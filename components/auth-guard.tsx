@@ -18,9 +18,11 @@ export function AuthGuard({
   requireGovernment = false,
 }: AuthGuardProps) {
   const router = useRouter();
-  const { user, isAuthenticated } = useAuthStore();
+  const { user, isAuthenticated, isHydrated } = useAuthStore();
 
   useEffect(() => {
+    if (!isHydrated) return;
+
     if (requireAuth && !isAuthenticated) {
       router.push("/");
       return;
@@ -30,7 +32,22 @@ export function AuthGuard({
       router.push("/home");
       return;
     }
-  }, [isAuthenticated, user, requireAuth, requireGovernment, router]);
+  }, [
+    isAuthenticated,
+    user,
+    requireAuth,
+    requireGovernment,
+    router,
+    isHydrated,
+  ]);
+
+  if (!isHydrated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-foreground font-mono">CARREGANDO...</div>
+      </div>
+    );
+  }
 
   if (requireAuth && !isAuthenticated) {
     return (

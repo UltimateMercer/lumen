@@ -164,6 +164,11 @@
     /* font-family: ; */
   }
 
+  .background-texture {
+    background-image: url("../assets/images/noisy.png");
+    background-attachment: local;
+  }
+
   .main-background::after {
     content: "";
     position: absolute;

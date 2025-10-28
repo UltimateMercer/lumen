@@ -38,7 +38,7 @@ export const FinalReminder = () => {
             size={18}
           />
         </div>
-        <p className="text-center">
+        <p className="text-center text-sm">
           A EXISTÊNCIA E IDENTIDADE REAL DESTE INDIVÍDUO SÃO SEGREDO DE ESTADO
           DE NÍVEL MÁXIMO. VAZAMENTO DE INFORMAÇÕES = TRAIÇÃO
         </p>

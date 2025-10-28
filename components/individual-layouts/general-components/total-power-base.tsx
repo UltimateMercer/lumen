@@ -38,28 +38,32 @@ export const TotalPowerBase = ({ energy, physical }: any) => {
           {totalBasePower()} pontos
         </div>
       </div>
-      <div className="bg-destructive">
-        <div className="text-[#eaeaea] p-4">
-          <div className="flex gap-2 items-center justify-center mb-2">
-            <WarningIcon
-              weight="fill"
-              className="text-[#252525]! animate-pulse"
-              size={18}
-            />
-            ALERTA CRÍTICO
-            <WarningIcon
-              weight="fill"
-              className="text-[#252525]! animate-pulse"
-              size={18}
-            />
+      {totalBasePower() >= 200000 && (
+        <div className="bg-destructive">
+          <div className="text-[#eaeaea] p-4">
+            <div className="flex gap-2 items-center justify-center mb-2">
+              <WarningIcon
+                weight="fill"
+                className="text-[#252525]! animate-pulse"
+                size={18}
+              />
+              ALERTA CRÍTICO
+              <WarningIcon
+                weight="fill"
+                className="text-[#252525]! animate-pulse"
+                size={18}
+              />
+            </div>
+            <p>
+              Poder base total excede 200000 pontos. Apenas 0.001% da população
+              atinge este nível.
+            </p>
+            <p className="text-center">
+              ATIVO ESTRATÉGICO DE IMPORTÂNCIA MÁXIMA
+            </p>
           </div>
-          <p>
-            Poder base total excede 200000 pontos. Apenas 0.001% da população
-            atinge este nível.
-          </p>
-          <p className="text-center">ATIVO ESTRATÉGICO DE IMPORTÂNCIA MÁXIMA</p>
         </div>
-      </div>
+      )}
     </>
   );
 };

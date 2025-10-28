@@ -17,6 +17,9 @@ interface FinalEvaluationInfoProps {
 export const FinalEvaluationInfo = ({
   finalEvaluationData,
 }: FinalEvaluationInfoProps) => {
+  const i = "·";
+
+  const formattedDate = finalEvaluationData.date.replace(/-/g, i);
   return (
     <SectionPaper>
       <SectionTitle>AVALIAÇÃO FINAL ESCOLAR</SectionTitle>
@@ -24,7 +27,7 @@ export const FinalEvaluationInfo = ({
         <ItemValue
           className="text-sm"
           item="Data de avaliação"
-          value={finalEvaluationData.date}
+          value={formattedDate}
         />
         <ItemValue
           className="text-sm"

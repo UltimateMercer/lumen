@@ -8,7 +8,7 @@ export const PaperHeader = ({
   isHighSecurity?: boolean;
 }) => {
   return (
-    <div className="flex flex-col gap-0.5 dark:bg-[#eaeaea] bg-[#252525] p-4 mb-3 text-center">
+    <div className="flex flex-col gap-0.5 dark:bg-[#eaeaea] bg-[#252525] background-texture texture-item p-4 mb-3 text-center">
       <div className="text-lg font-bold dark:text-[#121212] text-[#eaeaea] uppercase">
         República da Aurora
       </div>

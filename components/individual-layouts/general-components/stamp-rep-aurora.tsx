@@ -2,7 +2,7 @@ import { StarIcon } from "@phosphor-icons/react";
 
 export const StampRepAurora = () => {
   return (
-    <div className="flex gap-2 items-center justify-between dark:bg-[#eaeaea] bg-[#252525] py-3 px-6 text-center mt-4 texture-item">
+    <div className="flex gap-2 items-center justify-between dark:bg-[#eaeaea] bg-[#252525] background-texture texture-item py-3 px-6 text-center mt-4 texture-item">
       <div
         className="dark:text-[#121212] text-[#eaeaea]
           inline-flex items-center gap-2"
