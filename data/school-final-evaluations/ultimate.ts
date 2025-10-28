@@ -1,0 +1,55 @@
+export const ultimateSchoolFinalEvaluationData = {
+  isHighSecurity: true,
+  personalInfoData: {
+    registryName: "Ultimate",
+    realName: "Johan Kyler Mercer",
+    redactRealName: true,
+    age: "17",
+    birthDate: "25 - Vernis - 1228",
+    redactBirthDate: true,
+    residence: "Academia Escolar de New Raven",
+    redactResidence: true,
+  },
+  finalEvaluationData: {
+    date: "56 - Vernis - 1240",
+    institute: "Academia Escolar de New Raven",
+    examiners: "Mago Ozymandias e Cirah Tauv Freids",
+    redactExaminers: true,
+  },
+  energyComponentValues: {
+    totalEnergy: 498541,
+    energyControl: 0.98,
+    speedManipulation: 0.95,
+    mediumAffinity: 0.865,
+  },
+  physicalComponentValues: {
+    strength: 95,
+    physicalSpeed: 95,
+    durability: 92,
+    stamina: 93,
+  },
+  tablePowerValues: {
+    totalEnergy: 95,
+    energyControl: 98,
+    speedManipulation: 95,
+    mediumAffinity: 87,
+    strength: 95,
+    physicalSpeed: 95,
+    durability: 92,
+    stamina: 93,
+  },
+  additionalTableValues: {
+    survivanceAndFirstAid: 90,
+    strategySkills: 97,
+    teamwork: 95,
+    historyAndGeography: 92,
+  },
+  responsibleSignaturesData: [
+    {
+      department: "DEPARTAMENTO DE GESTÃO DE ATIVOS ESPECIAIS",
+      name: "Cirah Tauv Freids",
+      registry: "ra-csn-90123",
+      signature: "Cirah Tauv Freids",
+    },
+  ],
+};
