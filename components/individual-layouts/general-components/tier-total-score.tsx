@@ -54,7 +54,7 @@ export const TierTotalScore = ({
     F: "bg-muted-foreground/50 text-[#252525]",
   };
 
-  const score = 992;
+  const score = totalScore();
   const tier = getTier(Number(score));
   const tierStyle = tierColors[tier];
   return (

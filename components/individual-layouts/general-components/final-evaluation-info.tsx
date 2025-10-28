@@ -1,4 +1,5 @@
 import { ItemValue } from "./item-value";
+import { NexusFormatDate } from "./nexus-format-date";
 import { SectionPaper } from "./section-paper";
 import { SectionTitle } from "./section-title";
 
@@ -17,9 +18,6 @@ interface FinalEvaluationInfoProps {
 export const FinalEvaluationInfo = ({
   finalEvaluationData,
 }: FinalEvaluationInfoProps) => {
-  const i = "·";
-
-  const formattedDate = finalEvaluationData.date.replace(/-/g, i);
   return (
     <SectionPaper>
       <SectionTitle>AVALIAÇÃO FINAL ESCOLAR</SectionTitle>
@@ -27,7 +25,7 @@ export const FinalEvaluationInfo = ({
         <ItemValue
           className="text-sm"
           item="Data de avaliação"
-          value={formattedDate}
+          value={NexusFormatDate(finalEvaluationData.date)}
         />
         <ItemValue
           className="text-sm"

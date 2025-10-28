@@ -8,9 +8,9 @@ export const PaperSubject = ({
   registry,
   isHighSecurity = false,
 }: {
-  divisionName: string;
-  documentName: string;
-  registry: string;
+  divisionName?: string;
+  documentName?: string;
+  registry?: string;
   isHighSecurity?: boolean;
 }) => {
   return (
@@ -25,8 +25,14 @@ export const PaperSubject = ({
       >
         {isHighSecurity ? "Ultra-Confidencial" : "Confidencial"}
       </div>
-      <h3 className="uppercase font-bold text-xl">{divisionName}</h3>
-      <h3 className="uppercase font-bold text-xl">{documentName}</h3>
+      {divisionName && (
+        <h3 className="uppercase font-bold text-xl">{divisionName}</h3>
+      )}
+
+      {documentName && (
+        <h3 className="uppercase font-bold text-xl">{documentName}</h3>
+      )}
+
       {registry && <p>Nº: {registry}</p>}
       {isHighSecurity && <AccessLevel7Only />}
     </SectionPaper>

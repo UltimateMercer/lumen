@@ -9,13 +9,14 @@ export const RedactedText = ({
   if (redacted) {
     const text = React.Children.toArray(children).join("");
     // Mantém o tamanho exato e preserva espaços
-    const redactedText = text
-      .split("")
-      .map((char) => (char === " " ? " " : "█"))
-      .join("");
+    // const redactedText = text
+    //   .split("")
+    //   .map((char) => (char === " " ? "█" : "█"))
+    //   .join("");
+    const redactedText = text.replace(/./g, "█");
 
     return (
-      <span className="text-foreground select-none font-mono whitespace-pre">
+      <span className="text-[#252525] dark:text-[#eaeaea] select-none font-mono whitespace-pre">
         {redactedText}
       </span>
     );
