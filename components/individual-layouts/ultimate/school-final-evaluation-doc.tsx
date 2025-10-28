@@ -82,6 +82,7 @@ interface CompProps {
 export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
   const {
     isHighSecurity,
+    registry,
     personalInfoData,
     finalEvaluationData,
     energyComponentValues,
@@ -99,7 +100,7 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
       <PaperSubject
         divisionName="DIVISÃO DE AVALIAÇÃO E CLASSIFICAÇÃO"
         documentName="FICHA DE REGISTRO NACIONAL - PRIORIDADE NACIONAL"
-        registry="RA-1240-0000014"
+        registry={registry}
         isHighSecurity={isHighSecurity}
       />
 

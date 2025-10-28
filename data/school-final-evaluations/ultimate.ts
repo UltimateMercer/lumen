@@ -1,5 +1,6 @@
 export const ultimateSchoolFinalEvaluationData = {
   isHighSecurity: true,
+  registry: "RA-1240-0000014",
   personalInfoData: {
     registryName: "Ultimate",
     realName: "Johan Kyler Mercer",

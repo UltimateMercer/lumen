@@ -96,7 +96,7 @@ export const TableEnergyComponent = ({
           <TableCell>3. Velocidade de Manipulação</TableCell>
           <TableCell className="text-right">
             {Number(toPercent(attributes.speedManipulation)) >= 95 && (
-              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-0.25 text-xs font-medium uppercase ml-auto mr-2">
+              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
                   className="text-[#252525]!"
@@ -113,7 +113,7 @@ export const TableEnergyComponent = ({
           <TableCell>4. Afinidade Média</TableCell>
           <TableCell className="text-right">
             {Number(toPercent(attributes.mediumAffinity)) >= 95 && (
-              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-0.25 text-xs font-medium uppercase ml-auto mr-2">
+              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
                   className="text-[#252525]!"
