@@ -5,33 +5,32 @@ import { SchoolFinalEvaluationDoc } from "./documents/school-final-evaluation-do
 import { ultimateSchoolFinalEvaluationData } from "@/data/school-final-evaluations/ultimate";
 import { ProfileId } from "./documents/profile-id";
 import { ultimateProfileId } from "@/data/profile-id/ultimate";
+import { dianaWatsonProfileId } from "@/data/profile-id/diana-watson";
+import { dianaWatsonSchoolFinalEvaluationData } from "@/data/school-final-evaluations/diana-watson";
 import { PermitCard } from "./documents/permit-card";
-import { ultimatePermissions } from "@/data/permissions/ultimate";
+import { dianaWatsonPermissions } from "@/data/permissions/diana-watson";
 
-interface UltimateLayoutProps {
+interface LayoutProps {
   individual: Individual;
   documentId: string;
 }
 
-export const UltimateLayout = ({
-  individual,
-  documentId,
-}: UltimateLayoutProps) => {
+export const DianaWatsonLayout = ({ individual, documentId }: LayoutProps) => {
   if (documentId === "profile") {
-    return <ProfileId individual={ultimateProfileId} />;
+    return <ProfileId individual={dianaWatsonProfileId} />;
   }
 
   if (documentId === "school-final-evaluation") {
     return (
       <SchoolFinalEvaluationDoc
-        individual={ultimateSchoolFinalEvaluationData}
+        individual={dianaWatsonSchoolFinalEvaluationData}
       />
     );
   }
 
   if (documentId === "permit-card") {
-    return <PermitCard individual={ultimatePermissions} />;
+    return <PermitCard individual={dianaWatsonPermissions} />;
   }
 
-  return <div>Ultimate Layout</div>;
+  return <div>Diana Watson Layout</div>;
 };

@@ -1,1 +1,57 @@
-export const dianaWatsonSchoolFinalEvaluationData = {};
+export const dianaWatsonSchoolFinalEvaluationData = {
+  isHighSecurity: false,
+  registry: "RA-1244-0005032",
+  personalInfoData: {
+    registryName: "Diana Watson",
+    realName: "Diana Watson",
+    redactRealName: false,
+    age: "15",
+    birthDate: "87-Solaris-1229-S",
+    redactBirthDate: false,
+    residence: "Isaac's Village",
+    redactResidence: false,
+  },
+  finalEvaluationData: {
+    date: "74-Vernis-1244-S",
+    institute: "Academia Escolar de Isaac's Village",
+    examiners: "Serline Durran",
+    redactExaminers: false,
+  },
+  energyComponentValues: {
+    totalEnergy: 49547,
+    energyControl: 0.65,
+    speedManipulation: 0.58,
+    mediumAffinity: 0.665,
+  },
+  physicalComponentValues: {
+    strength: 56,
+    physicalSpeed: 52,
+    durability: 48,
+    stamina: 50,
+  },
+  tablePowerValues: {
+    totalEnergy: 78,
+    energyControl: 65,
+    speedManipulation: 58,
+    mediumAffinity: 67,
+    strength: 56,
+    physicalSpeed: 52,
+    durability: 48,
+    stamina: 50,
+  },
+  additionalTableValues: {
+    survivanceAndFirstAid: 68,
+    strategySkills: 61,
+    teamwork: 70,
+    historyAndGeography: 74,
+  },
+  responsibleSignaturesData: [
+    {
+      department: "DEPARTAMENTO DE GESTÃO DE ATIVOS ESPECIAIS",
+      name: "Loren Noah Okazaki",
+      registry: "ra-dgae-609127",
+      signature: "Loren Noah Okazaki",
+      timestamp: "78-Vernis-1244-S - 17:24:41",
+    },
+  ],
+};

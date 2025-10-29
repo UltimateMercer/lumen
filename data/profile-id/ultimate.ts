@@ -3,7 +3,7 @@ export const ultimateProfileId = {
   name: "Johan Kyler Mercer",
   knownAs: "Ultimate",
   age: 17,
-  birthDate: "25 - Vernis - 1228",
+  birthDate: "25-Vernis-1228",
   birthPlace: "New Raven",
   occupation: "Aventureiro/Estudante",
   height: "1.73m",

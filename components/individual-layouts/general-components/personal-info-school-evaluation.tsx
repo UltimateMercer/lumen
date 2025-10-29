@@ -1,4 +1,5 @@
 import { ItemValue } from "./item-value";
+import { NexusFormatDate } from "./nexus-format-date";
 import { SectionPaper } from "./section-paper";
 
 type PersonalInfoSchoolEvaluationType = {
@@ -41,7 +42,7 @@ export const PersonalInfoSchoolEvaluation = ({
         <ItemValue item="Idade atual" value={`${age} anos`} />
         <ItemValue
           item="Data de nascimento"
-          value={birthDate}
+          value={NexusFormatDate(birthDate)}
           redacted={redactBirthDate}
         />
         <ItemValue

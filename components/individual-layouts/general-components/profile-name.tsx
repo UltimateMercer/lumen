@@ -11,12 +11,14 @@ export const ProfileName = ({
 }) => {
   return (
     <div className="">
-      <h2 className="text-2xl font-bold text-foreground">
-        <RedactedText redacted={isHighSecurity}>{name}</RedactedText>
+      <h2 className="text-2xl font-bold text-foreground uppercase">
+        <RedactedText redacted={isHighSecurity}>Perfil: {name}</RedactedText>
       </h2>
-      <div className="text-muted-foreground uppercase mt-1 mb-2">
-        Conhecido como: <span className="font-bold ">{knownAs}</span>{" "}
-      </div>
+      {knownAs && (
+        <div className="text-muted-foreground uppercase mt-1 mb-2">
+          Conhecido como: <span className="font-bold ">{knownAs}</span>{" "}
+        </div>
+      )}
     </div>
   );
 };
