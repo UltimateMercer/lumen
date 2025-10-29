@@ -46,26 +46,44 @@ export const PermitCard = ({ individual }: CompProps) => {
     <Paper>
       <PaperHeader department="Divisão de Gestão de Ativos Especiais" />
       <SectionPaper>
-        <div className="flex gap-4 items-center mb-2">
+        <div
+          className={cn(
+            "flex gap-2.5 items-center mb-2 p-4 texture-item background-texture",
+            tierStyle
+          )}
+        >
           <div className="w-40 h-40 bg-[#252525] dark:bg-[#eaeaea]"></div>
-          <div className="flex flex-col gap-2">
-            <ItemValue item="Nome de registro" value={registryName} />
+          <div className="flex flex-col gap-1">
             <ItemValue
+              className="text-sm text-[#eaeaea]!"
+              item="Nome de registro"
+              value={registryName}
+            />
+            <ItemValue
+              className="text-sm"
               item="data de nascimento"
               value={NexusFormatDate(birthDate)}
             />
-            <ItemValue item="idade" value={age} />
+            <ItemValue className="text-sm" item="idade" value={age} />
             <ItemValue
+              className="text-sm"
               item="data de emissão"
               value={NexusFormatDate(licenseStartDate)}
             />
-            <ItemValue item="id" value={id} />
+            <ItemValue className="text-sm" item="id" value={id} />
             {/* {Object.keys(mentor).length > 0 && (
               <ItemValue item="mentor" value={mentor} />
             )} */}
           </div>
+          <div
+            className={cn(
+              "flex items-center justify-between text-center p-5 text-9xl font-bold ml-auto"
+            )}
+          >
+            <p className="mx-auto">{tier}</p>
+          </div>
         </div>
-        <div className="flex justify-center gap-4">
+        {/* <div className="flex justify-center gap-4">
           <div
             className={cn(
               "flex items-center justify-between text-center p-5 text-9xl font-bold w-40 h-40 texture-item background-texture",
@@ -74,7 +92,7 @@ export const PermitCard = ({ individual }: CompProps) => {
           >
             <p className="mx-auto">{tier}</p>
           </div>
-        </div>
+        </div> */}
       </SectionPaper>
       <SectionPaper>
         {/* <SectionTitle>Permissões</SectionTitle> */}

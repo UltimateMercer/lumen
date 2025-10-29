@@ -14,7 +14,7 @@ export const ItemValue = ({
 }) => {
   return (
     <div className={cn(className)}>
-      <span className="text-muted-foreground uppercase">{item}: </span>
+      <span className="uppercase">{item}: </span>
       <span className="font-bold uppercase">
         <RedactedText redacted={redacted}>{value}</RedactedText>
       </span>
