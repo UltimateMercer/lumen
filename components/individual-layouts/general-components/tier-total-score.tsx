@@ -24,10 +24,10 @@ interface TierTotalScoreProps {
 }
 
 export const tierColors: Record<string, string> = {
-  S: "bg-destructive text-[#eaeaea]",
-  A: "bg-indigo-500 text-[#eaeaea]",
-  B: "bg-blue-500 text-[#eaeaea]",
-  C: "bg-pink-500 text-[#eaeaea]",
+  S: "bg-indigo-500 text-[#eaeaea]",
+  A: "bg-blue-500 text-[#eaeaea]",
+  B: "bg-sky-500 text-[#eaeaea]",
+  C: "bg-teal-500 text-[#eaeaea]",
   D: "bg-yellow-500 text-[#252525]",
   E: "bg-green-500 text-[#252525]",
   F: "bg-muted-foreground/50 text-[#252525]",

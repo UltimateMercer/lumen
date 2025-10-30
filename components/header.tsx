@@ -74,7 +74,7 @@ export const Header = () => {
               </span>
             </div>
           </div>
-          <LangSwitcher />
+          {/* <LangSwitcher /> */}
           <AnimatedThemeToggler />
           <button
             onClick={handleLogout}

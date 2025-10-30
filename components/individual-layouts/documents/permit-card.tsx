@@ -48,7 +48,7 @@ export const PermitCard = ({ individual }: CompProps) => {
       <SectionPaper>
         <div
           className={cn(
-            "flex gap-2.5 items-center mb-2 p-4 texture-item background-texture",
+            "flex gap-4 items-center mb-2 p-4 texture-item background-texture",
             tierStyle
           )}
         >
@@ -77,7 +77,7 @@ export const PermitCard = ({ individual }: CompProps) => {
           </div>
           <div
             className={cn(
-              "flex items-center justify-between text-center p-5 text-9xl font-bold ml-auto"
+              "flex items-center justify-between text-center p-5 text-8xl font-bold ml-auto"
             )}
           >
             <p className="mx-auto">{tier}</p>
