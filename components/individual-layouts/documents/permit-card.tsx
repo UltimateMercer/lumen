@@ -83,22 +83,9 @@ export const PermitCard = ({ individual }: CompProps) => {
             <p className="mx-auto">{tier}</p>
           </div>
         </div>
-        {/* <div className="flex justify-center gap-4">
-          <div
-            className={cn(
-              "flex items-center justify-between text-center p-5 text-9xl font-bold w-40 h-40 texture-item background-texture",
-              tierStyle
-            )}
-          >
-            <p className="mx-auto">{tier}</p>
-          </div>
-        </div> */}
       </SectionPaper>
       <SectionPaper>
-        {/* <SectionTitle>Permissões</SectionTitle> */}
         <PermitCheckTable tier={tier} />
-
-        {/* <PermitCheckItem tier={tier} permissions={permissions} /> */}
       </SectionPaper>
       {Object.keys(mentor).length > 0 && (
         <SectionPaper>
@@ -120,6 +107,9 @@ export const PermitCard = ({ individual }: CompProps) => {
           </p>
         )}
       </div>
+      <div
+        className={cn("w-full h-4 texture-item background-texture", tierStyle)}
+      ></div>
       <StampRepAurora />
     </Paper>
   );

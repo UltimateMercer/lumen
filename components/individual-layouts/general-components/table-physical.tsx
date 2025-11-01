@@ -40,7 +40,6 @@ export const TablePhysicalComponent = ({
       attributes.stamina) /
     4;
   const subtotal = () => {
-    console.log(mediumValue);
     const total = mediumValue * 100 * evaluationWeight;
     return Number(total.toFixed(0));
   };
@@ -94,7 +93,7 @@ export const TablePhysicalComponent = ({
           <TableCell>Durabilidade</TableCell>
           <TableCell className="text-right">
             {attributes.durability >= 95 && (
-              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-0.25 text-xs font-medium uppercase ml-auto mr-2">
+              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
                   className="text-[#252525]!"
@@ -110,7 +109,7 @@ export const TablePhysicalComponent = ({
           <TableCell>Stamina</TableCell>
           <TableCell className="text-right">
             {attributes.stamina >= 95 && (
-              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-0.25 text-xs font-medium uppercase ml-auto mr-2">
+              <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
                   className="text-[#252525]!"
@@ -119,7 +118,7 @@ export const TablePhysicalComponent = ({
                 EXCEPCIONAL
               </span>
             )}
-            ~{attributes.stamina}
+            {attributes.stamina}
           </TableCell>
         </TableRow>
       </TableBody>

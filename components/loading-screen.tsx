@@ -41,13 +41,13 @@ export function LoadingScreen({ section }: LoadingScreenProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       {/* Scanline effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="scanline absolute w-full h-1 bg-foreground opacity-10" />
       </div>
 
-      <div className="w-full max-w-2xl border-2 border-foreground p-8 bg-background">
+      <div className="w-full max-w-2xl border-2 border-foreground p-8 bg-[#eaeaea] dark:bg-[#252525]">
         {/* Header */}
         <div className="mb-8 border-b-2 border-foreground pb-4">
           <div className="text-xs mb-2 text-muted-foreground">
@@ -67,7 +67,7 @@ export function LoadingScreen({ section }: LoadingScreenProps) {
           {/* Progress Bar */}
           <div className="border-2 border-foreground h-8 relative overflow-hidden">
             <div
-              className="h-full bg-foreground transition-all duration-300"
+              className="h-full dark:bg-[#eaeaea] bg-[#252525] transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
             <div className="absolute inset-0 flex items-center justify-center text-xs font-bold mix-blend-difference text-background">

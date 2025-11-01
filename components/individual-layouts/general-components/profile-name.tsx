@@ -12,7 +12,8 @@ export const ProfileName = ({
   return (
     <div className="">
       <h2 className="text-2xl font-bold text-foreground uppercase">
-        <RedactedText redacted={isHighSecurity}>Perfil: {name}</RedactedText>
+        Perfil:
+        <RedactedText redacted={isHighSecurity}>{name}</RedactedText>
       </h2>
       {knownAs && (
         <div className="text-muted-foreground uppercase mt-1 mb-2">

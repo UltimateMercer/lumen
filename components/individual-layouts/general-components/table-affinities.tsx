@@ -10,49 +10,43 @@ import {
 import { WarningIcon } from "@phosphor-icons/react";
 
 type Attributes = {
-  totalEnergy: number;
-  energyControl: number;
-  speedManipulation: number;
-  mediumAffinity: number;
+  chakra: number;
+  mana: number;
+  spectral: number;
 };
 
-interface TableEnergyProps {
+interface TableAffinitiesProps {
   attributes?: Attributes;
   note?: string;
 }
 
 const defaultValues = {
-  totalEnergy: 0,
-  energyControl: 0,
-  speedManipulation: 0,
-  mediumAffinity: 0,
+  chakra: 0,
+  mana: 0,
+  spectral: 0,
 };
 
-export const TableEnergyComponent = ({
+export const TableAffinitiesComponent = ({
   attributes = defaultValues,
   note,
-}: TableEnergyProps) => {
-  const evaluationWeight = 0.5;
-  const subtotal = () => {
-    const total =
-      attributes.totalEnergy *
-      attributes.energyControl *
-      attributes.speedManipulation *
-      attributes.mediumAffinity *
-      evaluationWeight;
-    return Number(total.toFixed(0));
-  };
-
+}: TableAffinitiesProps) => {
   const toPercent = (n: number) => {
     return Number((n * 100).toFixed(2));
   };
 
+  const calcMediumAffinity = () => {
+    const total =
+      (attributes.chakra + attributes.mana + attributes.spectral) / 3;
+    return Number(total.toFixed(3));
+  };
+
+  const mediumAffinity = calcMediumAffinity();
   return (
     <Table className="border border-[#252525] dark:border-[#eaeaea] mb-2.5">
       <TableHeader className="">
         <TableRow className=" bg-[#252525]  dark:bg-[#eaeaea] hover:bg-[#252525] hover:dark:bg-[#eaeaea] border-b border-[#252525] dark:border-[#eaeaea]">
           <TableHead className="text-[#eaeaea] dark:text-[#252525]">
-            COMPONENTE ENERGÉTICO - Peso({evaluationWeight})
+            Afinidades energéticas
           </TableHead>
           <TableHead className="text-[#eaeaea] dark:text-[#252525] text-right uppercase">
             Valor
@@ -61,9 +55,9 @@ export const TableEnergyComponent = ({
       </TableHeader>
       <TableBody>
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
-          <TableCell>1. Energia Total</TableCell>
+          <TableCell>Chakra</TableCell>
           <TableCell className="text-right">
-            {attributes.totalEnergy >= 300000 && (
+            {Number(toPercent(attributes.chakra)) >= 95.0 && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -73,13 +67,13 @@ export const TableEnergyComponent = ({
                 EXCEPCIONAL
               </span>
             )}
-            ~{attributes.totalEnergy}
+            ~{attributes.chakra} ({toPercent(attributes.chakra)}%)
           </TableCell>
         </TableRow>
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
-          <TableCell>2. Controle de Energia</TableCell>
+          <TableCell>Mana</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.energyControl)) >= 95.0 && (
+            {Number(toPercent(attributes.mana)) >= 95.0 && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -89,13 +83,13 @@ export const TableEnergyComponent = ({
                 EXCEPCIONAL
               </span>
             )}
-            ~{attributes.energyControl} ({toPercent(attributes.energyControl)}%)
+            ~{attributes.mana} ({toPercent(attributes.mana)}%)
           </TableCell>
         </TableRow>
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
-          <TableCell>3. Velocidade de Manipulação</TableCell>
+          <TableCell>Espectral</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.speedManipulation)) >= 95 && (
+            {Number(toPercent(attributes.spectral)) >= 95 && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -105,14 +99,13 @@ export const TableEnergyComponent = ({
                 EXCEPCIONAL
               </span>
             )}
-            ~{attributes.speedManipulation} (
-            {toPercent(attributes.speedManipulation)}%)
+            ~{attributes.spectral} ({toPercent(attributes.spectral)}%)
           </TableCell>
         </TableRow>
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea] h-[45px]">
-          <TableCell>4. Afinidade Média</TableCell>
+          <TableCell>Afinidade Média</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.mediumAffinity)) >= 95 && (
+            {Number(toPercent(mediumAffinity)) >= 95 && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -122,21 +115,10 @@ export const TableEnergyComponent = ({
                 EXCEPCIONAL
               </span>
             )}
-            ~{attributes.mediumAffinity} ({toPercent(attributes.mediumAffinity)}
-            %)
+            ~{mediumAffinity} ({toPercent(mediumAffinity)}%)
           </TableCell>
         </TableRow>
       </TableBody>
-      <TableFooter>
-        <TableRow className="border-t border-[#252525] dark:border-[#eaeaea] bg-[#252525] dark:bg-[#eaeaea] hover:bg-[#252525] hover:dark:bg-[#eaeaea]">
-          <TableCell className="text-[#eaeaea] dark:text-[#252525] uppercase">
-            Resultado
-          </TableCell>
-          <TableCell className="text-[#eaeaea] dark:text-[#252525] text-right">
-            {subtotal()} pontos
-          </TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   );
 };

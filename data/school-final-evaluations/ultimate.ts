@@ -19,11 +19,16 @@ export const ultimateSchoolFinalEvaluationData = {
     examiners: "Mago Ozymandias e Cirah Tauv Freids",
     redactExaminers: true,
   },
+  affinities: {
+    chakra: 0.95,
+    mana: 0.92,
+    spectral: 0.7,
+  },
   energyComponentValues: {
     totalEnergy: 498541,
     energyControl: 0.98,
     speedManipulation: 0.95,
-    mediumAffinity: 0.865,
+    mediumAffinity: 0.857,
   },
   physicalComponentValues: {
     strength: 95,
@@ -32,10 +37,10 @@ export const ultimateSchoolFinalEvaluationData = {
     stamina: 93,
   },
   tablePowerValues: {
-    totalEnergy: 95,
+    totalEnergy: 498541,
     energyControl: 98,
     speedManipulation: 95,
-    mediumAffinity: 87,
+    mediumAffinity: 85,
     strength: 95,
     physicalSpeed: 95,
     durability: 92,

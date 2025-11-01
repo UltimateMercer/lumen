@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { avaliarEnergia, calcularNotaEnergia } from "./energy-calculator";
 
 type Attributes = {
   totalEnergy: number;
@@ -38,9 +39,10 @@ export const TablePowerAttributes = ({
   attributes = defaultValues,
   note,
 }: TablePowerAttributesProps) => {
+  const convertedTotalEnergy = avaliarEnergia(attributes.totalEnergy);
   const subtotal = () => {
     const total =
-      attributes.totalEnergy +
+      convertedTotalEnergy.nota +
       attributes.energyControl +
       attributes.speedManipulation +
       attributes.mediumAffinity +
@@ -68,7 +70,7 @@ export const TablePowerAttributes = ({
           <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
             <TableCell>1. Energia Total</TableCell>
             <TableCell className="text-right">
-              {attributes.totalEnergy}
+              {convertedTotalEnergy.nota}
             </TableCell>
           </TableRow>
           <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">

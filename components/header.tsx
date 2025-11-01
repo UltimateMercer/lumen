@@ -2,7 +2,11 @@ import Image from "next/image";
 import { ModeToggle } from "./mode-toggle";
 import { brandBtnStyles, btnStyles } from "@/utils/styles";
 import { Logo } from "./logo";
-import { CaretLeftIcon, TranslateIcon } from "@phosphor-icons/react";
+import {
+  CaretLeftIcon,
+  SignOutIcon,
+  TranslateIcon,
+} from "@phosphor-icons/react";
 import Link from "next/link";
 import { LangSwitcher } from "./lang-switcher";
 import { useRouter, useSelectedLayoutSegments } from "next/navigation";
@@ -76,11 +80,8 @@ export const Header = () => {
           </div>
           {/* <LangSwitcher /> */}
           <AnimatedThemeToggler />
-          <button
-            onClick={handleLogout}
-            className="bg-transparent rounded-xs cursor-pointer px-2"
-          >
-            SAIR
+          <button onClick={handleLogout} className={btnStyles("rounded-br-xs")}>
+            <SignOutIcon size={20} weight="bold" />
           </button>
         </div>
       </header>

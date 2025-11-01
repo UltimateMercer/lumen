@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 export const btnStyles = (rules?: string) => {
   return cn(
-    "flex gap-1 justify-center items-center w-16 h-12 px-4 hover:bg-[#121212] dark:hover:bg-[#cfc0a0] text-[#121212] hover:text-custom-brown-text dark:text-custom-brown-text dark:hover:text-[#121212] rounded-br-xs cursor-pointer",
+    "flex gap-1 justify-center items-center w-16 h-12 px-4 hover:bg-[#252525] dark:hover:bg-[#eaeaea] text-[#252525] hover:text-[#eaeaea] dark:text-[#eaeaea] dark:hover:text-[#252525] rounded-br-xs cursor-pointer",
     rules ?? ""
   );
 };

@@ -136,7 +136,7 @@ export function GovernmentDashboard({
           </div>
         )}
 
-        <main className="bg-[#eaeaea] dark:bg-[#252525] p-4 lg:min-h-[calc(100vh-65px)] min-h-[calc(100vh-56px)]">
+        <main className="bg-[#eaeaea] dark:bg-[#252525] p-4 lg:min-h-[calc(100vh-65px)] min-h-[calc(100vh-56px)] rounded-xs">
           {content}
         </main>
       </div>

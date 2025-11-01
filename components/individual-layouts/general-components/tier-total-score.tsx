@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { avaliarEnergia } from "./energy-calculator";
 
 type TablePowerValues = {
   totalEnergy: number;
@@ -37,9 +38,13 @@ export const TierTotalScore = ({
   powerValues,
   additionalValues,
 }: TierTotalScoreProps) => {
+  const fixedPowerValues = {
+    ...powerValues,
+    totalEnergy: avaliarEnergia(powerValues.totalEnergy).nota,
+  };
   const totalScore = () => {
     return Number(
-      Object.values(powerValues).reduce((acc, curr) => acc + curr, 0) +
+      Object.values(fixedPowerValues).reduce((acc, curr) => acc + curr, 0) +
         Object.values(additionalValues).reduce((acc, curr) => acc + curr, 0)
     ).toFixed(0);
   };

@@ -152,7 +152,10 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
                   ENDEREÇO DE REDE
                 </div>
                 <div className="font-bold font-mono">
-                  192.168.47.{Math.floor(Math.random() * 255)}
+                  {Math.floor(Math.random() * 255)}.
+                  {Math.floor(Math.random() * 255)}.
+                  {Math.floor(Math.random() * 255)}.
+                  {Math.floor(Math.random() * 255)}
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">
                   CONEXÃO CRIPTOGRAFADA
@@ -276,7 +279,7 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
           </>
         )}
       </div>
-      <div className="bg-[#eaeaea] dark:bg-[#252525]  dark:border-[#eaeaea] border-[#252525] rounded-xs">
+      <div className="bg-[#eaeaea] dark:bg-[#252525] border-t dark:border-[#eaeaea] border-[#252525] rounded-xs">
         {isGovernment ? (
           <></>
         ) : (

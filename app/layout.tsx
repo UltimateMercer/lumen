@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, JetBrains_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Inter,
+  JetBrains_Mono,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
@@ -19,6 +25,12 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair-display",
+  display: "swap",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "REDE LUMEN - SISTEMA DE ACESSO",
   description: "Sistema de Acesso aos Arquivo da Rede Lumen",
@@ -32,7 +44,7 @@ export default function RootLayout({
   return (
     <Html>
       <body
-        className={`${inter.variable} ${jetBrainsMono.variable} bg-[#eaeaea] dark:bg-[#252525] font-mono antialiased`}
+        className={`${inter.variable} ${jetBrainsMono.variable} ${playfairDisplay.variable} bg-[#eaeaea] dark:bg-[#252525] font-mono antialiased`}
       >
         <ThemeProvider
           attribute="class"

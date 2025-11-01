@@ -12,7 +12,7 @@ export const ultimatePermissions = {
       name: "Samuel J. Neomawn",
       registry: "ra-dgae-19208403",
       signature: "Samuel J. Neomawn",
-      timestamp: "63-Solaris-1245-S - 11:31:43",
+      timestamp: "63-Vernis-1245-S - 11:31:43",
     },
   ],
 };
