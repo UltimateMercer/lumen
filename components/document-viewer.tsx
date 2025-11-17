@@ -65,7 +65,7 @@ interface DocumentViewerProps {
   classification?: string;
   department: string;
   content: React.ReactNode;
-  signedBy: string;
+  signedBy?: string;
   date: string;
 }
 

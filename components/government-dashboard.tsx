@@ -54,6 +54,7 @@ export function GovernmentDashboard({
     { id: "individuos", name: "INDIVÍDUOS DE DESTAQUE", icon: "👤" },
     { id: "missoes", name: "RELATÓRIOS DE MISSÕES", icon: "📋" },
     { id: "incidentes", name: "REGISTRO DE INCIDENTES", icon: "⚠️" },
+    { id: "poderes", name: "SISTEMA DE PODERES", icon: "🔑" },
   ];
 
   const getSectionContent = () => {
@@ -68,6 +69,8 @@ export function GovernmentDashboard({
         return MissionsSection({ onCloseMobileSidebar: closeSidebar });
       case "incidentes":
         return IncidentsSection({ onCloseMobileSidebar: closeSidebar });
+      case "poderes":
+        return PowersSection({ onCloseMobileSidebar: closeSidebar });
       default:
         return {
           sidebar: null,

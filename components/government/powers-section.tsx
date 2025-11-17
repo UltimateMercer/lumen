@@ -4,21 +4,16 @@ import { useState, useRef, useCallback } from "react";
 import { FileLoading } from "@/components/file-loading";
 import { DocumentNavigator } from "@/components/document-navigator";
 import { FolderOpen, Folder } from "lucide-react";
-import { individuals } from "@/data/individuals";
-import { generateIndividualDocuments } from "@/data/document-generators";
-import { IndividualsNavigationProvider } from "./contexts/individual-contenxt";
+import { generatePowerDocuments } from "@/data/power-generators";
+import { powers } from "@/data/powers";
 
-interface IndividualsSectionProps {
+interface PowersSectionProps {
   onCloseMobileSidebar?: () => void;
 }
 
-export function IndividualsSection({
-  onCloseMobileSidebar,
-}: IndividualsSectionProps) {
+export function PowersSection({ onCloseMobileSidebar }: PowersSectionProps) {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [selectedIndividual, setSelectedIndividual] = useState<string | null>(
-    null
-  );
+  const [selectedPower, setSelectedPower] = useState<string | null>(null);
   const [isLoadingFile, setIsLoadingFile] = useState(false);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
 
@@ -39,21 +34,18 @@ export function IndividualsSection({
     setIsLoadingFile(false);
   }, []);
 
-  const handleIndividualDocumentClick = (
-    individualName: string,
-    docId: string
-  ) => {
-    console.log("[v0] Clicking individual document:", individualName, docId);
+  const handlePowerDocumentClick = (powerName: string, docId: string) => {
+    console.log("[v0] Clicking individual document:", powerName, docId);
 
     if (loadingTimeoutRef.current) {
       clearTimeout(loadingTimeoutRef.current);
     }
 
-    const newFileName = `${individualName}-${docId}`;
+    const newFileName = `${powerName}-${docId}`;
     console.log("[v0] Setting file to:", newFileName);
 
     setSelectedFile(newFileName);
-    setSelectedIndividual(individualName);
+    setSelectedPower(powerName);
     setIsLoadingFile(true);
 
     onCloseMobileSidebar?.();
@@ -63,34 +55,24 @@ export function IndividualsSection({
     return (
       <div className="space-y-1">
         <div className="text-xs font-bold text-muted-foreground mb-2 px-2">
-          INDIVÍDUOS:
+          PODERES:
         </div>
-        {individuals.map((individual) => (
-          <div key={individual.knownAs ? individual.knownAs : individual.name}>
+        {powers.map((power) => (
+          <div key={power.name}>
             <button
-              onClick={() =>
-                toggleExpanded(
-                  individual.knownAs ? individual.knownAs : individual.name
-                )
-              }
+              onClick={() => toggleExpanded(power.name)}
               className="w-full text-left px-2 py-2 text-xs font-mono border border-foreground bg-background hover:bg-muted transition-colors flex items-center justify-between"
             >
-              <span className="truncate uppercase">
-                {individual.knownAs ? individual.knownAs : individual.name}
-              </span>
-              {expandedItems.has(
-                individual.knownAs ? individual.knownAs : individual.name
-              ) ? (
+              <span className="truncate uppercase">{power.name}</span>
+              {expandedItems.has(power.name) ? (
                 <FolderOpen className="w-4 h-4 shrink-0" />
               ) : (
                 <Folder className="w-4 h-4 shrink-0" />
               )}
             </button>
-            {expandedItems.has(
-              individual.knownAs ? individual.knownAs : individual.name
-            ) && (
+            {expandedItems.has(power.name) && (
               <div className="ml-4 space-y-1 mt-1">
-                {individual.documents.map((doc) => (
+                {power.documents.map((doc: any) => (
                   <button
                     key={doc.id}
                     onClick={() => {
@@ -98,16 +80,9 @@ export function IndividualsSection({
                         "[v0] Document clicked:",
                         doc.name,
                         doc.id,
-                        individual.knownAs
-                          ? individual.knownAs
-                          : individual.name
+                        power.name
                       );
-                      handleIndividualDocumentClick(
-                        individual.knownAs
-                          ? individual.knownAs
-                          : individual.name,
-                        doc.id
-                      );
+                      handlePowerDocumentClick(power.name, doc.id);
                     }}
                     className="w-full text-left px-2 py-1.5 text-xs font-mono border border-foreground bg-background hover:bg-muted transition-colors flex items-center gap-2 uppercase"
                   >
@@ -134,19 +109,17 @@ export function IndividualsSection({
       );
     }
 
-    if (selectedIndividual && selectedFile) {
+    if (selectedPower && selectedFile) {
       console.log(
         "[v0] Rendering DocumentNavigator for:",
-        selectedIndividual,
+        selectedPower,
         selectedFile
       );
 
-      const documentId = selectedFile.replace(`${selectedIndividual}-`, "");
-      const individual = individuals.find(
-        (ind) => (ind.knownAs || ind.name) === selectedIndividual
-      );
+      const documentId = selectedFile.replace(`${selectedPower}-`, "");
+      const power = powers.find((pow) => pow.name === selectedPower);
       const initialIndex =
-        individual?.documents.findIndex((doc) => doc.id === documentId) ?? 0;
+        power?.documents.findIndex((doc: any) => doc.id === documentId) ?? 0;
 
       console.log(
         "[v0] Document ID:",
@@ -156,21 +129,14 @@ export function IndividualsSection({
       );
 
       return (
-        <IndividualsNavigationProvider
-          onNavigate={handleIndividualDocumentClick}
-        >
-          <DocumentNavigator
-            documents={generateIndividualDocuments(
-              selectedIndividual,
-              individuals
-            )}
-            initialIndex={initialIndex}
-            onBack={() => {
-              setSelectedFile(null);
-              setSelectedIndividual(null);
-            }}
-          />
-        </IndividualsNavigationProvider>
+        <DocumentNavigator
+          documents={generatePowerDocuments(selectedPower, powers)}
+          initialIndex={initialIndex}
+          onBack={() => {
+            setSelectedFile(null);
+            setSelectedPower(null);
+          }}
+        />
       );
     }
 
@@ -182,8 +148,7 @@ export function IndividualsSection({
             SELECIONE UM ARQUIVO
           </div>
           <div className="text-sm text-muted-foreground">
-            Escolha um indivíduo na barra lateral para visualizar seus
-            documentos
+            Escolha um poder na barra lateral para visualizar seus documentos
           </div>
         </div>
       </div>

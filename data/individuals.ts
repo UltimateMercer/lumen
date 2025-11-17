@@ -1,6 +1,7 @@
 import type { Individual } from "@/utils/government-data";
 import { UltimateLayout } from "@/components/individual-layouts/ultimate-layout";
 import { DianaWatsonLayout } from "@/components/individual-layouts/diana-watson-layout";
+import { KendraConnorsLayout } from "@/components/individual-layouts/kendra-connors-layout";
 
 export const individuals: Individual[] = [
   {
@@ -59,6 +60,35 @@ export const individuals: Individual[] = [
       { id: "profile", name: "Perfil" },
       { id: "school-final-evaluation", name: "Avaliação Final Escolar" },
       { id: "permit-card", name: "Permissões" },
+    ],
+  },
+  {
+    name: "Kendra Juliet Connors",
+    knownAs: "Kendra Connors",
+    codename: "",
+    status: "",
+    threat: "",
+    id: "ID-2846",
+    age: 17,
+    birthDate: "56-Vernis-1228-S",
+    birthPlace: "Local desconhecido próximo a fronteira de Normandy",
+    occupation: "Estudante",
+    nationality: "",
+    height: "1.68m",
+    weight: "54kg",
+    bloodType: "AB-",
+    eyeColor: "Castanho",
+    hairColor: "Loiro",
+    skinColor: "Branco",
+    specializations: [],
+    clearanceLevel: "NÍVEL 1",
+    department: "",
+    yearsOfService: 0,
+    layoutComponent: KendraConnorsLayout,
+    documents: [
+      { id: "profile", name: "Perfil" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar" },
+      // { id: "permit-card", name: "Permissões" },
     ],
   },
 ];

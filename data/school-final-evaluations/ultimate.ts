@@ -25,7 +25,7 @@ export const ultimateSchoolFinalEvaluationData = {
     spectral: 0.7,
   },
   energyComponentValues: {
-    totalEnergy: 498541,
+    totalEnergy: 502541,
     energyControl: 0.98,
     speedManipulation: 0.95,
     mediumAffinity: 0.857,
@@ -37,7 +37,7 @@ export const ultimateSchoolFinalEvaluationData = {
     stamina: 93,
   },
   tablePowerValues: {
-    totalEnergy: 498541,
+    totalEnergy: 502541,
     energyControl: 98,
     speedManipulation: 95,
     mediumAffinity: 85,
@@ -48,7 +48,7 @@ export const ultimateSchoolFinalEvaluationData = {
   },
   additionalTableValues: {
     survivanceAndFirstAid: 90,
-    strategySkills: 97,
+    strategySkills: 96,
     teamwork: 95,
     historyAndGeography: 92,
   },
