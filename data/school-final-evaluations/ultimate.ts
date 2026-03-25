@@ -1,5 +1,3 @@
-import { time } from "console";
-
 export const ultimateSchoolFinalEvaluationData = {
   isHighSecurity: true,
   registry: "RA-1243-0000014",

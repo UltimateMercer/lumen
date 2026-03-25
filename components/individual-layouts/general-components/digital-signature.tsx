@@ -14,7 +14,7 @@ export const DigitalSignature = ({
       <span className="text-sm text-muted-foreground uppercase">
         Assinatura:{" "}
       </span>
-      <div className="flex items-center justify-between bg-muted-foreground/5 background-texture min-h-28 max-h-32">
+      <div className="relative flex items-center justify-between bg-muted-foreground/5 background-texture min-h-28 max-h-32">
         <div className="min-h-20 border border-[#252525] dark:border-[#eaeaea] mx-auto py-1 px-2">
           <p className="text-[9px] uppercase">
             Documento assinado digitalmente
@@ -26,6 +26,8 @@ export const DigitalSignature = ({
             República da Aurora
           </p>
         </div>
+
+        <div className="absolute size-10 border-l-2 border-t-2 top-0 left-0"></div>
       </div>
       <div className="flex flex-nowrap items-center">
         <div className="w-full h-px bg-muted-foreground"></div>

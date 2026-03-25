@@ -1,0 +1,62 @@
+export const kiraSchoolFinalEvaluationData = {
+  isHighSecurity: false,
+  registry: "RA-1244-0005032",
+  personalInfoData: {
+    registryName: "Kira",
+    realName: "Kira",
+    redactRealName: false,
+    age: "15",
+    birthDate: "Vernis-1229-S",
+    redactBirthDate: false,
+    residence: "New Raven",
+    redactResidence: true,
+  },
+  finalEvaluationData: {
+    date: "52-Vernis-1244-S",
+    institute: "Academia Escolar de Isaac's Village",
+    examiners: "Luna Vanili",
+    redactExaminers: false,
+  },
+  affinities: {
+    chakra: 0.85,
+    mana: 0.49,
+    spectral: 0.62,
+  },
+  energyComponentValues: {
+    totalEnergy: 20432,
+    energyControl: 1.5,
+    speedManipulation: 0.56,
+    mediumAffinity: 0.483,
+  },
+  physicalComponentValues: {
+    strength: 58,
+    physicalSpeed: 70,
+    durability: 52,
+    stamina: 59,
+  },
+  tablePowerValues: {
+    totalEnergy: 20432,
+    energyControl: 100,
+    speedManipulation: 56,
+    mediumAffinity: 48,
+    strength: 58,
+    physicalSpeed: 70,
+    durability: 52,
+    stamina: 59,
+  },
+  additionalTableValues: {
+    survivanceAndFirstAid: 71,
+    strategySkills: 65,
+    teamwork: 70,
+    historyAndGeography: 59,
+  },
+  responsibleSignaturesData: [
+    {
+      department: "DEPARTAMENTO DE GESTÃO DE ATIVOS ESPECIAIS",
+      name: "Luna Vanili",
+      registry: "ra-dgae-234809238",
+      signature: "Luna Vanili",
+      timestamp: "56-Vernis-1244-S - 09:53:18",
+    },
+  ],
+};
