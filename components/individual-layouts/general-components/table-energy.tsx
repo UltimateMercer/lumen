@@ -8,51 +8,43 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { WarningIcon } from "@phosphor-icons/react";
-
-type Attributes = {
-  totalEnergy: number;
-  energyControl: number;
-  speedManipulation: number;
-  mediumAffinity: number;
-};
+import { ENERGY_EXCEPTIONAL_THRESHOLD, EXCEPTIONAL_PERCENT_THRESHOLD } from "@/lib/power-system";
 
 interface TableEnergyProps {
-  attributes?: Attributes;
+  attributes: {
+    totalEnergy: number;
+    energyControl: number;
+    speedManipulation: number;
+  };
+  mediumAffinityString: string;
+  subtotal: number;
   note?: string;
 }
 
-const defaultValues = {
+const defaultAttributes = {
   totalEnergy: 0,
   energyControl: 0,
   speedManipulation: 0,
-  mediumAffinity: 0,
 };
 
 export const TableEnergyComponent = ({
-  attributes = defaultValues,
+  attributes = defaultAttributes,
+  mediumAffinityString = "0",
+  subtotal = 0,
   note,
 }: TableEnergyProps) => {
-  const evaluationWeight = 0.5;
-  const subtotal = () => {
-    const total =
-      attributes.totalEnergy *
-      attributes.energyControl *
-      attributes.speedManipulation *
-      attributes.mediumAffinity *
-      evaluationWeight;
-    return Number(total.toFixed(0));
-  };
-
   const toPercent = (n: number) => {
     return Number((n * 100).toFixed(2));
   };
+
+  const mediumAffinityNum = Number(mediumAffinityString);
 
   return (
     <Table className="border border-[#252525] dark:border-[#eaeaea] mb-2.5">
       <TableHeader className="">
         <TableRow className=" bg-[#252525]  dark:bg-[#eaeaea] hover:bg-[#252525] hover:dark:bg-[#eaeaea] border-b border-[#252525] dark:border-[#eaeaea]">
           <TableHead className="text-[#eaeaea] dark:text-[#252525]">
-            COMPONENTE ENERGÉTICO - Peso({evaluationWeight})
+            COMPONENTE ENERGÉTICO - Peso(0.5)
           </TableHead>
           <TableHead className="text-[#eaeaea] dark:text-[#252525] text-right uppercase">
             Valor
@@ -63,7 +55,7 @@ export const TableEnergyComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
           <TableCell>1. Energia Total</TableCell>
           <TableCell className="text-right">
-            {attributes.totalEnergy >= 300000 && (
+            {attributes.totalEnergy >= ENERGY_EXCEPTIONAL_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -79,7 +71,7 @@ export const TableEnergyComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
           <TableCell>2. Controle de Energia</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.energyControl)) >= 95.0 && (
+            {Number(toPercent(attributes.energyControl)) >= EXCEPTIONAL_PERCENT_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -95,7 +87,7 @@ export const TableEnergyComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
           <TableCell>3. Velocidade de Manipulação</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.speedManipulation)) >= 95 && (
+            {Number(toPercent(attributes.speedManipulation)) >= EXCEPTIONAL_PERCENT_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -112,7 +104,7 @@ export const TableEnergyComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea] h-[45px]">
           <TableCell>4. Afinidade Média</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.mediumAffinity)) >= 95 && (
+            {Number(toPercent(mediumAffinityNum)) >= EXCEPTIONAL_PERCENT_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -122,7 +114,7 @@ export const TableEnergyComponent = ({
                 EXCEPCIONAL
               </span>
             )}
-            ~{attributes.mediumAffinity} ({toPercent(attributes.mediumAffinity)}
+            ~{mediumAffinityString} ({toPercent(mediumAffinityNum)}
             %)
           </TableCell>
         </TableRow>
@@ -133,7 +125,7 @@ export const TableEnergyComponent = ({
             Resultado
           </TableCell>
           <TableCell className="text-[#eaeaea] dark:text-[#252525] text-right">
-            {subtotal()} pontos
+            {subtotal} pontos
           </TableCell>
         </TableRow>
       </TableFooter>

@@ -4,7 +4,8 @@ import { NexusFormatDate } from "../general-components/nexus-format-date";
 import { Paper } from "../general-components/paper";
 import { PaperHeader } from "../general-components/paper-header";
 import { SectionPaper } from "../general-components/section-paper";
-import { tierColors } from "../general-components/tier-total-score";
+import { tierColors } from "@/lib/power-system";
+import type { PowerTier } from "@/lib/power-system";
 import { Square } from "lucide-react";
 import { CheckSquareIcon, SquareIcon } from "@phosphor-icons/react";
 import {
@@ -40,7 +41,7 @@ export const PermitCard = ({ individual }: CompProps) => {
     mentor = "",
     responsibleSignatures,
   } = individual;
-  const tierStyle = tierColors[tier];
+  const tierStyle = tierColors[tier as PowerTier];
 
   return (
     <Paper>

@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Power System
+
+Power calculation logic is centralized in `lib/power-system/`. The `evaluatePower()`
+function computes all subtotals, tiers, and derived values from raw JSON data.
+See `ANALYSIS.md` for the full architecture.
+
 ## Getting Started
 
 First, run the development server:

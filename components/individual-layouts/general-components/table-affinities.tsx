@@ -2,45 +2,39 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { WarningIcon } from "@phosphor-icons/react";
-
-type Attributes = {
-  chakra: number;
-  mana: number;
-  spectral: number;
-};
+import { calcMediumAffinityRounded } from "@/lib/power-system";
+import { EXCEPTIONAL_PERCENT_THRESHOLD } from "@/lib/power-system";
 
 interface TableAffinitiesProps {
-  attributes?: Attributes;
+  attributes: {
+    chakra: number;
+    mana: number;
+    spectral: number;
+  };
   note?: string;
 }
 
-const defaultValues = {
+const defaultAttributes = {
   chakra: 0,
   mana: 0,
   spectral: 0,
 };
 
 export const TableAffinitiesComponent = ({
-  attributes = defaultValues,
+  attributes = defaultAttributes,
   note,
 }: TableAffinitiesProps) => {
   const toPercent = (n: number) => {
     return Number((n * 100).toFixed(2));
   };
 
-  const calcMediumAffinity = () => {
-    const total =
-      (attributes.chakra + attributes.mana + attributes.spectral) / 3;
-    return Number(total.toFixed(3));
-  };
+  const mediumAffinity = calcMediumAffinityRounded(attributes);
 
-  const mediumAffinity = calcMediumAffinity();
   return (
     <Table className="border border-[#252525] dark:border-[#eaeaea] mb-2.5">
       <TableHeader className="">
@@ -57,7 +51,7 @@ export const TableAffinitiesComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
           <TableCell>Chakra</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.chakra)) >= 95.0 && (
+            {Number(toPercent(attributes.chakra)) >= EXCEPTIONAL_PERCENT_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -73,7 +67,7 @@ export const TableAffinitiesComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
           <TableCell>Mana</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.mana)) >= 95.0 && (
+            {Number(toPercent(attributes.mana)) >= EXCEPTIONAL_PERCENT_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -89,7 +83,7 @@ export const TableAffinitiesComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
           <TableCell>Espectral</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(attributes.spectral)) >= 95 && (
+            {Number(toPercent(attributes.spectral)) >= EXCEPTIONAL_PERCENT_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"
@@ -105,7 +99,7 @@ export const TableAffinitiesComponent = ({
         <TableRow className="border-b border-[#252525] dark:border-[#eaeaea] h-[45px]">
           <TableCell>Afinidade Média</TableCell>
           <TableCell className="text-right">
-            {Number(toPercent(mediumAffinity)) >= 95 && (
+            {Number(toPercent(mediumAffinity)) >= EXCEPTIONAL_PERCENT_THRESHOLD && (
               <span className="inline-flex items-center gap-1 border border-[#252525] text-[#eaeaea] bg-destructive px-1 py-px text-xs font-medium uppercase ml-auto mr-2">
                 <WarningIcon
                   weight="fill"

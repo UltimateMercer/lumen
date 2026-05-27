@@ -16,6 +16,7 @@ import { PaperSubject } from "../general-components/paper-subject";
 import { PaperFooter } from "../general-components/paper-footer";
 import { ProtectDoc } from "../general-components/protect-doc-text";
 import { TableAffinitiesComponent } from "../general-components/table-affinities";
+import { evaluatePower } from "@/lib/power-system";
 
 interface CompProps {
   individual: any;
@@ -30,33 +31,17 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
     affinities,
     energyComponentValues,
     physicalComponentValues,
-    tablePowerValues,
     additionalTableValues,
     responsibleSignaturesData,
   } = individual;
 
-  const calcMediumAffinityToPercent = (affinities: any) => {
-    const total =
-      (affinities.chakra + affinities.mana + affinities.spectral) / 3;
-    const toPercent = Number((total * 100).toFixed(2));
-    return Number(toPercent.toFixed(0));
-  };
+  const powerResult = evaluatePower({
+    affinities,
+    energy: energyComponentValues,
+    physical: physicalComponentValues,
+    additionalTests: additionalTableValues,
+  });
 
-  const calcMediumAffinity = (affinities: any) => {
-    const total =
-      (affinities.chakra + affinities.mana + affinities.spectral) / 3;
-    return total.toFixed(2);
-  };
-
-  const fixedEnergyComponentValues = {
-    ...energyComponentValues,
-    mediumAffinity: calcMediumAffinity(affinities),
-  };
-
-  const fixedTablePowerValues = {
-    ...tablePowerValues,
-    mediumAffinity: calcMediumAffinityToPercent(affinities),
-  };
   return (
     <Paper>
       <PaperHeader
@@ -76,11 +61,22 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
         <SectionTitle>PODER BASE</SectionTitle>
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-bold">CÁLCULO DETALHADO:</h2>
-          <TableEnergyComponent attributes={fixedEnergyComponentValues} />
-          <TablePhysicalComponent attributes={physicalComponentValues} />
+          <TableEnergyComponent
+            attributes={{
+              totalEnergy: energyComponentValues.totalEnergy,
+              energyControl: energyComponentValues.energyControl,
+              speedManipulation: energyComponentValues.speedManipulation,
+            }}
+            mediumAffinityString={powerResult.mediumAffinityString}
+            subtotal={powerResult.energySubtotal}
+          />
+          <TablePhysicalComponent
+            attributes={physicalComponentValues}
+            subtotal={powerResult.physicalSubtotal}
+          />
           <TotalPowerBase
-            energy={energyComponentValues}
-            physical={physicalComponentValues}
+            totalBasePower={powerResult.totalBasePower}
+            isAboveWarningThreshold={powerResult.isAboveWarningThreshold}
           />
         </div>
       </SectionPaper>
@@ -90,14 +86,29 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
       </SectionPaper>
       <SectionPaper>
         <SectionTitle>COMPONENTES PARA CLASSIFICAÇÃO DE TIER</SectionTitle>
-        <TablePowerAttributes attributes={fixedTablePowerValues} />
-        <TableAdditionalTest attributes={additionalTableValues} />
+        <TablePowerAttributes
+          attributes={{
+            energyControl: Math.min(Math.round(energyComponentValues.energyControl * 100), 100),
+            speedManipulation: Math.round(energyComponentValues.speedManipulation * 100),
+            mediumAffinity: powerResult.mediumAffinityPercent,
+            strength: physicalComponentValues.strength,
+            physicalSpeed: physicalComponentValues.physicalSpeed,
+            durability: physicalComponentValues.durability,
+            stamina: physicalComponentValues.stamina,
+          }}
+          convertedTotalEnergyNote={powerResult.convertedTotalEnergyNote}
+          subtotal={powerResult.powerAttributesSubtotal}
+        />
+        <TableAdditionalTest
+          attributes={additionalTableValues}
+          subtotal={powerResult.additionalTestsSubtotal}
+        />
       </SectionPaper>
       <SectionPaper>
         <SectionTitle>RESULTADO FINAL</SectionTitle>
         <TierTotalScore
-          powerValues={fixedTablePowerValues}
-          additionalValues={additionalTableValues}
+          totalScore={powerResult.totalScore}
+          tier={powerResult.tier}
         />
       </SectionPaper>
 

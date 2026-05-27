@@ -8,19 +8,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-type Attributes = {
-  survivanceAndFirstAid: number;
-  strategySkills: number;
-  teamwork: number;
-  historyAndGeography: number;
-};
-
 interface TableAdditionalTestProps {
-  attributes?: Attributes;
+  attributes: {
+    survivanceAndFirstAid: number;
+    strategySkills: number;
+    teamwork: number;
+    historyAndGeography: number;
+  };
+  subtotal: number;
   note?: string;
 }
 
-const defaultValues: Attributes = {
+const defaultAttributes = {
   survivanceAndFirstAid: 0,
   strategySkills: 0,
   teamwork: 0,
@@ -28,17 +27,10 @@ const defaultValues: Attributes = {
 };
 
 export const TableAdditionalTest = ({
-  attributes = defaultValues,
+  attributes = defaultAttributes,
+  subtotal = 0,
   note,
 }: TableAdditionalTestProps) => {
-  const subtotal = () => {
-    const total =
-      attributes?.survivanceAndFirstAid +
-      attributes?.strategySkills +
-      attributes?.teamwork +
-      attributes?.historyAndGeography;
-    return total;
-  };
   return (
     <Table className="border border-[#252525] dark:border-[#eaeaea] mb-2.5">
       <TableHeader className="">
@@ -81,7 +73,7 @@ export const TableAdditionalTest = ({
             SUBTOTAL - PROVAS ADICIONAIS
           </TableCell>
           <TableCell className="text-[#eaeaea] dark:text-[#252525] text-right">
-            {subtotal()}
+            {subtotal}
           </TableCell>
         </TableRow>
       </TableFooter>

@@ -1,33 +1,15 @@
 import { WarningIcon } from "@phosphor-icons/react";
+import { BASE_POWER_WARNING_THRESHOLD } from "@/lib/power-system";
 
-export const TotalPowerBase = ({ energy, physical }: any) => {
-  const evaluationWeight = 0.5;
+interface TotalPowerBaseProps {
+  totalBasePower: number;
+  isAboveWarningThreshold: boolean;
+}
 
-  const totalBasePower = () => {
-    // Subtotal Energy
-    const energyTotal =
-      energy.totalEnergy *
-      energy.energyControl *
-      energy.speedManipulation *
-      energy.mediumAffinity *
-      evaluationWeight;
-
-    // Subtotal Physical
-    const mediumValue =
-      (physical.strength +
-        physical.physicalSpeed +
-        physical.durability +
-        physical.stamina) /
-      4;
-
-    const physicalTotal = mediumValue * 100 * evaluationWeight;
-
-    // Soma total e arredonda para inteiro
-    const total = energyTotal + physicalTotal;
-    const totalRounded = Number(total.toFixed(0));
-    return totalRounded;
-  };
-
+export const TotalPowerBase = ({
+  totalBasePower = 0,
+  isAboveWarningThreshold = false,
+}: TotalPowerBaseProps) => {
   return (
     <>
       <div className="border border-[#252525] dark:border-[#eaeaea] pb-2">
@@ -35,10 +17,10 @@ export const TotalPowerBase = ({ energy, physical }: any) => {
           Poder Base total
         </div>
         <div className="text-center font-bold uppercase">
-          {totalBasePower()} pontos
+          {totalBasePower} pontos
         </div>
       </div>
-      {totalBasePower() >= 200000 && (
+      {totalBasePower >= BASE_POWER_WARNING_THRESHOLD && (
         <div className="bg-destructive">
           <div className="text-[#eaeaea] p-4">
             <div className="flex gap-2 items-center justify-center font-bold text-lg mb-2">

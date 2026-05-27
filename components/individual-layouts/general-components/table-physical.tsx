@@ -9,19 +9,18 @@ import {
 } from "@/components/ui/table";
 import { WarningIcon } from "@phosphor-icons/react";
 
-type Attributes = {
-  strength: number;
-  physicalSpeed: number;
-  durability: number;
-  stamina: number;
-};
-
 interface TablePhysicalProps {
-  attributes?: Attributes;
+  attributes: {
+    strength: number;
+    physicalSpeed: number;
+    durability: number;
+    stamina: number;
+  };
+  subtotal: number;
   note?: string;
 }
 
-const defaultValues = {
+const defaultAttributes = {
   strength: 0,
   physicalSpeed: 0,
   durability: 0,
@@ -29,27 +28,16 @@ const defaultValues = {
 };
 
 export const TablePhysicalComponent = ({
-  attributes = defaultValues,
+  attributes = defaultAttributes,
+  subtotal = 0,
   note,
 }: TablePhysicalProps) => {
-  const evaluationWeight = 0.5;
-  const mediumValue =
-    (attributes.strength +
-      attributes.physicalSpeed +
-      attributes.durability +
-      attributes.stamina) /
-    4;
-  const subtotal = () => {
-    const total = mediumValue * 100 * evaluationWeight;
-    return Number(total.toFixed(0));
-  };
-
   return (
     <Table className="border border-[#252525] dark:border-[#eaeaea] mb-2.5">
       <TableHeader className="">
         <TableRow className=" bg-[#252525]  dark:bg-[#eaeaea] hover:bg-[#252525] hover:dark:bg-[#eaeaea] border-b border-[#252525] dark:border-[#eaeaea]">
           <TableHead className="text-[#eaeaea] dark:text-[#252525]">
-            COMPONENTE FÍSICO - Peso({evaluationWeight})
+            COMPONENTE FÍSICO - Peso(0.5)
           </TableHead>
           <TableHead className="text-[#eaeaea] dark:text-[#252525] text-right uppercase">
             Valor/Escala
@@ -128,7 +116,7 @@ export const TablePhysicalComponent = ({
             Resultado
           </TableCell>
           <TableCell className="text-[#eaeaea] dark:text-[#252525] text-right">
-            {subtotal()} pontos
+            {subtotal} pontos
           </TableCell>
         </TableRow>
       </TableFooter>

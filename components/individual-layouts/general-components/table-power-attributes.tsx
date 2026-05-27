@@ -7,25 +7,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { avaliarEnergia, calcularNotaEnergia } from "./energy-calculator";
 
-type Attributes = {
-  totalEnergy: number;
-  energyControl: number;
-  speedManipulation: number;
-  mediumAffinity: number;
-  strength: number;
-  physicalSpeed: number;
-  durability: number;
-  stamina: number;
-};
 interface TablePowerAttributesProps {
-  attributes?: Attributes;
+  attributes: {
+    energyControl: number;
+    speedManipulation: number;
+    mediumAffinity: number;
+    strength: number;
+    physicalSpeed: number;
+    durability: number;
+    stamina: number;
+  };
+  convertedTotalEnergyNote: number;
+  subtotal: number;
   note?: string;
 }
 
-const defaultValues: Attributes = {
-  totalEnergy: 0,
+const defaultAttributes = {
   energyControl: 0,
   speedManipulation: 0,
   mediumAffinity: 0,
@@ -36,23 +34,11 @@ const defaultValues: Attributes = {
 };
 
 export const TablePowerAttributes = ({
-  attributes = defaultValues,
+  attributes = defaultAttributes,
+  convertedTotalEnergyNote = 0,
+  subtotal = 0,
   note,
 }: TablePowerAttributesProps) => {
-  const convertedTotalEnergy = avaliarEnergia(attributes.totalEnergy);
-  const subtotal = () => {
-    const total =
-      convertedTotalEnergy.nota +
-      attributes.energyControl +
-      attributes.speedManipulation +
-      attributes.mediumAffinity +
-      attributes.strength +
-      attributes.physicalSpeed +
-      attributes.durability +
-      attributes.stamina;
-    return Number(total.toFixed(0));
-  };
-
   return (
     <>
       <Table className="border border-[#252525] dark:border-[#eaeaea] mb-2.5">
@@ -70,7 +56,7 @@ export const TablePowerAttributes = ({
           <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
             <TableCell>1. Energia Total</TableCell>
             <TableCell className="text-right">
-              {convertedTotalEnergy.nota}
+              {convertedTotalEnergyNote}
             </TableCell>
           </TableRow>
           <TableRow className="border-b border-[#252525] dark:border-[#eaeaea]">
@@ -118,7 +104,7 @@ export const TablePowerAttributes = ({
               SUBTOTAL - ATRIBUTOS DE PODER
             </TableCell>
             <TableCell className="text-[#eaeaea] dark:text-[#252525] text-right">
-              {subtotal()}
+              {subtotal}
             </TableCell>
           </TableRow>
         </TableFooter>
