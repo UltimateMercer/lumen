@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { serialize } from "next-mdx-remote/serialize";
-import { getDocument, getAllSlugs } from "@/_import/lib/registry";
-import { CLASSIFICATION_TOKEN, DOCUMENT_TYPE_LABEL } from "@/_import/lib/documents";
+import { getDocument, getAllSlugs, getBatchItems } from "@/_import/lib/registry";
+import { CLASSIFICATION_TOKEN, DOCUMENT_TYPE_LABEL, type ArchiveDocument } from "@/_import/lib/documents";
 import { TEMPLATES } from "@/_import/index";
 
 export async function generateStaticParams() {
@@ -24,8 +24,21 @@ export default async function ArchiveDocumentPage({
   const nextSlug = idx < allSlugs.length - 1 ? allSlugs[idx + 1] : null;
 
   const mdxSource = await serialize(doc.mdx);
+  const docWithSource = { ...doc, mdxSource } as ArchiveDocument & { batchItems?: Array<{ slug: string; role?: string; note?: string; doc?: ArchiveDocument }> };
+
+  // Pre-serialize each batch item's MDX so child templates receive mdxSource
+  if (doc.frontmatter.type === "batch") {
+    const items = getBatchItems(doc.frontmatter);
+    docWithSource.batchItems = await Promise.all(
+      items.map(async (it) => {
+        if (!it.doc) return it;
+        const itemSource = await serialize(it.doc.mdx);
+        return { ...it, doc: { ...it.doc, mdxSource: itemSource } };
+      }),
+    );
+  }
+
   const Template = TEMPLATES[doc.frontmatter.type];
-  const docWithSource = { ...doc, mdxSource };
 
   return (
     <div className="min-h-screen">

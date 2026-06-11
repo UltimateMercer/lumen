@@ -239,3 +239,104 @@ de `setActiveSlug` (fase de render).
 
 ### Status
 - TypeScript: 0 erros
+
+---
+## Sessão: BatchTemplate rewrite — abordagem flat page (2026-06-10)
+
+### Problemas eliminados
+- `setActiveSlug` updater chamava `window.history.pushState` durante render
+- `window.history` / hash routing complexo e frágil
+- Múltiplos `useEffect` concorrentes (hash sync + URL sync + ESC)
+
+### Nova abordagem
+BatchTemplate reescrito como página flat:
+- **Folder** (animação) → mantido como ponto de entrada
+- **Índice** (`#indice`) no topo — lista todas as peças como links âncora
+- **Todas as peças** renderizadas em sequência abaixo do índice
+- Cada peça tem `id="peca-slug"` e um sticky header com "↑ Índice"
+- Scroll nativo do browser via `href="#indice"` / `href="#peca-slug"`
+
+### Removido
+- `activeSlug` state, `openItem`, `closeItem`, `prevItem`, `nextItem`
+- `useEffect` para hash sync, URL sync, ESC listener
+- `readHashSlug`, `HASH_KEY`, `BatchPieceChrome`
+- `window.history.pushState` / `replaceState`
+- `useRef`, `useCallback` (navegação)
+
+### Mantido
+- `Folder` com animação e `useState(opened)`
+- `TYPE_ACCENT`, `getBatchItems`, `TEMPLATES`
+- `ClassificationBar`, `PaperSheet`, `RenderMdx`
+- Todos os estilos e classes CSS idênticos
+- `batch-row--link` (era `batch-row--btn`) — os botões viram `<a>`
+  para scroll nativo
+
+### Status
+- TypeScript: 0 erros
+
+---
+## Sessão: Fix MDX body rendering in BatchTemplate (2026-06-10)
+
+### Problema
+BatchTemplate não exibia o corpo de texto das peças (e da seção
+"notas do investigador"). RenderMdx recebia `undefined` como source.
+
+### Diagnóstico (3 camadas)
+1. **page.tsx**: serializa `doc.mdx` → `mdxSource` apenas para o documento
+   principal. Não serializa batch items.
+2. **registry.ts `getBatchItems()`**: retorna `doc` do `DOCS` Map —
+   apenas `{ frontmatter, mdx }` (raw), sem `mdxSource`.
+3. **BatchTemplate.tsx**: chamava `getBatchItems(fm)` em `useMemo`,
+   passava `it.doc` (sem `mdxSource`) para `<Template doc={it.doc}>`.
+   Todo template renderiza `RenderMdx source={doc.mdxSource}` → undefined.
+
+### Correção
+- **page.tsx**: se `type === "batch"`, chama `getBatchItems`, serializa
+  cada item's `doc.mdx` com `serialize()`, anexa `mdxSource` clone do doc.
+  Resultado armazenado em `docWithSource.batchItems`.
+- **BatchTemplate.tsx**: remove `useMemo` / `getBatchItems` import.
+  Lê `doc.batchItems` (pre-serializado do servidor) em vez de chamar
+  `getBatchItems(fm)`.
+
+### Arquivos alterados
+- `app/archive/[slug]/page.tsx` — +10 linhas (import + serialization loop)
+- `_import/batch-template/BatchTemplate.tsx` — removido `useMemo`/`getBatchItems`,
+  lê `(doc as any).batchItems ?? []`
+
+### Status
+- TypeScript: 0 erros nos arquivos alterados (apenas 5 pre-existentes)
+
+---
+## Sessão: Fix main document body rendering in BatchTemplate (2026-06-10)
+
+### Problema
+O texto narrativo, observações e assinatura do MDX raiz do batch não
+eram exibidos. Apenas o índice e as peças individuais apareciam.
+
+### Diagnóstico
+- `arquivo-bruma-iv.mdx` tem `editor_notes: |` (YAML multi-line string)
+  no frontmatter. O parser customizado em `registry.ts` não trata valores
+  com `|` — `fm.editor_notes` fica `undefined`.
+- O único `<RenderMdx source={doc.mdxSource} />` estava dentro de
+  `{fm.editor_notes && ...}` — gate nunca satisfeito, body nunca renderizado.
+
+### Correção
+- Removeu o bloco `{fm.editor_notes && <RenderMdx...>}` do interior
+  da seção índice.
+- Adicionou um novo `<PaperSheet>` com `<RenderMdx source={doc.mdxSource}>`
+  entre o índice e as peças individuais — renderiza o corpo do documento
+  principal incondicionalmente.
+
+### Estrutura atual do BatchTemplate
+```
+Folder (animação)
+  └─ Índice (PaperSheet) → #indice, classification bar, título, cover_note,
+     │                       lista de peças (links âncora)
+     ├─ CORPO DO DOCUMENTO PRINCIPAL (PaperSheet) ← NOVO
+     │     RenderMdx(source=doc.mdxSource)
+     └─ Peças (loop)
+           └─ cabeçalho sticky + Template(doc=it.doc)
+```
+
+### Status
+- TypeScript: 0 erros nos arquivos alterados
