@@ -100,3 +100,57 @@ Todos os arquivos em `_import/*-template/` foram adaptados:
 ### Status
 - TypeScript: 0 erros nos arquivos modificados
 - Pendências anteriores mantidas (CSS noise images, BatchTemplate interação)
+
+---
+## Sessão: Registry estático — remoção de fs (2026-06-10)
+
+### O que foi feito
+- **`_import/lib/registry.ts`**: reescrito sem `fs`/`path`:
+  - 30 `.mdx` files importados estaticamente via `import ... from "...mdx"`
+  - `parseFrontmatter()` mantido, executa uma vez no module scope
+  - `Map<string, ArchiveDocument>` populado no load do módulo
+  - Mesma API pública: `getAllSlugs()`, `getAllDocuments()`, `getDocument()`, `getBatchItems()`
+- **`next.config.ts`**: adicionado `webpack` rule com `type: "asset/source"` para `.mdx` → posteriormente migrado para `turbopack.rules` com `raw-loader`
+- **`_import/lib/types/mdx.d.ts`**: declaração de tipo `declare module "*.mdx"` com `export default string`
+- **`tsconfig.json`**: adicionado `"types": ["node", "react", "react-dom"]` para excluir `@types/mdx` da auto-inclusão
+
+### Decisões
+- `asset/source` (webpack 5 built-in) → resolve `.mdx` imports como strings raw sem necessidade de loader externo
+- `"types"` restrito em tsconfig → `@types/mdx` (transitivo de next-mdx-remote) conflitava com a declaração local
+- `_import/index.ts` e templates não foram alterados — continuam sem importar registry.ts
+- `app/archive/` continua sendo o único consumer de registry.ts (Server Components)
+
+### Status
+- TypeScript: 0 erros nos arquivos modificados
+- Total de erros no projeto: 13 (mesmos pre-existing de antes)
+- Compatível com GitHub Pages: sem `fs`, sem Node.js runtime
+
+### Pendências atualizadas
+5. [x] registry.ts com fs → substituído por imports estáticos + webpack asset/source
+
+---
+## Sessão: Webpack → Turbopack rules para .mdx (2026-06-10)
+
+### O que foi feito
+- **`next.config.ts`**: substituído `webpack()` com `type: "asset/source"` por `turbopack.rules` com `raw-loader`:
+  ```ts
+  turbopack: {
+    rules: {
+      "*.mdx": {
+        loaders: ["raw-loader"],
+        as: "*.js",
+      },
+    },
+  }
+  ```
+- **`raw-loader`** adicionado como devDependency (único loader suportado pelo Turbopack para raw text)
+
+### Decisões
+- `asset/source` (webpack only) conflitava com Turbopack (default no `next dev` do Next.js 16)
+- `raw-loader` é um dos loaders testados oficialmente com Turbopack (listado na doc)
+- `type: "raw"` não está disponível no Next.js 16.0.0 (adicionado em 16.2.0) — por isso usamos `raw-loader`
+- Compatível tanto com `next dev` (Turbopack) quanto `next build` (se usando Turbopack ou webpack)
+
+### Status
+- TypeScript: 0 erros nos arquivos modificados
+- Total de erros: 13 (mesmos pre-existing)
