@@ -65,23 +65,84 @@ const RAW: Record<string, string> = {
   "projeto-red-suns": projetoRedSuns,
 };
 
+function parseValue(val: string): unknown {
+  try { return JSON.parse(val); }
+  catch { return val; }
+}
+
+function parseInlineItem(str: string): Record<string, unknown> | null {
+  const s = str.trim();
+  try { return JSON.parse("{" + s + "}"); } catch {}
+  const fixed = s.replace(/(^|[{,]\s*)([-\w]+)(\s*:)/g, '$1"$2"$3');
+  try { return JSON.parse("{" + fixed + "}"); } catch { return null; }
+}
+
 function parseFrontmatter(raw: string): { frontmatter: DocumentFrontmatter; mdx: string } {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) throw new Error("Missing frontmatter block");
 
   const fmLines = match[1].split("\n");
   const fm: Record<string, unknown> = {};
-  for (const line of fmLines) {
-    const sep = line.indexOf(":");
-    if (sep === -1) continue;
-    const key = line.slice(0, sep).trim();
-    const val = line.slice(sep + 1).trim();
-    try {
-      fm[key] = JSON.parse(val);
-    } catch {
-      fm[key] = val;
+  let currentKey: string | null = null;
+  let currentList: unknown[] | null = null;
+  let currentItem: Record<string, unknown> | null = null;
+
+  for (const rawLine of fmLines) {
+    const line = rawLine.trimEnd();
+
+    // blank lines inside a list = end of list
+    if (line === "" && currentList !== null) {
+      if (currentKey) fm[currentKey] = currentList;
+      currentKey = null; currentList = null; currentItem = null;
+      continue;
+    }
+
+    // top-level key:value
+    const top = line.match(/^([-\w]+):\s*(.*)$/);
+    if (top && line[0] !== " " && line[0] !== "-") {
+      if (currentKey && currentList !== null) fm[currentKey] = currentList;
+      currentKey = top[1];
+      const val = top[2].trim();
+      currentList = null;
+      currentItem = null;
+      if (val === "" || val === "|" || val === ">") continue; // list / literal block
+      try { fm[currentKey] = JSON.parse(val); }
+      catch { fm[currentKey] = val; }
+      currentKey = null;
+      continue;
+    }
+
+    // YAML list item — inline object `  - { key: val, ... }`
+    const inlineItem = line.match(/^\s+-\s+\{(.+)\}\s*$/);
+    if (inlineItem && currentKey) {
+      if (currentList === null) currentList = [];
+      const parsed = parseInlineItem(inlineItem[1]);
+      if (parsed) currentList.push(parsed);
+      currentItem = null;
+      continue;
+    }
+
+    // YAML list item — `  - key: value` (start of multi-line item)
+    const itemStart = line.match(/^\s+-\s+([-\w]+):\s*(.*)$/);
+    if (itemStart && currentKey) {
+      if (currentList === null) currentList = [];
+      currentItem = {};
+      currentList.push(currentItem);
+      const v = itemStart[2].trim();
+      if (v !== "") currentItem[itemStart[1]] = parseValue(v);
+      continue;
+    }
+
+    // continuation of previous list item: `    key: value`
+    const cont = line.match(/^\s{4,}([-\w]+):\s*(.*)$/);
+    if (cont && currentList && currentItem) {
+      const v = cont[2].trim();
+      if (v !== "") currentItem[cont[1]] = parseValue(v);
     }
   }
+
+  if (currentKey && currentList !== null) fm[currentKey] = currentList;
+
   return {
     frontmatter: fm as unknown as DocumentFrontmatter,
     mdx: match[2],

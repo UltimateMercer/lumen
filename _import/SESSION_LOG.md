@@ -154,3 +154,88 @@ Todos os arquivos em `_import/*-template/` foram adaptados:
 ### Status
 - TypeScript: 0 erros nos arquivos modificados
 - Total de erros: 13 (mesmos pre-existing)
+
+---
+## Sessão: Fixes — undefined items e Folder.tsk órfão (2026-06-10)
+
+### O que foi feito
+- **`_import/lib/mdx-components.tsx`**: fallback defensivo em 3 componentes que faziam `.map()` em `items` sem verificar null:
+  - `RequirementList` → `const safeItems = items ?? []`
+  - `RecruitProfile` → `const safeItems = items ?? []`
+  - `ProjectTOC` → `const safeItems = items ?? []` (incluindo `safeItems.length` no footer)
+- **`_import/Folder.tsx`**: removido (arquivo órfão solto na raiz)
+  - `BatchTemplate.tsx` já importa de `../components/batch/Folder` → `_import/components/batch/Folder.tsx`
+  - Nenhum outro arquivo importava `_import/Folder.tsx`
+
+### Decisões
+- Preferimos `const safeItems = items ?? []` antes do `.map()` em vez de inline `(items ?? []).map(...)` por clareza
+- TypeScript não acusava erro porque a prop é tipada como `items: string[]` (não opcional), mas MDX pode omitir a prop
+
+### Status
+- TypeScript: 0 erros em `_import/`
+- Total de erros: 13 (mesmos pre-existing)
+
+---
+## Sessão: BatchTemplate — YAML parser e Folder.tsx (2026-06-10)
+
+### Problema
+BatchTemplate não exibia o índice de peças porque `getBatchItems()` sempre retornava array vazio.
+
+### Causa raiz
+`parseFrontmatter()` em `registry.ts` só tratava linhas `key: value`. O campo `items` no MDX usa sintaxe YAML de lista multilinha:
+```yaml
+items:
+  - slug: decreto-0421
+    role: "Base legal"
+```
+O parser antigo produzia `fm["items"] = ""` (falsy), então `getBatchItems` retornava `[]`.
+
+### Escopo do bug
+3 campos do frontmatter usam YAML list e estavam todos quebrados:
+- `items` (batch) — multi-line `- key: value`
+- `participants` (monitored_thread) — multi-line `- key: value`
+- `sections` (classified_project) — inline `- { id, label }`
+
+### O que foi feito
+- **`registry.ts`**: reescrita `parseFrontmatter()` com state machine que reconhece:
+  - `key:` com valor vazio → inicia lista
+  - `  - key: value` → item de lista + `parseValue()` (JSON ou string)
+  - `    key: value` → continuação do item anterior
+  - `  - { id, label }` → objeto inline com fallback para chaves sem aspas
+  - `key: |` / `key: >` → literal block (pula conteúdo)
+  - linha em branco dentro da lista → finaliza lista
+- **`_import/components/batch/Folder.tsx`**: removido bloco de código comentado (73 linhas) que duplicava a export
+- `_import/Folder.tsx` já havia sido removido na sessão anterior
+
+### Verificado
+- Parser testado com frontmatter real de batch, monitored_thread e classified_project
+- `BatchTemplate.tsx` importa `Folder` de `../components/batch/Folder` → correto
+- TypeScript: 0 erros em `_import/`
+
+---
+## Sessão: React render phase — window.history (2026-06-10)
+
+### Problema
+"React cannot update a component while rendering another" porque
+`openItem()` chamava `window.history.pushState` dentro do updater
+de `setActiveSlug` (fase de render).
+
+### O que foi feito
+- Removida manipulação de `window.history` e `requestAnimationFrame`
+  de dentro de `openItem()` e `closeItem()` — agora só chamam
+  `setActiveSlug(slug)` / `setActiveSlug(null)`
+- Novo `useEffect` que observa `activeSlug`:
+  - `activeSlug != null` → `replaceState` com hash (não empilha)
+  - `activeSlug === null` após primeira sincronia → `pushState`
+    limpa hash (empilha para que o botão "voltar" retorne à peça)
+  - `requestAnimationFrame` para scrollIntoView movido para cá
+- `useRef(initialSyncDone)` impede pushState desnecessário no mount
+  (a URL inicial já é a fonte da verdade)
+
+### Decisões
+- `replaceState` para navegação entre peças (sem poluir o histórico)
+- `pushState` apenas ao fechar (voltar → reabre a última peça)
+- ScrollIntoView é efeito colateral, não pertence ao callback de click
+
+### Status
+- TypeScript: 0 erros

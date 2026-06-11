@@ -49,6 +49,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
   const [opened, setOpened] = useState(false);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const pieceRef = useRef<HTMLDivElement>(null);
+  const initialSyncDone = useRef(false);
 
   // sync from hash on mount + popstate
   useEffect(() => {
@@ -69,6 +70,21 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
     };
   }, [items]);
 
+  // sync URL hash + scroll when activeSlug changes
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (activeSlug) {
+      const url = `${window.location.pathname}#${HASH_KEY}=${encodeURIComponent(activeSlug)}`;
+      window.history.replaceState(null, "", url);
+      requestAnimationFrame(() => {
+        pieceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    } else if (initialSyncDone.current) {
+      window.history.pushState(null, "", window.location.pathname);
+    }
+    initialSyncDone.current = true;
+  }, [activeSlug]);
+
   // ESC fecha peça
   useEffect(() => {
     if (!activeSlug) return;
@@ -81,27 +97,10 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
   }, [activeSlug]);
 
   const openItem = useCallback((slug: string) => {
-    setActiveSlug((prev) => {
-      const url = `${window.location.pathname}#${HASH_KEY}=${encodeURIComponent(slug)}`;
-      if (prev === null) {
-        window.history.pushState(null, "", url);
-      } else {
-        window.history.replaceState(null, "", url);
-      }
-      requestAnimationFrame(() => {
-        pieceRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      });
-      return slug;
-    });
+    setActiveSlug(slug);
   }, []);
 
   const closeItem = useCallback(() => {
-    if (typeof window !== "undefined") {
-      window.history.pushState(null, "", window.location.pathname);
-    }
     setActiveSlug(null);
   }, []);
 

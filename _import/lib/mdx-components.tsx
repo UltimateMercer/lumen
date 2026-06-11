@@ -222,9 +222,10 @@ export function Warning({ children }: { children: ReactNode }) {
 }
 
 export function RequirementList({ items }: { items: string[] }) {
+  const safeItems = items ?? [];
   return (
     <ol className="my-4 grid gap-2">
-      {items.map((it, i) => (
+      {safeItems.map((it, i) => (
         <li key={i} className="grid grid-cols-[3ch_1fr] items-baseline gap-3 border border-paper-foreground/25 px-3 py-2 text-sm text-paper-foreground">
           <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-stamp-red">{String(i + 1).padStart(2, "0")}</span>
           <span>{it}</span>
@@ -247,9 +248,10 @@ export function Phase({ n, name, children }: { n: number; name: string; children
 }
 
 export function RecruitProfile({ items }: { items: string[] }) {
+  const safeItems = items ?? [];
   return (
     <ul className="my-4 grid gap-1.5 border border-paper-foreground/30 bg-paper-foreground/[0.03] p-3 text-sm">
-      {items.map((it, i) => (
+      {safeItems.map((it, i) => (
         <li key={i} className="grid grid-cols-[2ch_1fr] gap-2 text-paper-foreground">
           <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-stamp-red">&#9656;</span>
           <span>{it}</span>
@@ -304,11 +306,12 @@ export function Section({ id, title, children }: { id: string; title: string; ch
 }
 
 export function ProjectTOC({ items }: { items: Array<{ id: string; label: string }> }) {
+  const safeItems = items ?? [];
   return (
     <nav aria-label="Sumário do projeto" className="project-toc">
       <div className="project-toc-head">&#9670; sumário</div>
       <ol className="project-toc-list">
-        {items.map((it, i) => (
+        {safeItems.map((it, i) => (
           <li key={it.id} className="project-toc-item">
             <a href={`#${it.id}`} className="project-toc-link">
               <span className="project-toc-num">{String(i + 1).padStart(2, "0")}</span>
@@ -317,7 +320,7 @@ export function ProjectTOC({ items }: { items: Array<{ id: string; label: string
           </li>
         ))}
       </ol>
-      <div className="project-toc-foot">{items.length} seções · uso interno</div>
+      <div className="project-toc-foot">{safeItems.length} seções · uso interno</div>
     </nav>
   );
 }
