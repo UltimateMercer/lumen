@@ -1,10 +1,10 @@
-import type { ArchiveDocument } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { DOCUMENT_TYPE_LABEL } from "@/lib/documents";
+"use client";
+import type { ArchiveDocument } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
+import { DOCUMENT_TYPE_LABEL } from "../lib/documents";
 
-/** Log de IA — variante CRT cyan, distinto da transmissão âmbar. */
 export function AiLogTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <div className="mx-auto max-w-3xl border border-cyan-crt/40 bg-chrome p-8 scanlines">
       <div className="flex items-center justify-between border-b border-cyan-crt/30 pb-3 text-[10px] uppercase tracking-[0.3em] text-cyan-crt">
@@ -26,7 +26,7 @@ export function AiLogTemplate({ doc }: { doc: ArchiveDocument }) {
         )}
       </div>
       <div className="mt-6 text-cyan-crt">
-        <RenderMdx Content={Content} />
+        <RenderMdx source={doc.mdxSource} />
       </div>
       <div className="mt-8 flex items-center justify-between border-t border-cyan-crt/30 pt-3 text-[10px] uppercase tracking-[0.3em] text-cyan-crt/70">
         <span>[ máquina · sem assinatura humana ]</span>

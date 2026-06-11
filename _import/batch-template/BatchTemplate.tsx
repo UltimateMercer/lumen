@@ -1,10 +1,12 @@
+"use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { ArchiveDocument, DocumentType } from "@/lib/documents";
-import { getBatchItems, DOCUMENT_TYPE_LABEL } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { ClassificationBar, PaperSheet } from "./DocumentHeader";
-import { Folder } from "./batch/Folder";
-import { TEMPLATES } from "./index";
+import type { ArchiveDocument, DocumentType } from "../lib/documents";
+import { getBatchItems } from "../lib/registry";
+import { DOCUMENT_TYPE_LABEL } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
+import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
+import { Folder } from "../components/batch/Folder";
+import { TEMPLATES } from "../index";
 import { cn } from "@/lib/utils";
 
 const TYPE_ACCENT: Partial<Record<DocumentType, string>> = {
@@ -42,7 +44,7 @@ function readHashSlug(): string | null {
 }
 
 export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   const items = useMemo(() => getBatchItems(fm), [fm]);
   const [opened, setOpened] = useState(false);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
@@ -87,7 +89,10 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
         window.history.replaceState(null, "", url);
       }
       requestAnimationFrame(() => {
-        pieceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        pieceRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       });
       return slug;
     });
@@ -100,12 +105,21 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
     setActiveSlug(null);
   }, []);
 
-  const activeIndex = activeSlug ? items.findIndex((i) => i.slug === activeSlug) : -1;
+  const activeIndex = activeSlug
+    ? items.findIndex((i) => i.slug === activeSlug)
+    : -1;
   const activeItem = activeIndex >= 0 ? items[activeIndex] : null;
   const prevItem =
-    activeIndex > 0 ? items.slice(0, activeIndex).reverse().find((i) => i.doc) ?? null : null;
+    activeIndex > 0
+      ? (items
+          .slice(0, activeIndex)
+          .reverse()
+          .find((i) => i.doc) ?? null)
+      : null;
   const nextItem =
-    activeIndex >= 0 ? items.slice(activeIndex + 1).find((i) => i.doc) ?? null : null;
+    activeIndex >= 0
+      ? (items.slice(activeIndex + 1).find((i) => i.doc) ?? null)
+      : null;
 
   return (
     <div className="relative">
@@ -123,12 +137,17 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
       <div
         className={cn(
           "transition-opacity duration-500",
-          opened ? "opacity-100" : "pointer-events-none absolute inset-0 opacity-0",
+          opened
+            ? "opacity-100"
+            : "pointer-events-none absolute inset-0 opacity-0",
         )}
       >
         <div className="relative">
           {/* CAPA (índice) */}
-          <div className={cn(activeSlug && "hidden")} aria-hidden={!!activeSlug}>
+          <div
+            className={cn(activeSlug && "hidden")}
+            aria-hidden={!!activeSlug}
+          >
             <PaperSheet>
               <ClassificationBar fm={fm} />
 
@@ -159,7 +178,9 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                   {items.map((it, idx) => {
                     const missing = !it.doc;
                     const fmt = it.doc?.frontmatter;
-                    const accent = fmt ? TYPE_ACCENT[fmt.type] ?? "bg-paper-foreground" : "bg-paper-muted";
+                    const accent = fmt
+                      ? (TYPE_ACCENT[fmt.type] ?? "bg-paper-foreground")
+                      : "bg-paper-muted";
                     return (
                       <li
                         key={it.slug}
@@ -168,8 +189,13 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                       >
                         {missing ? (
                           <div className="batch-row batch-row--missing">
-                            <span className="batch-row-accent bg-paper-muted/40" aria-hidden />
-                            <span className="batch-row-num">{String(idx + 1).padStart(2, "0")}</span>
+                            <span
+                              className="batch-row-accent bg-paper-muted/40"
+                              aria-hidden
+                            />
+                            <span className="batch-row-num">
+                              {String(idx + 1).padStart(2, "0")}
+                            </span>
                             <span className="batch-row-main">
                               <span className="batch-row-type">[ausente]</span>
                               <span className="batch-row-title">
@@ -186,15 +212,24 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                             className="batch-row batch-row--btn group"
                             aria-label={`Abrir peça ${idx + 1}: ${fmt!.title}`}
                           >
-                            <span className={cn("batch-row-accent", accent)} aria-hidden />
-                            <span className="batch-row-num">{String(idx + 1).padStart(2, "0")}</span>
+                            <span
+                              className={cn("batch-row-accent", accent)}
+                              aria-hidden
+                            />
+                            <span className="batch-row-num">
+                              {String(idx + 1).padStart(2, "0")}
+                            </span>
                             <span className="batch-row-main">
                               <span className="batch-row-type">
                                 {DOCUMENT_TYPE_LABEL[fmt!.type]}
                               </span>
-                              <span className="batch-row-title">{fmt!.title}</span>
+                              <span className="batch-row-title">
+                                {fmt!.title}
+                              </span>
                               {it.role && (
-                                <span className="batch-row-role">— {it.role}</span>
+                                <span className="batch-row-role">
+                                  — {it.role}
+                                </span>
                               )}
                             </span>
                             <span className="batch-row-date">{fmt!.date}</span>
@@ -213,7 +248,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                     ◆ notas do investigador
                   </h2>
                   <div className="text-paper-foreground">
-                    <RenderMdx Content={Content} />
+                    <RenderMdx source={doc.mdxSource} />
                   </div>
                 </div>
               )}
@@ -293,10 +328,13 @@ function BatchPieceChrome({
         <span>◆ arquivo · {caseId}</span>
         <span className="opacity-50">›</span>
         <span className="text-foreground">
-          peça {String(current).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          peça {String(current).padStart(2, "0")} /{" "}
+          {String(total).padStart(2, "0")}
         </span>
         <span className="opacity-50">·</span>
-        <span className="truncate normal-case tracking-normal text-foreground/80">{title}</span>
+        <span className="truncate normal-case tracking-normal text-foreground/80">
+          {title}
+        </span>
       </div>
       <div className="flex items-center gap-1">
         <button

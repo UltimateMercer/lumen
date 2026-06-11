@@ -1,12 +1,9 @@
-import type { ArchiveDocument } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
+"use client";
+import type { ArchiveDocument } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
 
-/**
- * Panfleto da resistência — visual oposto ao oficial.
- * Sem classificação. Tinta borrada, tipografia stencil.
- */
 export function ManifestoTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <div className="paper-texture relative mx-auto max-w-2xl border border-paper-foreground/40 p-8 shadow-[0_24px_64px_-32px_oklch(0_0_0/0.6)] md:p-12"
          style={{ filter: "contrast(1.05)" }}>
@@ -24,7 +21,7 @@ export function ManifestoTemplate({ doc }: { doc: ArchiveDocument }) {
       </div>
       <hr className="my-6 border-paper-foreground/40" />
       <div className="text-paper-foreground">
-        <RenderMdx Content={Content} />
+        <RenderMdx source={doc.mdxSource} />
       </div>
     </div>
   );

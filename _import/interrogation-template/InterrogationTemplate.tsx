@@ -1,7 +1,8 @@
-import type { ArchiveDocument } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { ClassificationBar, PaperSheet } from "./DocumentHeader";
-import { DigitalSignature } from "@/components/mdx/DigitalSignature";
+"use client";
+import type { ArchiveDocument } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
+import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
+import { DigitalSignature } from "../components/DigitalSignature";
 
 function Meta({ label, value }: { label: string; value?: string }) {
   return (
@@ -23,7 +24,7 @@ function PartyRow({ label, value }: { label: string; value?: string }) {
 }
 
 export function InterrogationTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   const isInterview = fm.mode === "interview";
   const interrogators = Array.isArray(fm.interrogator)
     ? fm.interrogator
@@ -86,7 +87,7 @@ export function InterrogationTemplate({ doc }: { doc: ArchiveDocument }) {
       </section>
 
       <div className="interrogation-body mt-7 text-paper-foreground">
-        <RenderMdx Content={Content} />
+        <RenderMdx source={doc.mdxSource} />
       </div>
 
       {fm.signed_by && fm.registry_id && (

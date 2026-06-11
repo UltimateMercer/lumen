@@ -1,6 +1,7 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 function SessionCode() {
   // Evita mismatch de hydration: gera só no cliente.
@@ -20,12 +21,12 @@ export function ArchiveShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen">
       <header className="border-b border-border bg-chrome/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3 text-xs uppercase tracking-[0.2em]">
-          <Link to="/" className="flex items-center gap-3 text-amber-crt crt-glow">
+          <Link href="/" className="flex items-center gap-3 text-amber-crt crt-glow">
             <span className="inline-block h-2.5 w-2.5 bg-amber-crt flicker" />
             <span className="font-bold">MINCONT-OS · v.7.42</span>
           </Link>
           <div className="flex items-center gap-4 text-muted-foreground">
-            <Link to="/" className="hidden hover:text-amber-crt md:inline">/arquivo</Link>
+            <Link href="/" className="hidden hover:text-amber-crt md:inline">/arquivo</Link>
             <span className="hidden md:inline">/diretoria-central</span>
             <SessionCode />
             <ThemeToggle />
@@ -42,7 +43,7 @@ export function ArchiveShell({ children }: { children: ReactNode }) {
           </div>
           <div className="flex items-center gap-4">
             <Link
-              to="/dev/componentes"
+              href="/dev/componentes"
               className="opacity-60 hover:text-amber-crt hover:opacity-100"
             >
               /dev/componentes

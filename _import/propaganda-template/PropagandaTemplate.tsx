@@ -1,5 +1,6 @@
-import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
 
 function PropagandaMotif({
   motif = "star",
@@ -64,7 +65,7 @@ function PropagandaMotif({
 }
 
 export function PropagandaTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <div className="paper-propaganda relative mx-auto max-w-3xl border-2 border-paper-foreground p-8 shadow-[0_30px_60px_-30px_oklch(0_0_0/0.7)] md:p-12">
       {/* corners */}
@@ -95,7 +96,7 @@ export function PropagandaTemplate({ doc }: { doc: ArchiveDocument }) {
         <div className="mt-8 h-[2px] w-2/3 bg-paper-foreground" />
 
         <div className="propaganda-body mt-6 max-w-xl text-paper-foreground">
-          <RenderMdx Content={Content} />
+          <RenderMdx source={doc.mdxSource} />
         </div>
 
         <footer className="mt-12 grid w-full grid-cols-3 items-end gap-4 border-t-2 border-paper-foreground pt-4 text-[10px] uppercase tracking-[0.3em] text-paper-foreground/80">

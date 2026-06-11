@@ -1,8 +1,8 @@
-import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { ClassificationBar, PaperSheet } from "./DocumentHeader";
-import { DigitalSignature } from "@/components/mdx/DigitalSignature";
-import { Stamp } from "@/components/mdx/MdxComponents";
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "../lib/documents";
+import { RenderMdx, Stamp } from "../lib/mdx-components";
+import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
+import { DigitalSignature } from "../components/DigitalSignature";
 import { cn } from "@/lib/utils";
 
 const FLAG_TONE: Record<NonNullable<NonNullable<DocumentFrontmatter["vitals"]>[number]["flag"]>, string> = {
@@ -23,7 +23,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 export function MedicalRecordTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <PaperSheet>
       <ClassificationBar fm={fm} />
@@ -147,7 +147,7 @@ export function MedicalRecordTemplate({ doc }: { doc: ArchiveDocument }) {
 
       <Section title="observações clínicas">
         <div className="text-paper-foreground">
-          <RenderMdx Content={Content} />
+          <RenderMdx source={doc.mdxSource} />
         </div>
       </Section>
 

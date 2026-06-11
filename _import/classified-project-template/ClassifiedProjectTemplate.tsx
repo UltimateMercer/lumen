@@ -1,7 +1,8 @@
-import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/documents";
-import { RenderMdx, Stamp, Redacted, ProjectTOC } from "@/components/mdx/MdxComponents";
-import { ClassificationBar, PaperSheet } from "./DocumentHeader";
-import { DigitalSignature } from "@/components/mdx/DigitalSignature";
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "../lib/documents";
+import { RenderMdx, Stamp, Redacted, ProjectTOC } from "../lib/mdx-components";
+import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
+import { DigitalSignature } from "../components/DigitalSignature";
 import { cn } from "@/lib/utils";
 
 type ProjectStatus = NonNullable<DocumentFrontmatter["project_status"]>;
@@ -78,7 +79,7 @@ function MetaCell({
 }
 
 export function ClassifiedProjectTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   const sections = fm.sections ?? [];
   return (
     <PaperSheet>
@@ -141,7 +142,7 @@ export function ClassifiedProjectTemplate({ doc }: { doc: ArchiveDocument }) {
           </aside>
         )}
         <div className="min-w-0">
-          <RenderMdx Content={Content} />
+          <RenderMdx source={doc.mdxSource} />
         </div>
       </div>
 

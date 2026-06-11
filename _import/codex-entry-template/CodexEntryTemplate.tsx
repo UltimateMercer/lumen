@@ -1,7 +1,8 @@
-import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { ClassificationBar, PaperSheet } from "./DocumentHeader";
-import { DigitalSignature } from "@/components/mdx/DigitalSignature";
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
+import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
+import { DigitalSignature } from "../components/DigitalSignature";
 import { cn } from "@/lib/utils";
 
 const THREAT_BARS: Record<NonNullable<DocumentFrontmatter["threat_tier"]>, number> = {
@@ -92,7 +93,7 @@ function StatChip({ label, value }: { label: string; value?: string }) {
 }
 
 export function CodexEntryTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <PaperSheet>
       <ClassificationBar fm={fm} />
@@ -137,7 +138,7 @@ export function CodexEntryTemplate({ doc }: { doc: ArchiveDocument }) {
       </section>
 
       <div className="codex-body mt-7 text-paper-foreground">
-        <RenderMdx Content={Content} />
+        <RenderMdx source={doc.mdxSource} />
       </div>
 
       {fm.verified_by && (

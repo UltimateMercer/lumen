@@ -1,9 +1,10 @@
-import type { ArchiveDocument } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { PaperSheet } from "./DocumentHeader";
+"use client";
+import type { ArchiveDocument } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
+import { PaperSheet } from "../components/DocumentHeader";
 
 export function NewsTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <PaperSheet>
       {/* Masthead */}
@@ -50,7 +51,7 @@ export function NewsTemplate({ doc }: { doc: ArchiveDocument }) {
 
       {/* Body — 2 columns w/ drop cap */}
       <article className="news-columns news-dropcap text-justify text-[13px] leading-relaxed text-paper-foreground">
-        <RenderMdx Content={Content} />
+        <RenderMdx source={doc.mdxSource} />
       </article>
 
       {/* Footer / censura */}

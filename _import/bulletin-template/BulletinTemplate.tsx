@@ -1,9 +1,10 @@
-import type { ArchiveDocument } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { ClassificationBar, PaperSheet } from "./DocumentHeader";
+"use client";
+import type { ArchiveDocument } from "../lib/documents";
+import { RenderMdx } from "../lib/mdx-components";
+import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
 
 export function BulletinTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <PaperSheet>
       <ClassificationBar fm={fm} />
@@ -22,7 +23,7 @@ export function BulletinTemplate({ doc }: { doc: ArchiveDocument }) {
         </div>
       </div>
       <div className="mt-6 text-paper-foreground">
-        <RenderMdx Content={Content} />
+        <RenderMdx source={doc.mdxSource} />
       </div>
     </PaperSheet>
   );

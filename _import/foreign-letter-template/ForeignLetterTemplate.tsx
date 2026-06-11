@@ -1,11 +1,11 @@
-import type { ArchiveDocument } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { ClassificationBar } from "./DocumentHeader";
-import { CrestSvg } from "./foreign/CrestSvg";
-import { Stamp } from "@/components/mdx/MdxComponents";
+"use client";
+import type { ArchiveDocument } from "../lib/documents";
+import { RenderMdx, Stamp } from "../lib/mdx-components";
+import { ClassificationBar } from "../components/DocumentHeader";
+import { CrestSvg } from "../foreign/CrestSvg";
 
 export function ForeignLetterTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <div className="paper-foreign relative mx-auto max-w-3xl border border-paper-muted/40 p-10 shadow-[0_24px_64px_-32px_oklch(0_0_0/0.6)] md:p-14">
       {/* watermark diagonal */}
@@ -53,7 +53,7 @@ export function ForeignLetterTemplate({ doc }: { doc: ArchiveDocument }) {
         </h2>
 
         <div className="foreign-body mt-6 text-paper-foreground">
-          <RenderMdx Content={Content} />
+          <RenderMdx source={doc.mdxSource} />
         </div>
 
         {/* Rodapé com selos */}

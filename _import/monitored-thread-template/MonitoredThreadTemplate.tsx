@@ -1,8 +1,8 @@
-import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/documents";
-import { RenderMdx } from "@/components/mdx/MdxComponents";
-import { ClassificationBar, PaperSheet } from "./DocumentHeader";
-import { DigitalSignature } from "@/components/mdx/DigitalSignature";
-import { Stamp } from "@/components/mdx/MdxComponents";
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "../lib/documents";
+import { RenderMdx, Stamp } from "../lib/mdx-components";
+import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
+import { DigitalSignature } from "../components/DigitalSignature";
 
 function MetaRow({ fm }: { fm: DocumentFrontmatter }) {
   const items: Array<[string, string | undefined]> = [
@@ -27,7 +27,7 @@ function MetaRow({ fm }: { fm: DocumentFrontmatter }) {
 }
 
 export function MonitoredThreadTemplate({ doc }: { doc: ArchiveDocument }) {
-  const { frontmatter: fm, Content } = doc;
+  const { frontmatter: fm } = doc;
   return (
     <PaperSheet>
       <ClassificationBar fm={fm} />
@@ -69,7 +69,7 @@ export function MonitoredThreadTemplate({ doc }: { doc: ArchiveDocument }) {
       </section>
 
       <div className="thread-body mt-6">
-        <RenderMdx Content={Content} />
+        <RenderMdx source={doc.mdxSource} />
       </div>
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-paper-foreground/30 pt-4">
