@@ -7,9 +7,9 @@ export {
   calcularNotaEnergia,
   obterClassificacao,
   isEnergiaValida,
-} from '@/components/individual-layouts/general-components/energy-calculator'
+} from './energy-calculator'
 export type {
   FaixaEnergia,
   AvaliacaoEnergia,
   Classificacao,
-} from '@/components/individual-layouts/general-components/energy-calculator'
+} from './energy-calculator'

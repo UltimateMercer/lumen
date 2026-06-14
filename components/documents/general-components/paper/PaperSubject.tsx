@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { SectionPaper } from "./section-paper";
-import { AccessLevel7Only } from "./access-level-7-only";
+import { SectionPaper } from "./SectionPaper";
+import { AccessLevel7Only } from "../stamps/AccessLevel7Only";
 
 export const PaperSubject = ({
   divisionName,

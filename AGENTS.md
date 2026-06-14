@@ -1,7 +1,6 @@
 # Regras para o agente — Projeto Lumen
 
 ## Arquivos read-only
-- `components/individual-layouts/` — não modificar
 - `_import/*.mdx` — não modificar
 
 ## Convenções
@@ -22,6 +21,12 @@
 - Classes como `paper-texture`, `stamp-ink-red`, `crt-glow`, `redacted`,
   `text-paper-foreground`, `text-classification-public` etc. dependem desse CSS
 - Ainda não integrado ao `app/globals.css`
+
+## Estrutura do projeto (material velho)
+- `components/documents/templates/` — 3 templates de ficha de personagem (permit-card, profile-id, school-final-evaluation)
+- `components/documents/general-components/` — componentes compartilhados (paper/, stamps/, signatures/, ui/, evaluation/)
+- `components/archives/individuals/` — layouts de personagem (roteamento de documentos por character)
+- `lib/power-system/energy-calculator.ts` — motor de cálculo energético (movido de individual-layouts/)
 
 ## Archive routes
 - `/archive` — listagem de documentos

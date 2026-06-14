@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { NexusFormatDate } from "./nexus-format-date";
+import { NexusFormatDate } from "../ui/NexusFormatDate";
 
 export const DigitalSignature = ({
   signature = "Ultimate Mercer",

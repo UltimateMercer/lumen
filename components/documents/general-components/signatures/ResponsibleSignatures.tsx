@@ -1,4 +1,4 @@
-import { DigitalSignature } from "./digital-signature";
+import { DigitalSignature } from "./DigitalSignature";
 
 type ResponsibleSignature = {
   department: string;

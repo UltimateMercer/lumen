@@ -1,5 +1,5 @@
 import { WarningIcon } from "@phosphor-icons/react";
-import { SectionPaper } from "./section-paper";
+import { SectionPaper } from "../paper/SectionPaper";
 
 export const FinalReminder = () => {
   return (

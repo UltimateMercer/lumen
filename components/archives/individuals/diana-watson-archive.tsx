@@ -1,13 +1,13 @@
 "use client";
 
 import type { Individual } from "@/utils/government-data";
-import { SchoolFinalEvaluationDoc } from "./documents/school-final-evaluation-doc";
+import { SchoolFinalEvaluationDoc } from "../../documents/templates/school-final-evaluation";
 import { ultimateSchoolFinalEvaluationData } from "@/data/school-final-evaluations/ultimate";
-import { ProfileId } from "./documents/profile-id";
+import { ProfileId } from "../../documents/templates/profile-id";
 import { ultimateProfileId } from "@/data/profile-id/ultimate";
 import { dianaWatsonProfileId } from "@/data/profile-id/diana-watson";
 import { dianaWatsonSchoolFinalEvaluationData } from "@/data/school-final-evaluations/diana-watson";
-import { PermitCard } from "./documents/permit-card";
+import { PermitCard } from "../../documents/templates/permit-card";
 import { dianaWatsonPermissions } from "@/data/permissions/diana-watson";
 
 interface LayoutProps {

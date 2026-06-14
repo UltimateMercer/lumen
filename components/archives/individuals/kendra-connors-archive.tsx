@@ -1,10 +1,10 @@
 "use client";
 
 import type { Individual } from "@/utils/government-data";
-import { SchoolFinalEvaluationDoc } from "./documents/school-final-evaluation-doc";
-import { ProfileId } from "./documents/profile-id";
+import { SchoolFinalEvaluationDoc } from "../../documents/templates/school-final-evaluation";
+import { ProfileId } from "../../documents/templates/profile-id";
 
-import { PermitCard } from "./documents/permit-card";
+import { PermitCard } from "../../documents/templates/permit-card";
 import { kendraConnorsProfileId } from "@/data/profile-id/kendra-connors";
 import { kendraConnorsSchoolFinalEvaluationData } from "@/data/school-final-evaluations/kendra-connors";
 

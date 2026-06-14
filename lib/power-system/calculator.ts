@@ -13,7 +13,7 @@ import {
   calcMediumAffinityToPercent,
   calcMediumAffinityRounded,
 } from './affinity'
-import { avaliarEnergia } from '@/components/individual-layouts/general-components/energy-calculator'
+import { avaliarEnergia } from './energy-calculator'
 
 export function getTier(score: number): PowerTier {
   if (score >= 1100) return 'S'

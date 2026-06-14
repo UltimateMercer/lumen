@@ -1,7 +1,7 @@
-import { ItemValue } from "./item-value";
-import { NexusFormatDate } from "./nexus-format-date";
-import { SectionPaper } from "./section-paper";
-import { SectionTitle } from "./section-title";
+import { ItemValue } from "../ui/ItemValue";
+import { NexusFormatDate } from "../ui/NexusFormatDate";
+import { SectionPaper } from "../paper/SectionPaper";
+import { SectionTitle } from "../paper/SectionTitle";
 
 type FinalEvaluationInfoType = {
   date: string;

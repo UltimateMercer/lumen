@@ -1,7 +1,7 @@
 import type { Individual } from "@/utils/government-data";
-import { UltimateLayout } from "@/components/individual-layouts/ultimate-layout";
-import { DianaWatsonLayout } from "@/components/individual-layouts/diana-watson-layout";
-import { KendraConnorsLayout } from "@/components/individual-layouts/kendra-connors-layout";
+import { UltimateLayout } from "@/components/archives/individuals/ultimate-archive";
+import { DianaWatsonLayout } from "@/components/archives/individuals/diana-watson-archive";
+import { KendraConnorsLayout } from "@/components/archives/individuals/kendra-connors-archive";
 
 export const individuals: Individual[] = [
   {

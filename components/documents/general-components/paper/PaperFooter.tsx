@@ -1,7 +1,7 @@
 import { WarningIcon } from "@phosphor-icons/react";
-import { ItemValue } from "./item-value";
-import { SectionPaper } from "./section-paper";
-import { FinalReminder } from "./final-reminder";
+import { ItemValue } from "../ui/ItemValue";
+import { SectionPaper } from "./SectionPaper";
+import { FinalReminder } from "../stamps/FinalReminder";
 
 export const PaperFooter = ({
   isHighSecurity = false,

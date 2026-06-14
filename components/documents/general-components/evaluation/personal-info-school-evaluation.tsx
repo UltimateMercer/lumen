@@ -1,6 +1,6 @@
-import { ItemValue } from "./item-value";
-import { NexusFormatDate } from "./nexus-format-date";
-import { SectionPaper } from "./section-paper";
+import { ItemValue } from "../ui/ItemValue";
+import { NexusFormatDate } from "../ui/NexusFormatDate";
+import { SectionPaper } from "../paper/SectionPaper";
 
 type PersonalInfoSchoolEvaluationType = {
   registryName: string;
