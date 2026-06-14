@@ -3,8 +3,9 @@ import { useState } from "react";
 import type { ArchiveDocument, DocumentType } from "../lib/documents";
 import { DOCUMENT_TYPE_LABEL } from "../lib/documents";
 import { RenderMdx } from "../lib/mdx-components";
-import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
-import { Folder } from "../components/batch/Folder";
+import { PaperSheet } from "../general-components/paper/PaperSheet";
+import { ClassificationBar } from "../general-components/stamps/ClassificationBar";
+import { Folder } from "../general-components/ui/Folder";
 import { TEMPLATES } from "../index";
 import { cn } from "@/lib/utils";
 

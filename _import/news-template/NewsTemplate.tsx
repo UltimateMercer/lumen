@@ -1,7 +1,7 @@
 "use client";
 import type { ArchiveDocument } from "../lib/documents";
 import { RenderMdx } from "../lib/mdx-components";
-import { PaperSheet } from "../components/DocumentHeader";
+import { PaperSheet } from "../general-components/paper/PaperSheet";
 
 export function NewsTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;

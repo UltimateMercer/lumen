@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
-import { ThemeToggle } from "./components/ThemeToggle";
+import { ThemeToggle } from "./general-components/ui/ThemeToggle";
 
 function SessionCode() {
   // Evita mismatch de hydration: gera só no cliente.

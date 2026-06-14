@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { Children, createContext, isValidElement, useContext, useRef } from "react";
 import { MDXRemote } from "next-mdx-remote";
 import { cn } from "@/lib/utils";
-import { DigitalSignature } from "../components/DigitalSignature";
+import { DigitalSignature } from "../general-components/signatures/DigitalSignature";
 
 export function Redacted({ children, length }: { children?: ReactNode; length?: number }) {
   const text = children ?? "█".repeat(length ?? 12);

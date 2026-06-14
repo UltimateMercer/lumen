@@ -2,11 +2,6 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * Capa de pasta lacrada com animação de abertura.
- * Estado inicial: fechada (SSR-safe). Anima após mount.
- * Respeita prefers-reduced-motion. Pula com tecla/click.
- */
 export function Folder({
   caseId,
   title,
@@ -22,18 +17,13 @@ export function Folder({
   onOpened: () => void;
   storageKey?: string;
 }) {
-  // 0 = pasta fechada, 1 = lacre rompido, 2 = abrindo, 3 = aberto
   const [stage, setStage] = useState(0);
   const [skipped, setSkipped] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const seen = storageKey
-      ? sessionStorage.getItem(storageKey) === "1"
-      : false;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const seen = storageKey ? sessionStorage.getItem(storageKey) === "1" : false;
     if (reduced || seen) {
       setSkipped(true);
       onOpened();
@@ -94,11 +84,8 @@ export function Folder({
           stage >= 3 && "folder--open",
         )}
       >
-        {/* corpo da pasta */}
         <div className="folder-body absolute inset-0 border-2 border-paper-foreground/60 bg-[oklch(0.78_0.05_70)] shadow-[0_24px_64px_-24px_oklch(0_0_0/0.6)]">
-          {/* aba superior */}
           <div className="absolute -top-3 left-8 right-8 h-8 border-x-2 border-t-2 border-paper-foreground/60 bg-[oklch(0.82_0.05_70)]" />
-          {/* etiqueta */}
           <div className="absolute left-1/2 top-12 w-3/4 -translate-x-1/2 border border-paper-foreground/40 bg-[oklch(0.92_0.03_85)] p-4 text-center text-paper-foreground">
             <div className="text-[10px] uppercase tracking-[0.3em] text-paper-muted">
               MINCONT · Divisão 14-B
@@ -113,11 +100,9 @@ export function Folder({
               ◆ {classification}
             </div>
           </div>
-          {/* marca diagonal */}
           <div className="pointer-events-none absolute inset-x-0 bottom-14 text-center font-display text-[10px] uppercase tracking-[0.4em] text-stamp-ink-red opacity-70">
             // não remover lacre sem autorização
           </div>
-          {/* lacre de cera */}
           <div className="seal-wrap absolute bottom-8 left-1/2 -translate-x-1/2">
             <div
               className={cn(

@@ -1,8 +1,9 @@
 "use client";
 import type { ArchiveDocument, DocumentFrontmatter } from "../lib/documents";
 import { RenderMdx, Stamp, Redacted, ProjectTOC } from "../lib/mdx-components";
-import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
-import { DigitalSignature } from "../components/DigitalSignature";
+import { PaperSheet } from "../general-components/paper/PaperSheet";
+import { ClassificationBar } from "../general-components/stamps/ClassificationBar";
+import { DigitalSignature } from "../general-components/signatures/DigitalSignature";
 import { cn } from "@/lib/utils";
 
 type ProjectStatus = NonNullable<DocumentFrontmatter["project_status"]>;

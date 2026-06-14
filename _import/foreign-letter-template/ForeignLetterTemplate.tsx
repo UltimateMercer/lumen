@@ -1,8 +1,8 @@
 "use client";
 import type { ArchiveDocument } from "../lib/documents";
 import { RenderMdx, Stamp } from "../lib/mdx-components";
-import { ClassificationBar } from "../components/DocumentHeader";
-import { CrestSvg } from "../foreign/CrestSvg";
+import { ClassificationBar } from "../general-components/stamps/ClassificationBar";
+import { CrestSvg } from "../general-components/ui/CrestSvg";
 
 export function ForeignLetterTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;

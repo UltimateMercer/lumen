@@ -1,8 +1,9 @@
 "use client";
 import type { ArchiveDocument } from "../lib/documents";
 import { RenderMdx } from "../lib/mdx-components";
-import { ClassificationBar, PaperSheet } from "../components/DocumentHeader";
-import { DigitalSignature } from "../components/DigitalSignature";
+import { PaperSheet } from "../general-components/paper/PaperSheet";
+import { ClassificationBar } from "../general-components/stamps/ClassificationBar";
+import { DigitalSignature } from "../general-components/signatures/DigitalSignature";
 
 function Meta({ label, value }: { label: string; value?: string }) {
   return (
