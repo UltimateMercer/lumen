@@ -5,10 +5,10 @@
 
 ## Convenções
 - `@/*` path alias mapeia para a raiz do projeto
-- Templates em `_import/*-template/` usam imports relativos (../lib/...)
-- MDX é carregado via `_import/lib/registry.ts` (fs.readFileSync, build-time)
+- Templates em `components/documents/templates/` usam imports por `@/lib/archive/` e `../general-components/`
+- MDX é carregado via `lib/archive/registry.ts` (build-time, webpack asset/source)
 - MDX é serializado via `next-mdx-remote/serialize` nas rotas
-- Renderização MDX usa `RenderMdx` de `_import/lib/mdx-components.tsx`
+- Renderização MDX usa `RenderMdx` de `components/documents/general-components/mdx/RenderMdx.tsx`
 - Archive routes em `app/archive/`
 
 ## Build
@@ -22,14 +22,16 @@
   `text-paper-foreground`, `text-classification-public` etc. dependem desse CSS
 - Ainda não integrado ao `app/globals.css`
 
-## Estrutura do projeto (material velho)
-- `components/documents/templates/` — 3 templates de ficha de personagem (permit-card, profile-id, school-final-evaluation)
-- `components/documents/general-components/` — componentes compartilhados (paper/, stamps/, signatures/, ui/, evaluation/)
+## Estrutura do projeto
+- `components/documents/templates/` — 26 templates (23 archive + 3 fichas de personagem)
+- `components/documents/general-components/` — componentes compartilhados (paper/, stamps/, signatures/, ui/, evaluation/, mdx/)
 - `components/archives/individuals/` — layouts de personagem (roteamento de documentos por character)
-- `lib/power-system/energy-calculator.ts` — motor de cálculo energético (movido de individual-layouts/)
+- `lib/power-system/` — motor de cálculo energético
+- `lib/archive/` — lib do archive (documents.ts com tipos + registry.ts com carregamento MDX)
+- `content/archive/` — arquivos MDX (codex/, classified-project/, examples/)
 
 ## Archive routes
 - `/archive` — listagem de documentos
 - `/archive/[slug]` — renderização individual com template + MDX
 - `app/archive/[slug]/page.tsx` usa `generateStaticParams` (Next.js 16)
-- `TEMPLATES` registry em `_import/index.ts`
+- `TEMPLATES` registry em `components/documents/index.ts`

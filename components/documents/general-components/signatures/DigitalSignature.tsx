@@ -1,19 +1,26 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { NexusFormatDate } from "../ui/NexusFormatDate";
 
-export const DigitalSignature = ({
-  signature = "Ultimate Mercer",
-  registry = "@ultimatemercer",
-  timestamp = Date.now(),
+export function DigitalSignature({
+  name,
+  role,
+  registry,
+  timestamp,
+  authority = "República Autônoma de Nova-Aurélia",
   color,
   background,
+  className,
 }: {
-  signature: string;
+  name: string;
+  role?: string;
   registry: string;
-  timestamp: any;
+  timestamp: string | number;
+  authority?: string;
   color?: string;
   background?: string;
-}) => {
+  className?: string;
+}) {
   const hasTheme = !!color;
 
   const frameStyle = hasTheme
@@ -43,107 +50,125 @@ export const DigitalSignature = ({
       : undefined;
   };
 
+  const cornerClasses = (pos: "tl" | "tr" | "br" | "bl") => {
+    if (hasTheme) return `absolute size-4 ${pos === "tl" ? "top-0 left-0" : pos === "tr" ? "top-0 right-0" : pos === "br" ? "bottom-0 right-0" : "bottom-0 left-0"}`;
+    const map = {
+      tl: "absolute size-8 left-0 top-0 border-l-2 border-t-2 border-paper-foreground/70",
+      tr: "hidden",
+      br: "absolute size-8 right-0 bottom-0 border-r-2 border-b-2 border-paper-foreground/70",
+      bl: "hidden",
+    };
+    return map[pos];
+  };
+
   return (
-    <div className="block font-mono">
+    <div className={cn("mt-10 block", className)}>
       <span
         className={cn(
-          "text-sm uppercase",
-          hasTheme ? "tracking-wider" : "text-muted-foreground",
+          "text-xs uppercase tracking-widest",
+          hasTheme ? "block" : "text-paper-muted",
         )}
         style={hasTheme ? { color, opacity: 0.6 } : undefined}
       >
-        Assinatura:{" "}
+        Assinatura ::
       </span>
       <div
         className={cn(
-          "relative flex items-center justify-center min-h-28 max-h-40 background-texture bg-muted-foreground/10",
-          // !hasTheme && "bg-muted-foreground/10 ",
+          "relative mt-1 flex min-h-28 items-center justify-center",
+          hasTheme
+            ? "background-texture"
+            : "border border-paper-foreground/20 bg-paper-foreground/[0.03]",
         )}
+        style={frameStyle}
       >
+        {(["tl", "tr", "br", "bl"] as const).map((pos) => (
+          <div
+            key={pos}
+            className={cornerClasses(pos)}
+            style={cornerStyle(pos)}
+          />
+        ))}
+
         <div
           className={cn(
-            "py-1 px-2 mx-3 my-3 font-mono",
-            !hasTheme && "border border-[#252525] dark:border-[#eaeaea]",
+            "border border-paper-foreground/80 px-3 py-2 text-center",
+            hasTheme && "border",
           )}
           style={cardStyle}
         >
           <p
-            className="text-[9px] uppercase"
+            className={cn(
+              "text-[9px] uppercase tracking-wider",
+              hasTheme ? "" : "text-paper-muted",
+            )}
             style={hasTheme ? { color, opacity: 0.7 } : undefined}
           >
             Documento assinado digitalmente
           </p>
           <p
-            className="text-sm font-bold uppercase"
+            className={cn(
+              "mt-1 text-sm font-bold uppercase tracking-wider",
+              hasTheme ? "" : "text-paper-foreground",
+            )}
             style={hasTheme ? { color } : undefined}
           >
-            {signature}
+            {name}
           </p>
-          <p className="text-xs" style={hasTheme ? { color } : undefined}>
-            {registry}
-          </p>
+          {role && (
+            <p
+              className={cn(
+                "text-[10px] uppercase tracking-wider",
+                hasTheme ? "" : "text-paper-muted",
+              )}
+              style={hasTheme ? { color, opacity: 0.7 } : undefined}
+            >
+              {role}
+            </p>
+          )}
           <p
-            className="text-xs uppercase"
-            style={hasTheme ? { color } : undefined}
+            className={cn(
+              "text-[10px] uppercase tracking-wider",
+              hasTheme ? "" : "text-paper-foreground/80",
+            )}
+            style={hasTheme ? { color, opacity: 0.8 } : undefined}
           >
-            {NexusFormatDate(timestamp)}
+            reg. {registry}
           </p>
           <p
-            className="text-[9px] uppercase text-center mt-1"
+            className={cn(
+              "text-[10px] uppercase tracking-wider",
+              hasTheme ? "" : "text-paper-foreground/80",
+            )}
+            style={hasTheme ? { color, opacity: 0.8 } : undefined}
+          >
+            {NexusFormatDate(String(timestamp))}
+          </p>
+          <p
+            className={cn(
+              "mt-1 text-[8px] uppercase tracking-[0.2em]",
+              hasTheme ? "text-center" : "text-paper-muted",
+            )}
             style={hasTheme ? { color, opacity: 0.6 } : undefined}
           >
-            República da Aurora
+            {authority}
           </p>
         </div>
-
-        {/* <div className="absolute size-10 border-l-2 border-t-2 top-0 left-0"></div> */}
-        {/* Cantos */}
-        {(["tl", "tr", "br", "bl"] as const).map((pos) => (
-          <div
-            key={pos}
-            className={cn(
-              "absolute",
-              !hasTheme && "size-6",
-              hasTheme && "size-4",
-              pos === "tl" &&
-                !hasTheme &&
-                "border-l-2 border-t-2 border-muted-foreground top-0 left-0",
-              pos === "tr" &&
-                !hasTheme &&
-                "border-r-2 border-t-2 border-muted-foreground top-0 right-0",
-              pos === "br" &&
-                !hasTheme &&
-                "border-r-2 border-b-2 border-muted-foreground bottom-0 right-0",
-              pos === "bl" &&
-                !hasTheme &&
-                "border-l-2 border-b-2 border-muted-foreground bottom-0 left-0",
-              pos === "tl" && hasTheme && "top-0 left-0",
-              pos === "tr" && hasTheme && "top-0 right-0",
-              pos === "br" && hasTheme && "bottom-0 right-0",
-              pos === "bl" && hasTheme && "bottom-0 left-0",
-            )}
-            style={cornerStyle(pos)}
-          />
-        ))}
       </div>
-      {/* Footer */}
-      <div className="flex flex-nowrap items-center mt-0.5">
+      <div className="mt-1 flex items-center gap-2">
         <div
-          className={cn("w-full h-px", !hasTheme && "bg-muted-foreground")}
+          className={cn("h-px w-full", hasTheme ? "" : "bg-paper-muted/60")}
           style={hasTheme ? { background: color, opacity: 0.4 } : undefined}
         />
         <span
           className={cn(
-            "block text-sm uppercase text-nowrap",
-            !hasTheme && "text-muted-foreground",
+            "text-[10px] uppercase tracking-widest whitespace-nowrap",
+            hasTheme ? "" : "text-paper-muted",
           )}
-          style={
-            hasTheme ? { color, opacity: 0.6, fontSize: "11px" } : undefined
-          }
+          style={hasTheme ? { color, opacity: 0.6 } : undefined}
         >
-          [Assinatura Digital]
+          [assinatura digital]
         </span>
       </div>
     </div>
   );
-};
+}

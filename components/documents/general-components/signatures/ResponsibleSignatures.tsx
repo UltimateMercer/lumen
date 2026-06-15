@@ -28,7 +28,7 @@ export const ResponsibleSignatures = ({
             <span className="font-bold uppercase">{data.registry}</span>
           </div>
           <DigitalSignature
-            signature={data.signature}
+            name={data.signature}
             registry={data.registry}
             timestamp={data.timestamp}
           />

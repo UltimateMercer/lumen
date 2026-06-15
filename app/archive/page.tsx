@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { DocumentType } from "@/_import/lib/documents";
-import { getAllDocuments } from "@/_import/lib/registry";
-import { DOCUMENT_TYPE_LABEL, CLASSIFICATION_TOKEN } from "@/_import/lib/documents";
+import type { DocumentType } from "@/lib/archive/documents";
+import { getAllDocuments } from "@/lib/archive/registry";
+import { DOCUMENT_TYPE_LABEL, CLASSIFICATION_TOKEN } from "@/lib/archive/documents";
 
 export default function ArchivePage() {
   const docs = getAllDocuments();

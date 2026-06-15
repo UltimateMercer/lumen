@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { serialize } from "next-mdx-remote/serialize";
-import { getDocument, getAllSlugs, getBatchItems } from "@/_import/lib/registry";
-import { CLASSIFICATION_TOKEN, DOCUMENT_TYPE_LABEL, type ArchiveDocument } from "@/_import/lib/documents";
-import { TEMPLATES } from "@/_import/index";
+import { getDocument, getAllSlugs, getBatchItems } from "@/lib/archive/registry";
+import { CLASSIFICATION_TOKEN, DOCUMENT_TYPE_LABEL, type ArchiveDocument } from "@/lib/archive/documents";
+import { TEMPLATES } from "@/components/documents/index";
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
