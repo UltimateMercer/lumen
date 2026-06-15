@@ -1,6 +1,11 @@
 "use client";
-import { MDXRemote } from "next-mdx-remote";
+import dynamic from "next/dynamic";
 import { mdxComponents } from "./MdxComponents";
+
+const MDXRemote = dynamic(
+  () => import("next-mdx-remote").then((m) => m.MDXRemote),
+  { ssr: false },
+);
 
 export function RenderMdx({ source }: { source?: Record<string, unknown> }) {
   if (!source) return null;
