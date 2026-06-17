@@ -19,19 +19,24 @@
 - Pre-existing errors (missing modules): ignorar, não são causados por nossas mudanças
 
 ## CSS
-- `_import/styles.css` contém 1022 linhas de classes customizadas
+- `_import/styles.css` (1022 linhas) foi integralmente migrado para `app/globals.css` (912 linhas)
 - Classes como `paper-texture`, `stamp-ink-red`, `crt-glow`, `redacted`,
-  `text-paper-foreground`, `text-classification-public` etc. dependem desse CSS
-- Ainda não integrado ao `app/globals.css` (referenciado em comentário)
+  `text-paper-foreground`, `text-classification-public` etc. estão em `app/globals.css` em `@layer utilities`
+
+## NRC (Número de Registro Civil)
+- `lib/in-universe-rules/nrc.ts` — geração e parse de NRCs no formato `XX-AAAA-NNNNNNNN`
+- `lib/in-universe-rules/README.md` — documentação diegética do formato
+- NRCs atribuídos em `data/individuals.ts` (4 personagens: Diana, Ultimate, Kendra, Kira)
+- Nacionalidade desconhecida → `??` no lugar do código de nação
 
 ## Estrutura do projeto
 - `components/documents/templates/` — 26 templates (23 archive + 3 fichas de personagem)
 - `components/documents/general-components/` — componentes compartilhados (paper/, stamps/, signatures/, ui/, evaluation/, mdx/)
-- `components/documents/general-components/signatures/DigitalSignature.tsx` — componente unificado (Etapa 3 + `_import/`)
 - `components/documents/index.ts` — barrel que exporta `TEMPLATES`
 - `components/archives/individuals/` — layouts de personagem (roteamento de documentos por character)
 - `lib/power-system/` — motor de cálculo energético
 - `lib/archive/` — lib do archive (documents.ts com tipos + registry.ts com carregamento MDX)
+- `lib/in-universe-rules/` — regras do universo (NRC)
 - `content/archive/` — 30 arquivos MDX (codex/, classified-project/, examples/)
 
 ## Archive routes
@@ -40,3 +45,10 @@
 - `app/archive/[slug]/page.tsx` usa `generateStaticParams` (Next.js 16)
 - `TEMPLATES` registry em `components/documents/index.ts`
 - `app/archive/page.tsx` — showcase inline de ~45 componentes via Group/Item helpers locais
+
+## Fase 1 — executada
+- Import fantasma removido de `diana-watson-archive.tsx`
+- Kira registrada em `data/individuals.ts` com NRC `??-1229-90814563`
+- `ID-2846` substituído por NRCs únicos em todos os 4 personagens
+- `lib/in-universe-rules/` criada com `nrc.ts` + `README.md`
+- `components/government-dashboard copy.tsx` deletado (sem referências no projeto)
