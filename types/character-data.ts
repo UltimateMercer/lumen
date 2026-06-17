@@ -86,6 +86,13 @@ export interface FinalEvaluationData {
   redactExaminers: boolean;
 }
 
+export interface IndividualLayoutProps {
+  documentId: string;
+  profileId?: ProfileIdData;
+  schoolFinalEvaluation?: SchoolFinalEvaluationData;
+  permissions?: PermissionsData;
+}
+
 export interface SchoolFinalEvaluationData {
   registry: string;
   personalInfoData: PersonalInfoData;

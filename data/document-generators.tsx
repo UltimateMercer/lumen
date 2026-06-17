@@ -36,7 +36,7 @@ export const generateIndividualDocuments = (
         individual.department || "DEPARTAMENTO DE REGISTROS E ARQUIVOS",
       date: "2024.03.15",
       signedBy: "Sistema de Documentação Automatizado",
-      content: <LayoutComponent individual={individual} documentId={doc.id} />,
+      content: <LayoutComponent documentId={doc.id} />,
     }));
   }
 

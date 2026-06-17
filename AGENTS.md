@@ -46,6 +46,14 @@
 - `TEMPLATES` registry em `components/documents/index.ts`
 - `app/archive/page.tsx` — showcase inline de ~45 componentes via Group/Item helpers locais
 
+## Fase 3 — executada
+- `slug` e `relatedDocuments` adicionados à interface `Individual` e aos 4 registros em `data/individuals.ts`
+- `IndividualLayoutProps` criado em `types/character-data.ts` com `documentId`, `profileId?`, `schoolFinalEvaluation?`, `permissions?`
+- `layoutComponent` em `Individual` agora recebe `IndividualLayoutProps` em vez de `{ individual, documentId }`
+- 3 `*-archive.tsx` refatorados para receber dados via props (sem imports diretos de dados)
+- `components/IndividualResolver.tsx` criado — orquestrador que resolve slug → dados → layout
+- `data/document-generators.tsx` atualizado para compatibilidade com nova props interface
+
 ## Fase 2 — executada
 - `types/character-data.ts` criado com 14 interfaces: `ProfileIdData`, `PermissionsData`, `SchoolFinalEvaluationData` +
   `ResponsibleSignature`, `MentorData`, `Affinities`, `EnergyComponentValues`, `PhysicalComponentValues`,

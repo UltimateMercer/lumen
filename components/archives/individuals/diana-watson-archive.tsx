@@ -1,33 +1,26 @@
 "use client";
 
-import type { Individual } from "@/utils/government-data";
+import type { IndividualLayoutProps } from "@/types/character-data";
 import { SchoolFinalEvaluationDoc } from "../../documents/templates/school-final-evaluation";
 import { ProfileId } from "../../documents/templates/profile-id";
-import { dianaWatsonProfileId } from "@/data/profile-id/diana-watson";
-import { dianaWatsonSchoolFinalEvaluationData } from "@/data/school-final-evaluations/diana-watson";
 import { PermitCard } from "../../documents/templates/permit-card";
-import { dianaWatsonPermissions } from "@/data/permissions/diana-watson";
 
-interface LayoutProps {
-  individual: Individual;
-  documentId: string;
-}
-
-export const DianaWatsonLayout = ({ individual, documentId }: LayoutProps) => {
-  if (documentId === "profile") {
-    return <ProfileId individual={dianaWatsonProfileId} />;
+export const DianaWatsonLayout = ({
+  documentId,
+  profileId,
+  schoolFinalEvaluation,
+  permissions,
+}: IndividualLayoutProps) => {
+  if (documentId === "profile" && profileId) {
+    return <ProfileId individual={profileId} />;
   }
 
-  if (documentId === "school-final-evaluation") {
-    return (
-      <SchoolFinalEvaluationDoc
-        individual={dianaWatsonSchoolFinalEvaluationData}
-      />
-    );
+  if (documentId === "school-final-evaluation" && schoolFinalEvaluation) {
+    return <SchoolFinalEvaluationDoc individual={schoolFinalEvaluation} />;
   }
 
-  if (documentId === "permit-card") {
-    return <PermitCard individual={dianaWatsonPermissions} />;
+  if (documentId === "permit-card" && permissions) {
+    return <PermitCard individual={permissions} />;
   }
 
   return <div>Diana Watson Layout</div>;

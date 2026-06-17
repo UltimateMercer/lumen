@@ -1,36 +1,26 @@
 "use client";
 
-import type { Individual } from "@/utils/government-data";
+import type { IndividualLayoutProps } from "@/types/character-data";
 import { SchoolFinalEvaluationDoc } from "../../documents/templates/school-final-evaluation";
-import { ultimateSchoolFinalEvaluationData } from "@/data/school-final-evaluations/ultimate";
 import { ProfileId } from "../../documents/templates/profile-id";
-import { ultimateProfileId } from "@/data/profile-id/ultimate";
 import { PermitCard } from "../../documents/templates/permit-card";
-import { ultimatePermissions } from "@/data/permissions/ultimate";
-
-interface UltimateLayoutProps {
-  individual: Individual;
-  documentId: string;
-}
 
 export const UltimateLayout = ({
-  individual,
   documentId,
-}: UltimateLayoutProps) => {
-  if (documentId === "profile") {
-    return <ProfileId individual={ultimateProfileId} />;
+  profileId,
+  schoolFinalEvaluation,
+  permissions,
+}: IndividualLayoutProps) => {
+  if (documentId === "profile" && profileId) {
+    return <ProfileId individual={profileId} />;
   }
 
-  if (documentId === "school-final-evaluation") {
-    return (
-      <SchoolFinalEvaluationDoc
-        individual={ultimateSchoolFinalEvaluationData}
-      />
-    );
+  if (documentId === "school-final-evaluation" && schoolFinalEvaluation) {
+    return <SchoolFinalEvaluationDoc individual={schoolFinalEvaluation} />;
   }
 
-  if (documentId === "permit-card") {
-    return <PermitCard individual={ultimatePermissions} />;
+  if (documentId === "permit-card" && permissions) {
+    return <PermitCard individual={permissions} />;
   }
 
   return <div>Ultimate Layout</div>;

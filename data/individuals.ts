@@ -5,6 +5,7 @@ import { KendraConnorsLayout } from "@/components/archives/individuals/kendra-co
 
 export const individuals: Individual[] = [
   {
+    slug: "diana-watson",
     name: "Diana Watson",
     knownAs: "",
     codename: "",
@@ -34,6 +35,7 @@ export const individuals: Individual[] = [
     ],
   },
   {
+    slug: "ultimate",
     name: "Johan Kyler Mercer",
     knownAs: "Ultimate",
     codename: "Portador do Crimson/Scarlet Eyes",
@@ -55,6 +57,9 @@ export const individuals: Individual[] = [
     clearanceLevel: "NÍVEL 5",
     department: "",
     yearsOfService: 0,
+    relatedDocuments: [
+      { slug: "codex-fic-01-fantasma-carmesim", label: "Codex — Fantasma Carmesim" },
+    ],
     layoutComponent: UltimateLayout,
     documents: [
       { id: "profile", name: "Perfil" },
@@ -63,6 +68,7 @@ export const individuals: Individual[] = [
     ],
   },
   {
+    slug: "kendra-connors",
     name: "Kendra Juliet Connors",
     knownAs: "Kendra Connors",
     codename: "",
@@ -84,6 +90,9 @@ export const individuals: Individual[] = [
     clearanceLevel: "NÍVEL 1",
     department: "",
     yearsOfService: 0,
+    relatedDocuments: [
+      { slug: "projeto-red-suns", label: "Projeto Red Suns" },
+    ],
     layoutComponent: KendraConnorsLayout,
     documents: [
       { id: "profile", name: "Perfil" },
@@ -92,6 +101,7 @@ export const individuals: Individual[] = [
     ],
   },
   {
+    slug: "kira",
     name: "Kira",
     knownAs: "",
     codename: "",

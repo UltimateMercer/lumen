@@ -1,3 +1,48 @@
+# Fase 3 — IndividualResolver + relatedDocuments
+**Data:** 17-Jun-2026
+
+## Mudanças
+
+### `utils/government-data.ts`
+- Adicionado campo `slug?: string` à interface `Individual` para lookup por identificador
+- Adicionado campo `relatedDocuments?: { slug: string; label?: string }[]` para vincular documentos do archive a personagens
+- `layoutComponent` agora recebe `IndividualLayoutProps` de `types/character-data.ts`
+
+### `data/individuals.ts`
+- Todos os 4 registros agora têm `slug` (diana-watson, ultimate, kendra-connors, kira)
+- Ultimate: `relatedDocuments` → `codex-fic-01-fantasma-carmesim`
+- Kendra: `relatedDocuments` → `projeto-red-suns`
+- Diana e Kira: sem `relatedDocuments`
+
+### `types/character-data.ts`
+- Nova interface `IndividualLayoutProps` com `documentId` (obrigatório) + `profileId?`, `schoolFinalEvaluation?`, `permissions?`
+- Todos os campos de dados opcionais — cada personagem tem um subconjunto diferente de documentos
+
+### `components/archives/individuals/*-archive.tsx` (3 arquivos)
+- Removidos todos os imports diretos de `data/profile-id/`, `data/permissions/`, `data/school-final-evaluations/`
+- Props alteradas de `{ individual: Individual; documentId: string }` para `IndividualLayoutProps`
+- Roteamento por `documentId` mantido, mas lendo de `profileId`, `schoolFinalEvaluation`, `permissions`
+- Dados ausentes tratados com early return (não assume presença)
+
+### `components/IndividualResolver.tsx` (novo)
+- Componente client que orquestra a resolução slug → dados → layout
+- Importa estaticamente todos os 9 arquivos de dados e constrói um mapa slug → dados
+- Busca o `Individual` em `data/individuals.ts` pelo slug
+- Renderiza o `layoutComponent` do indivíduo com as props corretas
+- Slug ou `layoutComponent` ausentes → retorna `null`
+
+### `data/document-generators.tsx`
+- Atualizado para compatibilidade com novo tipo de `layoutComponent` (removida prop `individual` obsoleta)
+
+## Decisões
+
+- **`IndividualLayoutProps` com campos opcionais**: Cada personagem tem documentos diferentes (ex: Kira só tem school-final-evaluation). Novos tipos de documento podem surgir sem quebrar layouts existentes.
+- **Resolver como orquestrador, não substituto**: Os 3 `*-archive.tsx` continuam existindo. O resolver apenas centraliza a passagem de dados — não substitui os layouts.
+- **Import estático vs dinâmico**: Todos os dados são constantes pequenas. Import estático é mais seguro (type checking em tempo de compilação) do que `import()` dinâmico.
+- **`slug` como campo separado do `name`**: Permite URLs limpas independentes do nome do personagem, que pode mudar (apelidos, codinomes).
+
+---
+
 # Fase 2 — Tipagem da Camada de Dados
 
 ## Interfaces Criadas (`types/character-data.ts`)
