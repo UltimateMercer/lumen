@@ -31,8 +31,6 @@ export interface Individual {
   yearsOfService?: number;
   lastKnownLocation?: string;
   aliases?: string[];
-  // Campos customizados adicionais podem ser adicionados aqui
-  [key: string]: any; // Permite campos completamente customizados
   // NEW: Custom layout component for this individual's documents
   layoutComponent?: React.ComponentType<{
     individual: Individual;

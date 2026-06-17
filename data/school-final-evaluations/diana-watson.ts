@@ -1,3 +1,5 @@
+import type { SchoolFinalEvaluationData } from "@/types/character-data";
+
 export const dianaWatsonSchoolFinalEvaluationData = {
   isHighSecurity: false,
   registry: "RA-1244-0005032",
@@ -48,4 +50,4 @@ export const dianaWatsonSchoolFinalEvaluationData = {
       timestamp: "78-Vernis-1244-S - 17:24:41",
     },
   ],
-};
+} satisfies SchoolFinalEvaluationData;

@@ -1,3 +1,5 @@
+import type { ProfileIdData } from "@/types/character-data";
+
 export const kendraConnorsProfileId = {
   name: "Kendra Juliet Connors",
   knownAs: "Kendra Connors",
@@ -20,4 +22,4 @@ export const kendraConnorsProfileId = {
       timestamp: "06-Solaris-1245-S - 10:12:54",
     },
   ],
-};
+} satisfies ProfileIdData;

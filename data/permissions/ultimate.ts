@@ -1,3 +1,5 @@
+import type { PermissionsData } from "@/types/character-data";
+
 export const ultimatePermissions = {
   id: "NR-9308387",
   registryName: "Ultimate",
@@ -15,4 +17,4 @@ export const ultimatePermissions = {
       timestamp: "63-Vernis-1245-S - 11:31:43",
     },
   ],
-};
+} satisfies PermissionsData;

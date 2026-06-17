@@ -1,3 +1,5 @@
+import type { PermissionsData } from "@/types/character-data";
+
 export const dianaWatsonPermissions = {
   id: "NR-2094910",
   registryName: "Diana Watson",
@@ -21,4 +23,4 @@ export const dianaWatsonPermissions = {
       timestamp: "11-Solaris-1245-S - 08:31:22",
     },
   ],
-};
+} satisfies PermissionsData;

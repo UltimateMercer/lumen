@@ -1,3 +1,5 @@
+import type { ProfileIdData } from "@/types/character-data";
+
 export const ultimateProfileId = {
   isHighSecurity: true,
   name: "Johan Kyler Mercer",
@@ -21,4 +23,4 @@ export const ultimateProfileId = {
       timestamp: "83-Umbrae-1244-S - 09:11:47",
     },
   ],
-};
+} satisfies ProfileIdData;

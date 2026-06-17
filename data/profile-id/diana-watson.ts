@@ -1,3 +1,5 @@
+import type { ProfileIdData } from "@/types/character-data";
+
 export const dianaWatsonProfileId = {
   name: "Diana Watson",
   knownAs: "",
@@ -20,4 +22,4 @@ export const dianaWatsonProfileId = {
       timestamp: "89-Vernis-1244-S - 16:48:11",
     },
   ],
-};
+} satisfies ProfileIdData;

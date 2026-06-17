@@ -46,6 +46,13 @@
 - `TEMPLATES` registry em `components/documents/index.ts`
 - `app/archive/page.tsx` — showcase inline de ~45 componentes via Group/Item helpers locais
 
+## Fase 2 — executada
+- `types/character-data.ts` criado com 14 interfaces: `ProfileIdData`, `PermissionsData`, `SchoolFinalEvaluationData` +
+  `ResponsibleSignature`, `MentorData`, `Affinities`, `EnergyComponentValues`, `PhysicalComponentValues`,
+  `AdditionalTableValues`, `PersonalInfoData`, `FinalEvaluationData`
+- 9 arquivos de dados anotados com `satisfies <Tipo>` (3 profile-id, 2 permissions, 4 school-final-evaluations)
+- Index signature `[key: string]: any` removida de `utils/government-data.ts`
+
 ## Fase 1 — executada
 - Import fantasma removido de `diana-watson-archive.tsx`
 - Kira registrada em `data/individuals.ts` com NRC `??-1229-90814563`

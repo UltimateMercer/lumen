@@ -1,3 +1,5 @@
+import type { SchoolFinalEvaluationData } from "@/types/character-data";
+
 export const ultimateSchoolFinalEvaluationData = {
   isHighSecurity: true,
   registry: "RA-1243-0000014",
@@ -48,4 +50,4 @@ export const ultimateSchoolFinalEvaluationData = {
       timestamp: "58-Vernis-1243-S - 14:42:19",
     },
   ],
-};
+} satisfies SchoolFinalEvaluationData;
