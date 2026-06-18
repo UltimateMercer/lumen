@@ -1,8 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { serialize } from "next-mdx-remote/serialize";
-import { getDocument, getAllSlugs, getBatchItems } from "@/lib/archive/registry";
-import { CLASSIFICATION_TOKEN, DOCUMENT_TYPE_LABEL, type ArchiveDocument } from "@/lib/archive/documents";
+import {
+  getDocument,
+  getAllSlugs,
+  getBatchItems,
+} from "@/lib/archive/registry";
+import {
+  CLASSIFICATION_TOKEN,
+  DOCUMENT_TYPE_LABEL,
+  type ArchiveDocument,
+} from "@/lib/archive/documents";
 import { TEMPLATES } from "@/components/documents/index";
 
 export async function generateStaticParams() {
@@ -24,7 +32,14 @@ export default async function ArchiveDocumentPage({
   const nextSlug = idx < allSlugs.length - 1 ? allSlugs[idx + 1] : null;
 
   const mdxSource = await serialize(doc.mdx);
-  const docWithSource = { ...doc, mdxSource } as ArchiveDocument & { batchItems?: Array<{ slug: string; role?: string; note?: string; doc?: ArchiveDocument }> };
+  const docWithSource = { ...doc, mdxSource } as ArchiveDocument & {
+    batchItems?: Array<{
+      slug: string;
+      role?: string;
+      note?: string;
+      doc?: ArchiveDocument;
+    }>;
+  };
 
   // Pre-serialize each batch item's MDX so child templates receive mdxSource
   if (doc.frontmatter.type === "batch") {
@@ -41,7 +56,7 @@ export default async function ArchiveDocumentPage({
   const Template = TEMPLATES[doc.frontmatter.type];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-10">
       <nav className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-6 py-4 text-xs uppercase tracking-[0.2em]">
         <Link
           href="/archive"
@@ -75,7 +90,9 @@ export default async function ArchiveDocumentPage({
       </nav>
 
       <div className="mx-auto max-w-4xl px-6 pb-2 text-center">
-        <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${CLASSIFICATION_TOKEN[doc.frontmatter.classification]}`}>
+        <span
+          className={`text-[10px] font-bold uppercase tracking-[0.2em] ${CLASSIFICATION_TOKEN[doc.frontmatter.classification]}`}
+        >
           {doc.frontmatter.classification}
         </span>
         <span className="mx-2 text-muted-foreground/40">·</span>
