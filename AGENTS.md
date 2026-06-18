@@ -1,5 +1,10 @@
 # Regras para o agente — Projeto Lumen
 
+## Fase 5c — executada
+- 62 arquivos PascalCase renomeados para kebab-case em 7 batches (ui/ paper/ stamps/ signatures/ mdx/ templates/ raiz)
+- `components/documents/index.ts` barrel atualizado
+- `npx tsc --noEmit`: 13 erros, todos pre-existentes (missing modules), zero erros novos
+
 ## Fase 5a — executada
 - Auditoria de dependências: nenhuma dependência órfã encontrada em package.json (fumadocs-ui, slugify, framer-motion, motion/react não estão declarados, só importados como fantasma)
 - Utilities `text-classification-{public,confidential,secret,ultra}` adicionadas em `app/globals.css` em `@layer utilities`, conectando as variáveis CSS `--c-*` já existentes

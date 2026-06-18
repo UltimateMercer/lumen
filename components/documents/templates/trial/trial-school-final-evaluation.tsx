@@ -1,28 +1,49 @@
-import { TablePowerAttributes } from "../general-components/evaluation/table-power-attributes";
-import { TableAdditionalTest } from "../general-components/evaluation/table-additional-test";
-import { TableEnergyComponent } from "../general-components/evaluation/table-energy";
-import { TablePhysicalComponent } from "../general-components/evaluation/table-physical";
-import { TotalPowerBase } from "../general-components/evaluation/total-power-base";
-import { TierTotalScore } from "../general-components/evaluation/tier-total-score";
-import { StampRepAurora } from "../general-components/stamps/stamp-rep-aurora";
-import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
-import { SectionPaper } from "../general-components/paper/section-paper";
-import { Paper } from "../general-components/paper/Paper";
-import { PaperHeader } from "../general-components/paper/paper-header";
-import { SectionTitle } from "../general-components/paper/section-title";
-import { FinalEvaluationInfo } from "../general-components/evaluation/final-evaluation-info";
-import { PersonalInfoSchoolEvaluation } from "../general-components/evaluation/personal-info-school-evaluation";
-import { PaperSubject } from "../general-components/paper/paper-subject";
-import { PaperFooter } from "../general-components/paper/paper-footer";
-import { ProtectDoc } from "../general-components/ui/protect-doc-text";
-import { TableAffinitiesComponent } from "../general-components/evaluation/table-affinities";
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
+import type {
+  Affinities,
+  EnergyComponentValues,
+  PhysicalComponentValues,
+  AdditionalTableValues,
+  PersonalInfoData,
+  FinalEvaluationData,
+  ResponsibleSignature,
+} from "@/types/character-data";
+import { TablePowerAttributes } from "../../general-components/evaluation/table-power-attributes";
+import { TableAdditionalTest } from "../../general-components/evaluation/table-additional-test";
+import { TableEnergyComponent } from "../../general-components/evaluation/table-energy";
+import { TablePhysicalComponent } from "../../general-components/evaluation/table-physical";
+import { TotalPowerBase } from "../../general-components/evaluation/total-power-base";
+import { TierTotalScore } from "../../general-components/evaluation/tier-total-score";
+import { StampRepAurora } from "../../general-components/stamps/stamp-rep-aurora";
+import { ResponsibleSignatures } from "../../general-components/signatures/responsible-signatures";
+import { SectionPaper } from "../../general-components/paper/section-paper";
+import { Paper } from "../../general-components/paper/Paper";
+import { PaperHeader } from "../../general-components/paper/paper-header";
+import { SectionTitle } from "../../general-components/paper/section-title";
+import { FinalEvaluationInfo } from "../../general-components/evaluation/final-evaluation-info";
+import { PersonalInfoSchoolEvaluation } from "../../general-components/evaluation/personal-info-school-evaluation";
+import { PaperSubject } from "../../general-components/paper/paper-subject";
+import { PaperFooter } from "../../general-components/paper/paper-footer";
+import { ProtectDoc } from "../../general-components/ui/protect-doc-text";
+import { TableAffinitiesComponent } from "../../general-components/evaluation/table-affinities";
 import { evaluatePower } from "@/lib/power-system";
 
-interface CompProps {
-  individual: any;
+interface TrialFrontmatter extends DocumentFrontmatter {
+  isHighSecurity: boolean;
+  registry: string;
+  personalInfoData: PersonalInfoData;
+  finalEvaluationData: FinalEvaluationData;
+  affinities: Affinities;
+  energyComponentValues: EnergyComponentValues;
+  physicalComponentValues: PhysicalComponentValues;
+  additionalTableValues: AdditionalTableValues;
+  responsibleSignaturesData: ResponsibleSignature[];
 }
 
-export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
+export function TrialSchoolFinalEvaluation({ doc }: { doc: ArchiveDocument }) {
+  const fm = doc.frontmatter as unknown as TrialFrontmatter;
+
   const {
     isHighSecurity,
     registry,
@@ -33,7 +54,7 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
     physicalComponentValues,
     additionalTableValues,
     responsibleSignaturesData,
-  } = individual;
+  } = fm;
 
   const powerResult = evaluatePower({
     affinities,
@@ -126,4 +147,4 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
       <StampRepAurora />
     </Paper>
   );
-};
+}

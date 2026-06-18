@@ -1,3 +1,43 @@
+# Fase 5c — Renomeação para kebab-case
+**Data:** 18-Jun-2026 20:52 BRT
+
+## Mudanças
+
+### Batch 1: `ui/` (14 arquivos)
+- `CrestSvg.tsx`, `FormField.tsx`, `IdField.tsx`, `ItemValue.tsx`, `MetaCell.tsx`, `NexusFormatDate.tsx`,
+  `PartyRow.tsx`, `ProfileName.tsx`, `PropagandaMotif.tsx`, `ProtectDocText.tsx`, `StatChip.tsx`,
+  `StatusPanel.tsx`, `ThemeToggle.tsx`, `ThreatGauge.tsx` → kebab-case
+
+### Batch 2: `paper/` (6 arquivos)
+- `PaperFooter.tsx`, `PaperHeader.tsx`, `PaperSheet.tsx`, `PaperSubject.tsx`,
+  `SectionPaper.tsx`, `SectionTitle.tsx` → kebab-case
+- `Paper.tsx` (single-word) mantido
+
+### Batch 3: `stamps/` (4 arquivos)
+- `AccessLevel7Only.tsx`, `ClassificationBar.tsx`, `FinalReminder.tsx`, `StampRepAurora.tsx` → kebab-case
+
+### Batch 4: `signatures/` (2 arquivos)
+- `DigitalSignature.tsx`, `ResponsibleSignatures.tsx` → kebab-case
+
+### Batch 5: `mdx/` (9 arquivos)
+- `RenderMdx.tsx`, `MdxComponents.tsx`, `ProjectTOC.tsx`, `LogLine.tsx`, `CensorEntry.tsx`,
+  `ForeignBody.tsx` (raiz), `RequirementList.tsx` (codex/), `RecruitProfile.tsx` (project/),
+  `AssetEntry.tsx` (project/) → kebab-case
+
+### Batch 6: `templates/` (24 arquivos)
+- Todos os 24 templates PascalCase → kebab-case
+- `components/documents/index.ts`: barrel atualizado com 24 novos paths
+
+### Batch 7: `components/` raiz (3 arquivos)
+- `ArchiveShell.tsx` → `archive-shell.tsx` (0 imports)
+- `IndividualResolver.tsx` → `individual-resolver.tsx` (1 import em `data/document-generators.tsx`)
+- `RotatingText/RotatingText.tsx` → `rotating-text/rotating-text.tsx` (1 import em `presentation.tsx`)
+
+### Verificação
+- `npx tsc --noEmit`: 13 erros, todos pre-existentes (missing modules), zero erros novos.
+
+---
+
 # Fase 5a — Limpeza Geral
 **Data:** 17-Jun-2026 21:10 BRT
 

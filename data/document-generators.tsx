@@ -2,7 +2,7 @@ import type { Individual, DocumentContent } from "@/utils/government-data";
 import { DocumentLink } from "@/components/document-link";
 import { DocumentPreview } from "@/components/document-preview";
 import { RedactedText } from "@/components/redacted-text";
-import { IndividualResolver } from "@/components/IndividualResolver";
+import { IndividualResolver } from "@/components/individual-resolver";
 /**
  * GERADORES DE CONTEÚDO DE DOCUMENTOS
  *

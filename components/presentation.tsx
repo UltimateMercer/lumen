@@ -1,7 +1,7 @@
 "use client";
 import { GlobeIcon } from "@phosphor-icons/react";
 import Image from "next/image";
-import RotatingText from "@/components/RotatingText/RotatingText";
+import RotatingText from "@/components/rotating-text/rotating-text";
 import { MorphingText } from "@/components/magicui/morphing-text";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import type { LanguageStore } from "@/utils/interfaces";

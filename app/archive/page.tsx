@@ -10,24 +10,24 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /* material existente (Etapa 3) */
 import { Paper } from "@/components/documents/general-components/paper/Paper";
-import { SectionPaper } from "@/components/documents/general-components/paper/SectionPaper";
-import { SectionTitle } from "@/components/documents/general-components/paper/SectionTitle";
-import { PaperHeader } from "@/components/documents/general-components/paper/PaperHeader";
-import { PaperSubject } from "@/components/documents/general-components/paper/PaperSubject";
-import { PaperFooter } from "@/components/documents/general-components/paper/PaperFooter";
-import { AccessLevel7Only } from "@/components/documents/general-components/stamps/AccessLevel7Only";
-import { FinalReminder } from "@/components/documents/general-components/stamps/FinalReminder";
-import { StampRepAurora } from "@/components/documents/general-components/stamps/StampRepAurora";
-import { DigitalSignature } from "@/components/documents/general-components/signatures/DigitalSignature";
-import { ResponsibleSignatures } from "@/components/documents/general-components/signatures/ResponsibleSignatures";
-import { ItemValue } from "@/components/documents/general-components/ui/ItemValue";
-import { ProfileName } from "@/components/documents/general-components/ui/ProfileName";
-import { NexusFormatDate } from "@/components/documents/general-components/ui/NexusFormatDate";
-import { ProtectDoc } from "@/components/documents/general-components/ui/ProtectDocText";
+import { SectionPaper } from "@/components/documents/general-components/paper/section-paper";
+import { SectionTitle } from "@/components/documents/general-components/paper/section-title";
+import { PaperHeader } from "@/components/documents/general-components/paper/paper-header";
+import { PaperSubject } from "@/components/documents/general-components/paper/paper-subject";
+import { PaperFooter } from "@/components/documents/general-components/paper/paper-footer";
+import { AccessLevel7Only } from "@/components/documents/general-components/stamps/access-level7-only";
+import { FinalReminder } from "@/components/documents/general-components/stamps/final-reminder";
+import { StampRepAurora } from "@/components/documents/general-components/stamps/stamp-rep-aurora";
+import { DigitalSignature } from "@/components/documents/general-components/signatures/digital-signature";
+import { ResponsibleSignatures } from "@/components/documents/general-components/signatures/responsible-signatures";
+import { ItemValue } from "@/components/documents/general-components/ui/item-value";
+import { ProfileName } from "@/components/documents/general-components/ui/profile-name";
+import { NexusFormatDate } from "@/components/documents/general-components/ui/nexus-format-date";
+import { ProtectDoc } from "@/components/documents/general-components/ui/protect-doc-text";
 
 /* material novo (Etapa 4) */
-import { PaperSheet } from "@/components/documents/general-components/paper/PaperSheet";
-import { ClassificationBar } from "@/components/documents/general-components/stamps/ClassificationBar";
+import { PaperSheet } from "@/components/documents/general-components/paper/paper-sheet";
+import { ClassificationBar } from "@/components/documents/general-components/stamps/classification-bar";
 import { Redacted } from "@/components/documents/general-components/mdx/Redacted";
 import {
   Stamp, ApprovedStamp, DeniedStamp, ClassifiedStamp, ArchivedStamp, UrgentStamp,
@@ -37,15 +37,15 @@ import { Field } from "@/components/documents/general-components/mdx/Field";
 import { Pullquote } from "@/components/documents/general-components/mdx/Pullquote";
 import { Caption } from "@/components/documents/general-components/mdx/Caption";
 import { Article } from "@/components/documents/general-components/mdx/Article";
-import { LogLine } from "@/components/documents/general-components/mdx/LogLine";
+import { LogLine } from "@/components/documents/general-components/mdx/log-line";
 import { Evidence } from "@/components/documents/general-components/mdx/Evidence";
-import { CensorEntry } from "@/components/documents/general-components/mdx/CensorEntry";
+import { CensorEntry } from "@/components/documents/general-components/mdx/censor-entry";
 import { Section } from "@/components/documents/general-components/mdx/Section";
 import { Signature } from "@/components/documents/general-components/mdx/Signature";
 import { Transmission } from "@/components/documents/general-components/mdx/Transmission";
-import { ForeignBody } from "@/components/documents/general-components/mdx/ForeignBody";
+import { ForeignBody } from "@/components/documents/general-components/mdx/foreign-body";
 import { Translation } from "@/components/documents/general-components/mdx/Translation";
-import { ProjectTOC } from "@/components/documents/general-components/mdx/ProjectTOC";
+import { ProjectTOC } from "@/components/documents/general-components/mdx/project-toc";
 import { Exchange } from "@/components/documents/general-components/mdx/interrogation/Exchange";
 import { Note } from "@/components/documents/general-components/mdx/interrogation/Note";
 import {
@@ -53,11 +53,11 @@ import {
 } from "@/components/documents/general-components/mdx/comms/Msg";
 import { Trait } from "@/components/documents/general-components/mdx/codex/Trait";
 import { Warning } from "@/components/documents/general-components/mdx/codex/Warning";
-import { RequirementList } from "@/components/documents/general-components/mdx/codex/RequirementList";
+import { RequirementList } from "@/components/documents/general-components/mdx/codex/requirement-list";
 import { Phase } from "@/components/documents/general-components/mdx/codex/Phase";
 import { Objective } from "@/components/documents/general-components/mdx/project/Objective";
-import { RecruitProfile } from "@/components/documents/general-components/mdx/project/RecruitProfile";
-import { AssetEntry } from "@/components/documents/general-components/mdx/project/AssetEntry";
+import { RecruitProfile } from "@/components/documents/general-components/mdx/project/recruit-profile";
+import { AssetEntry } from "@/components/documents/general-components/mdx/project/asset-entry";
 import { Safeguard } from "@/components/documents/general-components/mdx/project/Safeguard";
 
 /* ── helpers locais (copiados de dev.componentes.tsx) ── */

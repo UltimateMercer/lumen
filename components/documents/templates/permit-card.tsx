@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
-import { ItemValue } from "../general-components/ui/ItemValue";
-import { NexusFormatDate } from "../general-components/ui/NexusFormatDate";
+import { ItemValue } from "../general-components/ui/item-value";
+import { NexusFormatDate } from "../general-components/ui/nexus-format-date";
 import { Paper } from "../general-components/paper/Paper";
-import { PaperHeader } from "../general-components/paper/PaperHeader";
-import { SectionPaper } from "../general-components/paper/SectionPaper";
+import { PaperHeader } from "../general-components/paper/paper-header";
+import { SectionPaper } from "../general-components/paper/section-paper";
 import { tierColors } from "@/lib/power-system";
 import type { PowerTier } from "@/lib/power-system";
 import { Square } from "lucide-react";
@@ -14,8 +14,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { SectionTitle } from "../general-components/paper/SectionTitle";
-import { StampRepAurora } from "../general-components/stamps/StampRepAurora";
+import { SectionTitle } from "../general-components/paper/section-title";
+import { StampRepAurora } from "../general-components/stamps/stamp-rep-aurora";
 import {
   Table,
   TableBody,
@@ -25,7 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ResponsibleSignatures } from "../general-components/signatures/ResponsibleSignatures";
+import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
 
 interface CompProps {
   individual: any;

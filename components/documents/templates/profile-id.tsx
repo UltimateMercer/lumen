@@ -1,14 +1,14 @@
 import { RedactedText } from "@/components/redacted-text";
 import { Paper } from "../general-components/paper/Paper";
-import { PaperHeader } from "../general-components/paper/PaperHeader";
-import { PaperSubject } from "../general-components/paper/PaperSubject";
-import { ProfileName } from "../general-components/ui/ProfileName";
-import { ItemValue } from "../general-components/ui/ItemValue";
-import { NexusFormatDate } from "../general-components/ui/NexusFormatDate";
-import { SectionPaper } from "../general-components/paper/SectionPaper";
-import { ResponsibleSignatures } from "../general-components/signatures/ResponsibleSignatures";
-import { StampRepAurora } from "../general-components/stamps/StampRepAurora";
-import { ProtectDoc } from "../general-components/ui/ProtectDocText";
+import { PaperHeader } from "../general-components/paper/paper-header";
+import { PaperSubject } from "../general-components/paper/paper-subject";
+import { ProfileName } from "../general-components/ui/profile-name";
+import { ItemValue } from "../general-components/ui/item-value";
+import { NexusFormatDate } from "../general-components/ui/nexus-format-date";
+import { SectionPaper } from "../general-components/paper/section-paper";
+import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
+import { StampRepAurora } from "../general-components/stamps/stamp-rep-aurora";
+import { ProtectDoc } from "../general-components/ui/protect-doc-text";
 import { Section } from "lucide-react";
 interface CompProps {
   individual: any;

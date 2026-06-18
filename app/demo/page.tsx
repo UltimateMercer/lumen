@@ -1,4 +1,4 @@
-import { NexusFormatDate } from "@/components/documents/general-components/ui/NexusFormatDate";
+import { NexusFormatDate } from "@/components/documents/general-components/ui/nexus-format-date";
 
 export default function DemoPage() {
   return (
