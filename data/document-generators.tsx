@@ -2,6 +2,7 @@ import type { Individual, DocumentContent } from "@/utils/government-data";
 import { DocumentLink } from "@/components/document-link";
 import { DocumentPreview } from "@/components/document-preview";
 import { RedactedText } from "@/components/redacted-text";
+import { IndividualResolver } from "@/components/IndividualResolver";
 /**
  * GERADORES DE CONTEÚDO DE DOCUMENTOS
  *
@@ -27,8 +28,6 @@ export const generateIndividualDocuments = (
   if (!individual) return [];
 
   if (individual.layoutComponent) {
-    const LayoutComponent = individual.layoutComponent;
-
     return individual.documents.map((doc) => ({
       title: `${doc.name}: ${individualName}`,
       classification: "CONFIDENCIAL",
@@ -36,7 +35,9 @@ export const generateIndividualDocuments = (
         individual.department || "DEPARTAMENTO DE REGISTROS E ARQUIVOS",
       date: "2024.03.15",
       signedBy: "Sistema de Documentação Automatizado",
-      content: <LayoutComponent documentId={doc.id} />,
+      content: (
+        <IndividualResolver slug={individual.slug ?? ""} documentId={doc.id} />
+      ),
     }));
   }
 

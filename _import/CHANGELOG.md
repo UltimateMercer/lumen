@@ -1,3 +1,19 @@
+# fix: conectar IndividualResolver na rota de personagens
+**Data:** 17-Jun-2026 20:00 BRT
+
+## Mudanças
+
+### `data/document-generators.tsx`
+- Import adicionado de `IndividualResolver` de `@/components/IndividualResolver`
+- Substituída chamada direta a `<LayoutComponent documentId={doc.id} />` por `<IndividualResolver slug={individual.slug ?? ""} documentId={doc.id} />`
+- Variável `LayoutComponent` removida (já não referenciada)
+
+## Verificação
+- `npx tsc --noEmit`: zero novos erros (apenas os 13 pré-existentes de módulos ausentes)
+- Nenhum `*-archive.tsx` é importado diretamente fora de `data/individuals.ts`
+
+---
+
 # Fase 3 — IndividualResolver + relatedDocuments
 **Data:** 17-Jun-2026
 
