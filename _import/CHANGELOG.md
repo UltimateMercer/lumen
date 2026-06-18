@@ -1,3 +1,51 @@
+# Fase 4 PoC — Trial School Final Evaluation via MDX
+**Data:** 17-Jun-2026 20:30 BRT
+
+## Mudanças
+
+### `lib/archive/documents.ts`
+- Adicionado `"trial-school-final-evaluation"` ao union `DocumentType`
+- Adicionada label `"AVALIAÇÃO FINAL (TRIAL)"` em `DOCUMENT_TYPE_LABEL`
+
+### `components/documents/templates/trial/TrialSchoolFinalEvaluation.tsx` (novo)
+- Template visualmente idêntico a `school-final-evaluation.tsx` (Paper, PaperHeader, TableEnergyComponent, etc.)
+- Assinatura padrão dos templates do archive: `({ doc }: { doc: ArchiveDocument })`
+- Lê dados de `doc.frontmatter` em vez de `props.individual`
+- `TrialFrontmatter` estende `DocumentFrontmatter` com campos de `SchoolFinalEvaluationData`
+- Cast via `as unknown as TrialFrontmatter` (interface local, sem poluir o tipo global)
+- Chama `evaluatePower` com dados do frontmatter — mesmo cálculo energético
+
+### `components/documents/index.ts`
+- Importa `TrialSchoolFinalEvaluation` e registra em `TEMPLATES`
+- Chave usa `"trial-school-final-evaluation"` (kebab case, com aspas) — compatível com `Record<DocumentType, ...>`
+
+### `content/archive/trial/trial-sfe-ultimate.mdx` (novo)
+- Frontmatter inline JSON para campos complexos (parser caseiro não suporta YAML aninhado multi-linha)
+- Dados reais de Ultimate: personalInfoData, finalEvaluationData, affinities, energyComponentValues, physicalComponentValues, additionalTableValues, responsibleSignaturesData
+- Corpo MDX com nota diegética curta sobre a PoC
+
+### `lib/archive/registry.ts`
+- Import estático do novo MDX: `trialSfeUltimate`
+- Registrado no `RAW` como `"trial-sfe-ultimate"`
+
+### `app/archive/page.tsx`
+- Nova aba `"Trial MDX"` (última, após as 3 existentes)
+- Filtra documentos por `type === "trial-school-final-evaluation"` e exibe via `DocLink`
+
+## Decisões
+- **Frontmatter inline JSON**: O parser caseiro de `registry.ts` não suporta YAML aninhado multi-linha (objetos com indentação de 2 espaços). Para campos como `personalInfoData`, usa-se `chave: {"json":"inline"}` — o parser tenta `JSON.parse` e, se falhar, usa o raw string.
+- **Interface local `TrialFrontmatter`**: Em vez de poluir `DocumentFrontmatter` com campos da avaliação escolar, estendemos o tipo com cast `as unknown as`. Isso isola o template trial do sistema de tipos do archive.
+- **Aba separada**: Os documentos trial têm visual de ficha de personagem, não archive MDX tradicional. A aba isolada evita confusão com as listas de documentos convencionais.
+- **Nenhuma alteração nos `*-archive.tsx` ou `IndividualResolver`**: A PoC é paralela ao sistema existente de fichas de personagem.
+
+## Pendências para migração completa
+- O parser de frontmatter precisaria suportar YAML aninhado para evitar inline JSON
+- Ou migrar para gray-matter (ou similar) quando sair do PoC
+- O campo `type` precisaria ser unificado entre DocumentType e os tipos internos de personagem
+- A aba `school-final-evaluation` no `/archive` poderia exibir dados tanto de personagem quanto de trial MDX
+
+---
+
 # fix: conectar IndividualResolver na rota de personagens
 **Data:** 17-Jun-2026 20:00 BRT
 

@@ -151,6 +151,7 @@ export default function ArchivePage() {
             <TabsTrigger value="docs">Documentos</TabsTrigger>
             <TabsTrigger value="old">Componentes — Material Existente</TabsTrigger>
             <TabsTrigger value="new">Componentes — Material Novo</TabsTrigger>
+            <TabsTrigger value="trial">Trial MDX</TabsTrigger>
           </TabsList>
 
           <TabsContent value="docs" className="space-y-10">
@@ -422,6 +423,22 @@ export default function ArchivePage() {
                 </div>
               </Item>
             </Group>
+          </TabsContent>
+
+          <TabsContent value="trial" className="space-y-10">
+            <section>
+              <h2 className="mb-3 border-b border-border pb-1 font-display text-lg font-bold uppercase tracking-wider text-amber-crt">
+                Prova de Conceito — MDX com Frontmatter Rico
+              </h2>
+              <p className="mb-4 text-xs uppercase tracking-widest text-muted-foreground">
+                Documentos que carregam dados de personagem via frontmatter MDX em vez de props JSON.
+              </p>
+              <div className="grid gap-2">
+                {docs
+                  .filter((d) => d.frontmatter.type === "trial-school-final-evaluation")
+                  .map(DocLink)}
+              </div>
+            </section>
           </TabsContent>
         </Tabs>
       </div>

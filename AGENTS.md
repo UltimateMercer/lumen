@@ -1,5 +1,14 @@
 # Regras para o agente — Projeto Lumen
 
+## Fase 4 PoC — executada
+- Novo `DocumentType` `"trial-school-final-evaluation"` em `lib/archive/documents.ts`
+- `TrialSchoolFinalEvaluation` em `components/documents/templates/trial/` — template visualmente idêntico ao `SchoolFinalEvaluationDoc`, mas lê dados de `doc.frontmatter` em vez de `props.individual`
+- Interface `TrialFrontmatter` estende `DocumentFrontmatter` com campos `SchoolFinalEvaluationData` — cast via `as unknown as TrialFrontmatter`
+- MDX de exemplo em `content/archive/trial/trial-sfe-ultimate.mdx` — dados reais de Ultimate em frontmatter inline JSON (parser caseiro não suporta YAML aninhado multi-linha)
+- Aba "Trial MDX" em `app/archive/page.tsx` — filtra por `type === "trial-school-final-evaluation"`
+- Nenhum `*-archive.tsx` foi alterado; `IndividualResolver` não foi tocado
+- `tsc --noEmit`: zero erros novos
+
 ## Arquivos read-only
 - `_import/*.md` (raiz) — histórico de sessão, não modificar
 - `_import/` foi limpo: todo código migrado, restam apenas 6 `.md` de histórico

@@ -31,6 +31,7 @@ import codexAsc02CarmesimCelestialDivino from "../../content/archive/codex/codex
 import codexAsc03AzulCelestialSupremo from "../../content/archive/codex/codex-asc-03-azul-celestial-supremo.mdx";
 import fichaMedicaBruma403 from "../../content/archive/examples/ficha-medica-bruma-iv-paciente-03.mdx";
 import projetoRedSuns from "../../content/archive/classified-project/projeto-red-suns.mdx";
+import trialSfeUltimate from "../../content/archive/trial/trial-sfe-ultimate.mdx";
 
 const RAW: Record<string, string> = {
   "decreto-0421": decreto0421,
@@ -63,6 +64,7 @@ const RAW: Record<string, string> = {
   "codex-asc-03-azul-celestial-supremo": codexAsc03AzulCelestialSupremo,
   "ficha-medica-bruma-iv-paciente-03": fichaMedicaBruma403,
   "projeto-red-suns": projetoRedSuns,
+  "trial-sfe-ultimate": trialSfeUltimate,
 };
 
 function parseValue(val: string): unknown {

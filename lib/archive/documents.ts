@@ -9,7 +9,8 @@ export type DocumentType =
   | "bulletin" | "manifesto" | "order" | "forensic" | "ai_log"
   | "id_card" | "bounty" | "broadcast" | "autopsy" | "interrogation"
   | "news" | "batch" | "foreign_letter" | "propaganda"
-  | "monitored_thread" | "codex_entry" | "medical_record" | "classified_project";
+  | "monitored_thread" | "codex_entry" | "medical_record" | "classified_project"
+  | "trial-school-final-evaluation";
 
 export interface DocumentFrontmatter {
   type: DocumentType;
@@ -167,6 +168,7 @@ export const DOCUMENT_TYPE_LABEL: Record<DocumentType, string> = {
   codex_entry: "REGISTRO DE CODEX",
   medical_record: "PRONTUÁRIO MÉDICO",
   classified_project: "PROJETO CLASSIFICADO",
+  "trial-school-final-evaluation": "AVALIAÇÃO FINAL (TRIAL)",
 };
 
 export const CLASSIFICATION_TOKEN: Record<Classification, string> = {

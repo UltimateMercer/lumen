@@ -23,6 +23,7 @@ import { MonitoredThreadTemplate } from "./templates/MonitoredThreadTemplate";
 import { CodexEntryTemplate } from "./templates/CodexEntryTemplate";
 import { MedicalRecordTemplate } from "./templates/MedicalRecordTemplate";
 import { ClassifiedProjectTemplate } from "./templates/ClassifiedProjectTemplate";
+import { TrialSchoolFinalEvaluation } from "./templates/trial/TrialSchoolFinalEvaluation";
 
 export const TEMPLATES: Record<DocumentType, ComponentType<{ doc: ArchiveDocument }>> = {
   decree: DecreeTemplate,
@@ -48,4 +49,5 @@ export const TEMPLATES: Record<DocumentType, ComponentType<{ doc: ArchiveDocumen
   codex_entry: CodexEntryTemplate,
   medical_record: MedicalRecordTemplate,
   classified_project: ClassifiedProjectTemplate,
+  "trial-school-final-evaluation": TrialSchoolFinalEvaluation,
 };
