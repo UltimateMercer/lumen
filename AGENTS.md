@@ -1,5 +1,11 @@
 # Regras para o agente — Projeto Lumen
 
+## Fase 5a — executada
+- Auditoria de dependências: nenhuma dependência órfã encontrada em package.json (fumadocs-ui, slugify, framer-motion, motion/react não estão declarados, só importados como fantasma)
+- Utilities `text-classification-{public,confidential,secret,ultra}` adicionadas em `app/globals.css` em `@layer utilities`, conectando as variáveis CSS `--c-*` já existentes
+- 8 arquivos históricos deletados de `_import/` (mantido apenas `CHANGELOG.md`)
+- `tsc --noEmit`: zero erros novos
+
 ## Fase 4 PoC — executada
 - Novo `DocumentType` `"trial-school-final-evaluation"` em `lib/archive/documents.ts`
 - `TrialSchoolFinalEvaluation` em `components/documents/templates/trial/` — template visualmente idêntico ao `SchoolFinalEvaluationDoc`, mas lê dados de `doc.frontmatter` em vez de `props.individual`

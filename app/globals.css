@@ -906,6 +906,20 @@
 
   /* ============ EXCHANGE ROW (interrogation) ============ */
   .exchange-row { /* layout handled via tailwind grid in mdx-components */ }
+
+  /* ============ CLASSIFICATION BADGES ============ */
+  .text-classification-public {
+    color: var(--c-public);
+  }
+  .text-classification-confidential {
+    color: var(--c-confidential);
+  }
+  .text-classification-secret {
+    color: var(--c-secret);
+  }
+  .text-classification-ultra {
+    color: var(--c-ultra);
+  }
 }
 /* ============================================
    FIM _IMPORT ARCHIVE STYLES

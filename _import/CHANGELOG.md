@@ -1,3 +1,36 @@
+# Fase 5a — Limpeza Geral
+**Data:** 17-Jun-2026 21:10 BRT
+
+## Mudanças
+
+### `app/globals.css`
+- Adicionadas 4 utility classes em `@layer utilities`:
+  `.text-classification-public`,
+  `.text-classification-confidential`,
+  `.text-classification-secret`,
+  `.text-classification-ultra`
+- Cada uma conecta a classificação ao CSS custom property correspondente (`--c-public`, etc.)
+- As variáveis já existiam (temas claro e escuro), mas as classes nunca foram definidas
+
+### `_import/`
+- Deletados 8 arquivos históricos de sessões anteriores:
+  `ARCHIVE_SLUG_DEBUG.md`, `ETAPA_1_ANALISE.md`, `ETAPA_2_COMPONENTES.md`,
+  `ETAPA_3_REORGANIZACAO.md`, `ETAPA_4_MIGRACAO.md`, `ETAPA_5_ARCHIVE.md`,
+  `IMPORT_ANALYSIS.md`, `SESSION_LOG.md`
+- Mantido apenas `CHANGELOG.md`
+
+### `package.json`
+- Auditoria concluída: nenhuma dependência órfã encontrada
+- 4 pacotes importados mas não declarados (fora do escopo de limpeza):
+  `fumadocs-ui`, `slugify`, `framer-motion`, `motion/react` — são imports
+  fantasmas em componentes específicos, não listados em dependencies
+
+## Verificação
+- `npx tsc --noEmit`: zero novos erros (apenas os 13 pré-existentes)
+- Nenhum arquivo `* copy.*` ou `*.bak` encontrado no projeto
+
+---
+
 # Fase 4 PoC — Trial School Final Evaluation via MDX
 **Data:** 17-Jun-2026 20:30 BRT
 
