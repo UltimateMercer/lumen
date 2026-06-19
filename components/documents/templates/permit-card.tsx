@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ItemValue } from "../general-components/ui/item-value";
 import { NexusFormatDate } from "../general-components/ui/nexus-format-date";
-import { Paper } from "../general-components/paper/Paper";
+import { Paper } from "../general-components/paper/paper";
 import { PaperHeader } from "../general-components/paper/paper-header";
 import { SectionPaper } from "../general-components/paper/section-paper";
 import { tierColors } from "@/lib/power-system";

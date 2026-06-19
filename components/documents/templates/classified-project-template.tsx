@@ -1,8 +1,8 @@
 "use client";
 import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
-import { Stamp } from "../general-components/mdx/Stamp";
-import { Redacted } from "../general-components/mdx/Redacted";
+import { Stamp } from "../general-components/mdx/stamp";
+import { Redacted } from "../general-components/mdx/redacted";
 import { ProjectTOC } from "../general-components/mdx/project-toc";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";

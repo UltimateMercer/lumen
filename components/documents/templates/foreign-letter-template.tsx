@@ -1,7 +1,7 @@
 "use client";
 import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
-import { Stamp } from "../general-components/mdx/Stamp";
+import { Stamp } from "../general-components/mdx/stamp";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
 import { CrestSvg } from "../general-components/ui/crest-svg";
 

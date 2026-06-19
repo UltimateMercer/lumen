@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /* material existente (Etapa 3) */
-import { Paper } from "@/components/documents/general-components/paper/Paper";
+import { Paper } from "@/components/documents/general-components/paper/paper";
 import { SectionPaper } from "@/components/documents/general-components/paper/section-paper";
 import { SectionTitle } from "@/components/documents/general-components/paper/section-title";
 import { PaperHeader } from "@/components/documents/general-components/paper/paper-header";
@@ -28,37 +28,37 @@ import { ProtectDoc } from "@/components/documents/general-components/ui/protect
 /* material novo (Etapa 4) */
 import { PaperSheet } from "@/components/documents/general-components/paper/paper-sheet";
 import { ClassificationBar } from "@/components/documents/general-components/stamps/classification-bar";
-import { Redacted } from "@/components/documents/general-components/mdx/Redacted";
+import { Redacted } from "@/components/documents/general-components/mdx/redacted";
 import {
   Stamp, ApprovedStamp, DeniedStamp, ClassifiedStamp, ArchivedStamp, UrgentStamp,
-} from "@/components/documents/general-components/mdx/Stamp";
-import { Classified } from "@/components/documents/general-components/mdx/Classified";
-import { Field } from "@/components/documents/general-components/mdx/Field";
-import { Pullquote } from "@/components/documents/general-components/mdx/Pullquote";
-import { Caption } from "@/components/documents/general-components/mdx/Caption";
-import { Article } from "@/components/documents/general-components/mdx/Article";
+} from "@/components/documents/general-components/mdx/stamp";
+import { Classified } from "@/components/documents/general-components/mdx/classified";
+import { Field } from "@/components/documents/general-components/mdx/field";
+import { Pullquote } from "@/components/documents/general-components/mdx/pullquote";
+import { Caption } from "@/components/documents/general-components/mdx/caption";
+import { Article } from "@/components/documents/general-components/mdx/article";
 import { LogLine } from "@/components/documents/general-components/mdx/log-line";
-import { Evidence } from "@/components/documents/general-components/mdx/Evidence";
+import { Evidence } from "@/components/documents/general-components/mdx/evidence";
 import { CensorEntry } from "@/components/documents/general-components/mdx/censor-entry";
-import { Section } from "@/components/documents/general-components/mdx/Section";
-import { Signature } from "@/components/documents/general-components/mdx/Signature";
-import { Transmission } from "@/components/documents/general-components/mdx/Transmission";
+import { Section } from "@/components/documents/general-components/mdx/section";
+import { Signature } from "@/components/documents/general-components/mdx/signature";
+import { Transmission } from "@/components/documents/general-components/mdx/transmission";
 import { ForeignBody } from "@/components/documents/general-components/mdx/foreign-body";
-import { Translation } from "@/components/documents/general-components/mdx/Translation";
+import { Translation } from "@/components/documents/general-components/mdx/translation";
 import { ProjectTOC } from "@/components/documents/general-components/mdx/project-toc";
-import { Exchange } from "@/components/documents/general-components/mdx/interrogation/Exchange";
-import { Note } from "@/components/documents/general-components/mdx/interrogation/Note";
+import { Exchange } from "@/components/documents/general-components/mdx/interrogation/exchange";
+import { Note } from "@/components/documents/general-components/mdx/interrogation/note";
 import {
   Msg, FlagPhrase, Gap, Attachment,
-} from "@/components/documents/general-components/mdx/comms/Msg";
-import { Trait } from "@/components/documents/general-components/mdx/codex/Trait";
-import { Warning } from "@/components/documents/general-components/mdx/codex/Warning";
+} from "@/components/documents/general-components/mdx/comms/msg";
+import { Trait } from "@/components/documents/general-components/mdx/codex/trait";
+import { Warning } from "@/components/documents/general-components/mdx/codex/warning";
 import { RequirementList } from "@/components/documents/general-components/mdx/codex/requirement-list";
-import { Phase } from "@/components/documents/general-components/mdx/codex/Phase";
-import { Objective } from "@/components/documents/general-components/mdx/project/Objective";
+import { Phase } from "@/components/documents/general-components/mdx/codex/phase";
+import { Objective } from "@/components/documents/general-components/mdx/project/objective";
 import { RecruitProfile } from "@/components/documents/general-components/mdx/project/recruit-profile";
 import { AssetEntry } from "@/components/documents/general-components/mdx/project/asset-entry";
-import { Safeguard } from "@/components/documents/general-components/mdx/project/Safeguard";
+import { Safeguard } from "@/components/documents/general-components/mdx/project/safeguard";
 
 /* ── helpers locais (copiados de dev.componentes.tsx) ── */
 

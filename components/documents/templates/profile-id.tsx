@@ -1,5 +1,5 @@
 import { RedactedText } from "@/components/redacted-text";
-import { Paper } from "../general-components/paper/Paper";
+import { Paper } from "../general-components/paper/paper";
 import { PaperHeader } from "../general-components/paper/paper-header";
 import { PaperSubject } from "../general-components/paper/paper-subject";
 import { ProfileName } from "../general-components/ui/profile-name";

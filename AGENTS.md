@@ -1,5 +1,11 @@
 # Regras para o agente — Projeto Lumen
 
+## Fase 5d — executada
+- 26 arquivos single-word PascalCase renomeados para lowercase em 3 batches (paper/1, ui/5, mdx/20)
+- Total de 52 imports atualizados
+- `npx tsc --noEmit`: 13 erros, todos pre-existentes, zero novos
+- `components/ui/` (shadcn) intencionalmente excluído — convenção própria
+
 ## Fase 5c — executada
 - 62 arquivos PascalCase renomeados para kebab-case em 7 batches (ui/ paper/ stamps/ signatures/ mdx/ templates/ raiz)
 - `components/documents/index.ts` barrel atualizado

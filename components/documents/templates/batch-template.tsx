@@ -5,7 +5,7 @@ import { DOCUMENT_TYPE_LABEL } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
-import { Folder } from "../general-components/ui/Folder";
+import { Folder } from "../general-components/ui/folder";
 import { TEMPLATES } from "../index";
 import { cn } from "@/lib/utils";
 

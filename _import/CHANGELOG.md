@@ -1,3 +1,33 @@
+# Fase 5d — Renomeação single-word para lowercase
+**Data:** 18-Jun-2026 21:00 BRT
+
+**26 arquivos renomeados | 52 imports atualizados | 0 novos erros tsc**
+
+### Batch 1: `paper/` (1 arquivo)
+- `Paper.tsx` → `paper.tsx` (5 imports: page.tsx + 4 templates)
+
+### Batch 2: `ui/` (5 arquivos)
+- `Row.tsx` → `row.tsx`, `Meta.tsx` → `meta.tsx`, `Cell.tsx` → `cell.tsx`,
+  `Folder.tsx` → `folder.tsx`, `Sigil.tsx` → `sigil.tsx`
+- Apenas `Folder.tsx` tinha 1 import (batch-template.tsx); demais: zero imports
+
+### Batch 3: `mdx/` + subdirs (20 arquivos)
+**Raiz (12):** `Pullquote.tsx`, `Classified.tsx`, `Transmission.tsx`, `Field.tsx`,
+`Translation.tsx`, `Stamp.tsx`, `Section.tsx`, `Signature.tsx`, `Article.tsx`,
+`Evidence.tsx`, `Caption.tsx`, `Redacted.tsx`
+**interrogation/ (2):** `Note.tsx`, `Exchange.tsx`
+**codex/ (3):** `Phase.tsx`, `Warning.tsx`, `Trait.tsx`
+**project/ (2):** `Safeguard.tsx`, `Objective.tsx`
+**comms/ (1):** `Msg.tsx`
+- 46 imports atualizados em 7 arquivos (page.tsx, mdx-components.tsx,
+  asset-entry.tsx, 4 templates)
+
+### Notas
+- `components/ui/` (shadcn) excluído intencionalmente — convenção própria
+- `npx tsc --noEmit`: 13 erros, todos pre-existentes, zero novos
+
+---
+
 # Fase 5c — Renomeação para kebab-case
 **Data:** 18-Jun-2026 20:52 BRT
 

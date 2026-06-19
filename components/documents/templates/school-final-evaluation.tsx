@@ -7,7 +7,7 @@ import { TierTotalScore } from "../general-components/evaluation/tier-total-scor
 import { StampRepAurora } from "../general-components/stamps/stamp-rep-aurora";
 import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
 import { SectionPaper } from "../general-components/paper/section-paper";
-import { Paper } from "../general-components/paper/Paper";
+import { Paper } from "../general-components/paper/paper";
 import { PaperHeader } from "../general-components/paper/paper-header";
 import { SectionTitle } from "../general-components/paper/section-title";
 import { FinalEvaluationInfo } from "../general-components/evaluation/final-evaluation-info";

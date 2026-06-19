@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { Redacted } from "../Redacted";
+import { Redacted } from "../redacted";
 
 export function AssetEntry({ codename, age, intake, status = "ativo", children }: {
   codename: string; age?: string | number; intake?: string;

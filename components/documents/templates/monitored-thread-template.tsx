@@ -1,7 +1,7 @@
 "use client";
 import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
-import { Stamp } from "../general-components/mdx/Stamp";
+import { Stamp } from "../general-components/mdx/stamp";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
 import { DigitalSignature } from "../general-components/signatures/digital-signature";
