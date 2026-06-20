@@ -1,3 +1,37 @@
+# Fase 6 — Trial Templates ProfileId e PermitCard
+**Data:** 18-Jun-2026 21:30 BRT
+
+### `lib/archive/documents.ts`
+- `DocumentType` estendido com `"trial-profile-id"` e `"trial-permit-card"`
+- `DOCUMENT_TYPE_LABEL` com labels correspondentes
+
+### `components/documents/templates/trial/trial-profile-id.tsx`
+- Template pixel-perfect ao `profile-id.tsx` original
+- Interface `TrialProfileIdFrontmatter extends DocumentFrontmatter` com `ProfileIdData`
+- Cast `as unknown as TrialProfileIdFrontmatter`
+- Consome dados de `doc.frontmatter` em vez de `props.individual`
+
+### `components/documents/templates/trial/trial-permit-card.tsx`
+- Template pixel-perfect ao `permit-card.tsx` original
+- Interface `TrialPermitCardFrontmatter extends DocumentFrontmatter` com `PermissionsData`
+- `PermitCheckTable` reimportado do template original (evita duplicação)
+- Cast `as unknown as TrialPermitCardFrontmatter`
+
+### `content/archive/trial/trial-{profile-id,permit-card}-ultimate.mdx`
+- 2 MDX de exemplo com dados reais de Ultimate em frontmatter inline JSON
+- Formato consistente com `trial-sfe-ultimate.mdx`
+
+### `lib/archive/registry.ts`
+- Imports e registros dos 2 novos MDX
+
+### `components/documents/index.ts`
+- Barrel atualizado com imports e entradas no `TEMPLATES`
+
+### TypeScript
+- `npx tsc --noEmit`: 13 erros, todos pre-existentes, **zero novos**
+
+---
+
 # Fase 5d — Renomeação single-word para lowercase
 **Data:** 18-Jun-2026 21:00 BRT
 

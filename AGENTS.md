@@ -1,5 +1,13 @@
 # Regras para o agente — Projeto Lumen
 
+## Fase 6 — executada
+- `DocumentType`: `"trial-profile-id"` e `"trial-permit-card"` adicionados
+- `TrialProfileId` e `TrialPermitCard` templates criados em `components/documents/templates/trial/`
+- `PermitCheckTable` reutilizado do template original
+- 2 MDX de exemplo em `content/archive/trial/` (dados de Ultimate)
+- Barrel e registry atualizados
+- `tsc --noEmit`: zero erros novos
+
 ## Fase 5d — executada
 - 26 arquivos single-word PascalCase renomeados para lowercase em 3 batches (paper/1, ui/5, mdx/20)
 - Total de 52 imports atualizados
