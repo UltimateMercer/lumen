@@ -435,7 +435,7 @@ export default function ArchivePage() {
               </p>
               <div className="grid gap-2">
                 {docs
-                  .filter((d) => d.frontmatter.type === "trial-school-final-evaluation")
+                  .filter((d) => d.frontmatter.type.startsWith("trial-"))
                   .map(DocLink)}
               </div>
             </section>
