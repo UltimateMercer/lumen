@@ -2,9 +2,9 @@
 
 import type { IndividualLayoutProps } from "@/types/character-data";
 import type { ArchiveDocument } from "@/lib/archive/documents";
-import { SchoolFinalEvaluationDoc } from "../../documents/templates/school-final-evaluation";
 import { TrialProfileId } from "../../documents/templates/trial/trial-profile-id";
-import { PermitCard } from "../../documents/templates/permit-card";
+import { TrialSchoolFinalEvaluation } from "../../documents/templates/trial/trial-school-final-evaluation";
+import { TrialPermitCard } from "../../documents/templates/trial/trial-permit-card";
 
 export const UltimateLayout = ({
   documentId,
@@ -18,11 +18,13 @@ export const UltimateLayout = ({
   }
 
   if (documentId === "school-final-evaluation" && schoolFinalEvaluation) {
-    return <SchoolFinalEvaluationDoc individual={schoolFinalEvaluation} />;
+    const doc = { frontmatter: schoolFinalEvaluation, mdx: "" } as unknown as ArchiveDocument;
+    return <TrialSchoolFinalEvaluation doc={doc} />;
   }
 
   if (documentId === "permit-card" && permissions) {
-    return <PermitCard individual={permissions} />;
+    const doc = { frontmatter: permissions, mdx: "" } as unknown as ArchiveDocument;
+    return <TrialPermitCard doc={doc} />;
   }
 
   return <div>Ultimate Layout</div>;
