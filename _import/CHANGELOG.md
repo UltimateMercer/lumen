@@ -1,3 +1,33 @@
+# Migração Diana Watson: JSON → MDX na Navegação Interna
+**Data:** 20-Jun-2026
+
+### `content/archive/trial/`
+- 3 MDX criados: `trial-profile-id-diana-watson.mdx`, `trial-sfe-diana-watson.mdx`, `trial-permit-card-diana-watson.mdx`
+- Dados reais de Diana Watson (profile-id, school-final-evaluation, permissions) no frontmatter
+- NRC `??-1230-28467351` incluso no profile-id
+- Mentor populado no permit-card (5 campos, ao contrário do Ultimate que era `{}`)
+- Tags: `["trial", "mdx", "diana-watson"]`
+
+### `lib/archive/registry.ts`
+- 3 imports estáticos + 3 entries no `RAW` Map
+
+### `data/individuals.ts`
+- Diana Watson: `mdxSlug` adicionado aos 3 documentos
+
+### `components/archives/individuals/diana-watson-archive.tsx`
+- Templates trocados: `ProfileId` → `TrialProfileId`, `SchoolFinalEvaluationDoc` → `TrialSchoolFinalEvaluation`, `PermitCard` → `TrialPermitCard`
+- Dados passam via `doc.frontmatter` (pseudo `ArchiveDocument`)
+
+### `components/individual-resolver.tsx`
+- Inalterado. Diana agora coberta pelo fallback MDX via `mdxSlug`
+- DATA_MAP mantido como fallback (com `// TODO`)
+
+### Estado da migração
+- Ultimate ✓ (3 MDX trial, 3 templates trial)
+- Diana Watson ✓ (3 MDX trial, 3 templates trial)
+- Kendra Connors pendente (DATA_MAP + `// TODO`)
+- Kira pendente (DATA_MAP + `// TODO`)
+
 # Migração Ultimate: JSON → MDX na Navegação Interna
 **Data:** 20-Jun-2026
 

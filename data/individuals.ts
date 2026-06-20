@@ -29,9 +29,9 @@ export const individuals: Individual[] = [
     yearsOfService: 0,
     layoutComponent: DianaWatsonLayout,
     documents: [
-      { id: "profile", name: "Perfil" },
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar" },
-      { id: "permit-card", name: "Permissões" },
+      { id: "profile", name: "Perfil", mdxSlug: "trial-profile-id-diana-watson" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-diana-watson" },
+      { id: "permit-card", name: "Permissões", mdxSlug: "trial-permit-card-diana-watson" },
     ],
   },
   {

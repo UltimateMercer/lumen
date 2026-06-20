@@ -34,6 +34,9 @@ import projetoRedSuns from "../../content/archive/classified-project/projeto-red
 import trialSfeUltimate from "../../content/archive/trial/trial-sfe-ultimate.mdx";
 import trialProfileIdUltimate from "../../content/archive/trial/trial-profile-id-ultimate.mdx";
 import trialPermitCardUltimate from "../../content/archive/trial/trial-permit-card-ultimate.mdx";
+import trialProfileIdDianaWatson from "../../content/archive/trial/trial-profile-id-diana-watson.mdx";
+import trialSfeDianaWatson from "../../content/archive/trial/trial-sfe-diana-watson.mdx";
+import trialPermitCardDianaWatson from "../../content/archive/trial/trial-permit-card-diana-watson.mdx";
 
 const RAW: Record<string, string> = {
   "decreto-0421": decreto0421,
@@ -69,6 +72,9 @@ const RAW: Record<string, string> = {
   "trial-sfe-ultimate": trialSfeUltimate,
   "trial-profile-id-ultimate": trialProfileIdUltimate,
   "trial-permit-card-ultimate": trialPermitCardUltimate,
+  "trial-profile-id-diana-watson": trialProfileIdDianaWatson,
+  "trial-sfe-diana-watson": trialSfeDianaWatson,
+  "trial-permit-card-diana-watson": trialPermitCardDianaWatson,
 };
 
 function parseValue(val: string): unknown {

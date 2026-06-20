@@ -1,5 +1,14 @@
 # Regras para o agente — Projeto Lumen
 
+## Migração Diana Watson: JSON → MDX na Navegação Interna — executada
+- 3 MDX criados: `trial-profile-id-diana-watson.mdx`, `trial-sfe-diana-watson.mdx`, `trial-permit-card-diana-watson.mdx` em `content/archive/trial/`
+- `lib/archive/registry.ts`: 3 imports + 3 entries adicionados
+- `data/individuals.ts`: `mdxSlug` adicionado nos 3 documentos da Diana
+- `components/archives/individuals/diana-watson-archive.tsx`: templates trocados para `TrialProfileId`, `TrialSchoolFinalEvaluation`, `TrialPermitCard`
+- `components/individual-resolver.tsx`: inalterado — fallback MDX já existente cobre a Diana via `mdxSlug`
+- `tsc --noEmit`: 13 erros (todos pre-existentes), zero novos
+- Estado: Ultimate ✓, Diana ✓, Kendra e Kira pendentes (DATA_MAP + `// TODO`)
+
 ## Migração Ultimate: JSON → MDX na Navegação Interna — executada
 - `utils/government-data.ts`: campo `mdxSlug?: string` adicionado à interface `Document`
 - `data/individuals.ts`: `mdxSlug` adicionado nos 3 documentos do Ultimate
