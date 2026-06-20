@@ -1,5 +1,11 @@
 # Regras para o agente — Projeto Lumen
 
+## Migração Ultimate: JSON → MDX na Navegação Interna — executada
+- `utils/government-data.ts`: campo `mdxSlug?: string` adicionado à interface `Document`
+- `data/individuals.ts`: `mdxSlug` adicionado nos 3 documentos do Ultimate
+- `components/individual-resolver.tsx`: resolver agora tenta MDX primeiro (`getDocument(mdxSlug)`) com fallback para `DATA_MAP`. Se o documento atual do indivíduo tem `mdxSlug`, carrega frontmatter do registry e mapeia via cast `as unknown` para `ProfileIdData` / `SchoolFinalEvaluationData` / `PermissionsData`. O `layoutComponent` (`UltimateLayout`) continua sendo usado — só a origem dos dados muda. Diana, Kendra e Kira inalterados (DATA_MAP + `// TODO`)
+- `tsc --noEmit`: 13 erros (todos pre-existentes), zero novos
+
 ## NRC no Profile ID do Ultimate — executada
 - `content/archive/trial/trial-profile-id-ultimate.mdx`: campo `nrc: "??-1228-71938042"` adicionado ao frontmatter
 - `components/documents/templates/trial/trial-profile-id.tsx`: `nrc` adicionado à interface `TrialProfileIdFrontmatter`, destructured, renderizado como `ItemValue` logo após "NOME COMPLETO"

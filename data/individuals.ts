@@ -62,9 +62,9 @@ export const individuals: Individual[] = [
     ],
     layoutComponent: UltimateLayout,
     documents: [
-      { id: "profile", name: "Perfil" },
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar" },
-      { id: "permit-card", name: "Permissões" },
+      { id: "profile", name: "Perfil", mdxSlug: "trial-profile-id-ultimate" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-ultimate" },
+      { id: "permit-card", name: "Permissões", mdxSlug: "trial-permit-card-ultimate" },
     ],
   },
   {

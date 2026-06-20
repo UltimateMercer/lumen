@@ -5,6 +5,7 @@ import type { IndividualLayoutProps } from "@/types/character-data";
 export interface Document {
   id: string;
   name: string;
+  mdxSlug?: string;
 }
 
 export interface Individual {

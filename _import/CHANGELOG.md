@@ -1,3 +1,19 @@
+# Migração Ultimate: JSON → MDX na Navegação Interna
+**Data:** 20-Jun-2026
+
+### `utils/government-data.ts`
+- Interface `Document`: campo `mdxSlug?: string` adicionado
+
+### `data/individuals.ts`
+- Ultimate: `mdxSlug` adicionado aos 3 documentos (`trial-profile-id-ultimate`, `trial-sfe-ultimate`, `trial-permit-card-ultimate`)
+
+### `components/individual-resolver.tsx`
+- Fluxo alterado: antes de cair no `DATA_MAP`, verifica se o documento atual do indivíduo tem `mdxSlug`
+- Se sim: `getDocument(mdxSlug)` → frontmatter → cast `as unknown` → `IndividualLayoutProps` → renderiza via `layoutComponent` (`UltimateLayout`)
+- O cast preenche apenas a prop relevante baseada no `documentId`: `profileId`, `schoolFinalEvaluation`, ou `permissions`
+- Se não: fallback para `DATA_MAP` (comportamento original)
+- Diana, Kendra e Kira: entries mantidas ativas com `// TODO: migrar para MDX`
+
 # NRC no Profile ID do Ultimate
 **Data:** 20-Jun-2026
 
