@@ -14,6 +14,7 @@ import { ProtectDoc } from "../../general-components/ui/protect-doc-text";
 
 interface TrialProfileIdFrontmatter extends DocumentFrontmatter {
   isHighSecurity: boolean;
+  nrc: string;
   name: string;
   knownAs: string;
   age: number;
@@ -34,6 +35,7 @@ export function TrialProfileId({ doc }: { doc: ArchiveDocument }) {
 
   const {
     isHighSecurity,
+    nrc,
     name,
     knownAs,
     age,
@@ -68,6 +70,11 @@ export function TrialProfileId({ doc }: { doc: ArchiveDocument }) {
             item="NOME COMPLETO"
             value={name}
             redacted={isHighSecurity}
+          />
+          <ItemValue
+            className="text-sm"
+            item="NRC"
+            value={nrc}
           />
           <ItemValue
             className="text-sm"

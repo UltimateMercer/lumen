@@ -1,3 +1,17 @@
+# NRC no Profile ID do Ultimate
+**Data:** 20-Jun-2026
+
+### `content/archive/trial/trial-profile-id-ultimate.mdx`
+- Campo `nrc` adicionado ao frontmatter com valor `"??-1228-71938042"`
+
+### `components/documents/templates/trial/trial-profile-id.tsx`
+- `nrc` adicionado à interface `TrialProfileIdFrontmatter`
+- `nrc` destructured do frontmatter
+- Renderizado como `ItemValue` logo após "NOME COMPLETO" — posição escolhida por ser o identificador civil único, antes dos dados biográficos
+
+### `app/archive/page.tsx`
+- Filtro da aba Trial corrigido: `=== "trial-school-final-evaluation"` → `startsWith("trial-")`
+
 # Fase 6 — Trial Templates ProfileId e PermitCard
 **Data:** 18-Jun-2026 21:30 BRT
 

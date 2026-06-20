@@ -1,5 +1,11 @@
 # Regras para o agente — Projeto Lumen
 
+## NRC no Profile ID do Ultimate — executada
+- `content/archive/trial/trial-profile-id-ultimate.mdx`: campo `nrc: "??-1228-71938042"` adicionado ao frontmatter
+- `components/documents/templates/trial/trial-profile-id.tsx`: `nrc` adicionado à interface `TrialProfileIdFrontmatter`, destructured, renderizado como `ItemValue` logo após "NOME COMPLETO"
+- `app/archive/page.tsx`: filtro da aba Trial corrigido de `=== "trial-school-final-evaluation"` para `startsWith("trial-")`, capturando os 3 tipos trial
+- `tsc --noEmit`: 13 erros (todos pre-existentes), zero novos
+
 ## Fase 6 — executada
 - `DocumentType`: `"trial-profile-id"` e `"trial-permit-card"` adicionados
 - `TrialProfileId` e `TrialPermitCard` templates criados em `components/documents/templates/trial/`
