@@ -1,3 +1,38 @@
+# Migração Kendra Connors + Kira: JSON → MDX na Navegação Interna
+**Data:** 20-Jun-2026
+
+### `content/archive/trial/`
+- 3 MDX criados: `trial-profile-id-kendra-connors.mdx`, `trial-sfe-kendra-connors.mdx`, `trial-sfe-kira.mdx`
+- Kendra: profile-id com NRC `??-1228-53682917` + SFE com `isHighSecurity: true` e 2 signatures
+- Kira: SFE com NRC `??-1229-90814563` e `energyControl: 1.5` (valor original dos dados)
+- Tags: `"kendra-connors"` e `"kira"` respectivamente
+
+### `lib/archive/registry.ts`
+- 3 imports estáticos + 3 entries no `RAW` Map
+
+### `data/individuals.ts`
+- Kendra: `mdxSlug` adicionado nos 2 documentos (profile + SFE)
+- Kira: `mdxSlug` adicionado no documento SFE
+- Kira: `layoutComponent: KiraLayout` adicionado — antes não tinha, caía no `documentGenerators.default`
+
+### `components/archives/individuals/kendra-connors-archive.tsx`
+- Templates trocados: `ProfileId` → `TrialProfileId`, `SchoolFinalEvaluationDoc` → `TrialSchoolFinalEvaluation`
+- Dados passam via `doc.frontmatter`
+
+### `components/archives/individuals/kira-archive.tsx` (NOVO)
+- Layout minimal (14 linhas) que só trata `documentId === "school-final-evaluation"` via `TrialSchoolFinalEvaluation`
+- Necessário porque Kira não tinha `layoutComponent` antes
+
+### `components/individual-resolver.tsx`
+- Inalterado. Kendra e Kira agora cobertas pelo fallback MDX via `mdxSlug`
+
+### Estado final da migração
+- Ultimate ✓ — 3 documentos MDX + 3 templates trial
+- Diana Watson ✓ — 3 documentos MDX + 3 templates trial
+- Kendra Connors ✓ — 2 documentos MDX + 2 templates trial
+- Kira ✓ — 1 documento MDX + 1 template trial
+- Todos os 4 personagens migrados para MDX na navegação interna
+
 # Migração Diana Watson: JSON → MDX na Navegação Interna
 **Data:** 20-Jun-2026
 

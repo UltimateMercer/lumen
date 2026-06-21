@@ -2,6 +2,7 @@ import type { Individual } from "@/utils/government-data";
 import { UltimateLayout } from "@/components/archives/individuals/ultimate-archive";
 import { DianaWatsonLayout } from "@/components/archives/individuals/diana-watson-archive";
 import { KendraConnorsLayout } from "@/components/archives/individuals/kendra-connors-archive";
+import { KiraLayout } from "@/components/archives/individuals/kira-archive";
 
 export const individuals: Individual[] = [
   {
@@ -95,8 +96,8 @@ export const individuals: Individual[] = [
     ],
     layoutComponent: KendraConnorsLayout,
     documents: [
-      { id: "profile", name: "Perfil" },
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar" },
+      { id: "profile", name: "Perfil", mdxSlug: "trial-profile-id-kendra-connors" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-kendra-connors" },
       // { id: "permit-card", name: "Permissões" },
     ],
   },
@@ -123,8 +124,9 @@ export const individuals: Individual[] = [
     clearanceLevel: "",
     department: "",
     yearsOfService: 0,
+    layoutComponent: KiraLayout,
     documents: [
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-kira" },
     ],
   },
 ];

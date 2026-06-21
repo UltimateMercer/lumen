@@ -1,15 +1,16 @@
 # Regras para o agente — Projeto Lumen
 
-## Migração Diana Watson: JSON → MDX na Navegação Interna — executada
-- 3 MDX criados: `trial-profile-id-diana-watson.mdx`, `trial-sfe-diana-watson.mdx`, `trial-permit-card-diana-watson.mdx` em `content/archive/trial/`
+## Migração Kendra + Kira: JSON → MDX na Navegação Interna — executada
+- 3 MDX criados: `trial-profile-id-kendra-connors.mdx`, `trial-sfe-kendra-connors.mdx`, `trial-sfe-kira.mdx` em `content/archive/trial/`
 - `lib/archive/registry.ts`: 3 imports + 3 entries adicionados
-- `data/individuals.ts`: `mdxSlug` adicionado nos 3 documentos da Diana
-- `components/archives/individuals/diana-watson-archive.tsx`: templates trocados para `TrialProfileId`, `TrialSchoolFinalEvaluation`, `TrialPermitCard`
-- `components/individual-resolver.tsx`: inalterado — fallback MDX já existente cobre a Diana via `mdxSlug`
+- `data/individuals.ts`: `mdxSlug` adicionado nos 2 docs da Kendra e 1 doc da Kira; `layoutComponent: KiraLayout` adicionado em Kira (não tinha)
+- `components/archives/individuals/kendra-connors-archive.tsx`: templates trocados para `TrialProfileId`, `TrialSchoolFinalEvaluation`
+- `components/archives/individuals/kira-archive.tsx`: criado — layout minimal só com SFE via `TrialSchoolFinalEvaluation`
+- `components/individual-resolver.tsx`: inalterado — fallback MDX cobre ambos via `mdxSlug`
 - `tsc --noEmit`: 13 erros (todos pre-existentes), zero novos
-- Estado: Ultimate ✓, Diana ✓, Kendra e Kira pendentes (DATA_MAP + `// TODO`)
+- Estado: Ultimate ✓, Diana Watson ✓, Kendra Connors ✓, Kira ✓ — todos os 4 personagens migrados para MDX
 
-## Migração Ultimate: JSON → MDX na Navegação Interna — executada
+## Migração Diana Watson: JSON → MDX na Navegação Interna — executada
 - `utils/government-data.ts`: campo `mdxSlug?: string` adicionado à interface `Document`
 - `data/individuals.ts`: `mdxSlug` adicionado nos 3 documentos do Ultimate
 - `components/individual-resolver.tsx`: resolver agora tenta MDX primeiro (`getDocument(mdxSlug)`) com fallback para `DATA_MAP`. Se o documento atual do indivíduo tem `mdxSlug`, carrega frontmatter do registry e mapeia via cast `as unknown` para `ProfileIdData` / `SchoolFinalEvaluationData` / `PermissionsData`. O `layoutComponent` (`UltimateLayout`) continua sendo usado — só a origem dos dados muda. Diana, Kendra e Kira inalterados (DATA_MAP + `// TODO`)
