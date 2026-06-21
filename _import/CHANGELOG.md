@@ -1,3 +1,43 @@
+# Limpeza pós-migração: remoção do prefixo `trial-`
+**Data:** 21-Jun-2026
+
+### `content/archive/`
+- Pasta `trial/` deletada; 9 MDX movidos para `profile-id/`, `school-final-evaluation/`, `permit-card/`
+- Slugs atualizados: `trial-profile-id-ultimate` → `profile-id-ultimate`, `trial-sfe-ultimate` → `sfe-ultimate`, etc.
+- Types atualizados: `trial-profile-id` → `profile-id`, `trial-school-final-evaluation` → `school-final-evaluation`, `trial-permit-card` → `permit-card`
+- Frontmatter limpo: labels "(TRIAL MDX)" removidos, references atualizadas
+
+### `components/documents/templates/`
+- Pasta `trial/` deletada
+- `profile-id.tsx` substituído pelo código de `TrialProfileId` (export `ProfileId`, assinatura `{ doc }`)
+- `school-final-evaluation.tsx` substituído pelo código de `TrialSchoolFinalEvaluation` (export `SchoolFinalEvaluationDoc`, assinatura `{ doc }`)
+- `permit-card.tsx` substituído pelo código de `TrialPermitCard` (export `PermitCard`, assinatura `{ doc }`, `PermitCheckTable` incluso)
+
+### `lib/archive/documents.ts`
+- `DocumentType`: `"trial-school-final-evaluation"`, `"trial-profile-id"`, `"trial-permit-card"` removidos
+- `"profile-id"`, `"school-final-evaluation"`, `"permit-card"` adicionados
+- `DOCUMENT_TYPE_LABEL`: labels atualizados (sem "(TRIAL)")
+
+### `components/documents/index.ts`
+- Imports de `./templates/trial/` substituídos por `./templates/profile-id` etc.
+- `TEMPLATES` map: trial- removidos, canônicos adicionados
+
+### `components/individual-resolver.tsx`
+- 9 imports JSON removidos
+- `DATA_MAP` inteiro removido
+- Fluxo simplificado: único caminho MDX, sem fallback JSON
+
+### `data/`
+- `profile-id/`, `permissions/`, `school-final-evaluations/` deletados (verificados sem outras referências)
+
+### `app/archive/page.tsx`
+- Aba "Trial MDX" removida
+
+### `tsc --noEmit`
+- 13 erros, todos pre-existentes, zero novos
+
+---
+
 # Migração Kendra Connors + Kira: JSON → MDX na Navegação Interna
 **Data:** 20-Jun-2026
 
