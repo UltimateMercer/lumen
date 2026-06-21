@@ -1,3 +1,14 @@
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
+import type {
+  Affinities,
+  EnergyComponentValues,
+  PhysicalComponentValues,
+  AdditionalTableValues,
+  PersonalInfoData,
+  FinalEvaluationData,
+  ResponsibleSignature,
+} from "@/types/character-data";
 import { TablePowerAttributes } from "../general-components/evaluation/table-power-attributes";
 import { TableAdditionalTest } from "../general-components/evaluation/table-additional-test";
 import { TableEnergyComponent } from "../general-components/evaluation/table-energy";
@@ -18,11 +29,21 @@ import { ProtectDoc } from "../general-components/ui/protect-doc-text";
 import { TableAffinitiesComponent } from "../general-components/evaluation/table-affinities";
 import { evaluatePower } from "@/lib/power-system";
 
-interface CompProps {
-  individual: any;
+interface SchoolFinalEvaluationFrontmatter extends DocumentFrontmatter {
+  isHighSecurity: boolean;
+  registry: string;
+  personalInfoData: PersonalInfoData;
+  finalEvaluationData: FinalEvaluationData;
+  affinities: Affinities;
+  energyComponentValues: EnergyComponentValues;
+  physicalComponentValues: PhysicalComponentValues;
+  additionalTableValues: AdditionalTableValues;
+  responsibleSignaturesData: ResponsibleSignature[];
 }
 
-export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
+export function SchoolFinalEvaluationDoc({ doc }: { doc: ArchiveDocument }) {
+  const fm = doc.frontmatter as unknown as SchoolFinalEvaluationFrontmatter;
+
   const {
     isHighSecurity,
     registry,
@@ -33,7 +54,7 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
     physicalComponentValues,
     additionalTableValues,
     responsibleSignaturesData,
-  } = individual;
+  } = fm;
 
   const powerResult = evaluatePower({
     affinities,
@@ -126,4 +147,4 @@ export const SchoolFinalEvaluationDoc = ({ individual }: CompProps) => {
       <StampRepAurora />
     </Paper>
   );
-};
+}

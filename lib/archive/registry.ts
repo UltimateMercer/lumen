@@ -31,15 +31,15 @@ import codexAsc02CarmesimCelestialDivino from "../../content/archive/codex/codex
 import codexAsc03AzulCelestialSupremo from "../../content/archive/codex/codex-asc-03-azul-celestial-supremo.mdx";
 import fichaMedicaBruma403 from "../../content/archive/examples/ficha-medica-bruma-iv-paciente-03.mdx";
 import projetoRedSuns from "../../content/archive/classified-project/projeto-red-suns.mdx";
-import trialSfeUltimate from "../../content/archive/trial/trial-sfe-ultimate.mdx";
-import trialProfileIdUltimate from "../../content/archive/trial/trial-profile-id-ultimate.mdx";
-import trialPermitCardUltimate from "../../content/archive/trial/trial-permit-card-ultimate.mdx";
-import trialProfileIdDianaWatson from "../../content/archive/trial/trial-profile-id-diana-watson.mdx";
-import trialSfeDianaWatson from "../../content/archive/trial/trial-sfe-diana-watson.mdx";
-import trialPermitCardDianaWatson from "../../content/archive/trial/trial-permit-card-diana-watson.mdx";
-import trialProfileIdKendraConnors from "../../content/archive/trial/trial-profile-id-kendra-connors.mdx";
-import trialSfeKendraConnors from "../../content/archive/trial/trial-sfe-kendra-connors.mdx";
-import trialSfeKira from "../../content/archive/trial/trial-sfe-kira.mdx";
+import profileIdUltimate from "../../content/archive/profile-id/ultimate.mdx";
+import sfeUltimate from "../../content/archive/school-final-evaluation/ultimate.mdx";
+import permitCardUltimate from "../../content/archive/permit-card/ultimate.mdx";
+import profileIdDianaWatson from "../../content/archive/profile-id/diana-watson.mdx";
+import sfeDianaWatson from "../../content/archive/school-final-evaluation/diana-watson.mdx";
+import permitCardDianaWatson from "../../content/archive/permit-card/diana-watson.mdx";
+import profileIdKendraConnors from "../../content/archive/profile-id/kendra-connors.mdx";
+import sfeKendraConnors from "../../content/archive/school-final-evaluation/kendra-connors.mdx";
+import sfeKira from "../../content/archive/school-final-evaluation/kira.mdx";
 
 const RAW: Record<string, string> = {
   "decreto-0421": decreto0421,
@@ -72,15 +72,15 @@ const RAW: Record<string, string> = {
   "codex-asc-03-azul-celestial-supremo": codexAsc03AzulCelestialSupremo,
   "ficha-medica-bruma-iv-paciente-03": fichaMedicaBruma403,
   "projeto-red-suns": projetoRedSuns,
-  "trial-sfe-ultimate": trialSfeUltimate,
-  "trial-profile-id-ultimate": trialProfileIdUltimate,
-  "trial-permit-card-ultimate": trialPermitCardUltimate,
-  "trial-profile-id-diana-watson": trialProfileIdDianaWatson,
-  "trial-sfe-diana-watson": trialSfeDianaWatson,
-  "trial-permit-card-diana-watson": trialPermitCardDianaWatson,
-  "trial-profile-id-kendra-connors": trialProfileIdKendraConnors,
-  "trial-sfe-kendra-connors": trialSfeKendraConnors,
-  "trial-sfe-kira": trialSfeKira,
+  "profile-id-ultimate": profileIdUltimate,
+  "sfe-ultimate": sfeUltimate,
+  "permit-card-ultimate": permitCardUltimate,
+  "profile-id-diana-watson": profileIdDianaWatson,
+  "sfe-diana-watson": sfeDianaWatson,
+  "permit-card-diana-watson": permitCardDianaWatson,
+  "profile-id-kendra-connors": profileIdKendraConnors,
+  "sfe-kendra-connors": sfeKendraConnors,
+  "sfe-kira": sfeKira,
 };
 
 function parseValue(val: string): unknown {

@@ -1,5 +1,16 @@
 # Regras para o agente — Projeto Lumen
 
+## Limpeza pós-migração: remoção do prefixo `trial-` — executada
+- `content/archive/trial/` deletado; 9 MDX movidos para `content/archive/{profile-id,school-final-evaluation,permit-card}/` com slugs flat (`profile-id-ultimate`, `sfe-ultimate`, `permit-card-ultimate` etc.)
+- `components/documents/templates/trial/` deletado; `profile-id.tsx`, `school-final-evaluation.tsx`, `permit-card.tsx` substituídos pelo código dos trial (assinatura `{ doc }`, sem `{ individual }`)
+- `DocumentType`: `"trial-school-final-evaluation"` etc. removidos; `"profile-id"`, `"school-final-evaluation"`, `"permit-card"` adicionados
+- `DOCUMENT_TYPE_LABEL` atualizado com labels canônicos (sem "(TRIAL)")
+- `components/individual-resolver.tsx`: `DATA_MAP` + 9 imports JSON removidos; único fluxo MDX
+- `data/profile-id/`, `data/permissions/`, `data/school-final-evaluations/` deletados (sem outras referências)
+- `app/archive/page.tsx`: aba "Trial MDX" removida
+- `tsc --noEmit`: 13 erros (todos pre-existentes), zero novos
+- Estado: todos os 39 MDX em pastas canônicas, 0 referências a `trial-`, 0 dados JSON redundantes
+
 ## Migração Kendra + Kira: JSON → MDX na Navegação Interna — executada
 - 3 MDX criados: `trial-profile-id-kendra-connors.mdx`, `trial-sfe-kendra-connors.mdx`, `trial-sfe-kira.mdx` em `content/archive/trial/`
 - `lib/archive/registry.ts`: 3 imports + 3 entries adicionados
@@ -93,10 +104,10 @@
 - `lib/power-system/` — motor de cálculo energético
 - `lib/archive/` — lib do archive (documents.ts com tipos + registry.ts com carregamento MDX)
 - `lib/in-universe-rules/` — regras do universo (NRC)
-- `content/archive/` — 30 arquivos MDX (codex/, classified-project/, examples/)
+- `content/archive/` — 39 arquivos MDX (profile-id/, school-final-evaluation/, permit-card/, codex/, classified-project/, examples/)
 
 ## Archive routes
-- `/archive` — listagem de documentos com shadcn/ui `Tabs` (3 abas: Documentos, Componentes Existentes, Componentes Novos)
+- `/archive` — listagem de documentos com shadcn/ui `Tabs` (3 abas: Documentos, Componentes Existentes, Componentes Novos; aba Trial removida pós-migração)
 - `/archive/[slug]` — renderização individual com template + MDX
 - `app/archive/[slug]/page.tsx` usa `generateStaticParams` (Next.js 16)
 - `TEMPLATES` registry em `components/documents/index.ts`

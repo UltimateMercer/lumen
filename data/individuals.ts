@@ -30,9 +30,9 @@ export const individuals: Individual[] = [
     yearsOfService: 0,
     layoutComponent: DianaWatsonLayout,
     documents: [
-      { id: "profile", name: "Perfil", mdxSlug: "trial-profile-id-diana-watson" },
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-diana-watson" },
-      { id: "permit-card", name: "Permissões", mdxSlug: "trial-permit-card-diana-watson" },
+      { id: "profile", name: "Perfil", mdxSlug: "profile-id-diana-watson" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "sfe-diana-watson" },
+      { id: "permit-card", name: "Permissões", mdxSlug: "permit-card-diana-watson" },
     ],
   },
   {
@@ -63,9 +63,9 @@ export const individuals: Individual[] = [
     ],
     layoutComponent: UltimateLayout,
     documents: [
-      { id: "profile", name: "Perfil", mdxSlug: "trial-profile-id-ultimate" },
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-ultimate" },
-      { id: "permit-card", name: "Permissões", mdxSlug: "trial-permit-card-ultimate" },
+      { id: "profile", name: "Perfil", mdxSlug: "profile-id-ultimate" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "sfe-ultimate" },
+      { id: "permit-card", name: "Permissões", mdxSlug: "permit-card-ultimate" },
     ],
   },
   {
@@ -96,8 +96,8 @@ export const individuals: Individual[] = [
     ],
     layoutComponent: KendraConnorsLayout,
     documents: [
-      { id: "profile", name: "Perfil", mdxSlug: "trial-profile-id-kendra-connors" },
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-kendra-connors" },
+      { id: "profile", name: "Perfil", mdxSlug: "profile-id-kendra-connors" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "sfe-kendra-connors" },
       // { id: "permit-card", name: "Permissões" },
     ],
   },
@@ -126,7 +126,7 @@ export const individuals: Individual[] = [
     yearsOfService: 0,
     layoutComponent: KiraLayout,
     documents: [
-      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "trial-sfe-kira" },
+      { id: "school-final-evaluation", name: "Avaliação Final Escolar", mdxSlug: "sfe-kira" },
     ],
   },
 ];

@@ -23,9 +23,9 @@ import { MonitoredThreadTemplate } from "./templates/monitored-thread-template";
 import { CodexEntryTemplate } from "./templates/codex-entry-template";
 import { MedicalRecordTemplate } from "./templates/medical-record-template";
 import { ClassifiedProjectTemplate } from "./templates/classified-project-template";
-import { TrialSchoolFinalEvaluation } from "./templates/trial/trial-school-final-evaluation";
-import { TrialProfileId } from "./templates/trial/trial-profile-id";
-import { TrialPermitCard } from "./templates/trial/trial-permit-card";
+import { ProfileId } from "./templates/profile-id";
+import { SchoolFinalEvaluationDoc } from "./templates/school-final-evaluation";
+import { PermitCard } from "./templates/permit-card";
 
 export const TEMPLATES: Record<DocumentType, ComponentType<{ doc: ArchiveDocument }>> = {
   decree: DecreeTemplate,
@@ -51,7 +51,7 @@ export const TEMPLATES: Record<DocumentType, ComponentType<{ doc: ArchiveDocumen
   codex_entry: CodexEntryTemplate,
   medical_record: MedicalRecordTemplate,
   classified_project: ClassifiedProjectTemplate,
-  "trial-school-final-evaluation": TrialSchoolFinalEvaluation,
-  "trial-profile-id": TrialProfileId,
-  "trial-permit-card": TrialPermitCard,
+  "profile-id": ProfileId,
+  "school-final-evaluation": SchoolFinalEvaluationDoc,
+  "permit-card": PermitCard,
 };

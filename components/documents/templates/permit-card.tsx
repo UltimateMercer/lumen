@@ -1,3 +1,6 @@
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
+import type { MentorData, ResponsibleSignature } from "@/types/character-data";
 import { cn } from "@/lib/utils";
 import { ItemValue } from "../general-components/ui/item-value";
 import { NexusFormatDate } from "../general-components/ui/nexus-format-date";
@@ -6,31 +9,31 @@ import { PaperHeader } from "../general-components/paper/paper-header";
 import { SectionPaper } from "../general-components/paper/section-paper";
 import { tierColors } from "@/lib/power-system";
 import type { PowerTier } from "@/lib/power-system";
-import { Square } from "lucide-react";
-import { CheckSquareIcon, SquareIcon } from "@phosphor-icons/react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { SectionTitle } from "../general-components/paper/section-title";
 import { StampRepAurora } from "../general-components/stamps/stamp-rep-aurora";
+import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
 import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
 
-interface CompProps {
-  individual: any;
+interface PermitCardFrontmatter extends DocumentFrontmatter {
+  id: string;
+  registryName: string;
+  age: number;
+  birthDate: string;
+  licenseStartDate: string;
+  tier: string;
+  mentor: MentorData | Record<string, never>;
+  responsibleSignatures: ResponsibleSignature[];
 }
-export const PermitCard = ({ individual }: CompProps) => {
+
+export function PermitCard({ doc }: { doc: ArchiveDocument }) {
+  const fm = doc.frontmatter as unknown as PermitCardFrontmatter;
+
   const {
     id,
     registryName,
@@ -38,9 +41,10 @@ export const PermitCard = ({ individual }: CompProps) => {
     birthDate,
     licenseStartDate,
     tier,
-    mentor = "",
+    mentor = {},
     responsibleSignatures,
-  } = individual;
+  } = fm;
+
   const tierStyle = tierColors[tier as PowerTier];
 
   return (
@@ -65,16 +69,13 @@ export const PermitCard = ({ individual }: CompProps) => {
               item="data de nascimento"
               value={NexusFormatDate(birthDate)}
             />
-            <ItemValue className="text-sm" item="idade" value={age} />
+            <ItemValue className="text-sm" item="idade" value={`${age}`} />
             <ItemValue
               className="text-sm"
               item="data de emissão"
               value={NexusFormatDate(licenseStartDate)}
             />
             <ItemValue className="text-sm" item="id" value={id} />
-            {/* {Object.keys(mentor).length > 0 && (
-              <ItemValue item="mentor" value={mentor} />
-            )} */}
           </div>
           <div
             className={cn(
@@ -90,7 +91,7 @@ export const PermitCard = ({ individual }: CompProps) => {
       </SectionPaper>
       {Object.keys(mentor).length > 0 && (
         <SectionPaper>
-          <ResponsibleSignatures responsibleSignatures={[mentor]} />
+          <ResponsibleSignatures responsibleSignatures={[mentor as unknown as ResponsibleSignature]} />
         </SectionPaper>
       )}
 
@@ -114,9 +115,9 @@ export const PermitCard = ({ individual }: CompProps) => {
       <StampRepAurora />
     </Paper>
   );
-};
+}
 
-export const PermitCheckTable = ({ tier }: any) => {
+export function PermitCheckTable({ tier }: { tier: string }) {
   return (
     <Table className="border border-[#252525] dark:border-[#eaeaea] mb-2.5">
       <TableHeader className="">
@@ -226,16 +227,6 @@ export const PermitCheckTable = ({ tier }: any) => {
           </TableCell>
         </TableRow>
       </TableBody>
-      {/* <TableFooter>
-        <TableRow className="border-t border-[#252525] dark:border-[#eaeaea] bg-[#252525] dark:bg-[#eaeaea] hover:bg-[#252525] hover:dark:bg-[#eaeaea]">
-          <TableCell className="text-[#eaeaea] dark:text-[#252525]">
-            SUBTOTAL - PROVAS ADICIONAIS
-          </TableCell>
-          <TableCell className="text-[#eaeaea] dark:text-[#252525] text-right">
-            {"subtotal()"}
-          </TableCell>
-        </TableRow>
-      </TableFooter> */}
     </Table>
   );
-};
+}

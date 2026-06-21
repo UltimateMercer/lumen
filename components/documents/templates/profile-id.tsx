@@ -1,4 +1,6 @@
-import { RedactedText } from "@/components/redacted-text";
+"use client";
+import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
+import type { ResponsibleSignature } from "@/types/character-data";
 import { Paper } from "../general-components/paper/paper";
 import { PaperHeader } from "../general-components/paper/paper-header";
 import { PaperSubject } from "../general-components/paper/paper-subject";
@@ -9,14 +11,31 @@ import { SectionPaper } from "../general-components/paper/section-paper";
 import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
 import { StampRepAurora } from "../general-components/stamps/stamp-rep-aurora";
 import { ProtectDoc } from "../general-components/ui/protect-doc-text";
-import { Section } from "lucide-react";
-interface CompProps {
-  individual: any;
+
+interface ProfileIdFrontmatter extends DocumentFrontmatter {
+  isHighSecurity: boolean;
+  nrc: string;
+  name: string;
+  knownAs: string;
+  age: number;
+  birthDate: string;
+  birthPlace: string;
+  occupation: string;
+  height: string;
+  weight: string;
+  bloodType: string;
+  eyeColor: string;
+  hairColor: string;
+  skinColor: string;
+  responsibleSignaturesData: ResponsibleSignature[];
 }
-export const ProfileId = ({ individual }: CompProps) => {
+
+export function ProfileId({ doc }: { doc: ArchiveDocument }) {
+  const fm = doc.frontmatter as unknown as ProfileIdFrontmatter;
+
   const {
     isHighSecurity,
-    responsibleSignaturesData,
+    nrc,
     name,
     knownAs,
     age,
@@ -29,7 +48,9 @@ export const ProfileId = ({ individual }: CompProps) => {
     eyeColor,
     hairColor,
     skinColor,
-  } = individual;
+    responsibleSignaturesData,
+  } = fm;
+
   return (
     <Paper>
       <PaperHeader department="DEPARTAMENTO DE REGISTROS E CIDADANIA" />
@@ -49,6 +70,11 @@ export const ProfileId = ({ individual }: CompProps) => {
             item="NOME COMPLETO"
             value={name}
             redacted={isHighSecurity}
+          />
+          <ItemValue
+            className="text-sm"
+            item="NRC"
+            value={nrc}
           />
           <ItemValue
             className="text-sm"
@@ -117,4 +143,4 @@ export const ProfileId = ({ individual }: CompProps) => {
       <StampRepAurora />
     </Paper>
   );
-};
+}

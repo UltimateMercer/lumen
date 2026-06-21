@@ -10,9 +10,9 @@ export type DocumentType =
   | "id_card" | "bounty" | "broadcast" | "autopsy" | "interrogation"
   | "news" | "batch" | "foreign_letter" | "propaganda"
   | "monitored_thread" | "codex_entry" | "medical_record" | "classified_project"
-  | "trial-school-final-evaluation"
-  | "trial-profile-id"
-  | "trial-permit-card";
+  | "profile-id"
+  | "school-final-evaluation"
+  | "permit-card";
 
 export interface DocumentFrontmatter {
   type: DocumentType;
@@ -170,9 +170,9 @@ export const DOCUMENT_TYPE_LABEL: Record<DocumentType, string> = {
   codex_entry: "REGISTRO DE CODEX",
   medical_record: "PRONTUÁRIO MÉDICO",
   classified_project: "PROJETO CLASSIFICADO",
-  "trial-school-final-evaluation": "AVALIAÇÃO FINAL (TRIAL)",
-  "trial-profile-id": "DOCUMENTO DE IDENTIDADE (TRIAL)",
-  "trial-permit-card": "CARTÃO DE PERMISSÃO (TRIAL)",
+  "profile-id": "DOCUMENTO DE IDENTIDADE",
+  "school-final-evaluation": "AVALIAÇÃO FINAL ESCOLAR",
+  "permit-card": "CARTÃO DE PERMISSÃO",
 };
 
 export const CLASSIFICATION_TOKEN: Record<Classification, string> = {
