@@ -1,3 +1,37 @@
+# Estruturação: Missions, Incidents, Classified sections com Entity pattern
+**Data:** 22-Jun-2026
+
+### `data/missions.ts` (novo)
+- 4 missões como `Entity[]` — Operação Tempestade, Resgate Setor 7,
+  Infiltração Delta, Reconhecimento Norte
+- Cada uma com `slug`, `name`, `status`, `id`, `department`, `documents[]`
+
+### `data/incidents.ts` (novo)
+- 4 incidentes como `Entity[]` — Violação de Segurança, Anomalia Detectada,
+  Falha de Sistema, Acesso Não Autorizado
+
+### `data/classified.ts` (novo)
+- 2 projetos como `Entity[]` — Projeto Red Suns, Arma Suprema da República
+
+### `data/document-generators.tsx`
+- `generateEntityDocuments` agora aceita entidades sem `layoutComponent`/`mdxSlug`
+- Se doc não tem mdxSlug → renderiza placeholder "DOCUMENTO EM PROCESSAMENTO"
+- Fallback por documento (não por entidade inteira)
+
+### `components/government/missions-section.tsx`
+- Substituído mock v0 por implementação real com Entity pattern
+- Sidebar: accordion com status badge colorido (CONCLUÍDA/EM ANDAMENTO/PLANEJAMENTO)
+- Content: DocumentNavigator + generateEntityDocuments
+- Placeholder enquanto não há MDX
+
+### `components/government/incidents-section.tsx`
+- Substituído mock v0 por implementação real com Entity pattern
+- Status badge: CRÍTICO (red), ALTO (orange), MÉDIO (yellow)
+
+### `components/government/classified-section.tsx`
+- Substituído mock v0 por implementação real com Entity pattern
+- Status badge: ATIVO (green), INATIVO (gray), DESCLASSIFICADO (blue)
+
 # Refatoração: IndividualResolver → EntityResolver
 **Data:** 22-Jun-2026
 
