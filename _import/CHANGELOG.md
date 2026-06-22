@@ -1,3 +1,41 @@
+# Refatoração: IndividualResolver → EntityResolver
+**Data:** 22-Jun-2026
+
+### `types/character-data.ts`
+- Adicionada `EntityLayoutProps { documentId, frontmatter }`
+- `IndividualLayoutProps` agora é alias de `EntityLayoutProps`
+
+### `utils/government-data.ts`
+- Adicionada interface `Entity` (slug, name, status, id, documents, layoutComponent, department)
+- `Individual extends Entity` — campos específicos mantidos, `slug` agora obrigatório
+- `layoutComponent` em `Entity` usa `EntityLayoutProps`
+
+### `components/entity-resolver.tsx` (novo)
+- Props: `{ entity: Entity; documentId: string }`
+- Sem import de data source — recebe entidade já resolvida
+- Usa `getDocument(mdxSlug)` do registry, passa `frontmatter` direto ao layout
+
+### `components/individual-resolver.tsx`
+- Atualizado para usar `EntityLayoutProps` em vez de `IndividualLayoutProps` com cast condicional
+- Passa `frontmatter` diretamente (sem `profileId`/`schoolFinalEvaluation`/`permissions`)
+
+### `components/archives/individuals/*.tsx` (4 layouts)
+- Assinatura migrada de `IndividualLayoutProps` para `EntityLayoutProps`
+- Destrutura `{ documentId, frontmatter }` em vez de props nomeadas
+- Cast `frontmatter as unknown as NeededType` direto
+
+### `data/document-generators.tsx`
+- Nova função `generateEntityDocuments(entity: Entity): DocumentContent[]`
+- Usa `EntityResolver`, sem fallback hardcoded
+- `generateIndividualDocuments` mantido por compatibilidade
+
+### `components/government/individuals-section.tsx`
+- Estado migrado: `selectedIndividual: string` → `selectedEntity: Individual | null`
+- Usa `generateEntityDocuments(selectedEntity)` em vez da função legada
+
+### `components/government-dashboard.tsx`
+- Import de `PowersSection` adicionado (resolve TS2304 pré-existente)
+
 # Limpeza pós-migração: remoção do prefixo `trial-`
 **Data:** 21-Jun-2026
 

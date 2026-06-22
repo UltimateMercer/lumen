@@ -1,3 +1,10 @@
+import type { DocumentFrontmatter } from "@/lib/archive/documents";
+
+export interface EntityLayoutProps {
+  documentId: string;
+  frontmatter: DocumentFrontmatter;
+}
+
 export interface ResponsibleSignature {
   department: string;
   name: string;
@@ -86,12 +93,7 @@ export interface FinalEvaluationData {
   redactExaminers: boolean;
 }
 
-export interface IndividualLayoutProps {
-  documentId: string;
-  profileId?: ProfileIdData;
-  schoolFinalEvaluation?: SchoolFinalEvaluationData;
-  permissions?: PermissionsData;
-}
+export type IndividualLayoutProps = EntityLayoutProps;
 
 export interface SchoolFinalEvaluationData {
   registry: string;

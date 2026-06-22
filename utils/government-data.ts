@@ -1,5 +1,5 @@
 import type React from "react";
-import type { IndividualLayoutProps } from "@/types/character-data";
+import type { EntityLayoutProps } from "@/types/character-data";
 // Tipos para os dados governamentais
 
 export interface Document {
@@ -8,15 +8,21 @@ export interface Document {
   mdxSlug?: string;
 }
 
-export interface Individual {
-  slug?: string;
+export interface Entity {
+  slug: string;
   name: string;
-  knownAs?: string;
-  codename?: string;
   status: string;
-  threat: string;
   id: string;
   documents: Document[];
+  department?: string;
+  layoutComponent?: React.ComponentType<EntityLayoutProps>;
+}
+
+export interface Individual extends Entity {
+  slug: string;
+  knownAs?: string;
+  codename?: string;
+  threat: string;
   age?: number;
   birthDate?: string;
   birthPlace?: string;
@@ -30,13 +36,10 @@ export interface Individual {
   skinColor?: string;
   specializations?: string[];
   clearanceLevel?: string;
-  department?: string;
   yearsOfService?: number;
   lastKnownLocation?: string;
   aliases?: string[];
   relatedDocuments?: { slug: string; label?: string }[];
-  // Custom layout component for this individual's documents
-  layoutComponent?: React.ComponentType<IndividualLayoutProps>;
 }
 
 export interface ClassifiedInfo {

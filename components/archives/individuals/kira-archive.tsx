@@ -1,15 +1,16 @@
 "use client";
 
-import type { IndividualLayoutProps } from "@/types/character-data";
+import type { EntityLayoutProps } from "@/types/character-data";
 import type { ArchiveDocument } from "@/lib/archive/documents";
+import type { SchoolFinalEvaluationData } from "@/types/character-data";
 import { SchoolFinalEvaluationDoc } from "../../documents/templates/school-final-evaluation";
 
 export const KiraLayout = ({
   documentId,
-  schoolFinalEvaluation,
-}: IndividualLayoutProps) => {
-  if (documentId === "school-final-evaluation" && schoolFinalEvaluation) {
-    const doc = { frontmatter: schoolFinalEvaluation, mdx: "" } as unknown as ArchiveDocument;
+  frontmatter,
+}: EntityLayoutProps) => {
+  if (documentId === "school-final-evaluation") {
+    const doc = { frontmatter: frontmatter as unknown as SchoolFinalEvaluationData, mdx: "" } as unknown as ArchiveDocument;
     return <SchoolFinalEvaluationDoc doc={doc} />;
   }
 

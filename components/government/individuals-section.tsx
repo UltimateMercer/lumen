@@ -4,8 +4,9 @@ import { useState, useRef, useCallback } from "react";
 import { FileLoading } from "@/components/file-loading";
 import { DocumentNavigator } from "@/components/document-navigator";
 import { FolderOpen, Folder } from "lucide-react";
+import type { Individual } from "@/utils/government-data";
 import { individuals } from "@/data/individuals";
-import { generateIndividualDocuments } from "@/data/document-generators";
+import { generateEntityDocuments } from "@/data/document-generators";
 import { IndividualsNavigationProvider } from "./contexts/individual-contenxt";
 
 interface IndividualsSectionProps {
@@ -16,7 +17,7 @@ export function IndividualsSection({
   onCloseMobileSidebar,
 }: IndividualsSectionProps) {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [selectedIndividual, setSelectedIndividual] = useState<string | null>(
+  const [selectedEntity, setSelectedEntity] = useState<Individual | null>(
     null
   );
   const [isLoadingFile, setIsLoadingFile] = useState(false);
@@ -49,11 +50,15 @@ export function IndividualsSection({
       clearTimeout(loadingTimeoutRef.current);
     }
 
+    const entity = individuals.find(
+      (ind) => (ind.knownAs || ind.name) === individualName
+    ) ?? null;
+
     const newFileName = `${individualName}-${docId}`;
     console.log("[v0] Setting file to:", newFileName);
 
     setSelectedFile(newFileName);
-    setSelectedIndividual(individualName);
+    setSelectedEntity(entity);
     setIsLoadingFile(true);
 
     onCloseMobileSidebar?.();
@@ -134,19 +139,17 @@ export function IndividualsSection({
       );
     }
 
-    if (selectedIndividual && selectedFile) {
+    if (selectedEntity && selectedFile) {
       console.log(
         "[v0] Rendering DocumentNavigator for:",
-        selectedIndividual,
+        selectedEntity.name,
         selectedFile
       );
 
-      const documentId = selectedFile.replace(`${selectedIndividual}-`, "");
-      const individual = individuals.find(
-        (ind) => (ind.knownAs || ind.name) === selectedIndividual
-      );
+      const entityName = selectedEntity.knownAs || selectedEntity.name;
+      const documentId = selectedFile.replace(`${entityName}-`, "");
       const initialIndex =
-        individual?.documents.findIndex((doc) => doc.id === documentId) ?? 0;
+        selectedEntity.documents.findIndex((doc) => doc.id === documentId) ?? 0;
 
       console.log(
         "[v0] Document ID:",
@@ -160,14 +163,11 @@ export function IndividualsSection({
           onNavigate={handleIndividualDocumentClick}
         >
           <DocumentNavigator
-            documents={generateIndividualDocuments(
-              selectedIndividual,
-              individuals
-            )}
+            documents={generateEntityDocuments(selectedEntity)}
             initialIndex={initialIndex}
             onBack={() => {
               setSelectedFile(null);
-              setSelectedIndividual(null);
+              setSelectedEntity(null);
             }}
           />
         </IndividualsNavigationProvider>

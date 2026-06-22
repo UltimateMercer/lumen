@@ -16,6 +16,7 @@ import { IndividualsSection } from "@/components/government/individuals-section"
 import { ClassifiedSection } from "@/components/government/classified-section";
 import { MissionsSection } from "@/components/government/missions-section";
 import { IncidentsSection } from "@/components/government/incidents-section";
+import { PowersSection } from "@/components/government/powers-section";
 
 interface GovernmentDashboardProps {
   user: { username: string; accessLevel: string };
