@@ -1,26 +1,66 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { CODEX_CATEGORIES } from "@/data/codex";
 import type { CodexCategory, CodexItem } from "@/data/codex";
 
 type View = "categories" | "items" | "documents";
 
 export default function CodexIndex() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-4xl mx-auto p-8 opacity-50 text-center">
+          CARREGANDO...
+        </div>
+      }
+    >
+      <CodexIndexInner />
+    </Suspense>
+  );
+}
+
+function CodexIndexInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const itemParam = searchParams.get("item");
+
   const [view, setView] = useState<View>("categories");
-  const [selectedCategory, setSelectedCategory] = useState<CodexCategory | null>(null);
+  const [selectedCategory, setSelectedCategory] =
+    useState<CodexCategory | null>(null);
   const [selectedItem, setSelectedItem] = useState<CodexItem | null>(null);
 
-  const handleCategoryClick = (cat: CodexCategory) => {
+  useEffect(() => {
+    if (!categoryParam) {
+      setView("categories");
+      setSelectedCategory(null);
+      setSelectedItem(null);
+      return;
+    }
+    const cat =
+      CODEX_CATEGORIES.find((c) => c.id === categoryParam) ?? null;
     setSelectedCategory(cat);
-    setView("items");
+    if (itemParam && cat) {
+      const item = cat.items.find((i) => i.id === itemParam) ?? null;
+      setSelectedItem(item);
+      setView(item ? "documents" : "items");
+    } else {
+      setSelectedItem(null);
+      setView(cat ? "items" : "categories");
+    }
+  }, [categoryParam, itemParam]);
+
+  const handleCategoryClick = (cat: CodexCategory) => {
+    router.push(`?category=${cat.id}`, { scroll: false });
   };
 
   const handleItemClick = (item: CodexItem) => {
-    setSelectedItem(item);
-    setView("documents");
+    if (!selectedCategory) return;
+    router.push(`?category=${selectedCategory.id}&item=${item.id}`, {
+      scroll: false,
+    });
   };
 
   const handleDocumentClick = (mdxSlug: string) => {
@@ -28,12 +68,10 @@ export default function CodexIndex() {
   };
 
   const handleBack = () => {
-    if (view === "documents") {
-      setView("items");
-      setSelectedItem(null);
-    } else if (view === "items") {
-      setView("categories");
-      setSelectedCategory(null);
+    if (view === "documents" && selectedCategory) {
+      router.push(`?category=${selectedCategory.id}`, { scroll: false });
+    } else {
+      router.push("/government/codex", { scroll: false });
     }
   };
 
@@ -76,8 +114,11 @@ export default function CodexIndex() {
                 </div>
               )}
               <div className="text-xs font-mono text-muted-foreground pt-2">
-                {cat.items.reduce((acc, item) => acc + item.documents.length, 0)}{" "}
-                {cat.items.reduce((acc, item) => acc + item.documents.length, 0) === 1 ? "DOCUMENTO" : "DOCUMENTOS"}
+                {cat.items.reduce(
+                  (acc, item) => acc + item.documents.length,
+                  0,
+                )}{" "}
+                DOCUMENTOS
               </div>
             </button>
           ))}
@@ -108,8 +149,7 @@ export default function CodexIndex() {
                   </div>
                 )}
                 <div className="text-xs font-mono text-muted-foreground pt-2">
-                  {item.documents.length}{" "}
-                  {item.documents.length === 1 ? "DOCUMENTO" : "DOCUMENTOS"}
+                  {item.documents.length} DOCUMENTOS
                 </div>
               </button>
             ))}
