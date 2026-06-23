@@ -464,15 +464,22 @@ export const generateIndividualDocuments = (
 export const generateEntityDocuments = (
   entity: Entity,
 ): DocumentContent[] => {
-  return entity.documents.map((doc) => ({
+  const combinedDocs = [
+    ...entity.documents,
+    ...(entity.documentGroups?.flatMap((g) => g.documents) ?? []),
+  ];
+
+  const combinedEntity: Entity = { ...entity, documents: combinedDocs };
+
+  return combinedDocs.map((doc) => ({
     title: `${doc.name}: ${entity.name}`,
     classification: "CONFIDENCIAL",
     department:
       entity.department || "DEPARTAMENTO DE REGISTROS E ARQUIVOS",
     date: "2024.03.15",
     signedBy: "Sistema de Documentação Automatizado",
-    content: entity.layoutComponent && doc.mdxSlug
-      ? <EntityResolver entity={entity} documentId={doc.id} />
+    content: doc.mdxSlug
+      ? <EntityResolver entity={combinedEntity} documentId={doc.id} />
       : <div className="p-8 text-center opacity-50">DOCUMENTO EM PROCESSAMENTO</div>,
   }));
 };

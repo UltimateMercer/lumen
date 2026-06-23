@@ -8,12 +8,19 @@ export interface Document {
   mdxSlug?: string;
 }
 
+export interface DocumentGroup {
+  groupId: string;
+  groupName: string;
+  documents: Document[];
+}
+
 export interface Entity {
   slug: string;
   name: string;
   status: string;
   id: string;
   documents: Document[];
+  documentGroups?: DocumentGroup[];
   department?: string;
   layoutComponent?: React.ComponentType<EntityLayoutProps>;
 }

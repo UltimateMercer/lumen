@@ -31,6 +31,18 @@ import codexAsc02CarmesimCelestialDivino from "../../content/archive/codex/codex
 import codexAsc03AzulCelestialSupremo from "../../content/archive/codex/codex-asc-03-azul-celestial-supremo.mdx";
 import fichaMedicaBruma403 from "../../content/archive/examples/ficha-medica-bruma-iv-paciente-03.mdx";
 import projetoRedSuns from "../../content/archive/classified-project/projeto-red-suns.mdx";
+import redSunsBatch from "../../content/archive/classified-project/red-suns-batch.mdx";
+import redSunsOverview from "../../content/archive/classified-project/red-suns-overview.mdx";
+import redSunsTraining from "../../content/archive/classified-project/red-suns-training.mdx";
+import redSunsEvaluation from "../../content/archive/classified-project/red-suns-evaluation.mdx";
+import redSunsSpecialized from "../../content/archive/classified-project/red-suns-specialized.mdx";
+import redSunsPsychological from "../../content/archive/classified-project/red-suns-psychological.mdx";
+import redSunsScoreGuide from "../../content/archive/classified-project/red-suns-score-guide.mdx";
+import redSunsClassification from "../../content/archive/classified-project/red-suns-classification.mdx";
+import redSunsAnnexA from "../../content/archive/classified-project/red-suns-annex-a.mdx";
+import redSunsAnnexB from "../../content/archive/classified-project/red-suns-annex-b.mdx";
+import redSunsAnnexC from "../../content/archive/classified-project/red-suns-annex-c.mdx";
+import redSunsAnnexD from "../../content/archive/classified-project/red-suns-annex-d.mdx";
 import profileIdUltimate from "../../content/archive/profile-id/ultimate.mdx";
 import sfeUltimate from "../../content/archive/school-final-evaluation/ultimate.mdx";
 import permitCardUltimate from "../../content/archive/permit-card/ultimate.mdx";
@@ -72,6 +84,18 @@ const RAW: Record<string, string> = {
   "codex-asc-03-azul-celestial-supremo": codexAsc03AzulCelestialSupremo,
   "ficha-medica-bruma-iv-paciente-03": fichaMedicaBruma403,
   "projeto-red-suns": projetoRedSuns,
+  "red-suns-batch": redSunsBatch,
+  "red-suns-overview": redSunsOverview,
+  "red-suns-training": redSunsTraining,
+  "red-suns-evaluation": redSunsEvaluation,
+  "red-suns-specialized": redSunsSpecialized,
+  "red-suns-psychological": redSunsPsychological,
+  "red-suns-score-guide": redSunsScoreGuide,
+  "red-suns-classification": redSunsClassification,
+  "red-suns-annex-a": redSunsAnnexA,
+  "red-suns-annex-b": redSunsAnnexB,
+  "red-suns-annex-c": redSunsAnnexC,
+  "red-suns-annex-d": redSunsAnnexD,
   "profile-id-ultimate": profileIdUltimate,
   "sfe-ultimate": sfeUltimate,
   "permit-card-ultimate": permitCardUltimate,

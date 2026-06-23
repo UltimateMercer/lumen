@@ -1,15 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
+import { AuthGuard } from "@/components/auth-guard";
 import { FolderOpen, Folder, ChevronDown } from "lucide-react";
-import type { Entity } from "@/utils/government-data";
 import { classified } from "@/data/classified";
-import { FileLoading } from "@/components/file-loading";
-
-interface ClassifiedSectionProps {
-  onCloseMobileSidebar?: () => void;
-}
+import type { Entity } from "@/utils/government-data";
 
 const statusColors: Record<string, string> = {
   ATIVO: "text-green-600 dark:text-green-400",
@@ -17,21 +13,23 @@ const statusColors: Record<string, string> = {
   DESCLASSIFICADO: "text-blue-600 dark:text-blue-400",
 };
 
-export function ClassifiedSection({
-  onCloseMobileSidebar,
-}: ClassifiedSectionProps) {
+export default function ClassifiedLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
+  const params = useParams();
+  const currentSlug = params.slug as string | undefined;
+
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
   const toggleExpanded = (itemName: string) => {
-    const newExpanded = new Set(expandedItems);
-    if (newExpanded.has(itemName)) {
-      newExpanded.delete(itemName);
-    } else {
-      newExpanded.add(itemName);
-    }
-    setExpandedItems(newExpanded);
+    const next = new Set(expandedItems);
+    if (next.has(itemName)) next.delete(itemName);
+    else next.add(itemName);
+    setExpandedItems(next);
   };
 
   const toggleGroup = (entitySlug: string, groupId: string) => {
@@ -44,6 +42,7 @@ export function ClassifiedSection({
     });
   };
 
+  // lookup map: doc.id → mdxSlug
   const slugMap = new Map<string, string>();
   for (const e of classified) {
     for (const d of e.documents) {
@@ -56,12 +55,11 @@ export function ClassifiedSection({
     }
   }
 
-  const handleEntityDocumentClick = (entity: Entity, docId: string) => {
+  const handleDocClick = (entity: Entity, docId: string) => {
     const mdxSlug = slugMap.get(docId);
     if (mdxSlug) {
       router.push(`/government/classified/${mdxSlug}`);
     }
-    onCloseMobileSidebar?.();
   };
 
   const sidebar = (
@@ -76,30 +74,35 @@ export function ClassifiedSection({
             className="w-full text-left px-2 py-2 text-xs font-mono border border-foreground bg-background hover:bg-muted transition-colors"
           >
             <div className="flex items-center justify-between">
-              <span className="truncate uppercase font-bold">{entity.name}</span>
+              <span className="truncate uppercase font-bold">
+                {entity.name}
+              </span>
               {expandedItems.has(entity.name) ? (
                 <FolderOpen className="w-4 h-4 shrink-0" />
               ) : (
                 <Folder className="w-4 h-4 shrink-0" />
               )}
             </div>
-            <div className={`text-[10px] mt-0.5 ${statusColors[entity.status] || ""}`}>
+            <div
+              className={`text-[10px] mt-0.5 ${statusColors[entity.status] || ""}`}
+            >
               {entity.status}
             </div>
           </button>
           {expandedItems.has(entity.name) && (
             <div className="ml-4 space-y-1 mt-1">
               {entity.documents.map((doc) => {
-                const hasSlug = slugMap.has(doc.id);
+                const mdxSlug = slugMap.get(doc.id);
+                const isActive = !!mdxSlug && currentSlug === mdxSlug;
                 return (
                   <button
                     key={doc.id}
-                    onClick={() => handleEntityDocumentClick(entity, doc.id)}
-                    className={`w-full text-left px-2 py-1.5 text-xs font-mono border border-foreground transition-colors flex items-center gap-2 uppercase ${
-                      hasSlug
-                        ? "bg-background hover:bg-muted text-foreground"
-                        : "bg-background text-muted-foreground opacity-40 cursor-default"
-                    }`}
+                    onClick={() => handleDocClick(entity, doc.id)}
+                    className={`w-full text-left px-2 py-1.5 text-xs font-mono border transition-colors flex items-center gap-2 uppercase ${
+                      isActive
+                        ? "border-foreground bg-foreground/10 text-foreground"
+                        : "border-foreground bg-background hover:bg-muted text-foreground"
+                    } ${!mdxSlug ? "opacity-40 cursor-default" : ""}`}
                   >
                     → {doc.name}
                   </button>
@@ -114,7 +117,9 @@ export function ClassifiedSection({
                     <span>{group.groupName}</span>
                     <ChevronDown
                       className={`w-3 h-3 transition-transform ${
-                        expandedGroups.has(`${entity.slug}-${group.groupId}`)
+                        expandedGroups.has(
+                          `${entity.slug}-${group.groupId}`,
+                        )
                           ? "rotate-0"
                           : "-rotate-90"
                       }`}
@@ -123,16 +128,18 @@ export function ClassifiedSection({
                   {expandedGroups.has(`${entity.slug}-${group.groupId}`) && (
                     <div className="ml-2 space-y-1 mt-1">
                       {group.documents.map((doc) => {
-                        const hasSlug = slugMap.has(doc.id);
+                        const mdxSlug = slugMap.get(doc.id);
+                        const isActive =
+                          !!mdxSlug && currentSlug === mdxSlug;
                         return (
                           <button
                             key={doc.id}
-                            onClick={() => handleEntityDocumentClick(entity, doc.id)}
-                            className={`w-full text-left px-2 py-1.5 text-xs font-mono border border-foreground transition-colors flex items-center gap-2 uppercase ${
-                              hasSlug
-                                ? "bg-background hover:bg-muted text-foreground"
-                                : "bg-background text-muted-foreground opacity-40 cursor-default"
-                            }`}
+                            onClick={() => handleDocClick(entity, doc.id)}
+                            className={`w-full text-left px-2 py-1.5 text-xs font-mono border transition-colors flex items-center gap-2 uppercase ${
+                              isActive
+                                ? "border-foreground bg-foreground/10 text-foreground"
+                                : "border-foreground bg-background hover:bg-muted text-foreground"
+                            } ${!mdxSlug ? "opacity-40 cursor-default" : ""}`}
                           >
                             → {doc.name}
                           </button>
@@ -149,20 +156,16 @@ export function ClassifiedSection({
     </div>
   );
 
-  const content = (
-    <div className="flex items-center justify-center h-full">
-      <div className="text-center space-y-4">
-        <div className="text-6xl">🔒</div>
-        <div className="text-xl font-bold text-foreground">
-          REDIRECIONANDO...
+  return (
+    <AuthGuard requireGovernment>
+      <div className="grid md:grid-cols-[250px_1fr] gap-px h-full">
+        <div className="hidden md:block sticky lg:h-[calc(100vh-65px)] h-[calc(100vh-56px)] lg:top-[57px] top-12 p-2 bg-[#eaeaea] dark:bg-[#252525] overflow-y-auto rounded-xs">
+          {sidebar}
         </div>
-        <div className="text-sm text-muted-foreground">
-          Use a barra lateral para navegar ou acesse
-          /government/classified/[slug] diretamente.
-        </div>
+        <main className="bg-[#eaeaea] dark:bg-[#252525] p-4 lg:min-h-[calc(100vh-65px)] min-h-[calc(100vh-56px)] rounded-xs">
+          {children}
+        </main>
       </div>
-    </div>
+    </AuthGuard>
   );
-
-  return { sidebar, content };
 }

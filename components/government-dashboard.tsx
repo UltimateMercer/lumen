@@ -13,7 +13,7 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import { IndividualsSection } from "@/components/government/individuals-section";
-import { ClassifiedSection } from "@/components/government/classified-section";
+
 import { MissionsSection } from "@/components/government/missions-section";
 import { IncidentsSection } from "@/components/government/incidents-section";
 import { PowersSection } from "@/components/government/powers-section";
@@ -30,7 +30,6 @@ export function GovernmentDashboard({
   section,
 }: GovernmentDashboardProps) {
   const sectionMap: Record<string, string> = {
-    classified: "sigiloso",
     profiles: "individuos",
     missions: "missoes",
     incidents: "incidentes",
@@ -51,7 +50,6 @@ export function GovernmentDashboard({
   }, []);
 
   const sections = [
-    { id: "sigiloso", name: "INFORMAÇÕES SIGILOSAS", icon: "🔒" },
     { id: "individuos", name: "INDIVÍDUOS DE DESTAQUE", icon: "👤" },
     { id: "missoes", name: "RELATÓRIOS DE MISSÕES", icon: "📋" },
     { id: "incidentes", name: "REGISTRO DE INCIDENTES", icon: "⚠️" },
@@ -64,8 +62,6 @@ export function GovernmentDashboard({
     switch (activeSection) {
       case "individuos":
         return IndividualsSection({ onCloseMobileSidebar: closeSidebar });
-      case "sigiloso":
-        return ClassifiedSection({ onCloseMobileSidebar: closeSidebar });
       case "missoes":
         return MissionsSection({ onCloseMobileSidebar: closeSidebar });
       case "incidentes":

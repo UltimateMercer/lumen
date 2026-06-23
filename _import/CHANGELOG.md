@@ -1,3 +1,74 @@
+# Async MDX serialization via API route for entity-resolver
+**Data:** 22-Jun-2026
+
+### `app/api/mdx/serialize/route.ts` (novo)
+- POST endpoint que serializa MDX via `next-mdx-remote/serialize`
+- Aceita `{ mdx }` para doc único ou `{ mdx, items: [{ slug, mdx }] }` para batch
+- Retorna `{ mdxSource, itemSources?: Record<string, mdxSource> }`
+
+### `lib/mdx-cache.ts` (novo)
+- `getSerializedMdx(slug, mdx)` — cache em memória por slug, fetch POST
+- `getSerializedBatch(slug, mdx, items)` — serializa batch + items em 1 request
+- Cache evita serializar o mesmo doc múltiplas vezes
+
+### `components/entity-resolver.tsx`
+- Caminho B (fallback TEMPLATES): se `mdxDoc.mdxSource` existe → renderiza direto
+- Se não → `AsyncTemplateRenderer` stateful com useEffect:
+  - `useEffect` → `getSerializedMdx` ou `getSerializedBatch`
+  - Loading state "CARREGANDO DOCUMENTO..."
+  - Batch: constrói `batchItems` com `mdxSource` nos docs filhos
+  - Cache: mesma slug não faz 2 requests
+- Indivíduos (Caminho A) inalterados
+
+---
+
+# EntityResolver TEMPLATES fallback + ClassifiedSection document groups
+**Data:** 22-Jun-2026
+
+### `components/entity-resolver.tsx`
+- Remove early `if (!entity.layoutComponent) return null`
+- Caminho A: se entity tem layoutComponent → renderiza com `EntityLayoutProps` (indivíduos)
+- Caminho B: fallback genérico via `TEMPLATES[mdxDoc.frontmatter.type]` (classified, missions, incidents)
+- Sem layoutComponent → usa os templates de archive (`BatchTemplate`, `ClassifiedProjectTemplate`, `MemoTemplate`, etc.)
+
+### `utils/government-data.ts`
+- Nova interface `DocumentGroup { groupId, groupName, documents }`
+- `Entity.documentGroups?: DocumentGroup[]` adicionado
+
+### `data/document-generators.tsx`
+- `generateEntityDocuments` combina `entity.documents` + `entity.documentGroups[*].documents` em flat array
+- Condição mudada de `entity.layoutComponent && doc.mdxSlug` para `doc.mdxSlug` — deixando EntityResolver decidir
+- Passa `combinedEntity` com docs flat para EntityResolver
+
+### `data/classified.ts`
+- "Projeto Red Suns": 1 doc direto (Dossiê Completo) + 1 documentGroup "Documentos" com 11 itens
+- "Arma Suprema": inalterado
+
+### `components/government/classified-section.tsx`
+- `expandedGroups` state + `toggleGroup` para sub-accordion de grupos
+- `handleEntityDocumentClick` aceita `Entity` diretamente (sem double lookup)
+- Sidebar: botões diretos de `documents[]` + sub-accordion para `documentGroups[]`
+- `renderContent`: usa `combinedDocs` para `initialIndex` (cobre docs em ambas as fontes)
+
+---
+
+# Red Suns: 12 documentos classificados conectados ao sistema
+**Data:** 22-Jun-2026
+
+### `lib/archive/registry.ts`
+- 12 novos imports estáticos + RAW entries para todos os MDX Red Suns
+- Slugs: `red-suns-{batch,overview,training,evaluation,specialized,psychological,score-guide,classification,annex-a,annex-b,annex-c,annex-d}`
+
+### `data/classified.ts`
+- "Projeto Red Suns" expandido de 1 para 12 documentos, todos com `mdxSlug`
+- "Arma Suprema da República" mantido (1 doc sem mdxSlug → placeholder)
+
+### `components/government/classified-section.tsx`
+- Já estava no padrão Entity (accordion + DocumentNavigator + generateEntityDocuments)
+- Nenhuma alteração necessária — dados fluem automaticamente
+
+---
+
 # Estruturação: Missions, Incidents, Classified sections com Entity pattern
 **Data:** 22-Jun-2026
 
