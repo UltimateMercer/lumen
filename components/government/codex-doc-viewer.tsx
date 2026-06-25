@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { motion } from "motion/react";
 import { TEMPLATES } from "@/components/documents/index";
 import type { ArchiveDocument, DocumentType } from "@/lib/archive/documents";
 import { CODEX_CATEGORIES } from "@/data/codex";
@@ -57,7 +58,15 @@ export function CodexDocViewer({ doc }: CodexDocViewerProps) {
       </div>
 
       <div className="overflow-hidden px-6 max-w-3xl mx-auto no-overlay">
-        <Template doc={doc} />
+        <motion.div
+          key={slug}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.15 }}
+        >
+          <Template doc={doc} />
+        </motion.div>
       </div>
     </div>
   );

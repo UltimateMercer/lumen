@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { AnimatePresence, motion } from "motion/react";
 import { AuthGuard } from "@/components/auth-guard";
 import { FolderOpen, Folder, ChevronDown } from "lucide-react";
 import { CODEX_CATEGORIES } from "@/data/codex";
@@ -145,7 +146,17 @@ export default function CodexDocLayout({
           {sidebar}
         </div>
         <main className="bg-[#eaeaea] dark:bg-[#252525] p-4 lg:min-h-[calc(100vh-65px)] min-h-[calc(100vh-56px)] rounded-xs">
-          {children}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlug ?? "empty"}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.15 }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
     </AuthGuard>
