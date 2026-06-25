@@ -17,6 +17,18 @@ function findBreadcrumb(slug: string) {
   return null;
 }
 
+function initialExpanded(slug: string | undefined) {
+  if (!slug) return { cat: null, item: null };
+  for (const cat of CODEX_CATEGORIES) {
+    for (const item of cat.items) {
+      if (item.documents.some((d) => d.mdxSlug === slug)) {
+        return { cat: cat.id, item: item.id };
+      }
+    }
+  }
+  return { cat: null, item: null };
+}
+
 export default function CodexDocLayout({
   children,
 }: {
@@ -26,20 +38,15 @@ export default function CodexDocLayout({
   const params = useParams();
   const currentSlug = params.slug as string | undefined;
 
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const { cat: initCat, item: initItem } = initialExpanded(currentSlug);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(initCat);
+  const [expandedItem, setExpandedItem] = useState<string | null>(initItem);
 
   useEffect(() => {
     if (!currentSlug) return;
-    for (const cat of CODEX_CATEGORIES) {
-      for (const item of cat.items) {
-        if (item.documents.some((d) => d.mdxSlug === currentSlug)) {
-          setExpandedCategory(cat.id);
-          setExpandedItem(item.id);
-          return;
-        }
-      }
-    }
+    const { cat, item } = initialExpanded(currentSlug);
+    setExpandedCategory(cat);
+    setExpandedItem(item);
   }, [currentSlug]);
 
   const toggleCategory = (catId: string) => {
