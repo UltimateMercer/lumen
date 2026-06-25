@@ -62,7 +62,6 @@ export function CodexDocViewer({ doc }: CodexDocViewerProps) {
           key={slug}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.15 }}
         >
           <Template doc={doc} />
