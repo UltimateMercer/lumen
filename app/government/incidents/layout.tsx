@@ -42,7 +42,7 @@ export default function IncidentsLayout({
           <Link
             key={inc.mdxSlug}
             href={`/government/incidents/${inc.mdxSlug}`}
-            className={`block border border-border border-l-4 p-2 transition-colors ${
+            className={`block border border-border border-l-4 p-3 min-h-[88px] transition-colors ${
               isActive
                 ? "border-foreground bg-foreground/10"
                 : "hover:bg-muted"
@@ -53,7 +53,7 @@ export default function IncidentsLayout({
                 {inc.incident_code}
               </span>
               <span
-                className={`px-1 py-0.5 text-[9px] font-mono uppercase leading-none ${
+                className={`px-1.5 py-0.5 text-[10px] font-mono uppercase leading-none ${
                   accent?.chip ?? ""
                 }`}
               >
