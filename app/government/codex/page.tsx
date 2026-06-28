@@ -14,10 +14,10 @@ const TYPE_CODE: Record<string, string> = {
 };
 
 const CLASS_ACCENT = {
-  PÚBLICO: { chip: "bg-[--c-public] text-white", text: "text-[--c-public]", rule: "border-[--c-public]" },
-  CONFIDENCIAL: { chip: "bg-[--c-confidential] text-white", text: "text-[--c-confidential]", rule: "border-[--c-confidential]" },
-  SECRETO: { chip: "bg-[--c-secret] text-white", text: "text-[--c-secret]", rule: "border-[--c-secret]" },
-  ULTRASSECRETO: { chip: "bg-[--c-ultra] text-white", text: "text-[--c-ultra]", rule: "border-[--c-ultra]" },
+  PÚBLICO: { chip: "bg-[var(--c-public)] text-white", text: "text-[var(--c-public)]", rule: "border-[var(--c-public)]" },
+  CONFIDENCIAL: { chip: "bg-[var(--c-confidential)] text-white", text: "text-[var(--c-confidential)]", rule: "border-[var(--c-confidential)]" },
+  SECRETO: { chip: "bg-[var(--c-secret)] text-white", text: "text-[var(--c-secret)]", rule: "border-[var(--c-secret)]" },
+  ULTRASSECRETO: { chip: "bg-[var(--c-ultra)] text-white", text: "text-[var(--c-ultra)]", rule: "border-[var(--c-ultra)]" },
 } as const;
 
 const THREAT_LABEL: Record<string, string> = {
@@ -29,10 +29,10 @@ const THREAT_LABEL: Record<string, string> = {
 };
 
 const CATEGORY_ACCENT = [
-  { chip: "bg-[--c-public] text-white", text: "text-[--c-public]", border: "border-l-[--c-public]" },
-  { chip: "bg-[--c-confidential] text-white", text: "text-[--c-confidential]", border: "border-l-[--c-confidential]" },
-  { chip: "bg-[--c-secret] text-white", text: "text-[--c-secret]", border: "border-l-[--c-secret]" },
-  { chip: "bg-[--c-ultra] text-white", text: "text-[--c-ultra]", border: "border-l-[--c-ultra]" },
+  { chip: "bg-[var(--c-public)] text-white", text: "text-[var(--c-public)]", border: "border-l-[var(--c-public)]" },
+  { chip: "bg-[var(--c-confidential)] text-white", text: "text-[var(--c-confidential)]", border: "border-l-[var(--c-confidential)]" },
+  { chip: "bg-[var(--c-secret)] text-white", text: "text-[var(--c-secret)]", border: "border-l-[var(--c-secret)]" },
+  { chip: "bg-[var(--c-ultra)] text-white", text: "text-[var(--c-ultra)]", border: "border-l-[var(--c-ultra)]" },
 ];
 
 type View = "categories" | "items" | "documents";
@@ -136,7 +136,7 @@ function CodexIndexInner() {
               <button
                 key={cat.id}
                 onClick={() => handleCategoryClick(cat)}
-                className={`group text-left flex flex-col border border-border border-l-4 bg-background shadow-[4px_4px_0_0_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[6px_6px_0_0_rgba(0,0,0,0.14)] rounded-xs w-full ${ca.border}`}
+                className={`group text-left flex flex-col border border-border border-l-4 bg-background shadow-[4px_4px_0_0_color-mix(in_oklab,var(--foreground)_6%,transparent)] transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[6px_6px_0_0_color-mix(in_oklab,var(--foreground)_12%,transparent)] rounded-xs w-full min-h-[180px] texture-item overflow-hidden ${ca.border}`}
               >
                 <div className="flex items-stretch border-b border-border">
                   <div
@@ -200,7 +200,7 @@ function CodexIndexInner() {
                 <button
                   key={item.id}
                   onClick={() => handleItemClick(item)}
-                  className={`group text-left flex flex-col border border-border border-l-4 bg-background shadow-[4px_4px_0_0_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[6px_6px_0_0_rgba(0,0,0,0.14)] rounded-xs w-full ${
+                  className={`group text-left flex flex-col border border-border border-l-4 bg-background shadow-[4px_4px_0_0_color-mix(in_oklab,var(--foreground)_6%,transparent)] transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[6px_6px_0_0_color-mix(in_oklab,var(--foreground)_12%,transparent)] rounded-xs w-full min-h-[180px] texture-item overflow-hidden ${
                     accent
                       ? accent.rule.replace("border-", "border-l-")
                       : "border-l-foreground/30"
@@ -217,11 +217,11 @@ function CodexIndexInner() {
                       <div
                         className={`flex items-center gap-1.5 border-l border-border px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.22em] ${
                           itemFm.threat_tier === "apocalíptica"
-                            ? "text-[--c-ultra]"
+                            ? "text-[var(--c-ultra)]"
                             : itemFm.threat_tier === "crítica"
-                              ? "text-[--c-secret]"
+                              ? "text-[var(--c-secret)]"
                               : itemFm.threat_tier === "severa"
-                                ? "text-[--c-confidential]"
+                                ? "text-[var(--c-confidential)]"
                                 : "text-muted-foreground"
                         }`}
                       >
@@ -285,7 +285,7 @@ function CodexIndexInner() {
                 <button
                   key={doc.id}
                   onClick={() => handleDocumentClick(doc.mdxSlug)}
-                  className="group relative flex flex-col border-2 border-border bg-background shadow-[6px_6px_0_0_rgba(0,0,0,0.10)] transition-all hover:-translate-y-0.5 hover:border-foreground/70 hover:shadow-[8px_8px_0_0_rgba(0,0,0,0.18)] text-left w-full rounded-xs"
+                  className="group relative flex flex-col border-2 border-border bg-background shadow-[6px_6px_0_0_color-mix(in_oklab,var(--foreground)_8%,transparent)] transition-all hover:-translate-y-0.5 hover:border-foreground/70 hover:shadow-[8px_8px_0_0_color-mix(in_oklab,var(--foreground)_14%,transparent)] text-left w-full rounded-xs texture-item overflow-hidden"
                 >
                   <div className="flex items-stretch border-b-2 border-border">
                     <div
