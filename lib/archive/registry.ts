@@ -9,6 +9,9 @@ import dossieCidadao0 from "../../content/archive/examples/dossie-cidadao-0.mdx"
 import dossieAgenteVeil from "../../content/archive/examples/dossie-agente-veil.mdx";
 import memoQuarentena42 from "../../content/archive/examples/memo-quarentena-42.mdx";
 import incidenteBruma4 from "../../content/archive/examples/incidente-bruma-iv.mdx";
+import incidenteTempestaK7 from "../../content/archive/examples/incidente-tempestade-k7.mdx";
+import incidenteSombraZero from "../../content/archive/examples/incidente-sombra-zero.mdx";
+import incidenteAuroraI from "../../content/archive/examples/incidente-aurora-i.mdx";
 import transmissaoPassarosDeVidro from "../../content/archive/examples/transmissao-passaros-de-vidro.mdx";
 import boletimCensura218704 from "../../content/archive/examples/boletim-censura-2187-04.mdx";
 import manifestoPassarosLivres from "../../content/archive/examples/manifesto-passaros-livres.mdx";
@@ -62,6 +65,9 @@ const RAW: Record<string, string> = {
   "dossie-agente-veil": dossieAgenteVeil,
   "memo-quarentena-42": memoQuarentena42,
   "incidente-bruma-iv": incidenteBruma4,
+  "incidente-tempestade-k7": incidenteTempestaK7,
+  "incidente-sombra-zero": incidenteSombraZero,
+  "incidente-aurora-i": incidenteAuroraI,
   "transmissao-passaros-de-vidro": transmissaoPassarosDeVidro,
   "boletim-censura-2187-04": boletimCensura218704,
   "manifesto-passaros-livres": manifestoPassarosLivres,
