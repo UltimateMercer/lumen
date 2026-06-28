@@ -28,6 +28,13 @@ const THREAT_LABEL: Record<string, string> = {
   apocalíptica: "APOCALÍPTICA",
 };
 
+const CATEGORY_ACCENT = [
+  { chip: "bg-[--c-public] text-white", text: "text-[--c-public]", border: "border-l-[--c-public]" },
+  { chip: "bg-[--c-confidential] text-white", text: "text-[--c-confidential]", border: "border-l-[--c-confidential]" },
+  { chip: "bg-[--c-secret] text-white", text: "text-[--c-secret]", border: "border-l-[--c-secret]" },
+  { chip: "bg-[--c-ultra] text-white", text: "text-[--c-ultra]", border: "border-l-[--c-ultra]" },
+];
+
 type View = "categories" | "items" | "documents";
 
 export default function CodexIndex() {
@@ -99,7 +106,7 @@ function CodexIndexInner() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-6xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">CODEX</h1>
@@ -119,33 +126,59 @@ function CodexIndexInner() {
 
       {view === "categories" && (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-          {CODEX_CATEGORIES.map((cat, idx) => (
-            <button
-              key={cat.id}
-              onClick={() => handleCategoryClick(cat)}
-              className="group text-left border border-border bg-background border-l-2 border-l-foreground/30 hover:bg-muted hover:border-foreground transition-colors rounded-xs p-4 space-y-2 w-full"
-            >
-              <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
-                CAT · {String(idx + 1).padStart(3, "0")}
-              </div>
-              <div className="text-lg font-bold uppercase group-hover:underline">
-                {cat.name}
-              </div>
-              {cat.description && (
-                <div className="text-xs text-muted-foreground">
-                  {cat.description}
+          {CODEX_CATEGORIES.map((cat, idx) => {
+            const ca = CATEGORY_ACCENT[idx % CATEGORY_ACCENT.length];
+            const totalDocs = cat.items.reduce(
+              (acc, item) => acc + item.documents.length,
+              0,
+            );
+            return (
+              <button
+                key={cat.id}
+                onClick={() => handleCategoryClick(cat)}
+                className={`group text-left flex flex-col border border-border border-l-4 bg-background shadow-[4px_4px_0_0_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[6px_6px_0_0_rgba(0,0,0,0.14)] rounded-xs w-full ${ca.border}`}
+              >
+                <div className="flex items-stretch border-b border-border">
+                  <div
+                    className={`flex items-center justify-center px-3 py-1.5 font-mono text-xs font-extrabold tracking-tight ${ca.chip}`}
+                  >
+                    CAT
+                  </div>
+                  <div className="flex flex-1 items-center border-l border-border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                    CATEGORIA · {String(idx + 1).padStart(3, "0")}
+                  </div>
+                  <div
+                    className={`flex items-center gap-1.5 border-l border-border px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.22em] ${ca.text}`}
+                  >
+                    {totalDocs} DOCS
+                  </div>
                 </div>
-              )}
-              <div className="text-xs font-mono text-muted-foreground pt-2">
-                {cat.items.length} ENTRADAS ·{" "}
-                {cat.items.reduce(
-                  (acc, item) => acc + item.documents.length,
-                  0,
-                )}{" "}
-                DOCUMENTOS
-              </div>
-            </button>
-          ))}
+                <div className="flex-1 p-4 space-y-2">
+                  <div className="text-[9px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                    ÍNDICE DO SISTEMA · SEÇÃO CATALOGADA
+                  </div>
+                  <h3 className="font-mono text-lg font-bold uppercase tracking-wider text-foreground group-hover:underline">
+                    {cat.name}
+                  </h3>
+                  {cat.description && (
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {cat.description}
+                    </p>
+                  )}
+                </div>
+                <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-2">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                    IDX/CAT · {String(idx + 1).padStart(3, "0")}
+                  </span>
+                  <span
+                    className={`text-[10px] font-extrabold uppercase tracking-widest ${ca.text}`}
+                  >
+                    {cat.items.length} ENTR · {totalDocs} DOCS
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -167,50 +200,68 @@ function CodexIndexInner() {
                 <button
                   key={item.id}
                   onClick={() => handleItemClick(item)}
-                  className={`group text-left border border-border bg-background border-l-2 transition-colors rounded-xs p-4 space-y-2 w-full hover:bg-muted hover:border-foreground ${
-                    accent ? accent.rule : "border-l-foreground/30"
+                  className={`group text-left flex flex-col border border-border border-l-4 bg-background shadow-[4px_4px_0_0_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[6px_6px_0_0_rgba(0,0,0,0.14)] rounded-xs w-full ${
+                    accent
+                      ? accent.rule.replace("border-", "border-l-")
+                      : "border-l-foreground/30"
                   }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider flex-1">
-                      ENTRADA
+                  <div className="flex items-stretch border-b border-border">
+                    <div className="flex items-center justify-center px-3 py-1.5 font-mono text-xs font-extrabold tracking-tight bg-foreground/10 text-foreground">
+                      ENT
+                    </div>
+                    <div className="flex flex-1 items-center border-l border-border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                      ENTRADA CATALOGADA
                     </div>
                     {itemFm?.threat_tier && (
-                      <span
-                        className={`text-[10px] font-extrabold uppercase tracking-wider ${
+                      <div
+                        className={`flex items-center gap-1.5 border-l border-border px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.22em] ${
                           itemFm.threat_tier === "apocalíptica"
                             ? "text-[--c-ultra]"
                             : itemFm.threat_tier === "crítica"
                               ? "text-[--c-secret]"
-                              : "text-muted-foreground"
+                              : itemFm.threat_tier === "severa"
+                                ? "text-[--c-confidential]"
+                                : "text-muted-foreground"
                         }`}
                       >
+                        <span className="h-1.5 w-1.5 rotate-45 bg-current" />
                         {THREAT_LABEL[itemFm.threat_tier]}
-                      </span>
+                      </div>
                     )}
                   </div>
-                  <div className="text-lg font-bold uppercase group-hover:underline">
-                    {item.name}
+                  <div className="flex-1 p-4 space-y-2">
+                    {itemFm?.codex_class && (
+                      <div className="text-[9px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                        {itemFm.codex_class}
+                      </div>
+                    )}
+                    <h3 className="font-mono text-lg font-bold uppercase tracking-wider text-foreground group-hover:underline">
+                      {item.name}
+                    </h3>
+                    {item.description && (
+                      <p
+                        className={`border-l-2 pl-3 text-xs text-muted-foreground leading-relaxed ${
+                          accent ? accent.rule : "border-l-foreground/30"
+                        }`}
+                      >
+                        {item.description}
+                      </p>
+                    )}
                   </div>
-                  {itemFm?.codex_class && (
-                    <div className="text-xs italic text-muted-foreground">
-                      classificação técnica · {itemFm.codex_class}
-                    </div>
-                  )}
-                  {item.description && (
-                    <div
-                      className={`border-l-2 pl-3 text-xs text-muted-foreground ${
-                        accent ? accent.rule : "border-l-foreground/30"
+                  <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                      {itemFm?.designation
+                        ? `CDX/${itemFm.designation}`
+                        : "CDX/—"}
+                    </span>
+                    <span
+                      className={`text-[10px] font-extrabold uppercase tracking-widest ${
+                        accent ? accent.text : "text-foreground"
                       }`}
                     >
-                      {item.description}
-                    </div>
-                  )}
-                  <div className="text-xs font-mono text-muted-foreground pt-2">
-                    {itemFm?.designation
-                      ? `${TYPE_CODE.codex_entry}/${itemFm.designation} · `
-                      : ""}
-                    {item.documents.length} DOCS
+                      {item.documents.length} DOCS
+                    </span>
                   </div>
                 </button>
               );
