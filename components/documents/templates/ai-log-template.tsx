@@ -20,7 +20,7 @@ export function AiLogTemplate({ doc }: { doc: ArchiveDocument }) {
           &gt;&gt;&gt; {fm.title}
         </h1>
         {fm.reference && (
-          <div className="mt-1 text-xs uppercase tracking-widest opacity-70">
+          <div className="mt-1 text-xs uppercase tracking-widest opacity-80">
             ref. {fm.reference}
           </div>
         )}

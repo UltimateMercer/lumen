@@ -894,8 +894,7 @@
   .meta-cell-value--em { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.95rem; }
 
   /* ============ PROJECT TOC ============ */
-  .project-toc-wrap { position: relative; }
-  @media (min-width: 768px) { .project-toc-wrap { position: sticky; top: 1.5rem; align-self: start; } }
+  /* .project-toc-wrap was removed — no longer sticky */
   .project-toc { border: 1px solid color-mix(in oklab, var(--paper-foreground) 40%, transparent); background: color-mix(in oklab, var(--paper-foreground) 3%, transparent); font-family: var(--font-mono); }
   .project-toc-head { background: var(--paper-foreground); color: var(--paper); padding: 0.3rem 0.6rem; font-size: 9px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; }
   .project-toc-list { list-style: none; margin: 0; padding: 0.3rem 0; }

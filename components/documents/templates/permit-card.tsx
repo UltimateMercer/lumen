@@ -100,11 +100,11 @@ export function PermitCard({ doc }: { doc: ArchiveDocument }) {
       </SectionPaper>
       <div className="">
         {tier === "S" ? (
-          <p className="text-muted-foreground text-center uppercase">
+          <p className="text-paper-muted text-center uppercase">
             Documento válido indefinidamente. Renovação automática.
           </p>
         ) : (
-          <p className="text-muted-foreground text-center uppercase">
+          <p className="text-paper-muted text-center uppercase">
             Documento válido por 3 anos.
           </p>
         )}

@@ -119,7 +119,7 @@ export function CodexEntryTemplate({ doc }: { doc: ArchiveDocument }) {
         </div>
         <div className="flex flex-col items-center justify-center text-stamp-red/80">
           <Sigil motif={fm.sigil_motif} />
-          <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.3em] opacity-70">sigilum</div>
+          <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.3em] opacity-80">sigilum</div>
         </div>
       </header>
 

@@ -134,12 +134,7 @@ export function ClassifiedProjectTemplate({ doc }: { doc: ArchiveDocument }) {
         />
       </section>
 
-      <div
-        className={cn(
-          "classified-project-body mt-8 text-paper-foreground",
-          sections.length > 0 && "md:grid md:grid-cols-[14rem_1fr] md:gap-8",
-        )}
-      >
+      <div className="classified-project-body mt-8 text-paper-foreground">
         {sections.length > 0 && (
           <aside className="project-toc-wrap">
             <ProjectTOC items={sections} />

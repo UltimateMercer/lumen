@@ -128,7 +128,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                             </span>
                           </span>
                           <span className="batch-row-date">—</span>
-                          <span className="batch-row-chev opacity-30">×</span>
+                          <span className="batch-row-chev opacity-60">×</span>
                         </div>
                       ) : (
                         <a
@@ -193,12 +193,12 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                   <span>
                     ◆ arquivo · {fm.case_id ?? fm.reference ?? fm.slug}
                   </span>
-                  <span className="opacity-50">›</span>
+                  <span className="opacity-70">›</span>
                   <span className="text-foreground">
                     peça {String(idx + 1).padStart(2, "0")} /{" "}
                     {String(items.length).padStart(2, "0")}
                   </span>
-                  <span className="opacity-50">·</span>
+                  <span className="opacity-70">·</span>
                   <span className="truncate normal-case tracking-normal text-foreground/80">
                     {it.doc.frontmatter.title}
                   </span>

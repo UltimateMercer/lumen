@@ -61,8 +61,8 @@ export function MonitoredThreadTemplate({ doc }: { doc: ArchiveDocument }) {
               {fm.participants.map((p) => (
                 <li key={p.handle} className="font-mono text-[11px] text-paper-foreground">
                   ▸ <span className="font-bold">{p.handle}</span>
-                  {p.role ? <span className="opacity-70"> · {p.role}</span> : null}
-                  {p.device ? <span className="opacity-50"> · {p.device}</span> : null}
+                  {p.role ? <span className="opacity-80"> · {p.role}</span> : null}
+                  {p.device ? <span className="opacity-70"> · {p.device}</span> : null}
                 </li>
               ))}
             </ul>

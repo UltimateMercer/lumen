@@ -15,7 +15,7 @@ export const ProfileName = ({
         Perfil: <RedactedText redacted={isHighSecurity}>{name}</RedactedText>
       </h2>
       {knownAs && (
-        <div className="text-muted-foreground uppercase mt-1 mb-2">
+        <div className="text-paper-muted uppercase mt-1 mb-2">
           Conhecido como: <span className="font-bold ">{knownAs}</span>{" "}
         </div>
       )}

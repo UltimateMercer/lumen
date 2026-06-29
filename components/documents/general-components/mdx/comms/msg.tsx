@@ -38,8 +38,8 @@ export function Msg({
     <div className={cn("thread-msg", side === "right" ? "thread-msg--right" : "thread-msg--left")}>
       <div className="thread-msg-meta">
         <span className="font-bold text-paper-foreground">{from}</span>
-        {device ? <span className="opacity-60"> &middot; {device}</span> : null}
-        {ts ? <span className="opacity-60"> &middot; {ts}</span> : null}
+        {device ? <span className="opacity-75"> &middot; {device}</span> : null}
+        {ts ? <span className="opacity-75"> &middot; {ts}</span> : null}
         {flagged ? <span className="ml-2 text-stamp-red">&#9650; alerta</span> : null}
       </div>
       <MsgFootnoteContext.Provider value={counter}>
@@ -84,7 +84,7 @@ export function Attachment({ kind = "file", hash, label }: { kind?: "img" | "fil
     <div className="my-2 inline-flex max-w-full items-center gap-2 border border-paper-foreground/30 bg-paper-foreground/[0.04] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-paper-muted">
       <span className="text-base text-paper-foreground/70">{icon}</span>
       <span className="text-paper-foreground">{label ?? `anexo ${kind}`}</span>
-      {hash ? <span className="opacity-60">· sha {hash}</span> : null}
+      {hash ? <span className="opacity-75">· sha {hash}</span> : null}
     </div>
   );
 }
