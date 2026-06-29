@@ -26,7 +26,7 @@ export default function IncidentsLayout({
 
   const sidebar = (
     <div className="space-y-1">
-      <div className="px-2 pb-2 border-b border-border mb-2">
+      <div className="px-2 pb-2 border-b incident-item-border mb-2">
         <div className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-foreground">
           <span className="size-1.5 rounded-full bg-[var(--c-ultra)] animate-pulse" />
           MONITORAMENTO ATIVO
@@ -42,7 +42,7 @@ export default function IncidentsLayout({
           <Link
             key={inc.mdxSlug}
             href={`/government/incidents/${inc.mdxSlug}`}
-            className={`block border border-border border-l-4 p-3 min-h-[88px] transition-colors ${
+            className={`block border incident-item-border border-l-4 p-3 min-h-[88px] transition-colors ${
               isActive
                 ? "border-foreground bg-foreground/10"
                 : "hover:bg-muted"
