@@ -1,17 +1,23 @@
 "use client";
-import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
+import type {
+  ArchiveDocument,
+  DocumentFrontmatter,
+} from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
 import { DigitalSignature } from "../general-components/signatures/digital-signature";
 import { cn } from "@/lib/utils";
 
-const THREAT_BARS: Record<NonNullable<DocumentFrontmatter["threat_tier"]>, number> = {
-  "baixa": 1,
-  "moderada": 2,
-  "severa": 3,
-  "crítica": 4,
-  "apocalíptica": 5,
+const THREAT_BARS: Record<
+  NonNullable<DocumentFrontmatter["threat_tier"]>,
+  number
+> = {
+  baixa: 1,
+  moderada: 2,
+  severa: 3,
+  crítica: 4,
+  apocalíptica: 5,
 };
 
 function ThreatGauge({ tier }: { tier?: DocumentFrontmatter["threat_tier"] }) {
@@ -31,9 +37,20 @@ function ThreatGauge({ tier }: { tier?: DocumentFrontmatter["threat_tier"] }) {
   );
 }
 
-function Sigil({ motif = "crimson" }: { motif?: DocumentFrontmatter["sigil_motif"] }) {
+function Sigil({
+  motif = "crimson",
+}: {
+  motif?: DocumentFrontmatter["sigil_motif"];
+}) {
   const stroke = "currentColor";
-  const common = { width: 96, height: 96, viewBox: "0 0 100 100", fill: "none" as const, stroke, strokeWidth: 1.6 };
+  const common = {
+    width: 96,
+    height: 96,
+    viewBox: "0 0 100 100",
+    fill: "none" as const,
+    stroke,
+    strokeWidth: 1.6,
+  };
   switch (motif) {
     case "eye":
       return (
@@ -86,9 +103,13 @@ function Sigil({ motif = "crimson" }: { motif?: DocumentFrontmatter["sigil_motif
 
 function StatChip({ label, value }: { label: string; value?: string }) {
   return (
-    <div className="border border-paper-foreground/30 px-3 py-2">
-      <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-paper-muted">{label}</div>
-      <div className="mt-0.5 font-mono text-xs uppercase text-paper-foreground">{value ?? "—"}</div>
+    <div className="border border-paper-foreground px-3 py-2">
+      <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-paper-muted">
+        {label}
+      </div>
+      <div className="mt-0.5 font-mono text-xs uppercase text-paper-foreground">
+        {value ?? "—"}
+      </div>
     </div>
   );
 }
@@ -103,7 +124,9 @@ export function CodexEntryTemplate({ doc }: { doc: ArchiveDocument }) {
         <div>
           <div className="flex items-baseline gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-paper-muted">
             <span>◆ codex</span>
-            <span className="text-stamp-red">{fm.access_level ?? "acesso restrito"}</span>
+            <span className="text-stamp-red">
+              {fm.access_level ?? "acesso restrito"}
+            </span>
           </div>
           <div className="mt-2 font-mono text-4xl font-bold tracking-[0.15em] text-stamp-red md:text-5xl">
             {fm.designation ?? "—"}
@@ -113,27 +136,43 @@ export function CodexEntryTemplate({ doc }: { doc: ArchiveDocument }) {
           </h1>
           {fm.codex_class && (
             <div className="mt-2 text-xs uppercase tracking-[0.25em] text-paper-muted">
-              classificação técnica · <span className="text-paper-foreground">{fm.codex_class}</span>
+              classificação técnica ·{" "}
+              <span className="text-paper-foreground">{fm.codex_class}</span>
             </div>
           )}
         </div>
         <div className="flex flex-col items-center justify-center text-stamp-red/80">
           <Sigil motif={fm.sigil_motif} />
-          <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.3em] opacity-80">sigilum</div>
+          <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.3em] opacity-80">
+            sigilum
+          </div>
         </div>
       </header>
 
       <section className="mt-5 grid gap-2 md:grid-cols-3">
         <StatChip label="autonomia" value={fm.autonomy} />
         <StatChip label="contagiosidade" value={fm.contagion} />
-        <StatChip label="hospedeiro" value={fm.host_required === false ? "dispensável" : fm.host_required ? "obrigatório" : "—"} />
+        <StatChip
+          label="hospedeiro"
+          value={
+            fm.host_required === false
+              ? "dispensável"
+              : fm.host_required
+                ? "obrigatório"
+                : "—"
+          }
+        />
         <StatChip label="contenção" value={fm.containment_status} />
         <StatChip label="registrado em" value={fm.first_recorded ?? fm.date} />
         <div className="border border-paper-foreground/30 px-3 py-2">
-          <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-paper-muted">ameaça</div>
+          <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-paper-muted">
+            ameaça
+          </div>
           <div className="mt-1 flex items-center gap-2">
             <ThreatGauge tier={fm.threat_tier} />
-            <span className="font-mono text-[10px] uppercase text-paper-foreground">{fm.threat_tier ?? "—"}</span>
+            <span className="font-mono text-[10px] uppercase text-paper-foreground">
+              {fm.threat_tier ?? "—"}
+            </span>
           </div>
         </div>
       </section>
