@@ -12,8 +12,6 @@ import {
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-import { IndividualsSection } from "@/components/government/individuals-section";
-
 import { MissionsSection } from "@/components/government/missions-section";
 import { IncidentsSection } from "@/components/government/incidents-section";
 import { PowersSection } from "@/components/government/powers-section";
@@ -30,7 +28,6 @@ export function GovernmentDashboard({
   section,
 }: GovernmentDashboardProps) {
   const sectionMap: Record<string, string> = {
-    profiles: "individuos",
     missions: "missoes",
     incidents: "incidentes",
   };
@@ -50,7 +47,6 @@ export function GovernmentDashboard({
   }, []);
 
   const sections = [
-    { id: "individuos", name: "INDIVÍDUOS DE DESTAQUE", icon: "👤" },
     { id: "missoes", name: "RELATÓRIOS DE MISSÕES", icon: "📋" },
     { id: "incidentes", name: "REGISTRO DE INCIDENTES", icon: "⚠️" },
     { id: "poderes", name: "SISTEMA DE PODERES", icon: "🔑" },
@@ -60,8 +56,6 @@ export function GovernmentDashboard({
     const closeSidebar = () => setIsSidebarOpen(false);
 
     switch (activeSection) {
-      case "individuos":
-        return IndividualsSection({ onCloseMobileSidebar: closeSidebar });
       case "missoes":
         return MissionsSection({ onCloseMobileSidebar: closeSidebar });
       case "incidentes":

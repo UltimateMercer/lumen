@@ -130,3 +130,38 @@ export const individuals: Individual[] = [
     ],
   },
 ];
+
+export const ALL_PROFILE_SLUGS: string[] = individuals.flatMap(
+  (ind) => ind.documents.map((d) => d.mdxSlug).filter((s): s is string => !!s),
+);
+
+export function findSiblingSlugs(slug: string): string[] {
+  const ind = individuals.find((i) =>
+    i.documents.some((d) => d.mdxSlug === slug),
+  );
+  if (!ind) return [];
+  return ind.documents
+    .map((d) => d.mdxSlug)
+    .filter((s): s is string => !!s);
+}
+
+const PRIMARY_CLASSIFICATION: Record<string, string> = {
+  ultimate: "ULTRASSECRETO",
+  "diana-watson": "CONFIDENCIAL",
+  "kendra-connors": "CONFIDENCIAL",
+  kira: "CONFIDENCIAL",
+};
+
+export function getProfileSections() {
+  return individuals.map((ind) => ({
+    id: ind.slug,
+    name: ind.knownAs || ind.name,
+    classification: PRIMARY_CLASSIFICATION[ind.slug] ?? "CONFIDENCIAL",
+    ...(ind.clearanceLevel
+      ? { meta: { label: ind.clearanceLevel, className: "text-muted-foreground" } }
+      : {}),
+    documents: ind.documents
+      .filter((d) => d.mdxSlug)
+      .map((d) => ({ id: d.id, name: d.name, mdxSlug: d.mdxSlug })),
+  }));
+}

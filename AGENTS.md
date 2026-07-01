@@ -85,6 +85,15 @@
 - `bun run build` para build completo
 - Pre-existing errors (missing modules): ignorar, não são causados por nossas mudanças
 
+## Profiles: rota dedicada app/government/profiles/ — executada
+- `data/individuals.ts`: `ALL_PROFILE_SLUGS`, `findSiblingSlugs`, `getProfileSections` adicionados
+- `app/government/profiles/layout.tsx`: AuthGuard + main wrapper
+- `app/government/profiles/page.tsx`: grid de indivíduos com cards coloridos por classificação do documento primário
+- `app/government/profiles/[slug]/layout.tsx`: ArchiveSidebar com `getProfileSections()`, label "PERFIS"
+- `app/government/profiles/[slug]/page.tsx`: server component, `generateStaticParams`, `DocumentNavigator` link-based entre irmãos do mesmo indivíduo
+- `components/government-dashboard.tsx`: mapeamento `profiles → individuos`, seção `"individuos"` e `IndividualsSection` removidos (rota dedicada assume)
+- `tsc --noEmit`: 10 erros (todos preexistentes), zero novos
+
 ## CSS
 - `_import/styles.css` (1022 linhas) foi integralmente migrado para `app/globals.css` (912 linhas)
 - Classes como `paper-texture`, `stamp-ink-red`, `crt-glow`, `redacted`,

@@ -1,3 +1,34 @@
+# Profiles migration to dedicated route
+**Data:** 01-Jul-2026
+
+### `data/individuals.ts`
+- `ALL_PROFILE_SLUGS` — flatten de todos `mdxSlug` dos `individuals.documents` (9 slugs)
+- `findSiblingSlugs(slug)` — retorna `mdxSlug`s do indivíduo que contém `slug`
+- `getProfileSections()` — monta `SidebarSection[]` para `ArchiveSidebar`, um por indivíduo
+- `PRIMARY_CLASSIFICATION` — hardcoded para cor dos cards (ULTRA para Ultimate, CONFIDENCIAL para os demais)
+
+### `app/government/profiles/layout.tsx` (novo)
+- `AuthGuard` + `<main>` wrapper; sem sidebar (nível 1)
+
+### `app/government/profiles/page.tsx` (novo)
+- Grid de indivíduos com card por indivíduo, cor por classificação do doc primário
+- Chip `CLASS` com `bg-[var(--c-{classification})]`
+- Linka para o primeiro `mdxSlug` do indivíduo
+
+### `app/government/profiles/[slug]/layout.tsx` (novo)
+- `"use client"`, `ArchiveSidebar` com `getProfileSections()`, `label="PERFIS"`
+
+### `app/government/profiles/[slug]/page.tsx` (novo)
+- Server component: `generateStaticParams` via `ALL_PROFILE_SLUGS`
+- `getDocument(slug)` + `serialize()` + `TEMPLATES[type]` (resolve `profile-id`, `school-final-evaluation`, `permit-card`)
+- `DocumentNavigator` link-based com `findSiblingSlugs(slug)`
+
+### `components/government-dashboard.tsx`
+- Removido: `profiles: "individuos"` do `sectionMap`
+- Removido: `{ id: "individuos", name: "INDIVÍDUOS DE DESTAQUE" }` do array `sections`
+- Removido: `case "individuos":` do switch + `IndividualsSection` import
+- `IndividualsSection`, `document-generators.tsx`, `document-navigator.tsx` (stateful) — intocados
+
 # Async MDX serialization via API route for entity-resolver
 **Data:** 22-Jun-2026
 
