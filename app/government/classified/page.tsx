@@ -69,7 +69,7 @@ function ClassifiedInner() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <div className="max-w-6xl mx-auto space-y-6 p-4">
       {entity ? (
         <>
           <div className="flex items-center justify-between">
