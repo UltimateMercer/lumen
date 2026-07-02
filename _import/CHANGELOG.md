@@ -1,3 +1,16 @@
+# Cleanup: _investigation and _import naming docs
+**Data:** 02-Jul-2026
+
+### Deletados
+- `_investigation/`: 9 arquivos .md de investigação (archive-sidebar-interface,
+  classified-investigation, classified-layout-investigation,
+  contrast-and-layout-investigation, contrast-deep-investigation,
+  incidents-investigation, paper-border-investigation, paper-investigation,
+  profiles-migration-plan, cleanup-inventory)
+- `_import/`: 3 arquivos de investigação de naming (NAMING_INVESTIGATION.md,
+  NAMING_INVESTIGATION_SINGLE.md, NAV_INVESTIGATION.md)
+- Mantido: `_import/CHANGELOG.md`
+
 # Profiles migration to dedicated route
 **Data:** 01-Jul-2026
 
