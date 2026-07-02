@@ -127,7 +127,7 @@ export default async function ClassifiedDocPage({
         </div>
       </div>
 
-      <div className="overflow-hidden px-6 max-w-3xl mx-auto no-overlay">
+      <div className="px-6 max-w-3xl mx-auto no-overlay">
         <Template doc={augmentedDoc as ArchiveDocument} />
       </div>
     </div>

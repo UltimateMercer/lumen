@@ -74,15 +74,21 @@ export function BatchStackViewer({
   return (
     <div>
       {showNav && (
-        <div className="mb-4 flex items-center justify-between rounded-xs border dark:border-[#eaeaea] border-[#252525] p-4">
+        <div className="sticky top-2 z-10 -mx-6 mb-4 flex w-[calc(100%+3rem)] items-center justify-between rounded-xs border dark:border-[#eaeaea] border-[#252525] bg-card/95 p-4 backdrop-blur shadow-[0_8px_24px_-12px_oklch(0_0_0/0.5)]">
           <button onClick={goToNull} className={BTN}>
             ↑ ÍNDICE
           </button>
 
-          <span className={LABEL_CLASS}>
-            PEÇA {String(activeIndex! + 1).padStart(2, "0")} /{" "}
-            {String(items.length).padStart(2, "0")}
-          </span>
+          <div className="flex items-center gap-2 truncate">
+            <span className={LABEL_CLASS}>
+              PEÇA {String(activeIndex! + 1).padStart(2, "0")} /{" "}
+              {String(items.length).padStart(2, "0")}
+            </span>
+            <span className="text-[10px] text-muted-foreground/60">·</span>
+            <span className="truncate text-[10px] font-medium uppercase tracking-wider text-foreground/80">
+              {items[activeIndex]?.doc?.frontmatter?.title}
+            </span>
+          </div>
 
           <div className="flex gap-2">
             {activeIndex! > 0 ? (
@@ -115,28 +121,26 @@ export function BatchStackViewer({
               {...anim}
               transition={TRANSITION}
             >
-              <div className="max-h-[75vh] overflow-y-auto">
-                {(() => {
+              {(() => {
                   const item = items[activeIndex];
                   if (!item.doc) return null;
                   const Template = TEMPLATES[item.doc.frontmatter.type];
                   if (!Template) return null;
                   return <Template doc={item.doc} />;
                 })()}
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
         {showNav && activeIndex! > 0 && (
           <div
-            className="absolute left-[3%] right-[3%] top-3 z-[-1] h-72 scale-[0.97] -rotate-1 overflow-hidden rounded-sm border border-border/60 bg-card/40"
+            className="absolute -left-6 -right-6 -top-1 z-[-1] h-72 scale-[0.97] -rotate-1 overflow-hidden rounded-sm border border-border/60 bg-card/60 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.4)]"
             aria-hidden
           />
         )}
         {showNav && activeIndex! < items.length - 1 && (
           <div
-            className="absolute left-[5%] right-[1%] top-6 z-[-2] h-72 scale-[0.95] rotate-[1.1deg] overflow-hidden rounded-sm border border-border/40 bg-card/20"
+            className="absolute -left-4 -right-8 top-4 z-[-2] h-72 scale-[0.95] rotate-[1.1deg] overflow-hidden rounded-sm border border-border/40 bg-card/40 shadow-[0_8px_20px_-16px_rgba(0,0,0,0.3)]"
             aria-hidden
           />
         )}

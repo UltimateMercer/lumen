@@ -56,6 +56,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
     <div className="relative">
       <AnimatePresence>
         {!opened && (
+          <div className="-mx-6 w-[calc(100%+3rem)] max-w-5xl">
           <DossierFolder
             title={fm.title}
             caseId={fm.case_id ?? fm.reference}
@@ -71,6 +72,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
             dismissible={true}
             onOpenChange={(next) => { setOpened(next); if (!next) setActiveIndex(null); }}
           />
+          </div>
         )}
       </AnimatePresence>
 

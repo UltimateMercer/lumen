@@ -202,12 +202,12 @@ const expo: Transition["ease"] = [0.16, 1, 0.3, 1];
 
 const coverVariants: Record<DossierAnimation, Variants> = {
   flip3d: {
-    closed: { rotateY: 0, skewY: 0, opacity: 1, transition: { duration: 0.5, ease: physical } },
+    closed: { rotateY: 0, skewY: 0, opacity: 1, transition: { duration: 0.7, ease: physical } },
     open: {
       rotateY: -172,
       skewY: [0, -1.5, 0],
       opacity: 1,
-      transition: { duration: 0.85, ease: physical },
+      transition: { duration: 1.2, ease: physical },
     },
   },
   slide: {

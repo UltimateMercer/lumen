@@ -663,3 +663,17 @@ Não havia outras ocorrências de `any` ou index signatures no arquivo.
 
 ### Validation
 - `tsc --noEmit`: 10 erros preexistentes, zero novos
+
+# Correções pós-integração (stacked navigation)
+**Data:** 02-Jul-2026
+
+### Fixes
+- **Scroll global**: `max-h-[75vh] overflow-y-auto` removido do container da peça ativa; scroll passa a ser exclusivamente o global do navegador
+- **Nav sticky**: barra ANTERIOR/PRÓXIMO/ÍNDICE agora com `sticky top-2 z-10 bg-card/95 backdrop-blur` — mesma linguagem visual do sticky header antigo
+- **Nav largura + info**: barra usa `-mx-6 w-[calc(100%+3rem)]` (breakout do pai) e exibe título do documento (ex: "PEÇA 03/11 · RED SUNS OVERVIEW")
+- **Capa larga**: DossierFolder envolvido em `-mx-6 w-[calc(100%+3rem)] max-w-5xl`; `overflow-hidden` removido da página classified `[slug]/page.tsx` (era o único container que clipava o breakout)
+- **Folhas decorativas visíveis**: posicionamento alterado para `-left-6 -right-6` (mais largas que o conteúdo) + `-top-1` (peeking) + `bg-card/60 shadow` — agora visíveis nas bordas atrás da peça ativa
+- **flip3d mais lento**: open 0.85s → 1.2s, closed 0.5s → 0.7s no `dossier-folder.tsx`
+
+### Validation
+- `tsc --noEmit`: 10 erros preexistentes, zero novos
