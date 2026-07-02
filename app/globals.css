@@ -168,6 +168,26 @@
   --news-rule: oklch(0.2 0.02 50);
   --noise-opacity: 0.06;
   --paper-noise-opacity: 0.1;
+  --dossier-radius: 2px;
+  --paper-edge: color-mix(in oklab, var(--paper-foreground) 45%, transparent);
+  --ink-red: oklch(0.5 0.22 28);
+  --neon-red: oklch(0.62 0.27 25);
+  --neon-amber: oklch(0.78 0.18 70);
+  --neon-cyan: oklch(0.86 0.16 200);
+  --hud-grid: color-mix(in oklab, var(--neon-red) 28%, transparent);
+  --glass-bg: color-mix(in oklab, var(--paper) 28%, transparent);
+  --glass-border: color-mix(in oklab, var(--paper-foreground) 55%, transparent);
+  --glass-blur: 16px;
+  --carbon-bg: oklch(0.18 0.02 250);
+  --carbon-ink: oklch(0.92 0.02 90);
+  --carbon-edge: color-mix(in oklab, var(--neon-red) 55%, transparent);
+  --shadow-folder:
+    0 1px 0 color-mix(in oklab, var(--paper-foreground) 25%, transparent),
+    0 18px 40px -18px color-mix(in oklab, var(--neon-red) 45%, transparent),
+    0 30px 60px -30px rgba(0, 0, 0, 0.75);
+  --shadow-folder-open:
+    0 0 0 2px color-mix(in oklab, var(--neon-red) 35%, transparent),
+    0 30px 80px -20px rgba(0, 0, 0, 0.85);
   --bg-vignette: radial-gradient(
     ellipse at top,
     oklch(0.9 0.03 70 / 0.45) 0%,
@@ -231,6 +251,26 @@
   --news-rule: oklch(0.18 0.02 50);
   --noise-opacity: 0.08;
   --paper-noise-opacity: 0.14;
+  --dossier-radius: 2px;
+  --paper-edge: color-mix(in oklab, var(--paper-foreground) 45%, transparent);
+  --ink-red: oklch(0.55 0.22 28);
+  --neon-red: oklch(0.7 0.27 25);
+  --neon-amber: oklch(0.82 0.18 70);
+  --neon-cyan: oklch(0.88 0.16 200);
+  --hud-grid: color-mix(in oklab, var(--neon-red) 40%, transparent);
+  --glass-bg: color-mix(in oklab, var(--paper) 20%, transparent);
+  --glass-border: color-mix(in oklab, var(--paper-foreground) 50%, transparent);
+  --glass-blur: 16px;
+  --carbon-bg: oklch(0.12 0.02 250);
+  --carbon-ink: oklch(0.95 0.02 90);
+  --carbon-edge: color-mix(in oklab, var(--neon-red) 60%, transparent);
+  --shadow-folder:
+    0 1px 0 color-mix(in oklab, var(--paper-foreground) 20%, transparent),
+    0 18px 40px -18px color-mix(in oklab, var(--neon-red) 50%, transparent),
+    0 30px 60px -30px rgba(0, 0, 0, 0.85);
+  --shadow-folder-open:
+    0 0 0 2px color-mix(in oklab, var(--neon-red) 40%, transparent),
+    0 30px 80px -20px rgba(0, 0, 0, 0.9);
   --bg-vignette: radial-gradient(
     ellipse at top,
     oklch(0.22 0.03 240) 0%,

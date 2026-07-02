@@ -1,3 +1,27 @@
+# DossierFolder integration
+**Data:** 02-Jul-2026
+
+### Phase 1 — Port
+- `components/documents/general-components/ui/dossier-folder.tsx`: criado a partir de `_import/Dossier.standalone.tsx`
+  - Imports corrigidos para `motion/react`
+  - `cn()` substituído pelo `@/lib/utils`
+  - Sub-componentes mantidos: PaperTexture (3 variantes), HudOverlay, Barcode, AgencyCrest, ClassifiedStamp (rect + circle), CaseMetadata, InnerCover, DossierContent, EmptyPayload
+  - 9 presets de animação mantidos (flip3d, slide, glitch, combo, scale-rise, peel, shred, iris, double-cover)
+  - 4 layouts mantidos (default, crest-hero, minimal, field-report)
+  - 3 surfaces mantidos (paper, glass, carbon)
+  - `CLASSIFICATION_STAMP_MAP` adicionado: Lumen PT → Dossier EN
+  - `DossierAspect` type estendido com "16:9" | "4:3"
+- `app/globals.css`: 14 novas CSS vars em `:root` e `.dark` (dossier-radius, paper-edge, ink-red, neon-*, hud-grid, glass-*, carbon-*, shadow-folder*)
+
+### Phase 2 — Landscape aspect ratios
+- `aspectToClass` mapping inclui `aspect-video` para 16:9 e `aspect-[4/3]` para 4:3
+- Layouts responsivos adaptam-se naturalmente via flex + clamp()
+
+### Phase 3 — Batch cover
+- `batch-template.tsx`: `Folder` substituído por `DossierFolder`
+- `AnimatePresence` gerencia entrada/saída da capa e do conteúdo
+- `Folder.tsx` mantido (órfão)
+
 # Cleanup: _investigation and _import naming docs
 **Data:** 02-Jul-2026
 

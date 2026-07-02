@@ -10,6 +10,11 @@ See `ANALYSIS.md` for the full architecture.
 
 <!-- CHANGELOG:START -->
 
+### 02-Jul-2026 — DossierFolder integration
+- `components/documents/general-components/ui/dossier-folder.tsx`: criado a partir de `_import/Dossier.standalone.tsx`
+- Imports corrigidos para `motion/react`
+- `cn()` substituído pelo `@/lib/utils`
+
 ### 02-Jul-2026 — Cleanup: _investigation and _import naming docs
 - `_investigation/`: 9 arquivos .md de investigação (archive-sidebar-interface, classified-investigation, classified-layout-investigation, contrast-and-layout-investigation, contrast-deep-investigation, incidents-investigation, paper-border-investigation, paper-investigation, profiles-migration-plan, cleanup-inventory)
 - `_import/`: 3 arquivos de investigação de naming (NAMING_INVESTIGATION.md, NAMING_INVESTIGATION_SINGLE.md, NAV_INVESTIGATION.md)
@@ -19,11 +24,6 @@ See `ANALYSIS.md` for the full architecture.
 - `ALL_PROFILE_SLUGS` — flatten de todos `mdxSlug` dos `individuals.documents` (9 slugs)
 - `findSiblingSlugs(slug)` — retorna `mdxSlug`s do indivíduo que contém `slug`
 - `getProfileSections()` — monta `SidebarSection[]` para `ArchiveSidebar`, um por indivíduo
-
-### 22-Jun-2026 — Async MDX serialization via API route for entity-resolver
-- POST endpoint que serializa MDX via `next-mdx-remote/serialize`
-- Aceita `{ mdx }` para doc único ou `{ mdx, items: [{ slug, mdx }] }` para batch
-- Retorna `{ mdxSource, itemSources?: Record<string, mdxSource> }`
 
 [Ver histórico completo →](_import/CHANGELOG.md)
 <!-- CHANGELOG:END -->

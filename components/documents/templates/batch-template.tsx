@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import type { ArchiveDocument, DocumentType } from "@/lib/archive/documents";
 import { DOCUMENT_TYPE_LABEL } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
-import { Folder } from "../general-components/ui/folder";
+import { DossierFolder, CLASSIFICATION_STAMP_MAP } from "../general-components/ui/dossier-folder";
 import { TEMPLATES } from "../index";
 import { cn } from "@/lib/utils";
 
@@ -52,25 +53,35 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
 
   return (
     <div className="relative">
-      {!opened && (
-        <Folder
-          caseId={fm.case_id ?? fm.reference}
-          title={fm.title}
-          classification={fm.classification}
-          sealColor={fm.seal_color ?? "red"}
-          storageKey={`batch:${fm.slug}`}
-          onOpened={() => setOpened(true)}
-        />
-      )}
-
-      <div
-        className={cn(
-          "transition-opacity duration-500",
-          opened
-            ? "opacity-100"
-            : "pointer-events-none absolute inset-0 opacity-0",
+      <AnimatePresence>
+        {!opened && (
+          <DossierFolder
+            title={fm.title}
+            caseId={fm.case_id ?? fm.reference}
+            date={fm.date}
+            classification={CLASSIFICATION_STAMP_MAP[fm.classification] ?? "CLASSIFIED"}
+            animation="flip3d"
+            aspect="16:9"
+            surface="paper"
+            layout="default"
+            trigger="click"
+            showBarcode
+            showHud
+            dismissible={false}
+            onOpenChange={(isOpen) => { if (isOpen) setOpened(true); }}
+          />
         )}
-      >
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {opened && (
+          <motion.div
+            key="batch-content"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
         {/* ÍNDICE */}
         <PaperSheet>
           <section id="indice">
@@ -210,7 +221,9 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
             </div>
           );
         })}
-      </div>
+      </motion.div>
+      )}
+    </AnimatePresence>
     </div>
   );
 }
