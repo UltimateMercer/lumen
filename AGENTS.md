@@ -80,6 +80,14 @@
 - Archive routes em `app/archive/`
 - `types/mdx.d.ts` declara `declare module "*.mdx"` para type safety dos imports estáticos
 
+## Changelog sync
+- Rodar `pnpm sync-changelog` como parte do ritual de fim de sessão,
+  junto com `tsc --noEmit`
+- O script lê `_import/CHANGELOG.md`, extrai as 3 entradas mais recentes,
+  e insere no `README.md` entre os marcadores `<!-- CHANGELOG:START -->`
+  e `<!-- CHANGELOG:END -->`
+- Os marcadores são adicionados automaticamente na primeira execução
+
 ## Build
 - `npx tsc --noEmit` para type checking
 - `bun run build` para build completo
