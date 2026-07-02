@@ -635,3 +635,31 @@ Não havia outras ocorrências de `any` ou index signatures no arquivo.
 - **`MentorData` com todos os campos opcionais**: Justificado porque `ultimate.ts` tem `mentor: {}` (objeto vazio) enquanto `diana-watson.ts` tem o objeto preenchido. A união dos dois casos exige que todos os campos sejam opcionais.
 - **`isHighSecurity` como `boolean?` em todos os tipos**: Justificado porque nem todos os personagens têm o campo (ex: Diana Watson profile-id não tem `isHighSecurity`).
 - **Uso de `satisfies` em vez de anotação de tipo na variável**: `satisfies` valida a estrutura sem alargar o tipo inferido, preservando inferência literal para templates que esperam o formato exato.
+
+# Batch stacked navigation
+**Data:** 02-Jul-2026
+
+### Phase 1 — BatchStackViewer
+- `components/documents/templates/batch-stack-viewer.tsx`: novo componente (~120 linhas)
+  - Props: `items`, `activeIndex` (controlled), `onActiveIndexChange`, `children` (índice)
+  - Barra de navegação estilo DocumentNavigator: `↑ ÍNDICE` + "PEÇA XX / YY" + ANTERIOR/PRÓXIMO
+  - `AnimatePresence mode="wait"` com slide direcional (opacity + x ±60 + rotate ±2°, duration 0.25)
+  - `useReducedMotion()` fallback: fade-only sem slide
+  - Folhas decorativas inativas: `position: absolute`, `z-index: -1`, `scale(0.97)`, rotate, `h-72`
+  - Template renderizado em `max-h-[75vh] overflow-y-auto` com scroll interno
+
+### Phase 2 — Integration in batch-template.tsx
+- Estado `activeIndex` elevado para `BatchTemplate` (useState<number | null>)
+- `items.map(...)` substituído por `<BatchStackViewer>`; índice passado como children
+- `<a href="#peca-{slug}">` trocado por `<button onClick={() => setActiveIndex(idx)}>`
+- Classe `.batch-row--link` removida (substituída por `button`)
+- `id="peca-{slug}"`, `scroll-mt-6`, sticky header antigo removidos
+- `paper-stack-bed` não mais referenciado (CSS mantido em globals.css, sem outros consumers)
+
+### Phase 3 — DossierFolder close reinstated
+- `dismissible` revertido de `false` para `true`
+- `onOpenChange` agora fecha (`setOpened(next)`) e reseta `activeIndex` para `null`
+- `[ESC] CLOSE` + tecla Esc funcionam; reabrir sempre mostra o índice
+
+### Validation
+- `tsc --noEmit`: 10 erros preexistentes, zero novos
