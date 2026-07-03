@@ -131,19 +131,6 @@ export function BatchStackViewer({
             </motion.div>
           )}
         </AnimatePresence>
-
-        {showNav && activeIndex! > 0 && (
-          <div
-            className="absolute -left-6 -right-6 -top-1 z-[-1] h-72 scale-[0.97] -rotate-1 overflow-hidden rounded-sm border border-border/60 bg-card/60 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.4)]"
-            aria-hidden
-          />
-        )}
-        {showNav && activeIndex! < items.length - 1 && (
-          <div
-            className="absolute -left-4 -right-8 top-4 z-[-2] h-72 scale-[0.95] rotate-[1.1deg] overflow-hidden rounded-sm border border-border/40 bg-card/40 shadow-[0_8px_20px_-16px_rgba(0,0,0,0.3)]"
-            aria-hidden
-          />
-        )}
       </div>
     </div>
   );

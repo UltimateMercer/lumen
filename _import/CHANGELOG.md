@@ -677,3 +677,13 @@ Não havia outras ocorrências de `any` ou index signatures no arquivo.
 
 ### Validation
 - `tsc --noEmit`: 10 erros preexistentes, zero novos
+
+# Remoção de decoração de folhas empilhadas + DocumentNavigator em batches
+**Data:** 02-Jul-2026
+
+### Changes
+- **batch-stack-viewer.tsx**: divs decorativas de folhas anterior/próxima removidas
+- **classified/[slug]/page.tsx**: barra de navegação de rota (`DOCUMENTO X DE Y` + ANTERIOR/PRÓXIMO) condicionada a `type !== "batch"`
+
+### Validation
+- `tsc --noEmit`: 10 erros preexistentes, zero novos

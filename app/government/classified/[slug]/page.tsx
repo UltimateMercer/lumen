@@ -93,38 +93,40 @@ export default async function ClassifiedDocPage({
           ← VOLTAR
         </Link>
 
-        <div className="flex items-center gap-4">
-          <span className="text-xs font-mono text-muted-foreground">
-            DOCUMENTO {idx + 1} DE {ALL_SLUGS.length}
-          </span>
+        {type !== "batch" && (
+          <div className="flex items-center gap-4">
+            <span className="text-xs font-mono text-muted-foreground">
+              DOCUMENTO {idx + 1} DE {ALL_SLUGS.length}
+            </span>
 
-          <div className="flex gap-2">
-            {idx > 0 ? (
-              <Link
-                href={`/government/classified/${ALL_SLUGS[idx - 1]}`}
-                className="rounded-xs border dark:border-[#eaeaea] border-[#252525] bg-transparent px-3 py-1.5 text-xs font-mono hover:bg-muted transition-colors"
-              >
-                ← ANTERIOR
-              </Link>
-            ) : (
-              <span className="rounded-xs border dark:border-[#eaeaea]/30 border-[#252525]/30 bg-transparent px-3 py-1.5 text-xs font-mono text-muted-foreground opacity-30 cursor-not-allowed">
-                ← ANTERIOR
-              </span>
-            )}
-            {idx < ALL_SLUGS.length - 1 ? (
-              <Link
-                href={`/government/classified/${ALL_SLUGS[idx + 1]}`}
-                className="rounded-xs border dark:border-[#eaeaea] border-[#252525] bg-transparent px-3 py-1.5 text-xs font-mono hover:bg-muted transition-colors"
-              >
-                PRÓXIMO →
-              </Link>
-            ) : (
-              <span className="rounded-xs border dark:border-[#eaeaea]/30 border-[#252525]/30 bg-transparent px-3 py-1.5 text-xs font-mono text-muted-foreground opacity-30 cursor-not-allowed">
-                PRÓXIMO →
-              </span>
-            )}
+            <div className="flex gap-2">
+              {idx > 0 ? (
+                <Link
+                  href={`/government/classified/${ALL_SLUGS[idx - 1]}`}
+                  className="rounded-xs border dark:border-[#eaeaea] border-[#252525] bg-transparent px-3 py-1.5 text-xs font-mono hover:bg-muted transition-colors"
+                >
+                  ← ANTERIOR
+                </Link>
+              ) : (
+                <span className="rounded-xs border dark:border-[#eaeaea]/30 border-[#252525]/30 bg-transparent px-3 py-1.5 text-xs font-mono text-muted-foreground opacity-30 cursor-not-allowed">
+                  ← ANTERIOR
+                </span>
+              )}
+              {idx < ALL_SLUGS.length - 1 ? (
+                <Link
+                  href={`/government/classified/${ALL_SLUGS[idx + 1]}`}
+                  className="rounded-xs border dark:border-[#eaeaea] border-[#252525] bg-transparent px-3 py-1.5 text-xs font-mono hover:bg-muted transition-colors"
+                >
+                  PRÓXIMO →
+                </Link>
+              ) : (
+                <span className="rounded-xs border dark:border-[#eaeaea]/30 border-[#252525]/30 bg-transparent px-3 py-1.5 text-xs font-mono text-muted-foreground opacity-30 cursor-not-allowed">
+                  PRÓXIMO →
+                </span>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="px-6 max-w-3xl mx-auto no-overlay">
