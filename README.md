@@ -10,6 +10,11 @@ See `ANALYSIS.md` for the full architecture.
 
 <!-- CHANGELOG:START -->
 
+### 05-Jul-2026 — Calendar system connected to real content
+- `profile-id.tsx`: `age` removido da interface ProfileIdFrontmatter e do destructure; `NexusFormatDate(birthDate)` → `formatDate(parseLumenDate(birthDate, ...))`; idade estática → `getAge(parseLumenDate(birthDate, ...), CURRENT_DATE)`
+- `permit-card.tsx`: mesmo padrão para `birthDate`, `licenseStartDate`, `age`
+- `personal-info-school-evaluation.tsx`: `age` removido da type local e destructure; `NexusFormatDate(birthDate)` → `formatDate(parseLumenDate(birthDate, ...))`; idade → `getAge(...)`
+
 ### 05-Jul-2026 — Orphan cleanup, visibility schema, anomaly profile migration
 - `components/government/individuals-section.tsx`: deletado (0 referências ativas)
 - `components/documents/general-components/ui/folder.tsx`: deletado (0 referências ativas; substituído por DossierFolder)
@@ -19,11 +24,6 @@ See `ANALYSIS.md` for the full architecture.
 - `lib/in-universe-rules/calendar.ts`: `LumenInstant`, `LumenDate`, `Era`, `Hemisphere`, `Season`, `FormatStyle` types; constants `DAYS_PER_YEAR`, `DAYS_PER_SEASON`, `SEASON_MAP`, `SEASONS_ORDER`, `HEMISPHERE_FULL`
 - `vitest.config.ts`: created with `globals: true`
 - `package.json`: `"test": "vitest run"` script added
-
-### 02-Jul-2026 — DossierFolder integration
-- `components/documents/general-components/ui/dossier-folder.tsx`: criado a partir de `_import/Dossier.standalone.tsx`
-- Imports corrigidos para `motion/react`
-- `cn()` substituído pelo `@/lib/utils`
 
 [Ver histórico completo →](_import/CHANGELOG.md)
 <!-- CHANGELOG:END -->

@@ -177,3 +177,11 @@
 - Registrado em `components/documents/general-components/mdx/mdx-components.tsx`
 - 4/4 codex MDX migrados: anomalia (autonomy, contagion, host_required, containment_status) migrou do frontmatter para `<AnomalyProfile ... />` no body
 - Campos de anomalia mantidos em `DocumentFrontmatter` (para tipagem das props do componente) — não remover sem atualizar o componente
+
+## Calendar system conectado a conteúdo real — executada (05-Jul-2026)
+- 4 templates migrados (profile-id, permit-card, personal-info-school-evaluation, final-evaluation-info): `NexusFormatDate` → `formatDate(parseLumenDate(...))`; `age` estático → `getAge(parseLumenDate(birthDate, ...), CURRENT_DATE)`
+- `age` removido do frontmatter de 9 MDX (agora derivado sempre); Kira's `birthDate` corrigido de `"Vernis-1229-S"` para `"01-Vernis-1229-S"` (formato B → A, parseável)
+- `hemisphere?: "N" | "S"` adicionado a `Entity` em `utils/government-data.ts`; `data/individuals.ts`: `hemisphere: "S"` nos 4 indivíduos
+- `parseLumenDate` usado com `{ fallbackEra: "N.E.C.", fallbackHemisphere: "S" }` — cobre todos os formatos canônicos de personagem
+- `NexusFormatDate` mantido (ainda importado por `digital-signature.tsx`, que ficou fora do escopo); showcases em `/archive` e `/demo` limpos
+- `tsc --noEmit`: 10 erros preexistentes, zero novos

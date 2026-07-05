@@ -1,3 +1,31 @@
+# Calendar system connected to real content
+**Data:** 05-Jul-2026
+
+### Templates migrados para calendar.ts
+- `profile-id.tsx`: `age` removido da interface ProfileIdFrontmatter e do destructure; `NexusFormatDate(birthDate)` → `formatDate(parseLumenDate(birthDate, ...))`; idade estática → `getAge(parseLumenDate(birthDate, ...), CURRENT_DATE)`
+- `permit-card.tsx`: mesmo padrão para `birthDate`, `licenseStartDate`, `age`
+- `personal-info-school-evaluation.tsx`: `age` removido da type local e destructure; `NexusFormatDate(birthDate)` → `formatDate(parseLumenDate(birthDate, ...))`; idade → `getAge(...)`
+- `final-evaluation-info.tsx`: `NexusFormatDate(finalEvaluationData.date)` → `formatDate(parseLumenDate(date, ...))`
+
+### Schema/type changes
+- `utils/government-data.ts`: `hemisphere?: "N" | "S"` adicionado à interface `Entity` (linha 22)
+- `types/character-data.ts`: `age` removido de `PersonalInfoData`
+- `data/individuals.ts`: `hemisphere: "S"` adicionado aos 4 indivíduos
+
+### MDX — age removido do frontmatter
+- 9 MDX tiveram `age` removido (3 profile-id, 2 permit-card, 4 SFE)
+- Kira: `birthDate` corrigido de `"Vernis-1229-S"` para `"01-Vernis-1229-S"` (formato B sem dia → formato A parseável)
+
+### NexusFormatDate
+- Mantido por enquanto: `digital-signature.tsx` ainda importa o componente (fora do escopo de edição)
+- Consumidores migrados: profile-id, permit-card, personal-info-school-evaluation, final-evaluation-info — agora usam `formatDate`/`formatInstant` de calendar.ts
+- `app/archive/page.tsx` e `app/demo/page.tsx`: showcase removido
+
+### Notas
+- `parseLumenDate` com `{ fallbackEra: "N.E.C.", fallbackHemisphere: "S" }` cobre todos os formatos canônicos de data de personagem
+- `age` não está mais no frontmatter — é sempre derivado de `birthDate` + `CURRENT_DATE`
+- `tsc --noEmit`: 10 erros preexistentes, zero novos
+
 # Orphan cleanup, visibility schema, anomaly profile migration
 **Data:** 05-Jul-2026
 
