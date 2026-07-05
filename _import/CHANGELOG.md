@@ -1,3 +1,46 @@
+# Calendar system — lib/in-universe-rules/calendar.ts
+**Data:** 04-Jul-2026
+
+### Fase 1 — Types and constants
+- `lib/in-universe-rules/calendar.ts`: `LumenInstant`, `LumenDate`, `Era`, `Hemisphere`, `Season`, `FormatStyle` types; constants `DAYS_PER_YEAR`, `DAYS_PER_SEASON`, `SEASON_MAP`, `SEASONS_ORDER`, `HEMISPHERE_FULL`
+- `vitest.config.ts`: created with `globals: true`
+- `package.json`: `"test": "vitest run"` script added
+- `vitest@4.1.9` added as devDependency
+
+### Fase 2 — Validation
+- `assertValid()`: validates `dayOfYear` (1-360, integer), `year` (≥1, integer), `era` (A.E.C./N.E.C.)
+- `isValidLumenInstant()`: safe wrapper returning boolean
+- `isValidLumenDate()`: validates hemisphere too
+
+### Fase 3 — Season derivation
+- `getSeason(date)`: derives season from dayOfYear + hemisphere via `SEASON_MAP`
+- `getDayInSeason(date)`: local day within current season (1-90)
+
+### Fase 4 — Formatting
+- `formatDate(date, style)`: 3 styles (casual, official-abbr, official-full), hemisphere suffix
+- `formatInstant(instant, style)`: same 3 styles for raw instants
+
+### Fase 5 — Parser
+- `parseLumenDate(input, options)`: canonical (`·` interpunct, era) and legacy (`-` hyphen, no era) formats
+- `ParseOptions`: `fallbackEra`, `fallbackHemisphere`
+- Regex-based matching for both formats
+
+### Fase 6 — Chronology
+- `toTimelineValue(instant)`: contiguous integer TV (A.E.C. ≤ 0, N.E.C. ≥ 1); no year 0 gap
+- `compareInstants(a, b)`: TV-based comparison
+- `sortInstants(list)`: non-mutating chronological sort
+- `diffDays(a, b)`: absolute day distance
+- `addDays(instant, n)`: TV-arithmetic with era transition (360/1/AEC → 1/1/NEC)
+- `getAge(birth, at)`: full years elapsed, throws if at < birth
+
+### Fase 7 — World config
+- `lib/in-universe-rules/world-config.ts`: `CURRENT_DATE` constant (day 1, year 1228, N.E.C., hemisphere S)
+- `attachHemisphere(instant, hemisphere)`: LumenInstant → LumenDate
+
+### Fase 8 — Tests
+- `lib/in-universe-rules/calendar.test.ts`: 65 tests covering validation, derivation, formatting, parsing, chronology edge cases (era crossing, year boundaries, boundary-day season checks)
+- All 65 tests passing; `tsc --noEmit` clean (10 pre-existing errors)
+
 # DossierFolder integration
 **Data:** 02-Jul-2026
 

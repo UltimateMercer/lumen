@@ -10,6 +10,11 @@ See `ANALYSIS.md` for the full architecture.
 
 <!-- CHANGELOG:START -->
 
+### 04-Jul-2026 — Calendar system — lib/in-universe-rules/calendar.ts
+- `lib/in-universe-rules/calendar.ts`: `LumenInstant`, `LumenDate`, `Era`, `Hemisphere`, `Season`, `FormatStyle` types; constants `DAYS_PER_YEAR`, `DAYS_PER_SEASON`, `SEASON_MAP`, `SEASONS_ORDER`, `HEMISPHERE_FULL`
+- `vitest.config.ts`: created with `globals: true`
+- `package.json`: `"test": "vitest run"` script added
+
 ### 02-Jul-2026 — DossierFolder integration
 - `components/documents/general-components/ui/dossier-folder.tsx`: criado a partir de `_import/Dossier.standalone.tsx`
 - Imports corrigidos para `motion/react`
@@ -19,11 +24,6 @@ See `ANALYSIS.md` for the full architecture.
 - `_investigation/`: 9 arquivos .md de investigação (archive-sidebar-interface, classified-investigation, classified-layout-investigation, contrast-and-layout-investigation, contrast-deep-investigation, incidents-investigation, paper-border-investigation, paper-investigation, profiles-migration-plan, cleanup-inventory)
 - `_import/`: 3 arquivos de investigação de naming (NAMING_INVESTIGATION.md, NAMING_INVESTIGATION_SINGLE.md, NAV_INVESTIGATION.md)
 - Mantido: `_import/CHANGELOG.md`
-
-### 01-Jul-2026 — Profiles migration to dedicated route
-- `ALL_PROFILE_SLUGS` — flatten de todos `mdxSlug` dos `individuals.documents` (9 slugs)
-- `findSiblingSlugs(slug)` — retorna `mdxSlug`s do indivíduo que contém `slug`
-- `getProfileSections()` — monta `SidebarSection[]` para `ArchiveSidebar`, um por indivíduo
 
 [Ver histórico completo →](_import/CHANGELOG.md)
 <!-- CHANGELOG:END -->
