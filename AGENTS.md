@@ -145,6 +145,15 @@
 - 9 arquivos de dados anotados com `satisfies <Tipo>` (3 profile-id, 2 permissions, 4 school-final-evaluations)
 - Index signature `[key: string]: any` removida de `utils/government-data.ts`
 
+## Calendar system — executada
+- `lib/in-universe-rules/calendar.ts`: sistema completo — `LumenInstant`/`LumenDate`, validação, estações por hemisfério, formatação (3 estilos), parser tolerante (canônico `·` + legado `-`), cronologia via `toTimelineValue` (TV), `addDays`, `getAge`
+- `lib/in-universe-rules/world-config.ts`: `CURRENT_DATE` (day 1, year 1228, N.E.C., S)
+- `vitest.config.ts` criado; `vitest@4.1.9` adicionado como devDependency
+- 65 testes unitários em `calendar.test.ts` — todos passando
+- `tvToInstant` usa `Math.ceil((1 - tv) / 360)` para A.E.C. (corrige zero-day e boundary bugs de `Math.floor`)
+- `addDays` cruza era boundary (360/1/AEC → 1/1/NEC) sem gap
+- `tsc --noEmit`: 10 erros (todos pre-existentes), zero novos
+
 ## Fase 1 — executada
 - Import fantasma removido de `diana-watson-archive.tsx`
 - Kira registrada em `data/individuals.ts` com NRC `??-1229-90814563`
