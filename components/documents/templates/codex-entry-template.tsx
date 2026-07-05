@@ -150,19 +150,6 @@ export function CodexEntryTemplate({ doc }: { doc: ArchiveDocument }) {
       </header>
 
       <section className="mt-5 grid gap-2 md:grid-cols-3">
-        <StatChip label="autonomia" value={fm.autonomy} />
-        <StatChip label="contagiosidade" value={fm.contagion} />
-        <StatChip
-          label="hospedeiro"
-          value={
-            fm.host_required === false
-              ? "dispensável"
-              : fm.host_required
-                ? "obrigatório"
-                : "—"
-          }
-        />
-        <StatChip label="contenção" value={fm.containment_status} />
         <StatChip label="registrado em" value={fm.first_recorded ?? fm.date} />
         <div className="border border-paper-foreground/30 px-3 py-2">
           <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-paper-muted">

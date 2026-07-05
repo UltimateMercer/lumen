@@ -18,6 +18,7 @@ import { Note } from "./interrogation/note";
 import { ForeignBody } from "./foreign-body";
 import { Translation } from "./translation";
 import { Msg, FlagPhrase, Gap, Attachment } from "./comms/msg";
+import { AnomalyProfile } from "./codex/anomaly-profile";
 import { Trait } from "./codex/trait";
 import { Warning } from "./codex/warning";
 import { RequirementList } from "./codex/requirement-list";
@@ -31,6 +32,7 @@ import { ProjectTOC } from "./project-toc";
 import { DigitalSignature } from "../signatures/digital-signature";
 
 export const mdxComponents = {
+  AnomalyProfile,
   Redacted,
   Stamp,
   ApprovedStamp,
