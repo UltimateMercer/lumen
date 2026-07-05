@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { NexusFormatDate } from "../ui/nexus-format-date";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function DigitalSignature({
   name,
@@ -100,7 +100,7 @@ export function DigitalSignature({
             className="text-xs uppercase"
             style={hasTheme ? { color } : undefined}
           >
-            {NexusFormatDate(String(timestamp))}
+            {formatDate(parseLumenDate(String(timestamp), { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
           </p>
           <p
             className="text-[9px] uppercase text-center mt-1"
