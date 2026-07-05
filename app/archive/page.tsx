@@ -22,7 +22,6 @@ import { DigitalSignature } from "@/components/documents/general-components/sign
 import { ResponsibleSignatures } from "@/components/documents/general-components/signatures/responsible-signatures";
 import { ItemValue } from "@/components/documents/general-components/ui/item-value";
 import { ProfileName } from "@/components/documents/general-components/ui/profile-name";
-import { NexusFormatDate } from "@/components/documents/general-components/ui/nexus-format-date";
 import { ProtectDoc } from "@/components/documents/general-components/ui/protect-doc-text";
 
 /* material novo (Etapa 4) */
@@ -242,9 +241,6 @@ export default function ArchivePage() {
               </Item>
               <Item name="ProfileName" props="name · knownAs · isHighSecurity?">
                 <ProfileName name="Agente Desconhecido" knownAs="ALVO-7" />
-              </Item>
-              <Item name="NexusFormatDate" props="date: string">
-                <span className="text-sm">{NexusFormatDate("2187-04-30")}</span>
               </Item>
               <Item name="ProtectDocText">
                 <ProtectDoc />

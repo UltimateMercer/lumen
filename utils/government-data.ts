@@ -19,6 +19,7 @@ export interface Entity {
   name: string;
   status: string;
   id: string;
+  hemisphere?: "N" | "S";
   documents: Document[];
   documentGroups?: DocumentGroup[];
   department?: string;

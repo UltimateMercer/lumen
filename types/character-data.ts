@@ -79,7 +79,6 @@ export interface PersonalInfoData {
   registryName: string;
   realName: string;
   redactRealName: boolean;
-  age: string;
   birthDate: string;
   redactBirthDate: boolean;
   residence: string;

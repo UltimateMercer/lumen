@@ -6,7 +6,8 @@ import { PaperHeader } from "../general-components/paper/paper-header";
 import { PaperSubject } from "../general-components/paper/paper-subject";
 import { ProfileName } from "../general-components/ui/profile-name";
 import { ItemValue } from "../general-components/ui/item-value";
-import { NexusFormatDate } from "../general-components/ui/nexus-format-date";
+import { parseLumenDate, formatDate, getAge } from "@/lib/in-universe-rules/calendar";
+import { CURRENT_DATE } from "@/lib/in-universe-rules/world-config";
 import { SectionPaper } from "../general-components/paper/section-paper";
 import { ResponsibleSignatures } from "../general-components/signatures/responsible-signatures";
 import { StampRepAurora } from "../general-components/stamps/stamp-rep-aurora";
@@ -17,7 +18,6 @@ interface ProfileIdFrontmatter extends DocumentFrontmatter {
   nrc: string;
   name: string;
   knownAs: string;
-  age: number;
   birthDate: string;
   birthPlace: string;
   occupation: string;
@@ -38,7 +38,6 @@ export function ProfileId({ doc }: { doc: ArchiveDocument }) {
     nrc,
     name,
     knownAs,
-    age,
     birthDate,
     birthPlace,
     occupation,
@@ -79,10 +78,10 @@ export function ProfileId({ doc }: { doc: ArchiveDocument }) {
           <ItemValue
             className="text-sm"
             item="data de nascimento"
-            value={NexusFormatDate(birthDate)}
+            value={formatDate(parseLumenDate(birthDate, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
             redacted={isHighSecurity}
           />
-          <ItemValue className="text-sm" item="idade" value={`${age} anos`} />
+          <ItemValue className="text-sm" item="idade" value={`${getAge(parseLumenDate(birthDate, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), CURRENT_DATE)} anos`} />
           <ItemValue
             className="text-sm"
             item="Local de nascimento"

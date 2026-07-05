@@ -1,12 +1,12 @@
+import { parseLumenDate, formatDate, getAge } from "@/lib/in-universe-rules/calendar";
+import { CURRENT_DATE } from "@/lib/in-universe-rules/world-config";
 import { ItemValue } from "../ui/item-value";
-import { NexusFormatDate } from "../ui/nexus-format-date";
 import { SectionPaper } from "../paper/section-paper";
 
 type PersonalInfoSchoolEvaluationType = {
   registryName: string;
   realName: string;
   redactRealName?: boolean;
-  age: string;
   birthDate: string;
   redactBirthDate?: boolean;
   residence: string;
@@ -22,7 +22,6 @@ export const PersonalInfoSchoolEvaluation = ({
     registryName,
     realName,
     redactRealName,
-    age,
     birthDate,
     redactBirthDate,
     residence,
@@ -39,10 +38,10 @@ export const PersonalInfoSchoolEvaluation = ({
           value={realName}
           redacted={redactRealName}
         />
-        <ItemValue item="Idade atual" value={`${age} anos`} />
+        <ItemValue item="Idade atual" value={`${getAge(parseLumenDate(birthDate, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), CURRENT_DATE)} anos`} />
         <ItemValue
           item="Data de nascimento"
-          value={NexusFormatDate(birthDate)}
+          value={formatDate(parseLumenDate(birthDate, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
           redacted={redactBirthDate}
         />
         <ItemValue

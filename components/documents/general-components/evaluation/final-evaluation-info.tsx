@@ -1,5 +1,5 @@
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 import { ItemValue } from "../ui/item-value";
-import { NexusFormatDate } from "../ui/nexus-format-date";
 import { SectionPaper } from "../paper/section-paper";
 import { SectionTitle } from "../paper/section-title";
 
@@ -25,7 +25,7 @@ export const FinalEvaluationInfo = ({
         <ItemValue
           className="text-sm"
           item="Data de avaliação"
-          value={NexusFormatDate(finalEvaluationData.date)}
+          value={formatDate(parseLumenDate(finalEvaluationData.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
         />
         <ItemValue
           className="text-sm"

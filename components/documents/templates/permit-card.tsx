@@ -3,7 +3,8 @@ import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documen
 import type { MentorData, ResponsibleSignature } from "@/types/character-data";
 import { cn } from "@/lib/utils";
 import { ItemValue } from "../general-components/ui/item-value";
-import { NexusFormatDate } from "../general-components/ui/nexus-format-date";
+import { parseLumenDate, formatDate, getAge } from "@/lib/in-universe-rules/calendar";
+import { CURRENT_DATE } from "@/lib/in-universe-rules/world-config";
 import { Paper } from "../general-components/paper/paper";
 import { PaperHeader } from "../general-components/paper/paper-header";
 import { SectionPaper } from "../general-components/paper/section-paper";
@@ -23,7 +24,6 @@ import {
 interface PermitCardFrontmatter extends DocumentFrontmatter {
   id: string;
   registryName: string;
-  age: number;
   birthDate: string;
   licenseStartDate: string;
   tier: string;
@@ -37,7 +37,6 @@ export function PermitCard({ doc }: { doc: ArchiveDocument }) {
   const {
     id,
     registryName,
-    age,
     birthDate,
     licenseStartDate,
     tier,
@@ -67,13 +66,13 @@ export function PermitCard({ doc }: { doc: ArchiveDocument }) {
             <ItemValue
               className="text-sm"
               item="data de nascimento"
-              value={NexusFormatDate(birthDate)}
+              value={formatDate(parseLumenDate(birthDate, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
             />
-            <ItemValue className="text-sm" item="idade" value={`${age}`} />
+            <ItemValue className="text-sm" item="idade" value={`${getAge(parseLumenDate(birthDate, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), CURRENT_DATE)}`} />
             <ItemValue
               className="text-sm"
               item="data de emissão"
-              value={NexusFormatDate(licenseStartDate)}
+              value={formatDate(parseLumenDate(licenseStartDate, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
             />
             <ItemValue className="text-sm" item="id" value={id} />
           </div>

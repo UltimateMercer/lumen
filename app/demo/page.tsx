@@ -1,5 +1,3 @@
-import { NexusFormatDate } from "@/components/documents/general-components/ui/nexus-format-date";
-
 export default function DemoPage() {
   return (
     <div className="w-full bg-[#eaeaea] dark:bg-[#252525] no-overlay p-5">
@@ -60,7 +58,7 @@ export default function DemoPage() {
       <div className="max-w-5xl mx-auto p-8 mb-4 background-foreground border border-foreground background-texture shadow-2xl">
         <div className="flex items-center justify-between">
           <div className="font-serif font-semibold text-lg tracking-wide uppercase">
-            Segunda-feira, {NexusFormatDate("18-Solaris-1245")}
+            Segunda-feira, 18·Solaris·1245·S
           </div>
           <div className="font-serif font-semibold text-lg tracking-wide uppercase">
             Edição Nº 1223
