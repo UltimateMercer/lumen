@@ -160,3 +160,20 @@
 - `ID-2846` substituído por NRCs únicos em todos os 4 personagens
 - `lib/in-universe-rules/` criada com `nrc.ts` + `README.md`
 - `components/government-dashboard copy.tsx` deletado (sem referências no projeto)
+
+## Orphan cleanup — executada (05-Jul-2026)
+- `components/government/individuals-section.tsx` deletado (0 refs)
+- `components/documents/general-components/ui/folder.tsx` deletado (substituído por DossierFolder)
+- `data/document-generators.tsx`: dead `documentGenerators` fallback + 3 phantom imports removidos
+- `generateEntityDocuments` e `document-navigator.tsx` (legado): mantidos (ainda têm consumidores ativos)
+
+## `visibility` no schema — schema-only (05-Jul-2026)
+- `visibility?: "public" | "classified" | "both"` adicionado a `DocumentFrontmatter` em `lib/archive/documents.ts`
+- **Nenhum consumo/gating implementado ainda** — campo não é lido por template, AuthGuard, grid, ou qualquer outra lógica
+- Quando for implementar, decidir explicitamente onde o fallback `?? "classified"` entra (AuthGuard? layout? grid?)
+
+## `<AnomalyProfile>` no body do MDX — executada (05-Jul-2026)
+- `components/documents/general-components/mdx/codex/anomaly-profile.tsx`: componente criado (4 StatChips, props tipadas via indexed access types)
+- Registrado em `components/documents/general-components/mdx/mdx-components.tsx`
+- 4/4 codex MDX migrados: anomalia (autonomy, contagion, host_required, containment_status) migrou do frontmatter para `<AnomalyProfile ... />` no body
+- Campos de anomalia mantidos em `DocumentFrontmatter` (para tipagem das props do componente) — não remover sem atualizar o componente

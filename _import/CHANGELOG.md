@@ -1,3 +1,26 @@
+# Orphan cleanup, visibility schema, anomaly profile migration
+**Data:** 05-Jul-2026
+
+### fix(cleanup): remoção de órfãos da migração de profiles
+- `components/government/individuals-section.tsx`: deletado (0 referências ativas)
+- `components/documents/general-components/ui/folder.tsx`: deletado (0 referências ativas; substituído por DossierFolder)
+- `data/document-generators.tsx`: dead `documentGenerators` fallback (408 linhas) + 3 phantom imports (`DocumentLink`, `DocumentPreview`, `RedactedText`) removidos — `layoutComponent` é o único caminho de código alcançável
+- Mantidos (ainda têm consumidores): `generateEntityDocuments` (3 seções ativas), `components/document-navigator.tsx` legado (3 seções ativas)
+
+### feat(schema): campo `visibility` adicionado ao DocumentFrontmatter
+- `lib/archive/documents.ts`: `visibility?: "public" | "classified" | "both"` adicionado à interface `DocumentFrontmatter` (linha 22)
+- Apenas schema — sem lógica de consumo/gating/AuthGuard implementada
+- Ausência do campo = `"classified"` por default comportamental (nenhum código de fallback explícito existe)
+
+### feat(codex): migração dos campos de anomalia do frontmatter para `<AnomalyProfile>` no body do MDX
+- `components/documents/general-components/mdx/codex/anomaly-profile.tsx`: novo componente (44 linhas) — renderiza 4 StatChips (autonomia, contagiosidade, hospedeiro, contenção) com markup byte-a-byte idêntico ao StatChip removido do template
+- `components/documents/general-components/mdx/mdx-components.tsx`: `AnomalyProfile` registrado
+- `components/documents/templates/codex-entry-template.tsx`: 4 StatChips de anomalia removidos do grid (mantidos `first_recorded` e `threat_tier`)
+- 4/4 MDX codex migrados: `autonomy`, `contagion`, `host_required`, `containment_status` removidos do frontmatter; `<AnomalyProfile ... />` inserido como primeiro elemento do body
+- Campos mantidos em `DocumentFrontmatter` (`lib/archive/documents.ts:108-111`) para tipagem via indexed access types (`DocumentFrontmatter["autonomy"]`)
+- Nenhum resíduo de frontmatter antigo em `content/archive/codex/` ou qualquer outro MDX
+- `tsc --noEmit`: 10 erros preexistentes, zero novos
+
 # Calendar system — lib/in-universe-rules/calendar.ts
 **Data:** 04-Jul-2026
 

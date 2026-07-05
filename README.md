@@ -10,6 +10,11 @@ See `ANALYSIS.md` for the full architecture.
 
 <!-- CHANGELOG:START -->
 
+### 05-Jul-2026 — Orphan cleanup, visibility schema, anomaly profile migration
+- `components/government/individuals-section.tsx`: deletado (0 referências ativas)
+- `components/documents/general-components/ui/folder.tsx`: deletado (0 referências ativas; substituído por DossierFolder)
+- `data/document-generators.tsx`: dead `documentGenerators` fallback (408 linhas) + 3 phantom imports (`DocumentLink`, `DocumentPreview`, `RedactedText`) removidos — `layoutComponent` é o único caminho de código alcançável
+
 ### 04-Jul-2026 — Calendar system — lib/in-universe-rules/calendar.ts
 - `lib/in-universe-rules/calendar.ts`: `LumenInstant`, `LumenDate`, `Era`, `Hemisphere`, `Season`, `FormatStyle` types; constants `DAYS_PER_YEAR`, `DAYS_PER_SEASON`, `SEASON_MAP`, `SEASONS_ORDER`, `HEMISPHERE_FULL`
 - `vitest.config.ts`: created with `globals: true`
@@ -19,11 +24,6 @@ See `ANALYSIS.md` for the full architecture.
 - `components/documents/general-components/ui/dossier-folder.tsx`: criado a partir de `_import/Dossier.standalone.tsx`
 - Imports corrigidos para `motion/react`
 - `cn()` substituído pelo `@/lib/utils`
-
-### 02-Jul-2026 — Cleanup: _investigation and _import naming docs
-- `_investigation/`: 9 arquivos .md de investigação (archive-sidebar-interface, classified-investigation, classified-layout-investigation, contrast-and-layout-investigation, contrast-deep-investigation, incidents-investigation, paper-border-investigation, paper-investigation, profiles-migration-plan, cleanup-inventory)
-- `_import/`: 3 arquivos de investigação de naming (NAMING_INVESTIGATION.md, NAMING_INVESTIGATION_SINGLE.md, NAV_INVESTIGATION.md)
-- Mantido: `_import/CHANGELOG.md`
 
 [Ver histórico completo →](_import/CHANGELOG.md)
 <!-- CHANGELOG:END -->
