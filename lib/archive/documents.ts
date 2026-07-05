@@ -19,6 +19,7 @@ export interface DocumentFrontmatter {
   slug: string;
   title: string;
   classification: Classification;
+  visibility?: "public" | "classified" | "both";
   date: string;
   issued_by: string;
   reference?: string;
