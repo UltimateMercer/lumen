@@ -185,3 +185,8 @@
 - `parseLumenDate` usado com `{ fallbackEra: "N.E.C.", fallbackHemisphere: "S" }` — cobre todos os formatos canônicos de personagem
 - `NexusFormatDate` mantido (ainda importado por `digital-signature.tsx`, que ficou fora do escopo); showcases em `/archive` e `/demo` limpos
 - `tsc --noEmit`: 10 erros preexistentes, zero novos
+
+## Datas "A.R." — decisão fechada (não converter)
+- 33 MDX em `content/archive/{codex,classified-project,examples}/` usam formato `"A.R. YYYY.MM.DD"` — resíduo de scaffolding do Lovable (prompt original cyberpunk genérico, sem relação com a lore Lumen)
+- Decisão consciente: **NÃO converter** para A.E.C./N.E.C. Esses arquivos são não-canônicos — conteúdo de prototipagem que nunca deveria ter virado conteúdo real. Dar peso de lore a eles (convertendo as datas) seria pior do que mantê-los como estão
+- Mantidos como estão por enquanto. Sem conversão, sem deleção, sem flag especial nesta fase
