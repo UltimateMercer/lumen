@@ -5,8 +5,8 @@ import type { LumenDate, Era } from "./calendar";
  * Used as default reference for age calculations and document dating.
  */
 export const CURRENT_DATE: LumenDate = {
-  dayOfYear: 1,
-  year: 1228,
+  dayOfYear: 11,
+  year: 1245,
   era: "N.E.C." as Era,
   hemisphere: "S",
 };
