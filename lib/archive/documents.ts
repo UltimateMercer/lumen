@@ -20,6 +20,7 @@ export interface DocumentFrontmatter {
   title: string;
   classification: Classification;
   visibility?: "public" | "classified" | "both";
+  section?: "library" | "history" | "news";
   date: string;
   issued_by: string;
   reference?: string;
@@ -70,7 +71,7 @@ export interface DocumentFrontmatter {
   room?: string;
   outlet?: string;
   edition?: string;
-  section?: string;
+  newsSection?: string;
   byline?: string;
   dateline?: string;
   approved_by?: string;

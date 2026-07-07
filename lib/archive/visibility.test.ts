@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { canViewDocument, filterVisibleDocuments } from "./visibility";
+import { canViewDocument, filterVisibleDocuments, getDocumentsBySection } from "./visibility";
 
 function fm(visibility?: "public" | "classified" | "both") {
   return { visibility };
@@ -80,5 +80,66 @@ describe("filterVisibleDocuments", () => {
 
   it("returns empty array when given empty array", () => {
     expect(filterVisibleDocuments([], govUser)).toEqual([]);
+  });
+});
+
+describe("getDocumentsBySection", () => {
+  function doc(
+    section: string | undefined,
+    visibility: "public" | "classified" | "both" | undefined,
+    date: string,
+  ) {
+    return { frontmatter: { section, visibility, date } };
+  }
+
+  it("returns docs matching the given section", () => {
+    const docs = [
+      doc("library", "public", "1245-01-01"),
+      doc("history", "public", "1244-01-01"),
+    ];
+    const result = getDocumentsBySection(docs, "library", null);
+    expect(result).toHaveLength(1);
+    expect(result[0].frontmatter.section).toBe("library");
+  });
+
+  it("excludes classified docs for null user", () => {
+    const docs = [
+      doc("library", "classified", "1245-01-01"),
+      doc("library", "public", "1244-01-01"),
+    ];
+    const result = getDocumentsBySection(docs, "library", null);
+    expect(result).toHaveLength(1);
+    expect(result[0].frontmatter.visibility).toBe("public");
+  });
+
+  it("includes classified docs for gov user", () => {
+    const docs = [
+      doc("library", "classified", "1245-01-01"),
+    ];
+    const result = getDocumentsBySection(docs, "library", govUser);
+    expect(result).toHaveLength(1);
+  });
+
+  it("section mismatch returns empty", () => {
+    const docs = [doc("library", "public", "1245-01-01")];
+    expect(getDocumentsBySection(docs, "history", null)).toEqual([]);
+  });
+
+  it("returns empty array when given empty array", () => {
+    expect(getDocumentsBySection([], "library", null)).toEqual([]);
+  });
+
+  it("sorts by date descending (newest first)", () => {
+    const docs = [
+      doc("library", "public", "1243-01-01"),
+      doc("library", "public", "1245-01-01"),
+      doc("library", "public", "1244-01-01"),
+    ];
+    const result = getDocumentsBySection(docs, "library", null);
+    expect(result.map((d) => d.frontmatter.date)).toEqual([
+      "1245-01-01",
+      "1244-01-01",
+      "1243-01-01",
+    ]);
   });
 });

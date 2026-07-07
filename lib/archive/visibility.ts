@@ -18,3 +18,14 @@ export function filterVisibleDocuments<T extends { frontmatter: { visibility?: "
 ): T[] {
   return docs.filter((d) => canViewDocument(d.frontmatter, user));
 }
+
+export function getDocumentsBySection<T extends { frontmatter: { section?: string; visibility?: "public" | "classified" | "both"; date: string } }>(
+  docs: T[],
+  section: string,
+  user: Viewer | null,
+): T[] {
+  return docs
+    .filter((d) => d.frontmatter.section === section)
+    .filter((d) => canViewDocument(d.frontmatter, user))
+    .sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));
+}

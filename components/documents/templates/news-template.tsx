@@ -26,7 +26,7 @@ export function NewsTemplate({ doc }: { doc: ArchiveDocument }) {
 
       {/* Section bar */}
       <div className="mt-3 flex items-center justify-between border-y border-paper-foreground/60 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-paper-foreground">
-        <span>seç. {fm.section ?? "geral"}</span>
+        <span>seç. {fm.newsSection ?? "geral"}</span>
         <span className="text-paper-muted">{fm.issued_by}</span>
         <span>{fm.reference ?? "—"}</span>
       </div>
