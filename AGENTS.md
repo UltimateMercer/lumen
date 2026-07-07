@@ -190,3 +190,8 @@
 - 33 MDX em `content/archive/{codex,classified-project,examples}/` usam formato `"A.R. YYYY.MM.DD"` — resíduo de scaffolding do Lovable (prompt original cyberpunk genérico, sem relação com a lore Lumen)
 - Decisão consciente: **NÃO converter** para A.E.C./N.E.C. Esses arquivos são não-canônicos — conteúdo de prototipagem que nunca deveria ter virado conteúdo real. Dar peso de lore a eles (convertendo as datas) seria pior do que mantê-los como estão
 - Mantidos como estão por enquanto. Sem conversão, sem deleção, sem flag especial nesta fase
+
+## Rotas de conteúdo público — mapeamento de propósito
+- **`/archive/*`**: ferramenta de desenvolvimento para visualizar templates de documentos. NÃO é a interface pública real. Intencionalmente SEM gating de visibility — não é destinado a usuário final, é referência visual interna.
+- **`/public/[section]`**: interface pública REAL, destinada a cidadãos logados (AuthGuard `requireAuth` já bloqueia acesso anônimo — não existe "visitante anônimo", todo acesso exige login). Hoje ainda renderiza conteúdo fake/hardcoded via `PublicDashboard` — rebuild pendente para puxar MDX real filtrado por `visibility`.
+- `app/public-dashboard/` deletado (06-Jul-2026): diretório vazio, dead code, zero referências.
