@@ -19,15 +19,17 @@ export default async function HeroisPage() {
   );
 
   return (
-    <main className="p-6 max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">Registro Público de Heróis</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Heróis registrados oficialmente perante a República de Arcanum
-        </p>
-      </div>
+    <main className="bg-[#eaeaea] dark:bg-[#252525]">
+      <div className="p-6 max-w-6xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold">Registro Público de Heróis</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Heróis registrados oficialmente perante a República de Arcanum
+          </p>
+        </div>
 
-      <HeroList heroes={heroesWithSource} popularityOrder={popularityOrder} />
+        <HeroList heroes={heroesWithSource} popularityOrder={popularityOrder} />
+      </div>
     </main>
   );
 }

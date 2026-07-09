@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getSortedHeroes } from "@/lib/archive/hero-sort";
+import { HeroCard } from "@/components/public/hero-card";
 import type { ArchiveDocument } from "@/lib/archive/documents";
 
 interface HeroListProps {
@@ -15,6 +15,7 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
   const [sortBy, setSortBy] = useState<"tier" | "popularity">("tier");
 
   const sorted = getSortedHeroes(heroes, null, sortBy, popularityOrder);
+  const displayed = sortBy === "popularity" ? sorted.slice(0, 20) : sorted;
 
   return (
     <>
@@ -30,33 +31,46 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
         </Tabs>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        {sorted.map((doc) => {
-          const fm = doc.frontmatter as unknown as Record<string, unknown>;
-          const tier = fm.tier as string;
-
-          return (
-            <Link
-              key={doc.frontmatter.slug}
-              href={`/public/heroes/${doc.frontmatter.slug}`}
-              className="border-2 border-border rounded-xs p-4 hover:bg-muted transition-colors flex items-center gap-4"
-            >
-              <div className="w-20 h-20 bg-[#252525] dark:bg-[#eaeaea] flex-shrink-0" />
-              <div>
-                <div className="text-lg font-bold">
-                  {fm.registryName as string}
-                </div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  {fm.id as string}
-                </div>
-                <div className="text-xs font-bold mt-2 uppercase tracking-wider">
-                  Nível {tier}
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      {displayed.length === 0 ? (
+        <div className="border-2 border-dashed border-muted-foreground/30 rounded-xs p-12 text-center">
+          <p className="text-muted-foreground/50 text-sm">
+            Nenhum herói registrado.
+          </p>
+        </div>
+      ) : sortBy === "popularity" ? (
+        <div className="space-y-3">
+          {displayed.map((doc, i) => {
+            const fm = doc.frontmatter as unknown as Record<string, unknown>;
+            return (
+              <HeroCard
+                key={doc.frontmatter.slug}
+                variant="rank"
+                rank={i + 1}
+                name={fm.registryName as string}
+                id={fm.id as string}
+                tier={fm.tier as string}
+                slug={doc.frontmatter.slug}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {displayed.map((doc) => {
+            const fm = doc.frontmatter as unknown as Record<string, unknown>;
+            return (
+              <HeroCard
+                key={doc.frontmatter.slug}
+                variant="tier"
+                name={fm.registryName as string}
+                id={fm.id as string}
+                tier={fm.tier as string}
+                slug={doc.frontmatter.slug}
+              />
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }
