@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getSortedHeroes } from "@/lib/archive/hero-sort";
+import type { PopularityEntry } from "@/lib/archive/hero-sort";
 import { HeroCard } from "@/components/public/hero-card";
 import type { ArchiveDocument } from "@/lib/archive/documents";
 
+const TIER_ORDER = ["S", "A", "B", "C", "D", "E", "F"] as const;
+
 interface HeroListProps {
   heroes: ArchiveDocument[];
-  popularityOrder: string[];
+  popularityOrder: PopularityEntry[];
 }
 
 export function HeroList({ heroes, popularityOrder }: HeroListProps) {
@@ -41,6 +44,9 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
         <div className="space-y-3">
           {displayed.map((doc, i) => {
             const fm = doc.frontmatter as unknown as Record<string, unknown>;
+            const entry = popularityOrder.find(
+              (e) => e.slug === doc.frontmatter.slug,
+            );
             return (
               <HeroCard
                 key={doc.frontmatter.slug}
@@ -50,26 +56,46 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
                 id={fm.id as string}
                 tier={fm.tier as string}
                 slug={doc.frontmatter.slug}
+                votes={entry?.votes}
               />
             );
           })}
         </div>
       ) : (
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {displayed.map((doc) => {
-            const fm = doc.frontmatter as unknown as Record<string, unknown>;
+        <>
+          {TIER_ORDER.map((tier) => {
+            const tierDocs = displayed.filter(
+              (d) =>
+                ((d.frontmatter as unknown as Record<string, unknown>).tier as string) ===
+                tier,
+            );
+            if (tierDocs.length === 0) return null;
+
             return (
-              <HeroCard
-                key={doc.frontmatter.slug}
-                variant="tier"
-                name={fm.registryName as string}
-                id={fm.id as string}
-                tier={fm.tier as string}
-                slug={doc.frontmatter.slug}
-              />
+              <section key={tier} className="mb-8">
+                <h2 className="text-xl font-bold mb-3">Tier {tier}</h2>
+                <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                  {tierDocs.map((doc) => {
+                    const fm = doc.frontmatter as unknown as Record<
+                      string,
+                      unknown
+                    >;
+                    return (
+                      <HeroCard
+                        key={doc.frontmatter.slug}
+                        variant="tier"
+                        name={fm.registryName as string}
+                        id={fm.id as string}
+                        tier={fm.tier as string}
+                        slug={doc.frontmatter.slug}
+                      />
+                    );
+                  })}
+                </div>
+              </section>
             );
           })}
-        </div>
+        </>
       )}
     </>
   );

@@ -9,6 +9,7 @@ interface HeroCardProps {
   slug: string;
   variant: "tier" | "rank";
   rank?: number;
+  votes?: number;
 }
 
 export function HeroCard({
@@ -18,6 +19,7 @@ export function HeroCard({
   slug,
   variant,
   rank,
+  votes,
 }: HeroCardProps) {
   const tierStyle = tierColors[tier as PowerTier] ?? "bg-muted-foreground/50 text-[#252525]";
 
@@ -37,11 +39,21 @@ export function HeroCard({
             <div className="text-lg font-bold truncate">{name}</div>
             <div className="text-xs text-muted-foreground mt-0.5">{id}</div>
           </div>
-          <div className="ml-auto shrink-0">
+          <div className="ml-auto shrink-0 flex items-center gap-4">
+            {votes !== undefined && (
+              <div className="text-right">
+                <div className="text-xs text-muted-foreground">
+                  Aprovação Popular
+                </div>
+                <div className="text-lg font-bold tabular-nums">
+                  {votes.toLocaleString("pt-BR")}
+                </div>
+              </div>
+            )}
             <span
               className={`${tierStyle} text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs`}
             >
-              Nível {tier}
+              Tier {tier}
             </span>
           </div>
         </div>
@@ -52,20 +64,19 @@ export function HeroCard({
   return (
     <Link
       href={`/public/heroes/${slug}`}
-      className="block border-2 border-border rounded-xs hover:bg-muted transition-colors overflow-hidden"
+      className={`block border-2 border-border rounded-xs transition-colors overflow-hidden ${tierStyle} hover:brightness-110`}
     >
-      <div className={`${tierStyle.split(" ")[0]} h-2`} />
       <div className="p-4 flex flex-col gap-3">
         <div className="w-16 h-16 bg-[#252525] dark:bg-[#eaeaea]" />
         <div className="min-w-0">
           <div className="text-base font-bold truncate">{name}</div>
-          <div className="text-xs text-muted-foreground mt-0.5 truncate">{id}</div>
+          <div className="text-xs mt-0.5 truncate opacity-70">{id}</div>
         </div>
         <div className="mt-auto self-end">
           <span
             className={`${tierStyle} text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs`}
           >
-            Nível {tier}
+            Tier {tier}
           </span>
         </div>
       </div>
