@@ -52,6 +52,7 @@ import permitCardUltimate from "../../content/archive/permit-card/ultimate.mdx";
 import profileIdDianaWatson from "../../content/archive/profile-id/diana-watson.mdx";
 import sfeDianaWatson from "../../content/archive/school-final-evaluation/diana-watson.mdx";
 import permitCardDianaWatson from "../../content/archive/permit-card/diana-watson.mdx";
+import permitCardKendraConnors from "../../content/archive/permit-card/kendra-connors.mdx";
 import profileIdKendraConnors from "../../content/archive/profile-id/kendra-connors.mdx";
 import sfeKendraConnors from "../../content/archive/school-final-evaluation/kendra-connors.mdx";
 import sfeKira from "../../content/archive/school-final-evaluation/kira.mdx";
@@ -108,6 +109,7 @@ const RAW: Record<string, string> = {
   "profile-id-diana-watson": profileIdDianaWatson,
   "sfe-diana-watson": sfeDianaWatson,
   "permit-card-diana-watson": permitCardDianaWatson,
+  "permit-card-kendra-connors": permitCardKendraConnors,
   "profile-id-kendra-connors": profileIdKendraConnors,
   "sfe-kendra-connors": sfeKendraConnors,
   "sfe-kira": sfeKira,
