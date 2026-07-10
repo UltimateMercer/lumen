@@ -1,4 +1,3 @@
-import { serialize } from "next-mdx-remote/serialize";
 import { getAllDocuments } from "@/lib/archive/registry";
 import { filterVisibleDocuments } from "@/lib/archive/visibility";
 import popularityOrder from "@/lib/archive/hero-popularity.json";
@@ -11,13 +10,6 @@ export default async function HeroisPage() {
     { accessLevel: "public" },
   );
 
-  const heroesWithSource = await Promise.all(
-    heroes.map(async (doc) => ({
-      ...doc,
-      mdxSource: await serialize(doc.mdx),
-    })),
-  );
-
   return (
     <main className="bg-[#eaeaea] dark:bg-[#252525]">
       <div className="p-6 max-w-6xl mx-auto">
@@ -28,7 +20,7 @@ export default async function HeroisPage() {
           </p>
         </div>
 
-        <HeroList heroes={heroesWithSource} popularityOrder={popularityOrder} />
+        <HeroList heroes={heroes} popularityOrder={popularityOrder} />
       </div>
     </main>
   );

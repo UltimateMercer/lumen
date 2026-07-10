@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { tierColors } from "@/lib/power-system";
 import type { PowerTier } from "@/lib/power-system";
 
@@ -16,7 +15,7 @@ export function HeroCard({
   name,
   id,
   tier,
-  slug,
+  slug: _slug,
   variant,
   rank,
   votes,
@@ -25,9 +24,9 @@ export function HeroCard({
 
   if (variant === "rank") {
     return (
-      <Link
-        href={`/public/heroes/${slug}`}
-        className="block border-2 border-border rounded-xs hover:bg-muted transition-colors overflow-hidden"
+      <button
+        type="button"
+        className="w-full text-left block border-2 border-border rounded-xs hover:bg-muted transition-colors overflow-hidden"
       >
         <div className={`${tierStyle.split(" ")[0]} h-1.5`} />
         <div className="flex items-center gap-6 p-4">
@@ -57,14 +56,14 @@ export function HeroCard({
             </span>
           </div>
         </div>
-      </Link>
+      </button>
     );
   }
 
   return (
-    <Link
-      href={`/public/heroes/${slug}`}
-      className={`block border-2 border-border rounded-xs transition-colors overflow-hidden ${tierStyle} hover:brightness-110`}
+    <button
+      type="button"
+      className={`w-full text-left block border-2 border-border rounded-xs transition-colors overflow-hidden ${tierStyle} hover:brightness-110`}
     >
       <div className="p-4 flex flex-col gap-3">
         <div className="w-16 h-16 bg-[#252525] dark:bg-[#eaeaea]" />
@@ -80,6 +79,6 @@ export function HeroCard({
           </span>
         </div>
       </div>
-    </Link>
+    </button>
   );
 }

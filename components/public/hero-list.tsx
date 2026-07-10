@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { getSortedHeroes } from "@/lib/archive/hero-sort";
 import type { PopularityEntry } from "@/lib/archive/hero-sort";
 import { HeroCard } from "@/components/public/hero-card";
+import { PermitCardPublicView } from "@/components/documents/templates/permit-card-public-view";
 import type { ArchiveDocument } from "@/lib/archive/documents";
 
 const TIER_ORDER = ["S", "A", "B", "C", "D", "E", "F"] as const;
@@ -48,16 +54,22 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
               (e) => e.slug === doc.frontmatter.slug,
             );
             return (
-              <HeroCard
-                key={doc.frontmatter.slug}
-                variant="rank"
-                rank={i + 1}
-                name={fm.registryName as string}
-                id={fm.id as string}
-                tier={fm.tier as string}
-                slug={doc.frontmatter.slug}
-                votes={entry?.votes}
-              />
+              <Dialog key={doc.frontmatter.slug}>
+                <DialogTrigger asChild>
+                  <HeroCard
+                    variant="rank"
+                    rank={i + 1}
+                    name={fm.registryName as string}
+                    id={fm.id as string}
+                    tier={fm.tier as string}
+                    slug={doc.frontmatter.slug}
+                    votes={entry?.votes}
+                  />
+                </DialogTrigger>
+                <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+                  <PermitCardPublicView doc={doc} />
+                </DialogContent>
+              </Dialog>
             );
           })}
         </div>
@@ -81,14 +93,20 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
                       unknown
                     >;
                     return (
-                      <HeroCard
-                        key={doc.frontmatter.slug}
-                        variant="tier"
-                        name={fm.registryName as string}
-                        id={fm.id as string}
-                        tier={fm.tier as string}
-                        slug={doc.frontmatter.slug}
-                      />
+                      <Dialog key={doc.frontmatter.slug}>
+                        <DialogTrigger asChild>
+                          <HeroCard
+                            variant="tier"
+                            name={fm.registryName as string}
+                            id={fm.id as string}
+                            tier={fm.tier as string}
+                            slug={doc.frontmatter.slug}
+                          />
+                        </DialogTrigger>
+                        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+                          <PermitCardPublicView doc={doc} />
+                        </DialogContent>
+                      </Dialog>
                     );
                   })}
                 </div>
