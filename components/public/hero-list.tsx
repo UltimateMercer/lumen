@@ -66,7 +66,7 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
                     votes={entry?.votes}
                   />
                 </DialogTrigger>
-                <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+                <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 sm:p-2">
                   <PermitCardPublicView doc={doc} />
                 </DialogContent>
               </Dialog>
@@ -103,7 +103,7 @@ export function HeroList({ heroes, popularityOrder }: HeroListProps) {
                             slug={doc.frontmatter.slug}
                           />
                         </DialogTrigger>
-                        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+                        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 sm:p-2">
                           <PermitCardPublicView doc={doc} />
                         </DialogContent>
                       </Dialog>

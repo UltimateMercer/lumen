@@ -2,6 +2,9 @@
 import type { ArchiveDocument, DocumentFrontmatter } from "@/lib/archive/documents";
 import { parseLumenDate, formatDate, getAge } from "@/lib/in-universe-rules/calendar";
 import { CURRENT_DATE } from "@/lib/in-universe-rules/world-config";
+import { cn } from "@/lib/utils";
+import { tierColors } from "@/lib/power-system";
+import type { PowerTier } from "@/lib/power-system";
 import { Paper } from "../general-components/paper/paper";
 import { SectionPaper } from "../general-components/paper/section-paper";
 import { ItemValue } from "../general-components/ui/item-value";
@@ -18,12 +21,12 @@ export function PermitCardPublicView({ doc }: { doc: ArchiveDocument }) {
 
   const { id, registryName, birthDate, tier, date } = fm;
 
-  const tierLabel = `Nível ${tier}`;
+  const tierStyle = tierColors[tier as PowerTier];
 
   return (
     <Paper>
       <SectionPaper>
-        <div className="flex gap-4 items-center mb-2 p-4 texture-item background-texture">
+        <div className={cn("flex gap-4 items-center mb-2 p-4 texture-item background-texture", tierStyle)}>
           <div className="w-40 h-40 bg-[#252525] dark:bg-[#eaeaea]"></div>
           <div className="flex flex-col gap-1">
             <ItemValue
@@ -43,8 +46,8 @@ export function PermitCardPublicView({ doc }: { doc: ArchiveDocument }) {
             />
             <ItemValue className="text-sm" item="id" value={id} />
           </div>
-          <div className="flex items-center justify-center text-center p-5 text-6xl font-bold ml-auto">
-            <p className="mx-auto">{tierLabel}</p>
+          <div className="flex items-center justify-center text-center p-5 text-5xl sm:text-8xl font-bold ml-auto">
+            <p className="mx-auto">{tier}</p>
           </div>
         </div>
       </SectionPaper>
