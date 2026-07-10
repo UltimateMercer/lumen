@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { tierColors } from "@/lib/power-system";
 import type { PowerTier } from "@/lib/power-system";
 
@@ -11,20 +12,22 @@ interface HeroCardProps {
   votes?: number;
 }
 
-export function HeroCard({
-  name,
-  id,
-  tier,
-  slug: _slug,
-  variant,
-  rank,
-  votes,
-}: HeroCardProps) {
+export const HeroCard = forwardRef<HTMLButtonElement, HeroCardProps>(
+  function HeroCard({
+    name,
+    id,
+    tier,
+    slug: _slug,
+    variant,
+    rank,
+    votes,
+  }, ref) {
   const tierStyle = tierColors[tier as PowerTier] ?? "bg-muted-foreground/50 text-[#252525]";
 
   if (variant === "rank") {
     return (
       <button
+        ref={ref}
         type="button"
         className="w-full text-left block border-2 border-border rounded-xs hover:bg-muted transition-colors overflow-hidden"
       >
@@ -62,6 +65,7 @@ export function HeroCard({
 
   return (
     <button
+      ref={ref}
       type="button"
       className={`w-full text-left block border-2 border-border rounded-xs transition-colors overflow-hidden ${tierStyle} hover:brightness-110`}
     >
@@ -81,4 +85,5 @@ export function HeroCard({
       </div>
     </button>
   );
-}
+  },
+);
