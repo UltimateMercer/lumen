@@ -21,6 +21,7 @@ export const HeroCard = forwardRef<HTMLButtonElement, HeroCardProps>(
     variant,
     rank,
     votes,
+    ...rest
   }, ref) {
   const tierStyle = tierColors[tier as PowerTier] ?? "bg-muted-foreground/50 text-[#252525]";
 
@@ -28,6 +29,7 @@ export const HeroCard = forwardRef<HTMLButtonElement, HeroCardProps>(
     return (
       <button
         ref={ref}
+        {...rest}
         type="button"
         className="w-full text-left block border-2 border-border rounded-xs hover:bg-muted transition-colors overflow-hidden"
       >
@@ -66,6 +68,7 @@ export const HeroCard = forwardRef<HTMLButtonElement, HeroCardProps>(
   return (
     <button
       ref={ref}
+      {...rest}
       type="button"
       className={`w-full text-left block border-2 border-border rounded-xs transition-colors overflow-hidden ${tierStyle} hover:brightness-110`}
     >
