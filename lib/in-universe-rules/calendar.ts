@@ -17,8 +17,8 @@ export const DAYS_PER_YEAR = 360;
 export const DAYS_PER_SEASON = 90;
 
 export const SEASON_MAP: Record<Hemisphere, Record<1 | 2 | 3 | 4, Season>> = {
-  N: { 1: "Solaris", 2: "Auren", 3: "Umbrae", 4: "Vernis" },
-  S: { 1: "Umbrae", 2: "Vernis", 3: "Solaris", 4: "Auren" },
+  S: { 1: "Solaris", 2: "Auren", 3: "Umbrae", 4: "Vernis" },
+  N: { 1: "Umbrae", 2: "Vernis", 3: "Solaris", 4: "Auren" },
 };
 
 export const HEMISPHERE_FULL: Record<Hemisphere, string> = {

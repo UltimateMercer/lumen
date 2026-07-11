@@ -97,35 +97,35 @@ describe("isValidLumenDate", () => {
 // Season derivation
 // ---------------------------------------------------------------------------
 describe("getSeason", () => {
-  it("returns Solaris for day 1-90 in N hemisphere", () => {
-    expect(getSeason({ dayOfYear: 1, year: 1228, era: nec, hemisphere: "N" })).toBe("Solaris");
-    expect(getSeason({ dayOfYear: 45, year: 1228, era: nec, hemisphere: "N" })).toBe("Solaris");
-    expect(getSeason({ dayOfYear: 90, year: 1228, era: nec, hemisphere: "N" })).toBe("Solaris");
+  it("returns Umbrae for day 1-90 in N hemisphere", () => {
+    expect(getSeason({ dayOfYear: 1, year: 1228, era: nec, hemisphere: "N" })).toBe("Umbrae");
+    expect(getSeason({ dayOfYear: 45, year: 1228, era: nec, hemisphere: "N" })).toBe("Umbrae");
+    expect(getSeason({ dayOfYear: 90, year: 1228, era: nec, hemisphere: "N" })).toBe("Umbrae");
   });
 
-  it("returns Umbrae for day 1-90 in S hemisphere", () => {
-    expect(getSeason({ dayOfYear: 1, year: 1228, era: nec, hemisphere: "S" })).toBe("Umbrae");
-    expect(getSeason({ dayOfYear: 90, year: 1228, era: nec, hemisphere: "S" })).toBe("Umbrae");
+  it("returns Solaris for day 1-90 in S hemisphere", () => {
+    expect(getSeason({ dayOfYear: 1, year: 1228, era: nec, hemisphere: "S" })).toBe("Solaris");
+    expect(getSeason({ dayOfYear: 90, year: 1228, era: nec, hemisphere: "S" })).toBe("Solaris");
   });
 
-  it("returns Auren for day 91-180 in N hemisphere", () => {
-    expect(getSeason({ dayOfYear: 91, year: 1228, era: nec, hemisphere: "N" })).toBe("Auren");
-    expect(getSeason({ dayOfYear: 180, year: 1228, era: nec, hemisphere: "N" })).toBe("Auren");
+  it("returns Vernis for day 91-180 in N hemisphere", () => {
+    expect(getSeason({ dayOfYear: 91, year: 1228, era: nec, hemisphere: "N" })).toBe("Vernis");
+    expect(getSeason({ dayOfYear: 180, year: 1228, era: nec, hemisphere: "N" })).toBe("Vernis");
   });
 
-  it("returns Vernis for day 91-180 in S hemisphere", () => {
-    expect(getSeason({ dayOfYear: 91, year: 1228, era: nec, hemisphere: "S" })).toBe("Vernis");
-    expect(getSeason({ dayOfYear: 180, year: 1228, era: nec, hemisphere: "S" })).toBe("Vernis");
+  it("returns Auren for day 91-180 in S hemisphere", () => {
+    expect(getSeason({ dayOfYear: 91, year: 1228, era: nec, hemisphere: "S" })).toBe("Auren");
+    expect(getSeason({ dayOfYear: 180, year: 1228, era: nec, hemisphere: "S" })).toBe("Auren");
   });
 
-  it("returns Umbrae for day 181-270 in N", () => {
-    expect(getSeason({ dayOfYear: 181, year: 1228, era: nec, hemisphere: "N" })).toBe("Umbrae");
-    expect(getSeason({ dayOfYear: 270, year: 1228, era: nec, hemisphere: "N" })).toBe("Umbrae");
+  it("returns Solaris for day 181-270 in N", () => {
+    expect(getSeason({ dayOfYear: 181, year: 1228, era: nec, hemisphere: "N" })).toBe("Solaris");
+    expect(getSeason({ dayOfYear: 270, year: 1228, era: nec, hemisphere: "N" })).toBe("Solaris");
   });
 
-  it("returns Vernis for day 271-360 in N", () => {
-    expect(getSeason({ dayOfYear: 271, year: 1228, era: nec, hemisphere: "N" })).toBe("Vernis");
-    expect(getSeason({ dayOfYear: 360, year: 1228, era: nec, hemisphere: "N" })).toBe("Vernis");
+  it("returns Auren for day 271-360 in N", () => {
+    expect(getSeason({ dayOfYear: 271, year: 1228, era: nec, hemisphere: "N" })).toBe("Auren");
+    expect(getSeason({ dayOfYear: 360, year: 1228, era: nec, hemisphere: "N" })).toBe("Auren");
   });
 
   it("throws on invalid instant", () => {
@@ -162,40 +162,40 @@ describe("getDayInSeason", () => {
 describe("formatDate", () => {
   it("official-abbr: N hemisphere omits hemisphere", () => {
     const date: LumenDate = { dayOfYear: 1, year: 1228, era: nec, hemisphere: "N" };
-    expect(formatDate(date)).toBe("01·Solaris·1228·N.E.C.");
+    expect(formatDate(date)).toBe("01·Umbrae·1228·N.E.C.");
   });
 
   it("official-abbr: S hemisphere adds (S)", () => {
     const date: LumenDate = { dayOfYear: 1, year: 1228, era: nec, hemisphere: "S" };
-    expect(formatDate(date)).toBe("01·Umbrae·1228·N.E.C. (S)");
+    expect(formatDate(date)).toBe("01·Solaris·1228·N.E.C. (S)");
   });
 
   it("official-abbr: A.E.C. era", () => {
     const date: LumenDate = { dayOfYear: 285, year: 500, era: aec, hemisphere: "N" };
-    expect(formatDate(date)).toBe("15·Vernis·500·A.E.C.");
+    expect(formatDate(date)).toBe("15·Auren·500·A.E.C.");
   });
 
   it("casual: omits era", () => {
     const date: LumenDate = { dayOfYear: 1, year: 1228, era: nec, hemisphere: "N" };
-    expect(formatDate(date, "casual")).toBe("1° Solaris 1228");
+    expect(formatDate(date, "casual")).toBe("1° Umbrae 1228");
   });
 
   it("casual: S adds (S)", () => {
     const date: LumenDate = { dayOfYear: 1, year: 1228, era: nec, hemisphere: "S" };
-    expect(formatDate(date, "casual")).toBe("1° Umbrae 1228 (S)");
+    expect(formatDate(date, "casual")).toBe("1° Solaris 1228 (S)");
   });
 
   it("official-full: N hemisphere", () => {
     const date: LumenDate = { dayOfYear: 1, year: 1228, era: nec, hemisphere: "N" };
     expect(formatDate(date, "official-full")).toBe(
-      "01° Solaris de 1228 Nova Era Comum",
+      "01° Umbrae de 1228 Nova Era Comum",
     );
   });
 
   it("official-full: S hemisphere", () => {
     const date: LumenDate = { dayOfYear: 1, year: 1228, era: nec, hemisphere: "S" };
     expect(formatDate(date, "official-full")).toBe(
-      "01° Umbrae de 1228 Nova Era Comum (Hemisfério Sul)",
+      "01° Solaris de 1228 Nova Era Comum (Hemisfério Sul)",
     );
   });
 });
