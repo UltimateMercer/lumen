@@ -3,6 +3,7 @@ import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function IncidentTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -19,7 +20,7 @@ export function IncidentTemplate({ doc }: { doc: ArchiveDocument }) {
         </h1>
         <div className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1 text-xs uppercase tracking-wider text-paper-muted">
           <div>Local: <span className="text-paper-foreground">{fm.location ?? "indefinido"}</span></div>
-          <div>Data: <span className="text-paper-foreground">{fm.date}</span></div>
+          <div>Data: <span className="text-paper-foreground">{formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}</span></div>
           <div>Status: <span className="text-paper-foreground">{fm.status ?? "em apuração"}</span></div>
           <div>Emitido por: <span className="text-paper-foreground">{fm.issued_by}</span></div>
         </div>

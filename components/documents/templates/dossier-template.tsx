@@ -3,6 +3,7 @@ import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function DossierTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -23,7 +24,7 @@ export function DossierTemplate({ doc }: { doc: ArchiveDocument }) {
           <div className="mt-2 grid grid-cols-2 gap-x-6 text-xs uppercase tracking-wider text-paper-muted">
             <div>Ref. {fm.reference ?? "—"}</div>
             <div>Status: <span className="text-paper-foreground">{fm.status ?? "ativo"}</span></div>
-            <div>Aberto em {fm.date}</div>
+            <div>Aberto em {formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}</div>
             <div>Classif. {fm.classification}</div>
           </div>
         </div>

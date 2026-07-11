@@ -1,6 +1,7 @@
 "use client";
 import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function ManifestoTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -16,7 +17,7 @@ export function ManifestoTemplate({ doc }: { doc: ArchiveDocument }) {
           {fm.title}
         </h1>
         <div className="mt-2 text-[10px] uppercase tracking-[0.3em] text-paper-muted">
-          distribuído em {fm.date} · {fm.issued_by}
+          distribuído em {formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")} · {fm.issued_by}
         </div>
       </div>
       <hr className="my-6 border-paper-foreground/40" />

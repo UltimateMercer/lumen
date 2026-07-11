@@ -6,6 +6,7 @@ import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
 import { DigitalSignature } from "../general-components/signatures/digital-signature";
 import { cn } from "@/lib/utils";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 const FLAG_TONE: Record<NonNullable<NonNullable<DocumentFrontmatter["vitals"]>[number]["flag"]>, string> = {
   normal: "text-cyan-crt",
@@ -39,7 +40,7 @@ export function MedicalRecordTemplate({ doc }: { doc: ArchiveDocument }) {
             {fm.title}
           </h1>
           <div className="mt-1 text-[10px] uppercase tracking-[0.25em] text-paper-muted">
-            prontuário · {fm.case_id ?? fm.reference ?? "—"} · {fm.date}
+            prontuário · {fm.case_id ?? fm.reference ?? "—"} · {formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
           </div>
         </div>
         <div className="rotate-[-6deg]">

@@ -2,6 +2,7 @@
 import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function NewsTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -11,7 +12,7 @@ export function NewsTemplate({ doc }: { doc: ArchiveDocument }) {
       <header className="border-b-4 border-double border-paper-foreground pb-3">
         <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.3em] text-paper-muted">
           <span>ed. {fm.edition ?? "—"}</span>
-          <span>{fm.date}</span>
+          <span>{formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}</span>
           <span>preço · 0,30 cred</span>
         </div>
         <h1 className="mt-2 text-center font-display text-5xl font-black uppercase tracking-[0.05em] text-paper-foreground md:text-6xl">

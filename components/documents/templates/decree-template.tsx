@@ -3,6 +3,7 @@ import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function DecreeTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -24,7 +25,7 @@ export function DecreeTemplate({ doc }: { doc: ArchiveDocument }) {
         </h1>
         {fm.reference && (
           <div className="mt-2 text-xs uppercase tracking-widest text-paper-muted">
-            Ref. {fm.reference} · {fm.date}
+            Ref. {fm.reference} · {formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
           </div>
         )}
       </div>

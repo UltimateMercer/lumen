@@ -3,6 +3,7 @@ import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function BulletinTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -20,7 +21,7 @@ export function BulletinTemplate({ doc }: { doc: ArchiveDocument }) {
         </div>
         <div className="text-right text-[10px] uppercase tracking-widest text-paper-muted">
           <div>ref. {fm.reference}</div>
-          <div>{fm.date}</div>
+          <div>{formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}</div>
         </div>
       </div>
       <div className="mt-6 text-paper-foreground">

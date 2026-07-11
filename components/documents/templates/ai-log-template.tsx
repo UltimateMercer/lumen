@@ -2,6 +2,7 @@
 import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { DOCUMENT_TYPE_LABEL } from "@/lib/archive/documents";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function AiLogTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -14,7 +15,7 @@ export function AiLogTemplate({ doc }: { doc: ArchiveDocument }) {
       </div>
       <div className="mt-6 text-cyan-crt crt-glow">
         <div className="text-xs uppercase tracking-widest opacity-80">
-          {fm.date}
+          {formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
         </div>
         <h1 className="mt-2 font-display text-2xl font-bold uppercase tracking-wider">
           &gt;&gt;&gt; {fm.title}

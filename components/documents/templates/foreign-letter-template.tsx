@@ -4,6 +4,7 @@ import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { Stamp } from "../general-components/mdx/stamp";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
 import { CrestSvg } from "../general-components/ui/crest-svg";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function ForeignLetterTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -39,7 +40,7 @@ export function ForeignLetterTemplate({ doc }: { doc: ArchiveDocument }) {
             </div>
             <div className="mt-3 grid grid-cols-2 gap-x-4 text-[10px] uppercase tracking-[0.25em] text-paper-muted">
               <div>Ref. {fm.reference ?? "—"}</div>
-              <div>{fm.date}</div>
+              <div>{formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}</div>
               {fm.delivered_via && <div className="col-span-2">via: {fm.delivered_via}</div>}
             </div>
           </div>

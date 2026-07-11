@@ -3,6 +3,7 @@ import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function ForensicTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -18,7 +19,7 @@ export function ForensicTemplate({ doc }: { doc: ArchiveDocument }) {
         </h1>
         <div className="mt-2 grid grid-cols-3 gap-x-6 text-xs uppercase tracking-wider text-paper-muted">
           <div>Cena: <span className="text-paper-foreground">{fm.location ?? "—"}</span></div>
-          <div>Data: <span className="text-paper-foreground">{fm.date}</span></div>
+          <div>Data: <span className="text-paper-foreground">{formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}</span></div>
           <div>Ref. <span className="text-paper-foreground">{fm.reference ?? "—"}</span></div>
         </div>
       </div>

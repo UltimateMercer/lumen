@@ -4,6 +4,7 @@ import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
 import { DigitalSignature } from "../general-components/signatures/digital-signature";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 function Meta({ label, value }: { label: string; value?: string }) {
   return (
@@ -47,7 +48,7 @@ export function InterrogationTemplate({ doc }: { doc: ArchiveDocument }) {
         </h1>
         <dl className="mt-3 flex flex-wrap gap-x-7 gap-y-1.5">
           <Meta label="sessão" value={fm.session_code ?? fm.reference} />
-          <Meta label="data" value={fm.date} />
+          <Meta label="data" value={formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")} />
           <Meta label="sala" value={fm.room} />
           <Meta label="duração" value={fm.duration} />
         </dl>

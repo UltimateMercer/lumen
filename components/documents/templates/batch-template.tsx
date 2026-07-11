@@ -9,6 +9,7 @@ import { ClassificationBar } from "../general-components/stamps/classification-b
 import { DossierFolder, CLASSIFICATION_STAMP_MAP } from "../general-components/ui/dossier-folder";
 import { cn } from "@/lib/utils";
 import { BatchStackViewer } from "./batch-stack-viewer";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 const TYPE_ACCENT: Partial<Record<DocumentType, string>> = {
   decree: "bg-stamp-red",
@@ -60,7 +61,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
           <DossierFolder
             title={fm.title}
             caseId={fm.case_id ?? fm.reference}
-            date={fm.date}
+            date={formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
             classification={CLASSIFICATION_STAMP_MAP[fm.classification] ?? "CLASSIFIED"}
             animation="flip3d"
             aspect="16:9"
@@ -103,7 +104,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                       {fm.title}
                     </h1>
                     <div className="mt-2 text-xs uppercase tracking-widest text-paper-muted">
-                      arquivo · {fm.case_id ?? fm.reference ?? "—"} · {fm.date}
+                      arquivo · {fm.case_id ?? fm.reference ?? "—"} · {formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}
                     </div>
                   </div>
 
@@ -175,7 +176,7 @@ export function BatchTemplate({ doc }: { doc: ArchiveDocument }) {
                                     </span>
                                   )}
                                 </span>
-                                <span className="batch-row-date">{fmt!.date}</span>
+                                <span className="batch-row-date">{formatDate(parseLumenDate(fmt!.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")}</span>
                                 <span className="batch-row-chev">›</span>
                               </button>
                             )}

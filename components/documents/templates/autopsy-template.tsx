@@ -3,6 +3,7 @@ import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function AutopsyTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -20,7 +21,7 @@ export function AutopsyTemplate({ doc }: { doc: ArchiveDocument }) {
 
       <div className="mt-4 grid grid-cols-2 border border-paper-foreground/40 text-sm">
         <Cell label="Caso" value={fm.case_id ?? fm.reference ?? "—"} />
-        <Cell label="Data" value={fm.date} />
+        <Cell label="Data" value={formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr")} />
         <Cell label="Decedente" value={fm.decedent ?? "—"} />
         <Cell label="Local" value={fm.location ?? "—"} />
         <Cell label="Causa preliminar" value={fm.cause_of_death ?? "indeterminada"} full />
