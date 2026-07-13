@@ -10,20 +10,20 @@ See `ANALYSIS.md` for the full architecture.
 
 <!-- CHANGELOG:START -->
 
-### 05-Jul-2026 — Calendar system connected to real content
-- `profile-id.tsx`: `age` removido da interface ProfileIdFrontmatter e do destructure; `NexusFormatDate(birthDate)` → `formatDate(parseLumenDate(birthDate, ...))`; idade estática → `getAge(parseLumenDate(birthDate, ...), CURRENT_DATE)`
-- `permit-card.tsx`: mesmo padrão para `birthDate`, `licenseStartDate`, `age`
-- `personal-info-school-evaluation.tsx`: `age` removido da type local e destructure; `NexusFormatDate(birthDate)` → `formatDate(parseLumenDate(birthDate, ...))`; idade → `getAge(...)`
+### 12-Jul-2026 — Calendar hemisphere fix, document date formatting, DocumentViewer rewrite
+- Corrigido SEASON_MAP com direção de hemisfério invertida (Sul/Norte); testes de calendário atualizados
+- Aplicado formatDate ao cabeçalho de metadados em todos os templates de documento; corrigido separador de data híbrido nos documentos red-suns
+- DocumentViewer reescrito reaproveitando Paper, ClassificationBar e DigitalSignature (substitui scaffold antigo)
 
-### 05-Jul-2026 — Orphan cleanup, visibility schema, anomaly profile migration
-- `components/government/individuals-section.tsx`: deletado (0 referências ativas)
-- `components/documents/general-components/ui/folder.tsx`: deletado (0 referências ativas; substituído por DossierFolder)
-- `data/document-generators.tsx`: dead `documentGenerators` fallback (408 linhas) + 3 phantom imports (`DocumentLink`, `DocumentPreview`, `RedactedText`) removidos — `layoutComponent` é o único caminho de código alcançável
+### 09-Jul-2026 — Heroes section redesign: permit-card, tier sorting, dialog navigation
+- Permit-card da Kendra Connors criado; rota renomeada de herois para heroes
+- Ordenação por tier/popularidade e redesign visual dos hero cards (variant tier-colored, agrupamento por seção)
+- Navegação por rota substituída por Dialog overlay, com PermitCardPublicView alinhado ao PermitCard oficial
 
-### 04-Jul-2026 — Calendar system — lib/in-universe-rules/calendar.ts
-- `lib/in-universe-rules/calendar.ts`: `LumenInstant`, `LumenDate`, `Era`, `Hemisphere`, `Season`, `FormatStyle` types; constants `DAYS_PER_YEAR`, `DAYS_PER_SEASON`, `SEASON_MAP`, `SEASONS_ORDER`, `HEMISPHERE_FULL`
-- `vitest.config.ts`: created with `globals: true`
-- `package.json`: `"test": "vitest run"` script added
+### 07-Jul-2026 — Public sections foundation: visibility schema, heroes routes
+- Helper de visibilidade (canViewDocument/filterVisibleDocuments) com testes, valores explícitos aplicados a todo MDX
+- Seções públicas (library/history/news) e rotas heroes construídas com permit-card public view
+- Cleanup: remoção do diretório public-dashboard morto, documentação dos papéis de archive vs. rotas públicas
 
 [Ver histórico completo →](_import/CHANGELOG.md)
 <!-- CHANGELOG:END -->

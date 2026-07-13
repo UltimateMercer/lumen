@@ -3,6 +3,7 @@ import type { ArchiveDocument } from "@/lib/archive/documents";
 import { RenderMdx } from "../general-components/mdx/render-mdx";
 import { PaperSheet } from "../general-components/paper/paper-sheet";
 import { ClassificationBar } from "../general-components/stamps/classification-bar";
+import { parseLumenDate, formatDate } from "@/lib/in-universe-rules/calendar";
 
 export function MemoTemplate({ doc }: { doc: ArchiveDocument }) {
   const { frontmatter: fm } = doc;
@@ -24,7 +25,7 @@ export function MemoTemplate({ doc }: { doc: ArchiveDocument }) {
         <div className="text-xs font-bold uppercase tracking-wider text-paper-muted">Para:</div>
         <div className="text-paper-foreground">{fm.to ?? "—"}</div>
         <div className="text-xs font-bold uppercase tracking-wider text-paper-muted">Data:</div>
-        <div className="text-paper-foreground">{fm.date}</div>
+        <div className="text-paper-foreground">{fm.date ? formatDate(parseLumenDate(fm.date, { fallbackEra: "N.E.C.", fallbackHemisphere: "S" }), "official-abbr") : "—"}</div>
         <div className="text-xs font-bold uppercase tracking-wider text-paper-muted">Assunto:</div>
         <div className="font-bold text-paper-foreground">{fm.subject ?? fm.title}</div>
       </div>

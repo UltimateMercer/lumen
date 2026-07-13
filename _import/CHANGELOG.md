@@ -1,3 +1,21 @@
+# Calendar hemisphere fix, document date formatting, DocumentViewer rewrite
+**Data:** 12-Jul-2026
+- Corrigido SEASON_MAP com direção de hemisfério invertida (Sul/Norte); testes de calendário atualizados
+- Aplicado formatDate ao cabeçalho de metadados em todos os templates de documento; corrigido separador de data híbrido nos documentos red-suns
+- DocumentViewer reescrito reaproveitando Paper, ClassificationBar e DigitalSignature (substitui scaffold antigo)
+
+# Heroes section redesign: permit-card, tier sorting, dialog navigation
+**Data:** 09-Jul-2026
+- Permit-card da Kendra Connors criado; rota renomeada de herois para heroes
+- Ordenação por tier/popularidade e redesign visual dos hero cards (variant tier-colored, agrupamento por seção)
+- Navegação por rota substituída por Dialog overlay, com PermitCardPublicView alinhado ao PermitCard oficial
+
+# Public sections foundation: visibility schema, heroes routes
+**Data:** 07-Jul-2026
+- Helper de visibilidade (canViewDocument/filterVisibleDocuments) com testes, valores explícitos aplicados a todo MDX
+- Seções públicas (library/history/news) e rotas heroes construídas com permit-card public view
+- Cleanup: remoção do diretório public-dashboard morto, documentação dos papéis de archive vs. rotas públicas
+
 # Calendar system connected to real content
 **Data:** 05-Jul-2026
 
