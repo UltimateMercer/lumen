@@ -59,6 +59,13 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
           code: "INC-004",
           status: "ATIVO",
         },
+        {
+          id: "codex",
+          name: "CÓDICE DIGITAL",
+          desc: "Anomalias, transformações e fenômenos catalogados • Códice oficial",
+          code: "CDX-005",
+          status: "ATIVO",
+        },
       ]
     : [
         {
