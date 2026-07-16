@@ -198,6 +198,34 @@ describe("formatDate", () => {
       "01° Solaris de 1228 Nova Era Comum (Hemisfério Sul)",
     );
   });
+
+  it("appends time suffix in official-abbr", () => {
+    const date: LumenDate = {
+      dayOfYear: 1, year: 1228, era: nec, hemisphere: "S", time: "10:12:54",
+    };
+    expect(formatDate(date)).toBe("01·Solaris·1228·N.E.C. (S) - 10:12:54");
+  });
+
+  it("appends time suffix in casual", () => {
+    const date: LumenDate = {
+      dayOfYear: 1, year: 1228, era: nec, hemisphere: "N", time: "10:12:54",
+    };
+    expect(formatDate(date, "casual")).toBe("1° Umbrae 1228 - 10:12:54");
+  });
+
+  it("appends time suffix in official-full", () => {
+    const date: LumenDate = {
+      dayOfYear: 1, year: 1228, era: nec, hemisphere: "N", time: "10:12:54",
+    };
+    expect(formatDate(date, "official-full")).toBe(
+      "01° Umbrae de 1228 Nova Era Comum - 10:12:54",
+    );
+  });
+
+  it("no time — no suffix", () => {
+    const date: LumenDate = { dayOfYear: 1, year: 1228, era: nec, hemisphere: "N" };
+    expect(formatDate(date)).toBe("01·Umbrae·1228·N.E.C.");
+  });
 });
 
 describe("formatInstant", () => {
@@ -267,6 +295,41 @@ describe("parseLumenDate", () => {
 
   it("throws on unmatched string", () => {
     expect(() => parseLumenDate("lorem ipsum", optsNecN)).toThrow("Unable to parse");
+  });
+
+  describe("time suffix", () => {
+    it("canonical format with HH:MM:SS time suffix", () => {
+      const result = parseLumenDate("01·Solaris·1228·N.E.C. (S) - 10:12:54", optsNecN);
+      expect(result).toEqual({
+        dayOfYear: 1, year: 1228, era: nec, hemisphere: "S", time: "10:12:54",
+      });
+    });
+
+    it("legacy format with HH:MM:SS time suffix", () => {
+      const result = parseLumenDate("89-Vernis-1244-S - 16:48:11", optsNecN);
+      expect(result).toEqual({
+        dayOfYear: 359, year: 1244, era: nec, hemisphere: "S", time: "16:48:11",
+      });
+    });
+
+    it("legacy format with HH:MM only", () => {
+      const result = parseLumenDate("89-Vernis-1244-S - 16:48", optsNecN);
+      expect(result).toEqual({
+        dayOfYear: 359, year: 1244, era: nec, hemisphere: "S", time: "16:48",
+      });
+    });
+
+    it("legacy format with time and no hemisphere", () => {
+      const result = parseLumenDate("89-Vernis-1244 - 16:48:11", optsNecN);
+      expect(result).toEqual({
+        dayOfYear: 359, year: 1244, era: nec, hemisphere: "N", time: "16:48:11",
+      });
+    });
+
+    it("no time suffix — time is undefined", () => {
+      const result = parseLumenDate("01·Solaris·1228·N.E.C.", optsNecS);
+      expect(result.time).toBeUndefined();
+    });
   });
 });
 

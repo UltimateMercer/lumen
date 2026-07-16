@@ -11,6 +11,7 @@ export interface LumenInstant {
 
 export interface LumenDate extends LumenInstant {
   hemisphere: Hemisphere;
+  time?: string;
 }
 
 export const DAYS_PER_YEAR = 360;
@@ -106,14 +107,15 @@ export function formatDate(date: LumenDate, style: FormatStyle = "official-abbr"
   const season = getSeason(date);
   const day = getDayInSeason(date);
   const eraInfo = ERA_LABEL[date.era];
+  const timeSuffix = date.time ? ` - ${date.time}` : "";
 
   switch (style) {
     case "casual":
-      return `${day}° ${season} ${date.year}${date.hemisphere === "S" ? " (S)" : ""}`;
+      return `${day}° ${season} ${date.year}${date.hemisphere === "S" ? " (S)" : ""}${timeSuffix}`;
     case "official-abbr":
-      return `${pad2(day)}·${season}·${date.year}·${eraInfo.abbr}${date.hemisphere === "S" ? " (S)" : ""}`;
+      return `${pad2(day)}·${season}·${date.year}·${eraInfo.abbr}${date.hemisphere === "S" ? " (S)" : ""}${timeSuffix}`;
     case "official-full":
-      return `${pad2(day)}° ${season} de ${date.year} ${eraInfo.full}${date.hemisphere === "S" ? " (Hemisfério Sul)" : ""}`;
+      return `${pad2(day)}° ${season} de ${date.year} ${eraInfo.full}${date.hemisphere === "S" ? " (Hemisfério Sul)" : ""}${timeSuffix}`;
   }
 }
 
@@ -143,9 +145,9 @@ const SEASON_INDEX: Record<Season, number> = {
 };
 
 const CANONICAL_RE =
-  /^(\d{1,2})·(Solaris|Auren|Umbrae|Vernis)·(\d+)·((?:N|A)\.E\.C\.)\s*(?:\(([NS])\))?$/;
+  /^(\d{1,2})·(Solaris|Auren|Umbrae|Vernis)·(\d+)·((?:N|A)\.E\.C\.)\s*(?:\(([NS])\))?(?:\s*-\s*(\d{1,2}:\d{2}(?::\d{2})?))?$/;
 const LEGACY_RE =
-  /^(\d{1,2})-(Solaris|Auren|Umbrae|Vernis)-(\d+)-?([NS])?$/;
+  /^(\d{1,2})-(Solaris|Auren|Umbrae|Vernis)-(\d+)-?([NS])?(?:\s*-\s*(\d{1,2}:\d{2}(?::\d{2})?))?$/;
 
 export interface ParseOptions {
   /** Era to use when the input string has no explicit era. */
@@ -157,22 +159,22 @@ export interface ParseOptions {
 export function parseLumenDate(input: string, options: ParseOptions): LumenDate {
   let match = input.match(CANONICAL_RE);
   if (match) {
-    const [, dayStr, season, yearStr, era, hemi] = match;
+    const [, dayStr, season, yearStr, era, hemi, time] = match;
     const day = Number(dayStr);
     const year = Number(yearStr);
     const hemisphere = (hemi ?? options.fallbackHemisphere) as Hemisphere;
     const dayOfYear = (SEASON_INDEX[season as Season]) * DAYS_PER_SEASON + day;
-    return { dayOfYear, year, era: era as Era, hemisphere };
+    return { dayOfYear, year, era: era as Era, hemisphere, ...(time ? { time } : {}) };
   }
 
   match = input.match(LEGACY_RE);
   if (match) {
-    const [, dayStr, season, yearStr, hemi] = match;
+    const [, dayStr, season, yearStr, hemi, time] = match;
     const day = Number(dayStr);
     const year = Number(yearStr);
     const hemisphere = (hemi ?? options.fallbackHemisphere) as Hemisphere;
     const dayOfYear = (SEASON_INDEX[season as Season]) * DAYS_PER_SEASON + day;
-    return { dayOfYear, year, era: options.fallbackEra, hemisphere };
+    return { dayOfYear, year, era: options.fallbackEra, hemisphere, ...(time ? { time } : {}) };
   }
 
   throw new Error(
