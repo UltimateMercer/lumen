@@ -17,6 +17,20 @@ export interface LumenDate extends LumenInstant {
 export const DAYS_PER_YEAR = 360;
 export const DAYS_PER_SEASON = 90;
 
+/**
+ * Regra canônica de lore (confirmada com o autor do universo — não deduzir
+ * ou "corrigir" isso a partir do código sozinho):
+ *
+ *   - Hemisfério Sul: o dia 1 do ano é Solaris (bloco 1).
+ *   - Hemisfério Norte: o dia 1 do ano é Umbrae (bloco 1).
+ *
+ * Os dois hemisférios têm a mesma sequência cíclica de estações
+ * (Solaris → Auren → Umbrae → Vernis), só o ponto de partida do ano muda.
+ *
+ * Se este mapa alguma vez parecer "errado" por não bater com alguma
+ * suposição sobre a ordem das estações, o mapa está certo — confirme a
+ * premissa de novo com o autor antes de mexer aqui.
+ */
 export const SEASON_MAP: Record<Hemisphere, Record<1 | 2 | 3 | 4, Season>> = {
   S: { 1: "Solaris", 2: "Auren", 3: "Umbrae", 4: "Vernis" },
   N: { 1: "Umbrae", 2: "Vernis", 3: "Solaris", 4: "Auren" },
