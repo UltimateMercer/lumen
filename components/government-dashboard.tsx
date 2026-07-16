@@ -14,7 +14,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 import { MissionsSection } from "@/components/government/missions-section";
 import { IncidentsSection } from "@/components/government/incidents-section";
-import { PowersSection } from "@/components/government/powers-section";
 
 interface GovernmentDashboardProps {
   user: { username: string; accessLevel: string };
@@ -49,7 +48,6 @@ export function GovernmentDashboard({
   const sections = [
     { id: "missoes", name: "RELATÓRIOS DE MISSÕES", icon: "📋" },
     { id: "incidentes", name: "REGISTRO DE INCIDENTES", icon: "⚠️" },
-    { id: "poderes", name: "SISTEMA DE PODERES", icon: "🔑" },
   ];
 
   const getSectionContent = () => {
@@ -60,8 +58,6 @@ export function GovernmentDashboard({
         return MissionsSection({ onCloseMobileSidebar: closeSidebar });
       case "incidentes":
         return IncidentsSection({ onCloseMobileSidebar: closeSidebar });
-      case "poderes":
-        return PowersSection({ onCloseMobileSidebar: closeSidebar });
       default:
         return {
           sidebar: null,
