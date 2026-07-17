@@ -205,11 +205,16 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px">
-              {sections.map((section) => (
+              {sections.map((section, index) => {
+                const isLastOdd =
+                  sections.length % 2 !== 0 && index === sections.length - 1;
+                return (
                 <button
                   key={section.id}
                   onClick={() => onNavigate(section.id)}
-                  className="rounded-xs bg-[#eaeaea] dark:bg-[#252525] hover:bg-[#252525] hover:dark:bg-[#eaeaea] py-6 px-5 text-left hover:text-background transition-colors cursor-pointer group"
+                  className={`rounded-xs bg-[#eaeaea] dark:bg-[#252525] hover:bg-[#252525] hover:dark:bg-[#eaeaea] py-6 px-5 text-left hover:text-background transition-colors cursor-pointer group${
+                    isLastOdd ? " md:col-span-2" : ""
+                  }`}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="text-xs font-mono text-muted-foreground group-hover:text-background">
@@ -232,7 +237,8 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
                     {">> ACESSAR SISTEMA"}
                   </div>
                 </button>
-              ))}
+                );
+              })}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px">
