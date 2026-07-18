@@ -25,7 +25,7 @@ export default function ProfileSlugLayout({
           backLabel="← VOLTAR AOS PERFIS"
         />
       </div>
-      <main className="bg-[#eaeaea] dark:bg-[#252525] min-h-full rounded-xs">
+      <main className="bg-[#eaeaea] dark:bg-[#252525] min-h-full rounded-xs p-4">
         {children}
       </main>
     </div>

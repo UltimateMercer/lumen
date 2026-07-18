@@ -7,7 +7,7 @@ export default function ProfilesLayout({
 }) {
   return (
     <AuthGuard requireGovernment>
-      <main className="bg-[#eaeaea] dark:bg-[#252525] lg:min-h-[calc(100vh-65px)] min-h-[calc(100vh-56px)]">
+      <main className="lg:min-h-[calc(100vh-65px)] min-h-[calc(100vh-56px)]">
         {children}
       </main>
     </AuthGuard>
