@@ -47,7 +47,7 @@ export function FileLoading({
         const newProgress = prev + 2;
         if (newProgress >= 100) {
           clearInterval(interval);
-          setTimeout(() => onCompleteRef.current(), 500);
+          setTimeout(() => onCompleteRef.current(), 5000);
           return 100;
         }
         return newProgress;
@@ -75,7 +75,7 @@ export function FileLoading({
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="border-2 border-foreground bg-background p-8 relative overflow-hidden"
+      className="w-full max-w-3xl mx-auto border-2 border-foreground bg-background p-8 relative overflow-hidden"
     >
       {/* Scan line effect */}
       <motion.div
