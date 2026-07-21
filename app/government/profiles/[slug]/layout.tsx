@@ -14,7 +14,7 @@ export default function ProfileSlugLayout({
   const sections = getProfileSections();
 
   return (
-    <div className="grid md:grid-cols-[250px_1fr] gap-px h-full">
+    <div className="grid md:grid-cols-[250px_1fr] gap-px h-full dark:bg-[#eaeaea] bg-[#252525] rounded-xs">
       <div className="hidden md:block sticky lg:h-[calc(100vh-65px)] h-[calc(100vh-56px)] lg:top-14.25 top-12 p-2 bg-[#eaeaea] dark:bg-[#252525] overflow-y-auto rounded-xs">
         <ArchiveSidebar
           label="PERFIS"
