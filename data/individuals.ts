@@ -149,6 +149,14 @@ export function findSiblingSlugs(slug: string): string[] {
     .filter((s): s is string => !!s);
 }
 
+export function getClassificationForSlug(slug: string): string {
+  const ind = individuals.find((i) =>
+    i.documents.some((d) => d.mdxSlug === slug),
+  );
+  if (!ind) return "CONFIDENCIAL";
+  return PRIMARY_CLASSIFICATION[ind.slug] ?? "CONFIDENCIAL";
+}
+
 const PRIMARY_CLASSIFICATION: Record<string, string> = {
   ultimate: "ULTRASSECRETO",
   "diana-watson": "CONFIDENCIAL",

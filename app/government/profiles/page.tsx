@@ -1,8 +1,10 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { getProfileSections } from "@/data/individuals";
 import { individuals } from "@/data/individuals";
+import { FileLoading } from "@/components/file-loading";
 
 const CLASS_ACCENT: Record<string, { chip: string; text: string }> = {
   PÚBLICO:       { chip: "bg-[var(--c-public)] text-white",       text: "text-[var(--c-public)]" },
@@ -19,12 +21,28 @@ function firstDocSlug(ind: typeof individuals[number]): string | undefined {
 }
 
 export default function ProfilesPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const sections = getProfileSections();
+
+  const handleLoadingComplete = useCallback(() => {
+    setIsLoading(false);
+  }, []);
 
   const handleDocClick = (slug: string) => {
     router.push(`/government/profiles/${slug}`);
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <FileLoading
+          fileName="PERFIS DE INDIVÍDUOS"
+          onComplete={handleLoadingComplete}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 p-4">
