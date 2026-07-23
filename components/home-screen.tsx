@@ -66,6 +66,13 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
           code: "CDX-005",
           status: "ATIVO",
         },
+        {
+          id: "comms",
+          name: "COMUNICAÇÕES CRIPTOGRAFADAS",
+          desc: "Transmissões seguras entre agentes • Canais protegidos",
+          code: "COM-006",
+          status: "ATIVO",
+        },
       ]
     : [
         {
