@@ -60,17 +60,17 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
           status: "ATIVO",
         },
         {
-          id: "codex",
-          name: "CÓDICE DIGITAL",
-          desc: "Anomalias, transformações e fenômenos catalogados • Códice oficial",
-          code: "CDX-005",
-          status: "ATIVO",
-        },
-        {
           id: "comms",
           name: "COMUNICAÇÕES CRIPTOGRAFADAS",
           desc: "Transmissões seguras entre agentes • Canais protegidos",
           code: "COM-006",
+          status: "ATIVO",
+        },
+        {
+          id: "codex",
+          name: "CÓDICE DIGITAL",
+          desc: "Anomalias, transformações e fenômenos catalogados • Códice oficial",
+          code: "CDX-005",
           status: "ATIVO",
         },
       ]

@@ -25,7 +25,7 @@ export default function CommsPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 p-4">
+    <div className="max-w-2xl mx-auto space-y-6 p-4">
       <div>
         <h1 className="text-2xl font-bold">COMUNICAÇÕES CRIPTOGRAFADAS</h1>
         <p className="text-sm text-muted-foreground mt-1">
@@ -33,46 +33,30 @@ export default function CommsPage() {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-        {commThreads.map((thread) => (
-          <button
-            key={thread.slug}
-            onClick={() => router.push(`/government/comms/${thread.slug}`)}
-            className="group text-left flex flex-col border border-border border-l-4 bg-background texture-item overflow-hidden shadow-[4px_4px_0_0_color-mix(in_oklab,var(--foreground)_6%,transparent)] transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[6px_6px_0_0_color-mix(in_oklab,var(--foreground)_12%,transparent)] rounded-xs w-full min-h-[180px] border-l-[var(--c-confidential)]"
-          >
-            <div className="flex items-stretch border-b border-border">
-              <div className="flex items-center justify-center px-3 py-1.5 font-mono text-xs font-extrabold tracking-tight bg-[var(--c-confidential)] text-white">
-                CHAN
+      <div className="divide-y divide-border border border-border rounded-xs overflow-hidden bg-background">
+        {commThreads.map((thread) => {
+          const lastMessage = thread.messages[thread.messages.length - 1];
+          return (
+            <button
+              key={thread.slug}
+              onClick={() => router.push(`/government/comms/${thread.slug}`)}
+              className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors"
+            >
+              <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" aria-hidden />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-sm font-medium truncate">{thread.title}</span>
+                  <span className="text-[10px] font-mono text-muted-foreground shrink-0">{thread.channel}</span>
+                </div>
+                {lastMessage && (
+                  <p className="text-xs text-muted-foreground truncate mt-0.5">
+                    {lastMessage.sender}: {lastMessage.text}
+                  </p>
+                )}
               </div>
-              <div className="flex flex-1 items-center border-l border-border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-                TRANSMISSÃO SEGURA
-              </div>
-              <div className="flex items-center gap-1.5 border-l border-border px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.22em] text-[var(--c-confidential)]">
-                <span className="h-1.5 w-1.5 rotate-45 bg-current" />
-                {thread.messages.length} MSG
-              </div>
-            </div>
-            <div className="flex-1 p-4 space-y-2">
-              <div className="text-[9px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-                {thread.channel} • {thread.protocol}
-              </div>
-              <h3 className="font-mono text-lg font-bold uppercase tracking-wider text-foreground group-hover:underline">
-                {thread.title}
-              </h3>
-              <div className="text-xs text-muted-foreground">
-                Última transmissão registrada
-              </div>
-            </div>
-            <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-2">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                {thread.slug}
-              </span>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[var(--c-confidential)]">
-                ACESSAR →
-              </span>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

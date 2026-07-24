@@ -14,19 +14,32 @@ export default function CommsThreadPage() {
   const slug = params.slug as string;
   const thread = commThreads.find((t) => t.slug === slug);
   const [visibleCount, setVisibleCount] = useState(0);
+  const [phase, setPhase] = useState<"idle" | "typing">("idle");
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!thread || visibleCount >= thread.messages.length) return;
-    const timer = setTimeout(() => {
+    const nextMessage = thread.messages[visibleCount];
+
+    const pauseBeforeTyping = 300 + Math.random() * 300;
+    const typingDuration = Math.min(2200, Math.max(600, nextMessage.text.length * 35));
+
+    setPhase("idle");
+    const pauseTimer = setTimeout(() => setPhase("typing"), pauseBeforeTyping);
+    const revealTimer = setTimeout(() => {
+      setPhase("idle");
       setVisibleCount((c) => c + 1);
-    }, 600 + Math.random() * 400);
-    return () => clearTimeout(timer);
+    }, pauseBeforeTyping + typingDuration);
+
+    return () => {
+      clearTimeout(pauseTimer);
+      clearTimeout(revealTimer);
+    };
   }, [visibleCount, thread]);
 
   useEffect(() => {
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [visibleCount]);
+  }, [visibleCount, phase]);
 
   if (!thread) {
     return (
@@ -45,6 +58,7 @@ export default function CommsThreadPage() {
   );
 
   const visibleMessages = thread.messages.slice(0, visibleCount);
+  const nextMsg = thread.messages[visibleCount];
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 p-4">
@@ -85,6 +99,24 @@ export default function CommsThreadPage() {
             </Message>
           </div>
         ))}
+
+        {phase === "typing" && nextMsg && (
+          <div ref={lastMessageRef}>
+            <Message align={nextMsg.role === "self" ? "end" : "start"}>
+              <MessageContent>
+                <Bubble variant="ghost">
+                  <BubbleContent>
+                    <span className="inline-flex gap-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-current animate-bounce [animation-delay:-0.3s]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-current animate-bounce [animation-delay:-0.15s]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-current animate-bounce" />
+                    </span>
+                  </BubbleContent>
+                </Bubble>
+              </MessageContent>
+            </Message>
+          </div>
+        )}
       </div>
 
       {visibleCount >= thread.messages.length && (
