@@ -64,66 +64,66 @@ export default function CommsThreadPage() {
     <div className="max-w-3xl mx-auto space-y-4 p-4">
       <Link
         href="/government/comms"
-        className="inline-block rounded-xs border dark:border-[#eaeaea] border-[#252525] bg-transparent px-3 py-1.5 text-xs font-mono hover:bg-muted transition-colors"
+        className="inline-block rounded-xs border border-amber-crt/40 bg-transparent px-3 py-1.5 text-xs font-mono uppercase tracking-wide text-amber-crt transition-colors hover:bg-amber-crt/10"
       >
-        ← VOLTAR
+        ← voltar
       </Link>
 
-      <Marker variant="border">
-        <MarkerContent>
-          CANAL SEGURO ESTABELECIDO · {thread.protocol} · {thread.channel} · {formattedTimestamp}
-        </MarkerContent>
-      </Marker>
+      <div className="border border-amber-crt/40 bg-chrome scanlines p-8">
+        <Marker variant="border" className="flex-wrap gap-2 border-amber-crt/30 pb-3 text-[10px] uppercase tracking-[0.3em] text-amber-crt">
+          <MarkerContent>canal seguro estabelecido</MarkerContent>
+          <MarkerContent>{thread.protocol} · {thread.channel}</MarkerContent>
+          <MarkerContent>{formattedTimestamp}</MarkerContent>
+        </Marker>
 
-      <div className="space-y-4">
-        {visibleMessages.map((msg, index) => (
-          <div
-            key={msg.id}
-            ref={index === visibleMessages.length - 1 ? lastMessageRef : undefined}
-          >
-            <Message align={msg.role === "self" ? "end" : "start"}>
-              <MessageContent>
-                <MessageHeader>{msg.sender}</MessageHeader>
-                <Bubble
-                  variant={
-                    msg.role === "system"
-                      ? "ghost"
-                      : msg.role === "self"
-                        ? "muted"
-                        : "default"
-                  }
-                >
-                  <BubbleContent>{msg.text}</BubbleContent>
-                </Bubble>
-              </MessageContent>
-            </Message>
-          </div>
-        ))}
+        <div className="mt-6 space-y-4">
+          {visibleMessages.map((msg, index) => (
+            <div
+              key={msg.id}
+              ref={index === visibleMessages.length - 1 ? lastMessageRef : undefined}
+            >
+              <Message align={msg.role === "self" ? "end" : "start"}>
+                <MessageContent>
+                  <MessageHeader className="text-[10px] uppercase tracking-widest text-amber-crt/70">
+                    [{msg.sender}]
+                  </MessageHeader>
+                  <Bubble variant="ghost">
+                    <BubbleContent
+                      className={`rounded-xs border px-3 py-2 text-sm text-amber-crt crt-glow ${
+                        msg.role === "self"
+                          ? "border-amber-crt/50 bg-amber-crt/5"
+                          : "border-amber-crt/25 bg-transparent"
+                      }`}
+                    >
+                      {msg.text}
+                    </BubbleContent>
+                  </Bubble>
+                </MessageContent>
+              </Message>
+            </div>
+          ))}
 
-        {phase === "typing" && nextMsg && (
-          <div ref={lastMessageRef}>
-            <Message align={nextMsg.role === "self" ? "end" : "start"}>
-              <MessageContent>
-                <Bubble variant="ghost">
-                  <BubbleContent>
-                    <span className="inline-flex gap-1">
-                      <span className="h-1.5 w-1.5 rounded-full bg-current animate-bounce [animation-delay:-0.3s]" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-current animate-bounce [animation-delay:-0.15s]" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-current animate-bounce" />
-                    </span>
-                  </BubbleContent>
-                </Bubble>
-              </MessageContent>
-            </Message>
+          {phase === "typing" && nextMsg && (
+            <div ref={lastMessageRef}>
+              <Message align={nextMsg.role === "self" ? "end" : "start"}>
+                <MessageContent>
+                  <Bubble variant="ghost">
+                    <BubbleContent className="rounded-xs border border-amber-crt/25 px-3 py-2 text-amber-crt">
+                      <span className="blink-caret text-sm">▌</span>
+                    </BubbleContent>
+                  </Bubble>
+                </MessageContent>
+              </Message>
+            </div>
+          )}
+        </div>
+
+        {visibleCount >= thread.messages.length && (
+          <div className="mt-8 border-t border-amber-crt/30 pt-3 text-[10px] uppercase tracking-[0.3em] text-amber-crt/70">
+            <span className="blink-caret">transmissão encerrada</span>
           </div>
         )}
       </div>
-
-      {visibleCount >= thread.messages.length && (
-        <Marker variant="border">
-          <MarkerContent>TRANSMISSÃO ENCERRADA</MarkerContent>
-        </Marker>
-      )}
     </div>
   );
 }

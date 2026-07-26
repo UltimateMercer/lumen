@@ -25,38 +25,51 @@ export default function CommsPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 p-4">
-      <div>
-        <h1 className="text-2xl font-bold">COMUNICAÇÕES CRIPTOGRAFADAS</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Transmissões seguras entre agentes • Canais protegidos
-        </p>
-      </div>
+    <div className="max-w-2xl mx-auto p-4">
+      <div className="border border-amber-crt/40 bg-chrome scanlines">
+        <div className="flex items-center justify-between border-b border-amber-crt/30 px-6 py-3 text-[10px] uppercase tracking-[0.3em] text-amber-crt">
+          <span>registro de canais</span>
+          <span>{commThreads.length} ativo(s)</span>
+        </div>
 
-      <div className="divide-y divide-border border border-border rounded-xs overflow-hidden bg-background">
-        {commThreads.map((thread) => {
-          const lastMessage = thread.messages[thread.messages.length - 1];
-          return (
-            <button
-              key={thread.slug}
-              onClick={() => router.push(`/government/comms/${thread.slug}`)}
-              className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors"
-            >
-              <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" aria-hidden />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-mono text-sm font-medium truncate">{thread.title}</span>
-                  <span className="text-[10px] font-mono text-muted-foreground shrink-0">{thread.channel}</span>
+        <div className="px-6 py-4 text-amber-crt crt-glow">
+          <h1 className="font-display text-xl font-bold uppercase tracking-wider">
+            Comunicações Criptografadas
+          </h1>
+          <p className="mt-1 text-xs uppercase tracking-widest opacity-70">
+            transmissões seguras entre agentes · canais protegidos
+          </p>
+        </div>
+
+        <div className="divide-y divide-amber-crt/20 border-t border-amber-crt/30">
+          {commThreads.map((thread) => {
+            const lastMessage = thread.messages[thread.messages.length - 1];
+            return (
+              <button
+                key={thread.slug}
+                onClick={() => router.push(`/government/comms/${thread.slug}`)}
+                className="group flex w-full items-center gap-3 px-6 py-3 text-left text-amber-crt transition-colors hover:bg-amber-crt/5"
+              >
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-crt animate-pulse" aria-hidden />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="truncate font-mono text-sm font-medium uppercase tracking-wide group-hover:crt-glow">
+                      {thread.title}
+                    </span>
+                    <span className="shrink-0 text-[10px] uppercase tracking-widest opacity-60">
+                      {thread.channel}
+                    </span>
+                  </div>
+                  {lastMessage && (
+                    <p className="mt-0.5 truncate text-xs opacity-60">
+                      {lastMessage.sender}: {lastMessage.text}
+                    </p>
+                  )}
                 </div>
-                {lastMessage && (
-                  <p className="text-xs text-muted-foreground truncate mt-0.5">
-                    {lastMessage.sender}: {lastMessage.text}
-                  </p>
-                )}
-              </div>
-            </button>
-          );
-        })}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
