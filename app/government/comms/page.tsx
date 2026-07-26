@@ -26,13 +26,13 @@ export default function CommsPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
-      <div className="border border-amber-crt/40 bg-chrome scanlines">
-        <div className="flex items-center justify-between border-b border-amber-crt/30 px-6 py-3 text-[10px] uppercase tracking-[0.3em] text-amber-crt">
+      <div className="border border-comms-crt/40 bg-chrome scanlines">
+        <div className="flex items-center justify-between border-b border-comms-crt/30 px-6 py-3 text-[10px] uppercase tracking-[0.3em] text-comms-crt">
           <span>registro de canais</span>
           <span>{commThreads.length} ativo(s)</span>
         </div>
 
-        <div className="px-6 py-4 text-amber-crt crt-glow">
+        <div className="px-6 py-4 text-comms-crt crt-glow">
           <h1 className="font-display text-xl font-bold uppercase tracking-wider">
             Comunicações Criptografadas
           </h1>
@@ -41,16 +41,16 @@ export default function CommsPage() {
           </p>
         </div>
 
-        <div className="divide-y divide-amber-crt/20 border-t border-amber-crt/30">
+        <div className="divide-y divide-comms-crt/20 border-t border-comms-crt/30">
           {commThreads.map((thread) => {
             const lastMessage = thread.messages[thread.messages.length - 1];
             return (
               <button
                 key={thread.slug}
                 onClick={() => router.push(`/government/comms/${thread.slug}`)}
-                className="group flex w-full items-center gap-3 px-6 py-3 text-left text-amber-crt transition-colors hover:bg-amber-crt/5"
+                className="group flex w-full items-center gap-3 px-6 py-3 text-left text-comms-crt transition-colors hover:bg-comms-crt/5"
               >
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-crt animate-pulse" aria-hidden />
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-comms-crt animate-pulse" aria-hidden />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <span className="truncate font-mono text-sm font-medium uppercase tracking-wide group-hover:crt-glow">

@@ -64,13 +64,13 @@ export default function CommsThreadPage() {
     <div className="max-w-3xl mx-auto space-y-4 p-4">
       <Link
         href="/government/comms"
-        className="inline-block rounded-xs border border-amber-crt/40 bg-transparent px-3 py-1.5 text-xs font-mono uppercase tracking-wide text-amber-crt transition-colors hover:bg-amber-crt/10"
+        className="inline-block rounded-xs border border-comms-crt/40 bg-transparent px-3 py-1.5 text-xs font-mono uppercase tracking-wide text-comms-crt transition-colors hover:bg-comms-crt/10"
       >
         ← voltar
       </Link>
 
-      <div className="border border-amber-crt/40 bg-chrome scanlines p-8">
-        <Marker variant="border" className="flex-wrap gap-2 border-amber-crt/30 pb-3 text-[10px] uppercase tracking-[0.3em] text-amber-crt">
+      <div className="border border-comms-crt/40 bg-chrome scanlines p-8">
+        <Marker variant="border" className="flex-wrap gap-2 border-comms-crt/30 pb-3 text-[10px] uppercase tracking-[0.3em] text-comms-crt">
           <MarkerContent>canal seguro estabelecido</MarkerContent>
           <MarkerContent>{thread.protocol} · {thread.channel}</MarkerContent>
           <MarkerContent>{formattedTimestamp}</MarkerContent>
@@ -84,15 +84,15 @@ export default function CommsThreadPage() {
             >
               <Message align={msg.role === "self" ? "end" : "start"}>
                 <MessageContent>
-                  <MessageHeader className="text-[10px] uppercase tracking-widest text-amber-crt/70">
+                  <MessageHeader className="text-[10px] uppercase tracking-widest text-comms-crt/70">
                     [{msg.sender}]
                   </MessageHeader>
                   <Bubble variant="ghost">
                     <BubbleContent
-                      className={`rounded-xs border px-3 py-2 text-sm text-amber-crt crt-glow ${
+                      className={`rounded-xs border px-3 py-2 text-sm text-comms-crt crt-glow ${
                         msg.role === "self"
-                          ? "border-amber-crt/50 bg-amber-crt/5"
-                          : "border-amber-crt/25 bg-transparent"
+                          ? "border-comms-crt/50 bg-comms-crt/5"
+                          : "border-comms-crt/25 bg-transparent"
                       }`}
                     >
                       {msg.text}
@@ -108,8 +108,8 @@ export default function CommsThreadPage() {
               <Message align={nextMsg.role === "self" ? "end" : "start"}>
                 <MessageContent>
                   <Bubble variant="ghost">
-                    <BubbleContent className="rounded-xs border border-amber-crt/25 px-3 py-2 text-amber-crt">
-                      <span className="blink-caret text-sm">▌</span>
+                    <BubbleContent className="rounded-xs border border-comms-crt/25 px-3 py-2 text-comms-crt">
+                      <span className="blink-caret-mono text-sm">▌</span>
                     </BubbleContent>
                   </Bubble>
                 </MessageContent>
@@ -119,8 +119,8 @@ export default function CommsThreadPage() {
         </div>
 
         {visibleCount >= thread.messages.length && (
-          <div className="mt-8 border-t border-amber-crt/30 pt-3 text-[10px] uppercase tracking-[0.3em] text-amber-crt/70">
-            <span className="blink-caret">transmissão encerrada</span>
+          <div className="mt-8 border-t border-comms-crt/30 pt-3 text-[10px] uppercase tracking-[0.3em] text-comms-crt/70">
+            <span className="blink-caret-mono">transmissão encerrada</span>
           </div>
         )}
       </div>
