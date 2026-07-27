@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 // import { ThemeToggle } from "@/components/theme-toggle";
 import { useEffect, useState } from "react";
+import { formatDate, addDays } from "@/lib/in-universe-rules/calendar";
+import { CURRENT_DATE } from "@/lib/in-universe-rules/world-config";
 import { Presentation } from "./presentation";
 
 type SectionType = {
@@ -158,7 +160,7 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
                   {currentTime.toLocaleTimeString("pt-BR")}
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">
-                  {currentTime.toLocaleDateString("pt-BR")}
+                  {formatDate(CURRENT_DATE, "official-abbr")}
                 </div>
               </div>
               <div className="bg-[#eaeaea] dark:bg-[#252525] rounded-xs p-3">
@@ -206,7 +208,7 @@ export function HomeScreen({ user, onNavigate, onLogout }: HomeScreenProps) {
               </div>
               <div className="text-xs font-mono text-muted-foreground border-t border-muted-foreground pt-2 mt-2">
                 ÚLTIMA CONEXÃO:{" "}
-                {new Date(Date.now() - 86400000).toLocaleString("pt-BR")} •
+                {formatDate({ ...addDays(CURRENT_DATE, -1), hemisphere: CURRENT_DATE.hemisphere }, "official-abbr")} •
                 TENTATIVAS DE ACESSO NÃO AUTORIZADO: 0
               </div>
             </div>
